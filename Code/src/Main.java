@@ -37,7 +37,7 @@ public class Main {
                 System.out.println((i+1)+": "+results.get(i).getIcon());
             }
 
-            System.out.println("Przerzucić kość? Masz "+reroll+" przerzutów. Wpisz liczbę 0, aby pominąć, podaj numer kości, aby ją przerzucić.");
+            System.out.println("Reroll dice? Yoy have "+reroll+" rerolls. Write 0, to skip or write dice number,to reroll it.");
             // Reading data using readLine
             String numberString = reader.readLine();
             try {
@@ -56,7 +56,7 @@ public class Main {
         for(int i=0;i< results.size();i++){
             System.out.println((i+1)+": "+results.get(i).getIcon());
         }
-        System.out.println("Wynik to:");
+        System.out.println("Result is:");
         ArrayList<DiceAction> resultActions=pool.sumUp();
         for(DiceAction act:resultActions){
             System.out.println(act.action());

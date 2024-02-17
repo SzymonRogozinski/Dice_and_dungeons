@@ -16,7 +16,7 @@ public class DamageAction implements DiceAction{
 
     @Override
     public String action() {
-        return "Cios zadał " +value + " obrażeń!";
+        return "Attack hit for " +value + " damage!";
     }
 
     @Override
