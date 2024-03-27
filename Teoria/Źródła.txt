@@ -2,3 +2,7 @@ Bresenham's line algorithm -> https://en.wikipedia.org/wiki/Bresenham%27s_line_a
 
 Delaunay Triangulation and Kruskal Algorithm -> https://github.com/wuga214/TOOLBOX_Delaunay_Triangulation_JAVA/tree/master
 https://www.youtube.com/watch?v=GctAunEuHt4
+
+Przeszukiwanie w głąb i wszerz
+
+sprites -> https://opengameart.org/content/tileset-1bit-color

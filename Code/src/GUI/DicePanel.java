@@ -13,14 +13,21 @@ public class DicePanel extends JPanel {
 
     private final ArrayList<JButton> diceButtons;
     private DiceMaster master;
+    private final int diceIconSize;
 
     public DicePanel(int width,int height){
+        diceIconSize= Math.min(width / 6, height);
+
         this.setPreferredSize(new Dimension(width,height));
         this.setBackground(Color.WHITE);
         this.setBounds(0,height,width,height);
         this.setLayout(new GridLayout(1,10));
 
         diceButtons=new ArrayList<>();
+    }
+
+    public int getDiceIconSize(){
+        return diceIconSize;
     }
 
     public void setMaster(DiceMaster master){

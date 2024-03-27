@@ -27,14 +27,19 @@ public class DiceMaster {
         DamageAction bigdmg = new DamageAction(6);
         NullAction none = new NullAction();
 
-        DiceSide dmgSide = new DiceSide(new ArrayList<>(List.of(dmg)), new ImageIcon("DiceIcons/Damage4.png"));
-        DiceSide bigdmgSide = new DiceSide(new ArrayList<>(List.of(bigdmg)), new ImageIcon("DiceIcons/Damage6.png"));
-        DiceSide noneSide = new DiceSide(new ArrayList<>(List.of(none)), new ImageIcon("DiceIcons/NullSide.png"));
+        int size=dicePanel.getDiceIconSize();
+        DiceSide dmgSide = new DiceSide(new ArrayList<>(List.of(dmg)), resizeIcon("DiceIcons/Damage4.png",size));
+        DiceSide bigdmgSide = new DiceSide(new ArrayList<>(List.of(bigdmg)), resizeIcon("DiceIcons/Damage6.png",size));
+        DiceSide noneSide = new DiceSide(new ArrayList<>(List.of(none)), resizeIcon("DiceIcons/NullSide.png",size));
 
         Dice dice = new Dice(new DiceSide[]{noneSide, noneSide, noneSide, dmgSide, dmgSide, bigdmgSide});
 
         pool = new DicePool(dice, 6);
         reroll = maxRerolls;
+    }
+
+    private ImageIcon resizeIcon(String path,int size){
+        return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(size,size,java.awt.Image.SCALE_SMOOTH));
     }
 
     public int getRerolls(){
