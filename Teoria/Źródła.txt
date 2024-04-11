@@ -6,3 +6,5 @@ https://www.youtube.com/watch?v=GctAunEuHt4
 Przeszukiwanie w głąb i wszerz
 
 sprites -> https://opengameart.org/content/tileset-1bit-color
+
+mine tileset -> https://analogstudios.itch.io/mine-pico-platformer-tileset?download

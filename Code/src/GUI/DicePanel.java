@@ -4,30 +4,22 @@ import Dice.DiceSide;
 import main.DiceMaster;
 
 import javax.swing.*;
-import javax.swing.text.View;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class DicePanel extends JPanel {
 
-    private final ArrayList<JButton> diceButtons;
     private DiceMaster master;
-    private final int diceIconSize;
+    private static final int diceNumber=12;
+    private static final int diceRow=2;
+    private static final int diceColumns=6;
 
-    public DicePanel(int width,int height){
-        diceIconSize= Math.min(width / 6, height);
-
-        this.setPreferredSize(new Dimension(width,height));
-        this.setBackground(Color.WHITE);
-        this.setBounds(0,height,width,height);
-        this.setLayout(new GridLayout(1,10));
-
-        diceButtons=new ArrayList<>();
-    }
-
-    public int getDiceIconSize(){
-        return diceIconSize;
+    public DicePanel(Border border){
+        this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
+        this.setLayout(new GridLayout(diceRow,diceColumns));
+        this.setBorder(border);
+        this.setBackground(Color.BLACK);
     }
 
     public void setMaster(DiceMaster master){
@@ -41,15 +33,18 @@ public class DicePanel extends JPanel {
             DiceButton button=new DiceButton(i++,res.getIcon());
             this.add(button);
         }
+        //Fulfill
+        while(i<diceNumber){
+            this.add(new JLabel());
+            i++;
+        }
         this.revalidate();
     }
 
     private class DiceButton extends JButton {
-        private final int index;
 
         public DiceButton(int index,ImageIcon icon) {
             super(icon);
-            this.index=index;
             this.addActionListener(e->master.reroll(index));
         }
     }
