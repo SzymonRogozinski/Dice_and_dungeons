@@ -2,6 +2,7 @@ package GUI;
 
 import Dice.DiceAction.DiceAction;
 import main.DiceMaster;
+import main.FightModule;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -9,8 +10,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class RollPanel extends JPanel {
-    private DiceMaster master;
     private JLabel reroll;
+    private FightModule fight;
 
     public RollPanel(Border border){
         this.setLayout(new GridLayout(3,1));
@@ -33,30 +34,24 @@ public class RollPanel extends JPanel {
         this.add(skipButton);
     }
 
-    public void setMaster(DiceMaster master){
-        this.master=master;
+    public void setFight(FightModule fight){
+        this.fight=fight;
     }
 
     public void rerollsChange(){
-        reroll.setText("You have "+master.getRerolls()+" rerolls.");
+        reroll.setText("You have "+fight.getRerolls()+" rerolls.");
     }
 
     private void rollDicePool(){
-        if(master==null)
+        if(fight==null)
             return;
-        master.roll();
-        reroll.setText("You have "+master.getRerolls()+" rerolls.");
+        fight.rollDices();
+        reroll.setText("You have "+fight.getRerolls()+" rerolls.");
         this.revalidate();
     }
 
     private void sumUpDicePool(){
-        ArrayList<DiceAction> actions=master.sumUpResults();
-        StringBuilder res= new StringBuilder();
-        for(DiceAction a:actions){
-            res.append(a.action()).append(" ");
-        }
-        System.out.println(res);
-        this.revalidate();
+        fight.endAction();
     }
 
 }

@@ -50,19 +50,21 @@ public class DiceMaster {
     public void roll(){
         reroll=maxRerolls;
         pool.roll();
-        fight.getDicePanel().showDiceResults(pool.getRollResult());
     }
 
     public void reroll(int i){
         if(reroll>0) {
             pool.reroll(i);
             reroll--;
-            fight.getDicePanel().showDiceResults(pool.getRollResult());
-            fight.getControlPanel().rerollsChange();
         }
     }
 
-    public ArrayList<DiceAction> sumUpResults(){
-        return pool.sumUp();
+    public void sumUpResults(){
+        ArrayList<DiceAction> actions = pool.sumUp();
+        StringBuilder res= new StringBuilder();
+        for(DiceAction a:actions){
+            res.append(a.action()).append(" ");
+        }
+        System.out.println(res);
     }
 }

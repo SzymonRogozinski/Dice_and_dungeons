@@ -66,13 +66,10 @@ public class MainPanel extends JPanel {
         this.repaint();
     }
 
-    public void setDiceMaster(DiceMaster master){
-        dicePanel.setMaster(master);
-        rollPanel.setMaster(master);
-    }
-
     public void setFightModule(FightModule fightModule){
+        rollPanel.setFight(fightModule);
         actionPanel.setFight(fightModule);
+        dicePanel.setFight(fightModule);
     }
 
     public DicePanel getDicePanel() {
@@ -81,5 +78,21 @@ public class MainPanel extends JPanel {
 
     public RollPanel getRollPanel() {
         return rollPanel;
+    }
+
+    public void setState(int newState){
+        switch (newState){
+            case GUIState.PLAYER_CHOOSING_ACTION -> {
+                dicePanel.setVisible(false);
+                rollPanel.setVisible(false);
+                actionPanel.setVisible(true);
+            }
+            case GUIState.PLAYER_PERFORMING_ACTION -> {
+                dicePanel.setVisible(true);
+                rollPanel.setVisible(true);
+                actionPanel.setVisible(false);
+            }
+        }
+
     }
 }

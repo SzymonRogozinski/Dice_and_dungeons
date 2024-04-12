@@ -2,6 +2,7 @@ package GUI;
 
 import Dice.DiceSide;
 import main.DiceMaster;
+import main.FightModule;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 public class DicePanel extends JPanel {
 
-    private DiceMaster master;
+    private FightModule fight;
     private static final int diceNumber=12;
     private static final int diceRow=2;
     private static final int diceColumns=6;
@@ -22,8 +23,8 @@ public class DicePanel extends JPanel {
         this.setBackground(Color.BLACK);
     }
 
-    public void setMaster(DiceMaster master){
-        this.master=master;
+    public void setFight(FightModule fight){
+        this.fight=fight;
     }
 
     public void showDiceResults(ArrayList<DiceSide> diceResults){
@@ -45,7 +46,7 @@ public class DicePanel extends JPanel {
 
         public DiceButton(int index,ImageIcon icon) {
             super(icon);
-            this.addActionListener(e->master.reroll(index));
+            this.addActionListener(e->fight.rerollDice(index));
         }
     }
 }
