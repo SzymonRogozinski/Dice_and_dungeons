@@ -1,6 +1,7 @@
-package GUI;
+package GUI.FightGUI;
 
 import Dice.DiceSide;
+import GUI.GUISettings;
 import main.DiceMaster;
 import main.FightModule;
 

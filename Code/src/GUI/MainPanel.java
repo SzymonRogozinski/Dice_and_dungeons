@@ -1,6 +1,9 @@
 package GUI;
 
-import main.DiceMaster;
+import GUI.FightGUI.ActionPanel;
+import GUI.FightGUI.DicePanel;
+import GUI.FightGUI.FightPanel;
+import GUI.FightGUI.RollPanel;
 import main.FightModule;
 
 import javax.swing.*;
@@ -12,6 +15,7 @@ public class MainPanel extends JPanel {
     private DicePanel dicePanel;
     private RollPanel rollPanel;
     private ActionPanel actionPanel;
+    private FightPanel fightPanel;
 
     public MainPanel( ){
         //Setting panel
@@ -30,12 +34,14 @@ public class MainPanel extends JPanel {
         dicePanel=new DicePanel(border);
         rollPanel =new RollPanel(border);
         actionPanel = new ActionPanel(border);
+        fightPanel = new FightPanel(border);
 
         //Settings components
         bigPanel.setBounds(0,0, GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE);
         bigPanel.setLayout(null);
         bigPanel.setBackground(Color.BLACK);
         bigPanel.setBorder(border);
+        bigPanel.add(fightPanel);
 
         smallPanel.setBounds(GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
         smallPanel.setLayout(null);

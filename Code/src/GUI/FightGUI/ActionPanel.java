@@ -1,5 +1,6 @@
-package GUI;
+package GUI.FightGUI;
 
+import GUI.GUISettings;
 import main.FightModule;
 
 import javax.swing.*;
