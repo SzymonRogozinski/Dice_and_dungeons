@@ -1,6 +1,7 @@
 package GUI.FightGUI;
 
 import GUI.GUISettings;
+import main.FightModule;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,6 +18,8 @@ public class FightPanel extends JPanel {
     private final Border selectedLabelBorder=BorderFactory.createLineBorder(Color.RED,1);
     private final ArrayList<JLabel> enemyLabelList;
     private int selectedEnemy;
+    private boolean selectableFlag;
+    private FightModule fight;
 
     public FightPanel(Border border){
         //Set display
@@ -26,6 +29,7 @@ public class FightPanel extends JPanel {
         this.setBorder(border);
 
         selectedEnemy=-1;
+        selectableFlag=false;
         //Add Enemy
         enemyLabelList=new ArrayList<>();
         for(int i=0;i<3;i++) {
@@ -41,6 +45,14 @@ public class FightPanel extends JPanel {
         for(JLabel enemy:enemyLabelList){
             this.add(enemy);
         }
+    }
+
+    public void setFight(FightModule fight){
+        this.fight=fight;
+    }
+
+    public void enemySelectable(boolean selectableFlag){
+        this.selectableFlag=selectableFlag;
     }
 
     private void setLabels(){
@@ -61,7 +73,11 @@ public class FightPanel extends JPanel {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-
+            if(selectableFlag) {
+                enemyLabelList.get(enemyId).setBorder(labelBorder);
+                selectedEnemy = -1;
+                fight.performAction();
+            }
         }
 
         @Override
@@ -76,18 +92,18 @@ public class FightPanel extends JPanel {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            for(int i=0; i<enemyLabelList.size();i++){
-                enemyLabelList.get(i).setBorder(i==enemyId ? selectedLabelBorder:labelBorder);
+            if(selectableFlag) {
+                enemyLabelList.get(enemyId).setBorder(selectedLabelBorder);
+                selectedEnemy = enemyId;
             }
-            selectedEnemy=enemyId;
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            for(int i=0; i<enemyLabelList.size();i++){
-                enemyLabelList.get(i).setBorder(labelBorder);
+            if(selectableFlag) {
+                enemyLabelList.get(enemyId).setBorder(labelBorder);
+                selectedEnemy = -1;
             }
-            selectedEnemy=-1;
         }
     }
 

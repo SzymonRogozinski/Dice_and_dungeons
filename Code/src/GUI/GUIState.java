@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 public class GUIState {
     public static final int PLAYER_CHOOSING_ACTION=0;
-    public static final int PLAYER_PERFORMING_ACTION=1;
+    public static final int PLAYER_CHOOSING_TARGET=1;
+    public static final int PLAYER_PERFORMING_ACTION=2;
     private int currentState;
     private final MainPanel panel;
 

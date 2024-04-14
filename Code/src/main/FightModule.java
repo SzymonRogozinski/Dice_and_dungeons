@@ -22,23 +22,24 @@ public class FightModule {
         return master.getRerolls();
     }
 
-    public void rollDices(){
-        master.roll();
-        state.showDiceResult(master.getResults());
-    }
-
     public void rerollDice(int diceId){
         master.reroll(diceId);
         state.showDiceResult(master.getResults());
         state.refreshRollPanel();
     }
 
-    public void showDiceResult(ArrayList<DiceSide> result){
-        state.showDiceResult(result);
+    //public void showDiceResult(ArrayList<DiceSide> result){
+    //    state.showDiceResult(result);
+    //}
+
+    public void chooseTarget(){
+        state.setState(GUIState.PLAYER_CHOOSING_TARGET);
     }
 
     public void performAction(){
         state.setState(GUIState.PLAYER_PERFORMING_ACTION);
+        master.roll();
+        state.showDiceResult(master.getResults());
     }
 
     public void endAction(){

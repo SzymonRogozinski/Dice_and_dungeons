@@ -24,13 +24,9 @@ public class RollPanel extends JPanel {
         reroll.setSize(GUISettings.SMALL_PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE/3);
         reroll.setForeground(Color.WHITE);
 
-        JButton rollButton=new JButton("Roll");
-        rollButton.addActionListener(e->rollDicePool());
-
         JButton skipButton=new JButton("Skip and sum up");
         skipButton.addActionListener(e->sumUpDicePool());
 
-        this.add(rollButton);
         this.add(reroll);
         this.add(skipButton);
     }
@@ -41,14 +37,6 @@ public class RollPanel extends JPanel {
 
     public void rerollsChange(){
         reroll.setText("You have "+fight.getRerolls()+" rerolls.");
-    }
-
-    private void rollDicePool(){
-        if(fight==null)
-            return;
-        fight.rollDices();
-        reroll.setText("You have "+fight.getRerolls()+" rerolls.");
-        this.revalidate();
     }
 
     private void sumUpDicePool(){
