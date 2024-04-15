@@ -26,7 +26,5 @@ public class GUIState {
         panel.getRollPanel().rerollsChange();
     }
 
-    public void showDiceResult(ArrayList<DiceSide> result){
-        panel.getDicePanel().showDiceResults(result);
-    }
+    public void showDiceResult(ArrayList<DiceSide> result){panel.getActionPanel().getDicePanel().showDiceResults(result);}
 }

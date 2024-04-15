@@ -1,10 +1,7 @@
 package main;
 
-import Dice.DiceSide;
 import GUI.GUIState;
 import GUI.MainPanel;
-
-import java.util.ArrayList;
 
 public class FightModule {
     private final DiceMaster master;
@@ -28,16 +25,13 @@ public class FightModule {
         state.refreshRollPanel();
     }
 
-    //public void showDiceResult(ArrayList<DiceSide> result){
-    //    state.showDiceResult(result);
-    //}
-
     public void chooseTarget(){
         state.setState(GUIState.PLAYER_CHOOSING_TARGET);
     }
 
-    public void performAction(){
-        state.setState(GUIState.PLAYER_PERFORMING_ACTION);
+    public void performAction(){state.setState(GUIState.PLAYER_PERFORMING_ACTION);}
+
+    public void rollDices(){
         master.roll();
         state.showDiceResult(master.getResults());
     }

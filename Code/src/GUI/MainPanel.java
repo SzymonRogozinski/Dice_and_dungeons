@@ -1,9 +1,6 @@
 package GUI;
 
-import GUI.FightGUI.ActionPanel;
-import GUI.FightGUI.DicePanel;
-import GUI.FightGUI.FightPanel;
-import GUI.FightGUI.RollPanel;
+import GUI.FightGUI.*;
 import main.FightModule;
 
 import javax.swing.*;
@@ -14,8 +11,9 @@ public class MainPanel extends JPanel {
 
     private DicePanel dicePanel;
     private RollPanel rollPanel;
-    private ActionPanel actionPanel;
+    //private ActionListPanel actionListPanel;
     private FightPanel fightPanel;
+    private ActionPanel actionPanel;
 
     public MainPanel( ){
         //Setting panel
@@ -33,8 +31,8 @@ public class MainPanel extends JPanel {
         //Real components
         dicePanel=new DicePanel(border);
         rollPanel =new RollPanel(border);
-        actionPanel = new ActionPanel(border);
         fightPanel = new FightPanel(border);
+        actionPanel =  new ActionPanel(border);
 
         //Settings components
         bigPanel.setBounds(0,0, GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE);
@@ -53,13 +51,12 @@ public class MainPanel extends JPanel {
         leftInfoPanel.setLayout(null);
         leftInfoPanel.setBackground(Color.BLACK);
         leftInfoPanel.setBorder(border);
-        leftInfoPanel.add(actionPanel);
 
         downInfoPanel.setBounds(0,GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
         downInfoPanel.setLayout(null);
         downInfoPanel.setBackground(Color.BLACK);
         downInfoPanel.setBorder(border);
-        downInfoPanel.add(dicePanel);
+        downInfoPanel.add(actionPanel);
 
         //Adding component to panel
         this.add(bigPanel);
@@ -74,14 +71,13 @@ public class MainPanel extends JPanel {
 
     public void setFightModule(FightModule fightModule){
         rollPanel.setFight(fightModule);
-        actionPanel.setFight(fightModule);
         dicePanel.setFight(fightModule);
         fightPanel.setFight(fightModule);
+        actionPanel.setFight(fightModule);
     }
 
-    public DicePanel getDicePanel() {
-        return dicePanel;
-    }
+    public ActionPanel getActionPanel(){ return actionPanel;}
+
 
     public RollPanel getRollPanel() {
         return rollPanel;
@@ -93,6 +89,7 @@ public class MainPanel extends JPanel {
                 dicePanel.setVisible(false);
                 rollPanel.setVisible(false);
                 actionPanel.setVisible(true);
+                actionPanel.changePage("Actions");
             }
             case GUIState.PLAYER_CHOOSING_TARGET -> {
                 dicePanel.setVisible(false);
@@ -103,8 +100,9 @@ public class MainPanel extends JPanel {
             case GUIState.PLAYER_PERFORMING_ACTION -> {
                 dicePanel.setVisible(true);
                 rollPanel.setVisible(true);
-                actionPanel.setVisible(false);
                 fightPanel.enemySelectable(false);
+                actionPanel.setVisible(true);
+                actionPanel.changePage("Pause");
             }
         }
 

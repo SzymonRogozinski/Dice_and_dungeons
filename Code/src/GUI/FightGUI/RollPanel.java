@@ -1,14 +1,11 @@
 package GUI.FightGUI;
 
-import Dice.DiceAction.DiceAction;
 import GUI.GUISettings;
-import main.DiceMaster;
 import main.FightModule;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class RollPanel extends JPanel {
     private JLabel reroll;
