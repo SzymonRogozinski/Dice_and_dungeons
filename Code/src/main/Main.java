@@ -12,6 +12,9 @@ public class Main {
     private static GUIState state;
 
     public static void main(String[] args) {
+        //TODO
+        //Change place of action panel
+
         mainPanel =new MainPanel();
         state=new GUIState(mainPanel);
         FightModule fight = new FightModule(mainPanel,state);
