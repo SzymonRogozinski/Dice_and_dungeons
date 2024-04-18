@@ -1,18 +1,33 @@
 package main;
 
+import Character.PlayerParty;
+
+import Dice.Dice;
 import GUI.GUIState;
 import GUI.MainPanel;
 
 public class FightModule {
+    private final PlayerParty party;
     private final DiceMaster master;
     private final MainPanel panel;
     private final GUIState state;
+    private int playerTurn;
 
-    public FightModule(MainPanel panel,GUIState state) {
+    public FightModule(MainPanel panel,GUIState state,PlayerParty party) {
+        this.party=party;
         this.state=state;
         this.panel=panel;
         this.master = new DiceMaster(this);
         this.panel.setFightModule(this);
+        this.playerTurn=0;
+    }
+
+    public void initFight(){
+        state.initState(party.getCharacters().get(0));
+    }
+
+    public PlayerParty getParty() {
+        return party;
     }
 
     public int getRerolls(){
@@ -25,7 +40,8 @@ public class FightModule {
         state.refreshRollPanel();
     }
 
-    public void chooseTarget(){
+    public void choosedAction(Dice dice, int numDice,int rerolls){
+        master.setDicePool(dice,numDice,rerolls);
         state.setState(GUIState.PLAYER_CHOOSING_TARGET);
     }
 

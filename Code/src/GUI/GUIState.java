@@ -2,6 +2,8 @@ package GUI;
 
 import Dice.DiceSide;
 
+import Character.PlayerCharacter;
+
 import java.util.ArrayList;
 
 public class GUIState {
@@ -15,6 +17,10 @@ public class GUIState {
         currentState=PLAYER_CHOOSING_ACTION;
         this.panel=panel;
         panel.setState(currentState);
+    }
+
+    public void initState(PlayerCharacter firstCharacter){
+        panel.init(firstCharacter);
     }
 
     public void setState(int newState){

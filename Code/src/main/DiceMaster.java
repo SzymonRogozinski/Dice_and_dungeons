@@ -10,33 +10,25 @@ import GUI.GUISettings;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DiceMaster {
-    private static final int maxRerolls=2;
     private int reroll;
     private DicePool pool;
     private final FightModule fight;
 
     public DiceMaster(FightModule fight) {
         this.fight=fight;
-        DamageAction dmg = new DamageAction(4);
-        DamageAction bigdmg = new DamageAction(6);
-        NullAction none = new NullAction();
-
-        int size= GUISettings.SMALL_PANEL_SIZE/2;
-        DiceSide dmgSide = new DiceSide(new ArrayList<>(List.of(dmg)), resizeIcon("DiceIcons/Damage4.png",size));
-        DiceSide bigdmgSide = new DiceSide(new ArrayList<>(List.of(bigdmg)), resizeIcon("DiceIcons/Damage6.png",size));
-        DiceSide noneSide = new DiceSide(new ArrayList<>(List.of(none)), resizeIcon("DiceIcons/NullSide.png",size));
-
-        Dice dice = new Dice(new DiceSide[]{noneSide, noneSide, noneSide, dmgSide, dmgSide, bigdmgSide});
-
-        pool = new DicePool(dice, 6);
-        reroll = maxRerolls;
     }
 
-    private ImageIcon resizeIcon(String path,int size){
-        return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(size,size,java.awt.Image.SCALE_SMOOTH));
+    public DiceMaster(FightModule fight, Dice dice, int diceNumber, int reroll) {
+        this.fight=fight;
+        this.pool=new DicePool(dice,diceNumber);
+        this.reroll=reroll;
+    }
+
+    public void setDicePool(Dice dice, int diceNumber, int reroll){
+        this.pool=new DicePool(dice,diceNumber);
+        this.reroll=reroll;
     }
 
     public int getRerolls(){
@@ -48,7 +40,6 @@ public class DiceMaster {
     }
 
     public void roll(){
-        reroll=maxRerolls;
         pool.roll();
     }
 

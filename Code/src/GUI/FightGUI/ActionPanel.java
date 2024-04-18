@@ -50,6 +50,10 @@ public class ActionPanel extends JPanel {
 
     public void changePage(String pageName){layout.show(this,pageName);}
 
+    public ActionListPanel getActions() {
+        return actions;
+    }
+
     private void roll(){
         changePage("Dice");
         fight.rollDices();

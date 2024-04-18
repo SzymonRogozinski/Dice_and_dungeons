@@ -17,7 +17,7 @@ public class RollPanel extends JPanel {
         this.setBackground(Color.BLACK);
         this.setBorder(border);
 
-        reroll=new JLabel("You have 2 rerolls.",SwingConstants.CENTER);
+        reroll=new JLabel("",SwingConstants.CENTER);
         reroll.setSize(GUISettings.SMALL_PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE/3);
         reroll.setForeground(Color.WHITE);
 

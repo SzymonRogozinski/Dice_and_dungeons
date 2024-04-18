@@ -3,6 +3,8 @@ package GUI;
 import GUI.FightGUI.*;
 import main.FightModule;
 
+import Character.PlayerCharacter;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -78,9 +80,15 @@ public class MainPanel extends JPanel {
 
     public ActionPanel getActionPanel(){ return actionPanel;}
 
-
     public RollPanel getRollPanel() {
         return rollPanel;
+    }
+
+    public void init(PlayerCharacter firstCharacter){
+        actionPanel.getActions().loadAction(firstCharacter);
+        //Refresh
+        this.revalidate();
+        this.repaint();
     }
 
     public void setState(int newState){
@@ -94,6 +102,7 @@ public class MainPanel extends JPanel {
             case GUIState.PLAYER_CHOOSING_TARGET -> {
                 dicePanel.setVisible(false);
                 rollPanel.setVisible(false);
+                rollPanel.rerollsChange();
                 actionPanel.setVisible(false);
                 fightPanel.enemySelectable(true);
             }
@@ -105,6 +114,9 @@ public class MainPanel extends JPanel {
                 actionPanel.changePage("Pause");
             }
         }
+        //Refresh
+        this.revalidate();
+        this.repaint();
 
     }
 }
