@@ -6,6 +6,7 @@ import main.FightModule;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class ActionPanel extends JPanel {
 
@@ -13,7 +14,7 @@ public class ActionPanel extends JPanel {
     private CardLayout layout;
     private ActionListPanel actions;
     private DicePanel dice;
-    private JPanel pauseScreen;
+    private JPanel pauseScreen,enemyScreen;
 
     public ActionPanel(Border border){
         //Set display
@@ -26,17 +27,12 @@ public class ActionPanel extends JPanel {
         actions=new ActionListPanel(border);
         dice =new DicePanel(border);
         //Pause Screen
-        pauseScreen=new JPanel();
-        pauseScreen.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
-        pauseScreen.setLayout(new GridLayout(3,1));
-        pauseScreen.setBackground(Color.BLACK);
-        JButton pauseButton = new JButton("Roll");
-        pauseButton.addActionListener(e->roll());
-        pauseScreen.add(new JLabel());
-        pauseScreen.add(pauseButton);
+        pauseScreen=new StopPanel(e->roll(),"roll");
+        enemyScreen=new StopPanel(e->enemy(),"Enemy attack");
 
         this.add("Actions",actions);
         this.add("Pause",pauseScreen);
+        this.add("Enemy",enemyScreen);
         this.add("Dice", dice);
     }
 
@@ -57,5 +53,22 @@ public class ActionPanel extends JPanel {
     private void roll(){
         changePage("Dice");
         fight.rollDices();
+    }
+
+    private void enemy(){
+        fight.enemyAction();
+    }
+
+    private class StopPanel extends JPanel{
+
+        StopPanel(ActionListener l,String buttonName){
+            this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
+            this.setLayout(new GridLayout(3,1));
+            this.setBackground(Color.BLACK);
+            JButton pauseButton = new JButton(buttonName);
+            pauseButton.addActionListener(l);
+            this.add(new JLabel());
+            this.add(pauseButton);
+        }
     }
 }

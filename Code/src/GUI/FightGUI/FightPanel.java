@@ -27,13 +27,20 @@ public class FightPanel extends JPanel {
         this.setLayout(null);
         this.setBackground(Color.BLACK);
         this.setBorder(border);
-
         selectedEnemy=-1;
         selectableFlag=false;
         //Add Enemy
         enemyLabelList=new ArrayList<>();
-        for(int i=0;i<3;i++) {
-            JLabel enemy = new JLabel();
+    }
+
+    private static ImageIcon resizeIcon(ImageIcon image,int width,int height){
+        return new ImageIcon(image.getImage().getScaledInstance(width,height,java.awt.Image.SCALE_SMOOTH));
+    }
+
+    public void setFight(FightModule fight){
+        this.fight=fight;
+        for(int i=0;i<fight.getEnemyCount();i++) {
+            JLabel enemy = new JLabel(resizeIcon(fight.getEnemies().get(i).getImage(),labelWidth, labelHeight));
             enemy.setSize(labelWidth, labelHeight);
             enemy.setBackground(Color.BLACK);
             enemy.setBorder(labelBorder);
@@ -45,10 +52,8 @@ public class FightPanel extends JPanel {
         for(JLabel enemy:enemyLabelList){
             this.add(enemy);
         }
-    }
-
-    public void setFight(FightModule fight){
-        this.fight=fight;
+        this.repaint();
+        this.revalidate();
     }
 
     public void enemySelectable(boolean selectableFlag){

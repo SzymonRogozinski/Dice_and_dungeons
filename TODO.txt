@@ -1,0 +1,12 @@
+> Kolejka akcji postaci [Done]
+> Wyświetlanie tekstur przeciwników i postaci gracza [Done 1/2]
+> Wyświetlanie paska zdrowia Przeciwników
+> Wyświetlanie paska zdrowia drużyny, jej many oraz nazwy postaci obecnie walczącej
+> Zaznaczanie pojedyńczego wroga/ sojusznika lub grupy
+> Implementacja śmierci wroga
+> Wyświetlanie statusów postaci
+> Implementacja statusów
+> Implementacja tagów
+> Implementacja akcji
+> Zmiana animacji zaznaczania
+> Wyświetlanie postaci

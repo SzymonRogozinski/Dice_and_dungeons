@@ -5,29 +5,41 @@ import Character.PlayerParty;
 import Dice.Dice;
 import GUI.GUIState;
 import GUI.MainPanel;
+import Character.GameCharacter;
+import Character.EnemyCharacter;
+
+import java.util.ArrayList;
 
 public class FightModule {
     private final PlayerParty party;
     private final DiceMaster master;
     private final MainPanel panel;
     private final GUIState state;
-    private int playerTurn;
+    private final ArrayList<EnemyCharacter> enemies;
+    private boolean playerTurn;
+    private int characterTurn;
 
-    public FightModule(MainPanel panel,GUIState state,PlayerParty party) {
+    public FightModule(MainPanel panel,GUIState state,PlayerParty party,ArrayList<EnemyCharacter> enemies) {
         this.party=party;
         this.state=state;
         this.panel=panel;
         this.master = new DiceMaster(this);
+        this.enemies=enemies;
         this.panel.setFightModule(this);
-        this.playerTurn=0;
+        this.playerTurn=true;
+        this.characterTurn=0;
+    }
+
+    public GameCharacter getCharacter(){
+        return playerTurn?party.getCharacters().get(characterTurn) : enemies.get(characterTurn);
+    }
+
+    public ArrayList<EnemyCharacter> getEnemies() {
+        return enemies;
     }
 
     public void initFight(){
-        state.initState(party.getCharacters().get(0));
-    }
-
-    public PlayerParty getParty() {
-        return party;
+        state.initState();
     }
 
     public int getRerolls(){
@@ -53,8 +65,23 @@ public class FightModule {
     }
 
     public void endAction(){
-        master.sumUpResults();
-        state.setState(GUIState.PLAYER_CHOOSING_ACTION);
+        if(playerTurn)
+            master.sumUpResults();
+        characterTurn++;
+        if((playerTurn && characterTurn>=party.getCharacters().size()) || (!playerTurn && characterTurn>=enemies.size())) {
+            characterTurn=0;
+            playerTurn=!playerTurn;
+        }
+        state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
+    }
+
+    public int getEnemyCount(){
+        return enemies.size();
+    }
+
+    public void enemyAction(){
+        enemies.get(characterTurn).action();
+        endAction();
     }
 
 }

@@ -1,10 +1,14 @@
 package Character;
 
+import javax.swing.*;
+
 public class GameCharacter {
     private int strength,endurance,intelligence,charisma,cunning,luck;
     private final int startStrength,startEndurance,startIntelligence,startCharisma,startCunning,startLuck;
+    private final String name;
+    private final ImageIcon image;
 
-    public GameCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck) {
+    public GameCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck,String name,ImageIcon image) {
         this.startStrength = startStrength;
         strength = startStrength;
         this.startEndurance = startEndurance;
@@ -17,6 +21,16 @@ public class GameCharacter {
         cunning = startCunning;
         this.startLuck = startLuck;
         luck = startLuck;
+        this.name=name;
+        this.image=image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ImageIcon getImage(){
+        return image;
     }
 
     public int getStrength() {

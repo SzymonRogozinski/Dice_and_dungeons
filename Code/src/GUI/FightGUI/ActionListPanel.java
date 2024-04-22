@@ -53,13 +53,19 @@ public class ActionListPanel extends JPanel {
         this.fight=fight;
     }
 
-    public void loadAction(PlayerCharacter character){
+    public void loadAction(){
+        if(!(fight.getCharacter() instanceof PlayerCharacter))
+            throw new RuntimeException("Illegal state, enemy and player character were mixed!");
+        PlayerCharacter character=(PlayerCharacter) fight.getCharacter();
         ArrayList<ActionItem> items = character.getActionItems();
         ArrayList<JButton> buttons=new ArrayList<>();
         for(ActionItem item:items){
             JButton button=new JButton(item.getName());
             button.setSize(buttonWidth,buttonHeight);
-            button.addActionListener(e->fight.choosedAction(item.getDice(),character.getDiceNumber(character.getStrength()),character.getCharacterRerolls()));
+            button.addActionListener(e-> {
+                fight.choosedAction(item.getDice(), character.getDiceNumber(character.getStrength()), character.getCharacterRerolls());
+                changePage("Start");
+            });
             buttons.add(button);
         }
         fightPanel.loadNewAction(buttons);

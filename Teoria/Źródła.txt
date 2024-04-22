@@ -8,3 +8,5 @@ Przeszukiwanie w głąb i wszerz
 sprites -> https://opengameart.org/content/tileset-1bit-color
 
 mine tileset -> https://analogstudios.itch.io/mine-pico-platformer-tileset?download
+
+Skeleton texture -> https://opengameart.org/content/tiny-skelly-rpg-enemies-rework

@@ -10,22 +10,23 @@ public class GUIState {
     public static final int PLAYER_CHOOSING_ACTION=0;
     public static final int PLAYER_CHOOSING_TARGET=1;
     public static final int PLAYER_PERFORMING_ACTION=2;
+    public static final int ENEMY_PERFORMING_ACTION=3;
     private int currentState;
     private final MainPanel panel;
 
     public GUIState(MainPanel panel){
         currentState=PLAYER_CHOOSING_ACTION;
         this.panel=panel;
-        panel.setState(currentState);
+        panel.setState(currentState,currentState);
     }
 
-    public void initState(PlayerCharacter firstCharacter){
-        panel.init(firstCharacter);
+    public void initState(){
+        panel.init();
     }
 
     public void setState(int newState){
+        panel.setState(newState,currentState);
         currentState=newState;
-        panel.setState(currentState);
     }
 
     public void refreshRollPanel(){

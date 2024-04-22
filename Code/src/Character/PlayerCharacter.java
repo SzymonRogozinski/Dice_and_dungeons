@@ -2,6 +2,7 @@ package Character;
 
 import Fight.ActionItem;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class PlayerCharacter extends GameCharacter{
@@ -9,8 +10,8 @@ public class PlayerCharacter extends GameCharacter{
     private static final int MAX_ACTION_ITEM=3;
     private final ArrayList<ActionItem> actionItems;
 
-    public PlayerCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck,ArrayList<ActionItem> actionItems) {
-        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck);
+    public PlayerCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image,ArrayList<ActionItem> actionItems) {
+        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image);
         this.actionItems = actionItems;
     }
 

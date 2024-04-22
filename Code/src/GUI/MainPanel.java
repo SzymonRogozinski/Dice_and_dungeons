@@ -11,7 +11,6 @@ import java.awt.*;
 
 public class MainPanel extends JPanel {
 
-    private DicePanel dicePanel;
     private RollPanel rollPanel;
     //private ActionListPanel actionListPanel;
     private FightPanel fightPanel;
@@ -31,7 +30,6 @@ public class MainPanel extends JPanel {
         JPanel downInfoPanel = new JPanel();
         Border border = BorderFactory.createLineBorder(Color.WHITE, 2);
         //Real components
-        dicePanel=new DicePanel(border);
         rollPanel =new RollPanel(border);
         fightPanel = new FightPanel(border);
         actionPanel =  new ActionPanel(border);
@@ -73,7 +71,6 @@ public class MainPanel extends JPanel {
 
     public void setFightModule(FightModule fightModule){
         rollPanel.setFight(fightModule);
-        dicePanel.setFight(fightModule);
         fightPanel.setFight(fightModule);
         actionPanel.setFight(fightModule);
     }
@@ -84,34 +81,40 @@ public class MainPanel extends JPanel {
         return rollPanel;
     }
 
-    public void init(PlayerCharacter firstCharacter){
-        actionPanel.getActions().loadAction(firstCharacter);
+    public void init(){
+        actionPanel.getActions().loadAction();
         //Refresh
         this.revalidate();
         this.repaint();
     }
 
-    public void setState(int newState){
+    public void setState(int newState,int currentState){
         switch (newState){
             case GUIState.PLAYER_CHOOSING_ACTION -> {
-                dicePanel.setVisible(false);
+                if(currentState==GUIState.PLAYER_PERFORMING_ACTION){
+                    actionPanel.getActions().loadAction();
+                }
+                //dicePanel.setVisible(false);
                 rollPanel.setVisible(false);
                 actionPanel.setVisible(true);
                 actionPanel.changePage("Actions");
             }
             case GUIState.PLAYER_CHOOSING_TARGET -> {
-                dicePanel.setVisible(false);
                 rollPanel.setVisible(false);
                 rollPanel.rerollsChange();
                 actionPanel.setVisible(false);
                 fightPanel.enemySelectable(true);
             }
             case GUIState.PLAYER_PERFORMING_ACTION -> {
-                dicePanel.setVisible(true);
                 rollPanel.setVisible(true);
                 fightPanel.enemySelectable(false);
                 actionPanel.setVisible(true);
                 actionPanel.changePage("Pause");
+            }
+            case GUIState.ENEMY_PERFORMING_ACTION -> {
+                rollPanel.setVisible(true);
+                actionPanel.setVisible(true);
+                actionPanel.changePage("Enemy");
             }
         }
         //Refresh
