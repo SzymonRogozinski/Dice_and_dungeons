@@ -14,14 +14,10 @@ import java.util.ArrayList;
 public class DiceMaster {
     private int reroll;
     private DicePool pool;
-    private final FightModule fight;
 
-    public DiceMaster(FightModule fight) {
-        this.fight=fight;
-    }
+    public DiceMaster() {}
 
-    public DiceMaster(FightModule fight, Dice dice, int diceNumber, int reroll) {
-        this.fight=fight;
+    public DiceMaster(Dice dice, int diceNumber, int reroll) {
         this.pool=new DicePool(dice,diceNumber);
         this.reroll=reroll;
     }

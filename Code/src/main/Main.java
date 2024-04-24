@@ -30,7 +30,7 @@ public class Main {
 
         item = new ActionItem("Mace", DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}));
         items = new ArrayList<>(List.of(new ActionItem[]{item}));
-        PlayerCharacter player2=new PlayerCharacter(12,12,12,12,12,12,"Bandit",new ImageIcon("CharacterTexture/player.png"),items);
+        PlayerCharacter player2=new PlayerCharacter(12,18,12,12,12,12,"Bandit",new ImageIcon("CharacterTexture/player.png"),items);
 
         PlayerParty party = new PlayerParty(new ArrayList<>(List.of(new PlayerCharacter[]{player,player2})));
 

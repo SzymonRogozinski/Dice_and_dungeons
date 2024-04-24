@@ -3,8 +3,6 @@ package GUI;
 import GUI.FightGUI.*;
 import main.FightModule;
 
-import Character.PlayerCharacter;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -12,9 +10,9 @@ import java.awt.*;
 public class MainPanel extends JPanel {
 
     private RollPanel rollPanel;
-    //private ActionListPanel actionListPanel;
     private FightPanel fightPanel;
     private ActionPanel actionPanel;
+    private StatusPanel statusPanel;
 
     public MainPanel( ){
         //Setting panel
@@ -33,6 +31,7 @@ public class MainPanel extends JPanel {
         rollPanel =new RollPanel(border);
         fightPanel = new FightPanel(border);
         actionPanel =  new ActionPanel(border);
+        statusPanel=new StatusPanel(border);
 
         //Settings components
         bigPanel.setBounds(0,0, GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE);
@@ -51,6 +50,7 @@ public class MainPanel extends JPanel {
         leftInfoPanel.setLayout(null);
         leftInfoPanel.setBackground(Color.BLACK);
         leftInfoPanel.setBorder(border);
+        leftInfoPanel.add(statusPanel);
 
         downInfoPanel.setBounds(0,GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
         downInfoPanel.setLayout(null);
@@ -73,6 +73,7 @@ public class MainPanel extends JPanel {
         rollPanel.setFight(fightModule);
         fightPanel.setFight(fightModule);
         actionPanel.setFight(fightModule);
+        statusPanel.setFight(fightModule);
     }
 
     public ActionPanel getActionPanel(){ return actionPanel;}
@@ -94,7 +95,6 @@ public class MainPanel extends JPanel {
                 if(currentState==GUIState.PLAYER_PERFORMING_ACTION){
                     actionPanel.getActions().loadAction();
                 }
-                //dicePanel.setVisible(false);
                 rollPanel.setVisible(false);
                 actionPanel.setVisible(true);
                 actionPanel.changePage("Actions");
@@ -118,6 +118,7 @@ public class MainPanel extends JPanel {
             }
         }
         //Refresh
+        statusPanel.refresh();
         this.revalidate();
         this.repaint();
 

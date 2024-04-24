@@ -20,18 +20,22 @@ public class FightModule {
     private int characterTurn;
 
     public FightModule(MainPanel panel,GUIState state,PlayerParty party,ArrayList<EnemyCharacter> enemies) {
-        this.party=party;
-        this.state=state;
-        this.panel=panel;
-        this.master = new DiceMaster(this);
-        this.enemies=enemies;
-        this.panel.setFightModule(this);
         this.playerTurn=true;
         this.characterTurn=0;
+        this.state=state;
+        this.panel=panel;
+        this.master = new DiceMaster();
+        this.enemies=enemies;
+        this.party=party;
+        this.panel.setFightModule(this);
     }
 
     public GameCharacter getCharacter(){
         return playerTurn?party.getCharacters().get(characterTurn) : enemies.get(characterTurn);
+    }
+
+    public PlayerParty getParty(){
+        return party;
     }
 
     public ArrayList<EnemyCharacter> getEnemies() {
