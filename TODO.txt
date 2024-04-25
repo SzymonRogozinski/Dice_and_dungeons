@@ -4,7 +4,7 @@
 > Zmiana animacji zaznaczania [Done]
 > Wyświetlanie paska zdrowia Przeciwników
 > Wyświetlanie paska zdrowia drużyny, jej many oraz nazwy postaci obecnie walczącej [Done]
-> Zaznaczanie pojedyńczego wroga/ sojusznika lub grupy
+> Zaznaczanie pojedyńczego wroga/ sojusznika lub grupy [Done]
 > Implementacja śmierci wroga
 > Wyświetlanie statusów postaci
 > Implementacja statusów

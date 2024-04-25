@@ -2,7 +2,7 @@ package GUI.FightGUI;
 
 import Fight.ActionItem;
 import GUI.GUISettings;
-import main.FightModule;
+import Fight.FightModule;
 import Character.PlayerCharacter;
 
 import javax.swing.*;
@@ -63,7 +63,7 @@ public class ActionListPanel extends JPanel {
             JButton button=new JButton(item.getName());
             button.setSize(buttonWidth,buttonHeight);
             button.addActionListener(e-> {
-                fight.choosedAction(item.getDice(), character.getDiceNumber(character.getStrength()), character.getCharacterRerolls());
+                fight.choosedAction(item.getDice(), character.getDiceNumber(character.getStrength()), character.getCharacterRerolls(),item.getTarget());
                 changePage("Start");
             });
             buttons.add(button);

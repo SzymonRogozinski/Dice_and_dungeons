@@ -1,4 +1,4 @@
-package main;
+package Fight;
 
 import Dice.Dice;
 import Dice.DiceAction.DamageAction;

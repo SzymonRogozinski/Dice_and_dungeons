@@ -2,7 +2,7 @@ package GUI.FightGUI;
 
 import Dice.DiceSide;
 import GUI.GUISettings;
-import main.FightModule;
+import Fight.FightModule;
 
 import javax.swing.*;
 import javax.swing.border.Border;

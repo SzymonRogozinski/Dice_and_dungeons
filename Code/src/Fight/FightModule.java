@@ -1,4 +1,4 @@
-package main;
+package Fight;
 
 import Character.PlayerParty;
 
@@ -18,6 +18,8 @@ public class FightModule {
     private final ArrayList<EnemyCharacter> enemies;
     private boolean playerTurn;
     private int characterTurn;
+    private int targetId;
+    private ActionTarget targetType;
 
     public FightModule(MainPanel panel,GUIState state,PlayerParty party,ArrayList<EnemyCharacter> enemies) {
         this.playerTurn=true;
@@ -28,6 +30,10 @@ public class FightModule {
         this.enemies=enemies;
         this.party=party;
         this.panel.setFightModule(this);
+    }
+
+    public ActionTarget getTargetType() {
+        return targetType;
     }
 
     public GameCharacter getCharacter(){
@@ -56,12 +62,16 @@ public class FightModule {
         state.refreshRollPanel();
     }
 
-    public void choosedAction(Dice dice, int numDice,int rerolls){
+    public void choosedAction(Dice dice, int numDice,int rerolls, ActionTarget targetType){
+        this.targetType=targetType;
         master.setDicePool(dice,numDice,rerolls);
         state.setState(GUIState.PLAYER_CHOOSING_TARGET);
     }
 
-    public void performAction(){state.setState(GUIState.PLAYER_PERFORMING_ACTION);}
+    public void performAction(int targetId){
+        this.targetId=targetId;
+        state.setState(GUIState.PLAYER_PERFORMING_ACTION);
+    }
 
     public void rollDices(){
         master.roll();
@@ -69,6 +79,8 @@ public class FightModule {
     }
 
     public void endAction(){
+        if(master.getResults()==null)
+            return;
         if(playerTurn)
             master.sumUpResults();
         characterTurn++;

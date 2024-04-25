@@ -1,7 +1,8 @@
 package GUI.FightGUI;
 
+import Fight.ActionTarget;
 import GUI.GUISettings;
-import main.FightModule;
+import Fight.FightModule;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -122,15 +123,11 @@ public class FightPanel extends JPanel {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            if(!selectableFlag)
+            if(!selectableFlag || !setBorderFlashing(false))
                 return;
-            if(isEnemy)
-                enemyLabelList.get(characterId).setBorder(labelBorder);
-            else
-                playerLabelList.get(characterId).setBorder(labelBorder);
-            selectedEnemy = -1;
             borderFlash.makeStop();
-            fight.performAction();
+            fight.performAction(selectedEnemy);
+            selectedEnemy = -1;
         }
 
         @Override
@@ -143,10 +140,7 @@ public class FightPanel extends JPanel {
         public void mouseEntered(MouseEvent e) {
             if(!selectableFlag)
                 return;
-            if(isEnemy)
-                enemyLabelList.get(characterId).setBorder(selectedLabelBorder);
-            else
-                playerLabelList.get(characterId).setBorder(selectedLabelBorder);
+            setBorderFlashing(true);
             notifyBorder();
             selectedEnemy = characterId;
         }
@@ -155,12 +149,28 @@ public class FightPanel extends JPanel {
         public void mouseExited(MouseEvent e) {
             if(!selectableFlag)
                 return;
-            if(isEnemy)
-                enemyLabelList.get(characterId).setBorder(labelBorder);
-            else
-                playerLabelList.get(characterId).setBorder(labelBorder);
+            setBorderFlashing(false);
             borderFlash.makeStop();
             selectedEnemy = -1;
+        }
+
+        private boolean setBorderFlashing(boolean flashing){
+            if(isEnemy && fight.getTargetType() == ActionTarget.ENEMY_CHARACTER) {
+                enemyLabelList.get(characterId).setBorder(flashing ? selectedLabelBorder : labelBorder);
+                return true;
+            }else if (!isEnemy && fight.getTargetType() == ActionTarget.PLAYER_CHARACTER) {
+                playerLabelList.get(characterId).setBorder(flashing ? selectedLabelBorder : labelBorder);
+                return true;
+            }else if (isEnemy && fight.getTargetType() == ActionTarget.ALL_ENEMIES){
+                for(JLabel label:enemyLabelList)
+                    label.setBorder(flashing?selectedLabelBorder:labelBorder);
+                return true;
+            }else if (!isEnemy && fight.getTargetType() == ActionTarget.PLAYER_PARTY){
+                for(JLabel label:playerLabelList )
+                    label.setBorder(flashing?selectedLabelBorder:labelBorder);
+                return true;
+            }
+            return false;
         }
     }
 

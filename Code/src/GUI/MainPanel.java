@@ -1,7 +1,7 @@
 package GUI;
 
 import GUI.FightGUI.*;
-import main.FightModule;
+import Fight.FightModule;
 
 import javax.swing.*;
 import javax.swing.border.Border;

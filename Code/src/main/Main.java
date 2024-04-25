@@ -2,6 +2,8 @@ package main;
 
 import Dice.DiceFactory;
 import Fight.ActionItem;
+import Fight.ActionTarget;
+import Fight.FightModule;
 import GUI.GUIState;
 import GUI.MainFrame;
 import GUI.MainPanel;
@@ -23,12 +25,12 @@ public class Main {
 
         mainPanel =new MainPanel();
         state=new GUIState(mainPanel);
-        ActionItem item = new ActionItem("Sword", DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}));
+        ActionItem item = new ActionItem("Sword", DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER);
         ArrayList<ActionItem> items = new ArrayList<>();
         items.add(item);
         PlayerCharacter player=new PlayerCharacter(24,12,12,12,12,12,"Warrior",new ImageIcon("CharacterTexture/player.png"),items);
 
-        item = new ActionItem("Mace", DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}));
+        item = new ActionItem("Mace", DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER);
         items = new ArrayList<>(List.of(new ActionItem[]{item}));
         PlayerCharacter player2=new PlayerCharacter(12,18,12,12,12,12,"Bandit",new ImageIcon("CharacterTexture/player.png"),items);
 
