@@ -92,7 +92,7 @@ public class MainPanel extends JPanel {
     public void setState(int newState,int currentState){
         switch (newState){
             case GUIState.PLAYER_CHOOSING_ACTION -> {
-                if(currentState==GUIState.PLAYER_PERFORMING_ACTION){
+                if(currentState==GUIState.PLAYER_PERFORMING_ACTION || currentState==GUIState.ENEMY_PERFORMING_ACTION){
                     actionPanel.getActions().loadAction();
                 }
                 rollPanel.setVisible(false);
