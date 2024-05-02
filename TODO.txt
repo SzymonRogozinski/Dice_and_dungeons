@@ -2,12 +2,14 @@
 > Wyświetlanie tekstur przeciwników i postaci gracza [Done]
 > Wyświetlanie postaci [Done]
 > Zmiana animacji zaznaczania [Done]
-> Wyświetlanie paska zdrowia Przeciwników
 > Wyświetlanie paska zdrowia drużyny, jej many oraz nazwy postaci obecnie walczącej [Done]
 > Zaznaczanie pojedyńczego wroga/ sojusznika lub grupy [Done]
-> Implementacja śmierci wroga
+> Implementacja akcji [Done]
+> Wyświetlanie paska zdrowia Przeciwników [Done]
+> Implementacja śmierci wroga [Done]
+> Implementacja inteligencji przeciwnika
 > Wyświetlanie statusów postaci
 > Implementacja statusów
 > Implementacja tagów
-> Implementacja akcji
+> Spisanie DiceActions
 

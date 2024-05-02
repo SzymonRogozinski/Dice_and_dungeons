@@ -3,12 +3,15 @@ package Fight;
 import Character.PlayerParty;
 
 import Dice.Dice;
+import Dice.DiceAction.DiceAction;
 import GUI.GUIState;
 import GUI.MainPanel;
 import Character.GameCharacter;
 import Character.EnemyCharacter;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class FightModule {
     private final PlayerParty party;
@@ -68,7 +71,7 @@ public class FightModule {
         state.setState(GUIState.PLAYER_CHOOSING_TARGET);
     }
 
-    public void performAction(int targetId){
+    public void targetSelected(int targetId){
         this.targetId=targetId;
         state.setState(GUIState.PLAYER_PERFORMING_ACTION);
     }
@@ -79,25 +82,54 @@ public class FightModule {
     }
 
     public void endAction(){
-        if(master.getResults()==null)
-            return;
         if(playerTurn)
             master.sumUpResults();
+        else {
+            //TODO tymczasowe rozwiązanie
+            targetType=ActionTarget.PLAYER_CHARACTER;
+            targetId=new Random().nextInt(party.getCharacters().size());
+            master.setResult(enemies.get(characterTurn).action());
+        }
+        performAction();
+        setNextCharacterTurn();
+        state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
+    }
+
+    private void performAction(){
+        ArrayList<DiceAction> actions = master.getSumUpResults();
+        ArrayList<GameCharacter> characters;
+        //Set Attacker
+        GameCharacter attacker = playerTurn?party.getCharacters().get(characterTurn):enemies.get(characterTurn);
+        //Set Defender
+        switch (targetType){
+            case PLAYER_CHARACTER -> characters=new ArrayList<>(List.of(new GameCharacter[]{party.getCharacters().get(targetId)}));
+            case ENEMY_CHARACTER -> characters=new ArrayList<>(List.of(new GameCharacter[]{enemies.get(targetId)}));
+            case ALL_ENEMIES -> characters=new ArrayList<>(enemies);
+            case PLAYER_PARTY -> characters=new ArrayList<>(party.getCharacters());
+            default -> characters=null;
+        }
+        for (DiceAction action : actions){
+            if(action.onSelf())
+                action.doAction(attacker);
+            else{
+                for(GameCharacter character:characters)
+                    action.doAction(character);
+            }
+        }
+    }
+
+    private void setNextCharacterTurn(){
         characterTurn++;
         if((playerTurn && characterTurn>=party.getCharacters().size()) || (!playerTurn && characterTurn>=enemies.size())) {
             characterTurn=0;
             playerTurn=!playerTurn;
         }
-        state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
+        if(!playerTurn && enemies.get(characterTurn).getCurrentHealth()==0)
+            setNextCharacterTurn();
     }
 
     public int getEnemyCount(){
         return enemies.size();
-    }
-
-    public void enemyAction(){
-        enemies.get(characterTurn).action();
-        endAction();
     }
 
 }

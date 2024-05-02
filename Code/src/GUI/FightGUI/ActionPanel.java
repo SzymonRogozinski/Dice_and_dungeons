@@ -56,7 +56,7 @@ public class ActionPanel extends JPanel {
     }
 
     private void enemy(){
-        fight.enemyAction();
+        fight.endAction();
     }
 
     private class StopPanel extends JPanel{

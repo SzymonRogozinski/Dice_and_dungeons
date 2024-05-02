@@ -1,9 +1,8 @@
-package main;
-
 import Dice.DiceFactory;
-import Fight.ActionItem;
+import Fight.GameActions.ActionItem;
 import Fight.ActionTarget;
 import Fight.FightModule;
+import Fight.GameActions.SpellAction;
 import GUI.GUIState;
 import GUI.MainFrame;
 import GUI.MainPanel;
@@ -26,13 +25,15 @@ public class Main {
         mainPanel =new MainPanel();
         state=new GUIState(mainPanel);
         ActionItem item = new ActionItem("Sword", DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER);
-        ArrayList<ActionItem> items = new ArrayList<>();
-        items.add(item);
-        PlayerCharacter player=new PlayerCharacter(24,12,12,12,12,12,"Warrior",new ImageIcon("CharacterTexture/player.png"),items);
+        ArrayList<ActionItem> items = new ArrayList<>(List.of(new ActionItem[]{item}));
+        ArrayList<SpellAction> spells = new ArrayList<>();
+        PlayerCharacter player=new PlayerCharacter(24,12,12,12,12,12,"Warrior",new ImageIcon("CharacterTexture/player.png"),items,spells);
 
         item = new ActionItem("Mace", DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER);
         items = new ArrayList<>(List.of(new ActionItem[]{item}));
-        PlayerCharacter player2=new PlayerCharacter(12,18,12,12,12,12,"Bandit",new ImageIcon("CharacterTexture/player.png"),items);
+        SpellAction spell = new SpellAction("Fire Vortex", DiceFactory.buildDice(new int[][]{{0},{1,4},{1,4},{1,4},{1,4},{1,4}}), ActionTarget.ALL_ENEMIES,8);
+        spells = new ArrayList<>(List.of(new SpellAction[]{spell}));
+        PlayerCharacter player2=new PlayerCharacter(12,18,12,12,12,12,"Bandit",new ImageIcon("CharacterTexture/player.png"),items,spells);
 
         PlayerParty party = new PlayerParty(new ArrayList<>(List.of(new PlayerCharacter[]{player,player2})));
 

@@ -1,5 +1,7 @@
 package Character;
 
+import jdk.jshell.spi.ExecutionControl;
+
 import javax.swing.*;
 
 public class GameCharacter {
@@ -55,5 +57,9 @@ public class GameCharacter {
 
     public int getLuck() {
         return luck;
+    }
+
+    public void dealDamage(int damage) {
+        throw new RuntimeException("Method not implemented");
     }
 }

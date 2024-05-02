@@ -1,5 +1,7 @@
 package Dice.DiceAction;
 
+import Character.GameCharacter;
+
 public class DamageAction implements DiceAction{
     private static final String id="Damage";
     private final int value;
@@ -27,5 +29,14 @@ public class DamageAction implements DiceAction{
     @Override
     public String getIdentification() {
         return id;
+    }
+
+    @Override
+    public void doAction(GameCharacter character) {
+        character.dealDamage(value);
+    }
+    @Override
+    public boolean onSelf(){
+        return false;
     }
 }

@@ -1,6 +1,7 @@
 package GUI.FightGUI;
 
-import Fight.ActionItem;
+import Fight.GameActions.ActionItem;
+import Fight.GameActions.SpellAction;
 import GUI.GUISettings;
 import Fight.FightModule;
 import Character.PlayerCharacter;
@@ -19,8 +20,7 @@ public class ActionListPanel extends JPanel {
     private final static int buttonVGap =(GUISettings.SMALL_PANEL_SIZE-buttonHeight)/2;
     private FightModule fight;
     private CardLayout layout;
-    private CardPanel startPanel;
-    private CardPanel fightPanel;
+    private CardPanel startPanel, fightPanel,magicPanel;
 
     public ActionListPanel(Border border){
         //Set display
@@ -39,14 +39,18 @@ public class ActionListPanel extends JPanel {
             actionButtons1.add(action);
         }
         actionButtons1.get(0).addActionListener(e->changePage("Fight"));
+        actionButtons1.get(2).addActionListener(e->changePage("Magic"));
 
         ArrayList<JButton> actionButtons2=new ArrayList<>();
+        ArrayList<JButton> actionButtons3=new ArrayList<>();
 
         startPanel=new CardPanel(border,actionButtons1);
         fightPanel=new CardPanel(border,actionButtons2,"Start");
+        magicPanel=new CardPanel(border,actionButtons3,"Start");
 
         this.add("Start",startPanel);
         this.add("Fight",fightPanel);
+        this.add("Magic",magicPanel);
     }
 
     public void setFight(FightModule fight){
@@ -57,6 +61,7 @@ public class ActionListPanel extends JPanel {
         if(!(fight.getCharacter() instanceof PlayerCharacter))
             throw new RuntimeException("Illegal state, enemy and player character were mixed!");
         PlayerCharacter character=(PlayerCharacter) fight.getCharacter();
+        //items
         ArrayList<ActionItem> items = character.getActionItems();
         ArrayList<JButton> buttons=new ArrayList<>();
         for(ActionItem item:items){
@@ -69,6 +74,26 @@ public class ActionListPanel extends JPanel {
             buttons.add(button);
         }
         fightPanel.loadNewAction(buttons);
+
+        //spells
+        ArrayList<SpellAction> spellActions = character.getSpells();
+        buttons=new ArrayList<>();
+        for(SpellAction spell:spellActions){
+            JButton button=new JButton(spell.getName());
+            button.setSize(buttonWidth,buttonHeight);
+            button.addActionListener(e-> {
+                if(fight.getParty().getCurrentMana()<spell.getManaCost()){
+                    System.out.println("You don't have enough mana!");
+                }
+                else {
+                    fight.getParty().spendMana(spell.getManaCost());
+                    fight.choosedAction(spell.getDice(), character.getDiceNumber(character.getIntelligence()), character.getCharacterRerolls(), spell.getTarget());
+                    changePage("Start");
+                }
+            });
+            buttons.add(button);
+        }
+        magicPanel.loadNewAction(buttons);
     }
 
     private void changePage(String pageName){

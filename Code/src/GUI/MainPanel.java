@@ -119,8 +119,9 @@ public class MainPanel extends JPanel {
         }
         //Refresh
         statusPanel.refresh();
-        this.revalidate();
-        this.repaint();
+        fightPanel.refresh();
+        //this.revalidate();
+        //this.repaint();
 
     }
 }

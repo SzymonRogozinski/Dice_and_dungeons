@@ -1,5 +1,8 @@
 package Dice.DiceAction;
 
+import Fight.FightModule;
+import Character.GameCharacter;
+
 public class NullAction implements DiceAction{
     private static final String id=null;
 
@@ -23,5 +26,12 @@ public class NullAction implements DiceAction{
     @Override
     public String getIdentification() {
         return id;
+    }
+
+    @Override
+    public void doAction(GameCharacter character) {}
+    @Override
+    public boolean onSelf(){
+        return true;
     }
 }

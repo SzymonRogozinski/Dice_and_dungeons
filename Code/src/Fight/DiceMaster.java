@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class DiceMaster {
     private int reroll;
     private DicePool pool;
+    private ArrayList<DiceAction> sumUpActions;
 
     public DiceMaster() {}
 
@@ -25,6 +26,12 @@ public class DiceMaster {
     public void setDicePool(Dice dice, int diceNumber, int reroll){
         this.pool=new DicePool(dice,diceNumber);
         this.reroll=reroll;
+        sumUpActions=null;
+    }
+
+    public void setResult(ArrayList<DiceAction> actions){
+        pool=null;
+        sumUpActions=actions;
     }
 
     public int getRerolls(){
@@ -32,7 +39,7 @@ public class DiceMaster {
     }
 
     public ArrayList<DiceSide> getResults(){
-        return pool.getRollResult();
+        return pool==null?null:pool.getRollResult();
     }
 
     public void roll(){
@@ -53,5 +60,10 @@ public class DiceMaster {
             res.append(a.action()).append(" ");
         }
         System.out.println(res);
+        sumUpActions=actions;
+    }
+
+    public ArrayList<DiceAction> getSumUpResults(){
+        return sumUpActions;
     }
 }
