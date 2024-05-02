@@ -68,7 +68,7 @@ public class ActionListPanel extends JPanel {
             JButton button=new JButton(item.getName());
             button.setSize(buttonWidth,buttonHeight);
             button.addActionListener(e-> {
-                fight.choosedAction(item.getDice(), character.getDiceNumber(character.getStrength()), character.getCharacterRerolls(),item.getTarget());
+                fight.choosedAction(item.getDice(), item.getDiceNumber(character), character.getCharacterRerolls(),item.getTarget());
                 changePage("Start");
             });
             buttons.add(button);
@@ -87,7 +87,7 @@ public class ActionListPanel extends JPanel {
                 }
                 else {
                     fight.getParty().spendMana(spell.getManaCost());
-                    fight.choosedAction(spell.getDice(), character.getDiceNumber(character.getIntelligence()), character.getCharacterRerolls(), spell.getTarget());
+                    fight.choosedAction(spell.getDice(), spell.getDiceNumber(character), character.getCharacterRerolls(), spell.getTarget());
                     changePage("Start");
                 }
             });

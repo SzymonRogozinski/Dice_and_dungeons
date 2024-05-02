@@ -17,7 +17,7 @@ public class FightPanel extends JPanel {
 
     private final static int enemyHeight =GUISettings.PANEL_SIZE/4;
     private final static int enemyWidth =GUISettings.PANEL_SIZE/6;
-    private final Border labelBorder=BorderFactory.createLineBorder(Color.WHITE,1);
+    private final Border labelBorder=BorderFactory.createLineBorder(Color.BLACK,1);
     private Color selectedColor= new Color(255,0,0);
     private final Border selectedLabelBorder=new LineBorder(selectedColor, 1) {
         @Override
@@ -128,15 +128,14 @@ public class FightPanel extends JPanel {
         EnemyCharacter enemy;
 
         EnemyPanel(int i){
-            this.setLayout(new FlowLayout());
+            FlowLayout layout=new FlowLayout();
+            layout.setVgap(1);
+            this.setLayout(layout);
             enemy=fight.getEnemies().get(i);
 
-            enemyLabel = new JLabel(resizeIcon(enemy.getImage(), enemyWidth-2, (int)(enemyHeight*0.8)-2));
-            //enemyLabel.setLocation(0,0);
+            enemyLabel = new JLabel(resizeIcon(enemy.getImage(), enemyWidth-2, (int)(enemyHeight*0.85)-2));
             healthBar=new JProgressBar(0,enemy.getMaxHealth());
-            //healthBar.setLocation(0,(int)(enemyHeight*0.9));
-            healthBar.setSize(enemyWidth, (int)(enemyHeight*0.1));
-            healthBar.setPreferredSize(new Dimension(enemyWidth-2, (int)(enemyHeight*0.12)));
+            healthBar.setPreferredSize(new Dimension(enemyWidth-2, (int)(enemyHeight*0.15)-1));
             healthBar.setForeground(Color.RED);
             healthBar.setStringPainted(true);
 
