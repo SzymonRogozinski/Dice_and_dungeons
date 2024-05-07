@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EnemyCharacter extends GameCharacter{
 
-    private int maxHealth,currentHealth;
+    private int maxHealth,currentHealth,shield;
 
     public EnemyCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image) {
         super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image);
@@ -27,9 +27,13 @@ public class EnemyCharacter extends GameCharacter{
 
     @Override
     public void dealDamage(int damage) {
-        currentHealth-=damage;
-        if(currentHealth<0)
-            currentHealth=0;
+        shield-=damage;
+        if(shield<0){
+            currentHealth+=shield;
+            shield=0;
+            if(currentHealth<0)
+                currentHealth=0;
+        }
     }
 
     public ArrayList<DiceAction> action(){
@@ -40,4 +44,10 @@ public class EnemyCharacter extends GameCharacter{
         DiceAction action=new DamageAction(3);
         return new ArrayList<>(List.of(new DiceAction[]{action}));
     }
+
+    public void onTurnStart(){
+        this.shield=0;
+    }
+
+    public int getShield(){return shield;}
 }

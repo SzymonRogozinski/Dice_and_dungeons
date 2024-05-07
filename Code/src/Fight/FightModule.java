@@ -121,11 +121,15 @@ public class FightModule {
     private void setNextCharacterTurn(){
         characterTurn++;
         if((playerTurn && characterTurn>=party.getCharacters().size()) || (!playerTurn && characterTurn>=enemies.size())) {
+            if(!playerTurn)
+                party.onTurnStart();
             characterTurn=0;
             playerTurn=!playerTurn;
         }
         if(!playerTurn && enemies.get(characterTurn).getCurrentHealth()==0)
             setNextCharacterTurn();
+        if(!playerTurn)
+            enemies.get(characterTurn).onTurnStart();
     }
 
     public int getEnemyCount(){

@@ -3,6 +3,7 @@ package Dice;
 import Dice.DiceAction.DamageAction;
 import Dice.DiceAction.DiceAction;
 import Dice.DiceAction.NullAction;
+import Dice.DiceAction.ShieldAction;
 import GUI.GUISettings;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 public class DiceFactory {
     public static final int NULL_ACTION=0;
     public static final int DAMAGE_ACTION=1;
+    public static final int SHIELD_ACTION=2;
 
     private static final int size= GUISettings.SMALL_PANEL_SIZE/2;
 
@@ -42,6 +44,11 @@ public class DiceFactory {
                 case DAMAGE_ACTION -> {
                     actions.add(new DamageAction(instruction[i+1]));
                     imageCode+="D"+instruction[i+1];
+                }
+                case SHIELD_ACTION -> {
+                    //TODO onSelf?
+                    actions.add(new ShieldAction(instruction[i+1],true));
+                    imageCode+="S"+instruction[i+1];
                 }
             }
         }

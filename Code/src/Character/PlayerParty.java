@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class PlayerParty {
 
     private ArrayList<PlayerCharacter> characters;
-    private int maxHealth,currentHealth,maxMana,currentMana;
+    private int maxHealth,currentHealth,maxMana,currentMana,shield;
 
     public PlayerParty(ArrayList<PlayerCharacter> characters) {
         this.characters = characters;
@@ -20,6 +20,7 @@ public class PlayerParty {
         currentHealth=health;
         maxMana=mana;
         currentMana=mana;
+        shield=0;
     }
 
     public int getMaxHealth() {
@@ -31,9 +32,13 @@ public class PlayerParty {
     }
 
     public void dealDamage(int damage) {
-        currentHealth-=damage;
-        if(currentHealth<0)
-            currentHealth=0;
+        shield-=damage;
+        if(shield<0){
+            currentHealth+=shield;
+            shield=0;
+            if(currentHealth<0)
+                currentHealth=0;
+        }
     }
 
     public int getMaxMana() {
@@ -48,6 +53,15 @@ public class PlayerParty {
         currentMana-=mana;
         if(currentMana<0)
             throw new RuntimeException("Your mana cannot be negative!");
+    }
+
+    public void addShield(int shield){
+        this.shield+=shield;
+    }
+
+    public int getShield(){return shield;}
+    public void onTurnStart(){
+        this.shield=0;
     }
 
     public ArrayList<PlayerCharacter> getCharacters() {

@@ -38,15 +38,13 @@ public class ActionListPanel extends JPanel {
             action.setSize(buttonWidth,buttonHeight);
             actionButtons1.add(action);
         }
+
         actionButtons1.get(0).addActionListener(e->changePage("Fight"));
         actionButtons1.get(2).addActionListener(e->changePage("Magic"));
 
-        ArrayList<JButton> actionButtons2=new ArrayList<>();
-        ArrayList<JButton> actionButtons3=new ArrayList<>();
-
         startPanel=new CardPanel(border,actionButtons1);
-        fightPanel=new CardPanel(border,actionButtons2,"Start");
-        magicPanel=new CardPanel(border,actionButtons3,"Start");
+        fightPanel=new CardPanel(border,new ArrayList<>(),"Start");
+        magicPanel=new CardPanel(border,new ArrayList<>(),"Start");
 
         this.add("Start",startPanel);
         this.add("Fight",fightPanel);
@@ -78,8 +76,27 @@ public class ActionListPanel extends JPanel {
         //spells
         ArrayList<SpellAction> spellActions = character.getSpells();
         buttons=new ArrayList<>();
+        //Mana
+        FlowLayout flowLayout=new FlowLayout();
+        flowLayout.setHgap(0);
+        flowLayout.setVgap(0);
         for(SpellAction spell:spellActions){
-            JButton button=new JButton(spell.getName());
+            //TextAreas
+            JLabel t = new JLabel(spell.getName());
+            t.setFont(GUISettings.BUTTON_FONT);
+            t.setBackground(new Color(0,0,0,0));
+
+            JLabel tt = new JLabel(" "+spell.getManaCost());
+            tt.setFont(GUISettings.BUTTON_FONT);
+            tt.setBackground(new Color(0,0,0,0));
+            tt.setForeground(Color.BLUE);
+
+            //Button setup
+            JButton button=new JButton();
+            button.setLayout(flowLayout);
+            button.add(t);
+            button.add(tt);
+
             button.setSize(buttonWidth,buttonHeight);
             button.addActionListener(e-> {
                 if(fight.getParty().getCurrentMana()<spell.getManaCost()){

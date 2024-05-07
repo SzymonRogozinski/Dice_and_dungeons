@@ -25,7 +25,9 @@ public class Main {
         mainPanel =new MainPanel();
         state=new GUIState(mainPanel);
         ActionItem item = new ActionItem("Sword", DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getStrength()));
-        ArrayList<ActionItem> items = new ArrayList<>(List.of(new ActionItem[]{item}));
+        ActionItem item2 = new ActionItem("Shield", DiceFactory.buildDice(new int[][]{{0},{0},{2,3},{2,3},{2,3},{2,3}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getEndurance()));
+
+        ArrayList<ActionItem> items = new ArrayList<>(List.of(new ActionItem[]{item,item2}));
         ArrayList<SpellAction> spells = new ArrayList<>();
         PlayerCharacter player=new PlayerCharacter(24,12,12,12,12,12,"Warrior",new ImageIcon("CharacterTexture/player.png"),items,spells);
 

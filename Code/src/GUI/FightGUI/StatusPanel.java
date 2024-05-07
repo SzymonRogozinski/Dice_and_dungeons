@@ -61,7 +61,10 @@ public class StatusPanel extends JPanel {
         if(fight==null)
             return;
         healthBar.setValue(fight.getParty().getCurrentHealth());
-        healthBar.setString(fight.getParty().getCurrentHealth()+"/"+fight.getParty().getMaxHealth());
+        String healthString = fight.getParty().getCurrentHealth()+"/"+fight.getParty().getMaxHealth();
+        if(fight.getParty().getShield()>0)
+            healthString+=" +"+fight.getParty().getShield();
+        healthBar.setString(healthString);
         manaBar.setValue(fight.getParty().getCurrentMana());
         manaBar.setString(fight.getParty().getCurrentMana()+"/"+fight.getParty().getMaxMana());
         characterName.setText(fight.getCharacter().getName());

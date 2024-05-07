@@ -43,4 +43,9 @@ public class PlayerCharacter extends GameCharacter{
     public void dealDamage(int damage) {
         party.dealDamage(damage);
     }
+
+    @Override
+    public void addShield(int shield){
+        party.addShield(shield);
+    }
 }

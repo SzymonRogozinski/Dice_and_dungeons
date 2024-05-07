@@ -7,9 +7,10 @@
 > Implementacja akcji [Done]
 > Wyświetlanie paska zdrowia Przeciwników [Done]
 > Implementacja śmierci wroga [Done]
+> Spisanie DiceActions [Done]
+> Wyświetlanie kosztu many [Done]
+> Wyświetlanie tarcz [Done]
 > Implementacja inteligencji przeciwnika
 > Wyświetlanie statusów postaci
 > Implementacja statusów
 > Implementacja tagów
-> Spisanie DiceActions
-

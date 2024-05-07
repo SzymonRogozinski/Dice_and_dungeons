@@ -5,7 +5,7 @@ import jdk.jshell.spi.ExecutionControl;
 import javax.swing.*;
 
 public class GameCharacter {
-    private int strength,endurance,intelligence,charisma,cunning,luck;
+    private int strength,endurance,intelligence,charisma,cunning,luck,shield;
     private final int startStrength,startEndurance,startIntelligence,startCharisma,startCunning,startLuck;
     private final String name;
     private final ImageIcon image;
@@ -25,6 +25,7 @@ public class GameCharacter {
         luck = startLuck;
         this.name=name;
         this.image=image;
+        this.shield=0;
     }
 
     public String getName() {
@@ -61,5 +62,9 @@ public class GameCharacter {
 
     public void dealDamage(int damage) {
         throw new RuntimeException("Method not implemented");
+    }
+
+    public void addShield(int shield){
+        this.shield+=shield;
     }
 }

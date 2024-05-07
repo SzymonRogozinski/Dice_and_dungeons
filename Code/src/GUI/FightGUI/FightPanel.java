@@ -58,11 +58,6 @@ public class FightPanel extends JPanel {
         //Draw enemies
         for(int i=0;i<fight.getEnemyCount();i++) {
             EnemyPanel enemy = new EnemyPanel(i);
-            /*JLabel enemy = new JLabel(resizeIcon(fight.getEnemies().get(i).getImage(), enemyWidth, enemyHeight));
-            enemy.setSize(enemyWidth, enemyHeight);
-            enemy.setBackground(Color.BLACK);
-            enemy.setBorder(labelBorder);
-            enemy.addMouseListener(new EnemyMouseListener(i,true));*/
             enemyPanelList.add(enemy);
         }
         for(EnemyPanel enemy:enemyPanelList){
@@ -154,7 +149,10 @@ public class FightPanel extends JPanel {
                 this.setVisible(false);
             else {
                 healthBar.setValue(enemy.getCurrentHealth());
-                healthBar.setString(enemy.getCurrentHealth() + "/" + enemy.getMaxHealth());
+                String healthString = enemy.getCurrentHealth()+"/"+enemy.getMaxHealth();
+                if(enemy.getShield()>0)
+                    healthString+=" +"+enemy.getShield();
+                healthBar.setString(healthString);
             }
         }
 
