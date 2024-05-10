@@ -26,14 +26,17 @@ public class Main {
         state=new GUIState(mainPanel);
         ActionItem item = new ActionItem("Sword", DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getStrength()));
         ActionItem item2 = new ActionItem("Shield", DiceFactory.buildDice(new int[][]{{0},{0},{2,3},{2,3},{2,3},{2,3}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getEndurance()));
+        SpellAction spell = new SpellAction("Heal", DiceFactory.buildDice(new int[][]{{0},{3,3},{3,3},{3,3},{3,3},{3,3}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),4);
 
         ArrayList<ActionItem> items = new ArrayList<>(List.of(new ActionItem[]{item,item2}));
-        ArrayList<SpellAction> spells = new ArrayList<>();
+        ArrayList<SpellAction> spells = new ArrayList<>(List.of(new SpellAction[]{spell}));
         PlayerCharacter player=new PlayerCharacter(24,12,12,12,12,12,"Warrior",new ImageIcon("CharacterTexture/player.png"),items,spells);
 
         item = new ActionItem("Mace", DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getStrength()));
-        items = new ArrayList<>(List.of(new ActionItem[]{item}));
-        SpellAction spell = new SpellAction("Fire Vortex", DiceFactory.buildDice(new int[][]{{0},{1,4},{1,4},{1,4},{1,4},{1,4}}), ActionTarget.ALL_ENEMIES,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),8);
+        item2 = new ActionItem("Magic sphere", DiceFactory.buildDice(new int[][]{{0},{0},{4,3},{4,3},{4,3},{4,3}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()));
+        spell = new SpellAction("Fire Vortex", DiceFactory.buildDice(new int[][]{{0},{1,4},{1,4},{1,4},{1,4},{1,4}}), ActionTarget.ALL_ENEMIES,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),8);
+
+        items = new ArrayList<>(List.of(new ActionItem[]{item,item2}));
         spells = new ArrayList<>(List.of(new SpellAction[]{spell}));
         PlayerCharacter player2=new PlayerCharacter(12,18,12,12,12,12,"Bandit",new ImageIcon("CharacterTexture/player.png"),items,spells);
 

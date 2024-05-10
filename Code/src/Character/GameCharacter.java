@@ -64,6 +64,10 @@ public class GameCharacter {
         throw new RuntimeException("Method not implemented");
     }
 
+    public void healDamage(int heal){throw new RuntimeException("Method not implemented");}
+
+    public void gainMana(int mana){throw new RuntimeException("Method not implemented");}
+
     public void addShield(int shield){
         this.shield+=shield;
     }

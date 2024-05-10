@@ -41,6 +41,18 @@ public class PlayerParty {
         }
     }
 
+    public void healDamage(int heal){
+        currentHealth+=heal;
+        if(currentHealth>maxHealth)
+            currentHealth=maxHealth;
+    }
+
+    public void gainMana(int mana){
+        currentMana+=mana;
+        if(currentMana>maxMana)
+            currentMana=maxMana;
+    }
+
     public int getMaxMana() {
         return maxMana;
     }

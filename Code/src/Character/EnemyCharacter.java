@@ -36,6 +36,18 @@ public class EnemyCharacter extends GameCharacter{
         }
     }
 
+    @Override
+    public void healDamage(int heal){
+        currentHealth+=heal;
+        if(currentHealth>maxHealth)
+            currentHealth=maxHealth;
+    }
+
+    @Override
+    public void gainMana(int mana){
+        System.out.println("Enemy cannot gain mana!");
+    }
+
     public ArrayList<DiceAction> action(){
         System.out.println("Enemy attack!");
         System.out.println(currentHealth+"/"+maxHealth);

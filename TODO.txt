@@ -1,16 +1,7 @@
-> Kolejka akcji postaci [Done]
-> Wyświetlanie tekstur przeciwników i postaci gracza [Done]
-> Wyświetlanie postaci [Done]
-> Zmiana animacji zaznaczania [Done]
-> Wyświetlanie paska zdrowia drużyny, jej many oraz nazwy postaci obecnie walczącej [Done]
-> Zaznaczanie pojedyńczego wroga/ sojusznika lub grupy [Done]
-> Implementacja akcji [Done]
-> Wyświetlanie paska zdrowia Przeciwników [Done]
-> Implementacja śmierci wroga [Done]
-> Spisanie DiceActions [Done]
-> Wyświetlanie kosztu many [Done]
-> Wyświetlanie tarcz [Done]
 > Implementacja inteligencji przeciwnika
 > Wyświetlanie statusów postaci
 > Implementacja statusów
 > Implementacja tagów
+> Ustawienie akcji onSelf
+> Pasek do wyświetlania komunikatów o walce
+> Pasek do wyświetlania komunikatów o statusie

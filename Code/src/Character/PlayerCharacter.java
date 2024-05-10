@@ -45,6 +45,16 @@ public class PlayerCharacter extends GameCharacter{
     }
 
     @Override
+    public void healDamage(int heal){
+        party.healDamage(heal);
+    }
+
+    @Override
+    public void gainMana(int mana){
+        party.gainMana(mana);
+    }
+
+    @Override
     public void addShield(int shield){
         party.addShield(shield);
     }
