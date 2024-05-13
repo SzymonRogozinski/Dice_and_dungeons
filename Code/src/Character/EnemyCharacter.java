@@ -13,8 +13,8 @@ public class EnemyCharacter extends GameCharacter{
 
     public EnemyCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image) {
         super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image);
-        maxHealth=startEndurance;
-        currentHealth=startEndurance;
+        maxHealth=startEndurance*5;
+        currentHealth=startEndurance*5;
     }
 
     public int getMaxHealth() {
@@ -26,7 +26,7 @@ public class EnemyCharacter extends GameCharacter{
     }
 
     @Override
-    public void dealDamage(int damage) {
+    public void dealDamage(int damage) throws CharacterDieException{
         shield-=damage;
         if(shield<0){
             currentHealth+=shield;
@@ -34,6 +34,8 @@ public class EnemyCharacter extends GameCharacter{
             if(currentHealth<0)
                 currentHealth=0;
         }
+        if(currentHealth==0)
+            throw new CharacterDieException();
     }
 
     @Override

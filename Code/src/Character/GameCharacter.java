@@ -1,12 +1,16 @@
 package Character;
 
+import Fight.Statuses.GameStatus;
+import Fight.Statuses.StatusEvaporatedException;
 import jdk.jshell.spi.ExecutionControl;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class GameCharacter {
     private int strength,endurance,intelligence,charisma,cunning,luck,shield;
     private final int startStrength,startEndurance,startIntelligence,startCharisma,startCunning,startLuck;
+    private final ArrayList<GameStatus> statuses;
     private final String name;
     private final ImageIcon image;
 
@@ -26,6 +30,7 @@ public class GameCharacter {
         this.name=name;
         this.image=image;
         this.shield=0;
+        this.statuses=new ArrayList<>();
     }
 
     public String getName() {
@@ -60,7 +65,7 @@ public class GameCharacter {
         return luck;
     }
 
-    public void dealDamage(int damage) {
+    public void dealDamage(int damage) throws CharacterDieException {
         throw new RuntimeException("Method not implemented");
     }
 
@@ -70,5 +75,35 @@ public class GameCharacter {
 
     public void addShield(int shield){
         this.shield+=shield;
+    }
+
+    public void addStatus(GameStatus newStatus){
+        for(GameStatus status:statuses){
+            if(status.getClass().equals(newStatus.getClass())){
+                status.addEffect(newStatus.getSumUpValue());
+                return;
+            }
+        }
+        statuses.add(newStatus);
+    }
+
+    public void statusEvaporate(){
+        int i=0;
+        while(i<statuses.size()){
+            try {
+                statuses.get(i).evaporate();
+                i++;
+            }catch (StatusEvaporatedException e){
+                statuses.remove(i);
+            }
+        }
+    }
+
+    public void resetStatus(){
+        statuses.clear();
+    }
+
+    public ArrayList<GameStatus> getStatuses() {
+        return statuses;
     }
 }

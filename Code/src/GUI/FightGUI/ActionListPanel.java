@@ -16,7 +16,7 @@ public class ActionListPanel extends JPanel {
     //Sizes and placement of button
     private final static int buttonWidth=GUISettings.SMALL_PANEL_SIZE*2/3;
     private final static int buttonHeight=GUISettings.SMALL_PANEL_SIZE/3;
-    private final static int buttonHGap =GUISettings.PANEL_SIZE/4-buttonWidth/2;
+    private final static int buttonHGap =GUISettings.PANEL_SIZE/5-buttonWidth*2/3;
     private final static int buttonVGap =(GUISettings.SMALL_PANEL_SIZE-buttonHeight)/2;
     private FightModule fight;
     private CardLayout layout;

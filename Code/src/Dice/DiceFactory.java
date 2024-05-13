@@ -12,6 +12,7 @@ public class DiceFactory {
     public static final int SHIELD_ACTION=2;
     public static final int HEAL_ACTION=3;
     public static final int MANA_ACTION=4;
+    public static final int POISON_ACTION=5;
 
     private static final int size= GUISettings.SMALL_PANEL_SIZE/2;
 
@@ -45,18 +46,22 @@ public class DiceFactory {
                     imageCode+="D"+instruction[i+1];
                 }
                 case SHIELD_ACTION -> {
-                    //TODO onSelf?
-                    actions.add(new ShieldAction(instruction[i+1],true));
+                    actions.add(new ShieldAction(instruction[i+1],instruction[i+2]==1));
                     imageCode+="S"+instruction[i+1];
+                    i++;
                 }
                 case HEAL_ACTION -> {
-                    //TODO onSelf?
-                    actions.add(new HealAction(instruction[i+1],true));
+                    actions.add(new HealAction(instruction[i+1],instruction[i+2]==1));
                     imageCode+="H"+instruction[i+1];
+                    i++;
                 }
                 case MANA_ACTION -> {
                     actions.add(new ManaAction(instruction[i+1]));
                     imageCode+="M"+instruction[i+1];
+                }
+                case POISON_ACTION -> {
+                    actions.add(new PoisonAction(instruction[i+1]));
+                    imageCode+="P"+instruction[i+1];
                 }
             }
         }

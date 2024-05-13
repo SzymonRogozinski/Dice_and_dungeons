@@ -1,25 +1,26 @@
 package Dice.DiceAction;
 
 import Character.GameCharacter;
-import Character.CharacterDieException;
+import Fight.Statuses.PoisonStatus;
 
-public class DamageAction implements DiceAction{
-    private static final String id="Damage";
+public class PoisonAction implements DiceAction{
+
+    private static final String id="Poison";
     private final int value;
 
-    public DamageAction(int value){
+    public PoisonAction(int value){
         this.value=value;
     }
 
     @Override
     public DiceAction sumAction(DiceAction action) {
         int newValue=value+ action.getValue();
-        return new DamageAction(newValue);
+        return new PoisonAction(newValue);
     }
 
     @Override
     public String action() {
-        return "Attack hit for " +value + " damage!";
+        return "Attack apply " +value + " of poison!";
     }
 
     @Override
@@ -34,9 +35,7 @@ public class DamageAction implements DiceAction{
 
     @Override
     public void doAction(GameCharacter character) {
-        try{
-            character.dealDamage(value);
-        }catch (CharacterDieException ignore){}
+        character.addStatus(new PoisonStatus(value));
     }
     @Override
     public boolean onSelf(){

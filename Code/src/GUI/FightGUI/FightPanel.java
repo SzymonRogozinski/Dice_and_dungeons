@@ -1,9 +1,11 @@
 package GUI.FightGUI;
 
 import Fight.ActionTarget;
+import Fight.Statuses.GameStatus;
 import GUI.GUISettings;
 import Fight.FightModule;
 import Character.EnemyCharacter;
+import Character.PlayerCharacter;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,6 +19,7 @@ public class FightPanel extends JPanel {
 
     private final static int enemyHeight =GUISettings.PANEL_SIZE/4;
     private final static int enemyWidth =GUISettings.PANEL_SIZE/6;
+    private static final int statusIconSize = Math.min((int)(enemyHeight*0.15)-1, (int)( (enemyWidth-2) /3) );
     private final Border labelBorder=BorderFactory.createLineBorder(Color.BLACK,1);
     private Color selectedColor= new Color(255,0,0);
     private final Border selectedLabelBorder=new LineBorder(selectedColor, 1) {
@@ -29,7 +32,7 @@ public class FightPanel extends JPanel {
 
     private final ArrayList<JLabel> enemyLabelList;
     private final ArrayList<EnemyPanel> enemyPanelList;
-    private final ArrayList<JLabel> playerLabelList;
+    private final ArrayList<PlayerPanel> playerLabelList;
     private int selectedEnemy;
     private boolean selectableFlag;
     private FightModule fight;
@@ -65,15 +68,11 @@ public class FightPanel extends JPanel {
         }
         //Draw player
         for(int i=0;i<fight.getParty().getCharacters().size();i++) {
-            JLabel player = new JLabel(resizeIcon(fight.getParty().getCharacters().get(i).getImage(), enemyWidth, enemyHeight));
-            player.setSize(enemyWidth, enemyHeight);
-            player.setBackground(Color.BLACK);
-            player.setBorder(labelBorder);
-            player.addMouseListener(new EnemyMouseListener(i,false));
+            PlayerPanel player = new PlayerPanel(i);
             playerLabelList.add(player);
         }
 
-        for(JLabel player:playerLabelList){
+        for(PlayerPanel player:playerLabelList){
             this.add(player);
         }
         setLabels();
@@ -122,6 +121,8 @@ public class FightPanel extends JPanel {
         JProgressBar healthBar;
         EnemyCharacter enemy;
 
+        JLabel statusLabel;
+
         EnemyPanel(int i){
             FlowLayout layout=new FlowLayout();
             layout.setVgap(1);
@@ -134,10 +135,19 @@ public class FightPanel extends JPanel {
             healthBar.setForeground(Color.RED);
             healthBar.setStringPainted(true);
 
+            statusLabel = new JLabel();
+            statusLabel.setPreferredSize(new Dimension(enemyWidth-2,(int)(enemyHeight*0.15)-1));
+            statusLabel.setBackground(Color.BLACK);
+            layout=new FlowLayout();
+            layout.setHgap(1);
+            layout.setVgap(0);
+            statusLabel.setLayout(layout);
+
             this.add(enemyLabel);
             this.add(healthBar);
+            this.add(statusLabel);
 
-            this.setSize(enemyWidth, enemyHeight);
+            this.setSize(enemyWidth, (int)(enemyHeight*1.15));
             this.setBackground(Color.BLACK);
             this.setBorder(labelBorder);
             this.addMouseListener(new EnemyMouseListener(i,true));
@@ -153,6 +163,54 @@ public class FightPanel extends JPanel {
                 if(enemy.getShield()>0)
                     healthString+=" +"+enemy.getShield();
                 healthBar.setString(healthString);
+
+                //Set statuses
+                statusLabel.removeAll();
+                for(GameStatus status:enemy.getStatuses()){
+                    JLabel statLabel=new JLabel(resizeIcon(status.getIcon(),statusIconSize,statusIconSize));
+                    statusLabel.add(statLabel);
+                }
+            }
+        }
+    }
+
+    private class PlayerPanel extends JPanel{
+        JLabel playerLabel;
+        PlayerCharacter playerCharacter;
+        JLabel statusLabel;
+
+        PlayerPanel(int i){
+            FlowLayout layout=new FlowLayout();
+            layout.setVgap(1);
+            this.setLayout(layout);
+            playerCharacter=fight.getParty().getCharacters().get(i);
+
+            playerLabel = new JLabel(resizeIcon(playerCharacter.getImage(), enemyWidth-2, (int)(enemyHeight*0.85)-2));
+
+            statusLabel = new JLabel();
+            statusLabel.setPreferredSize(new Dimension(enemyWidth-2,(int)(enemyHeight*0.15)-1));
+            statusLabel.setBackground(Color.BLACK);
+            layout=new FlowLayout();
+            layout.setHgap(1);
+            layout.setVgap(0);
+            statusLabel.setLayout(layout);
+
+            this.add(playerLabel);
+            this.add(statusLabel);
+
+            this.setSize(enemyWidth, enemyHeight);
+            this.setBackground(Color.BLACK);
+            this.setBorder(labelBorder);
+            this.addMouseListener(new EnemyMouseListener(i,false));
+            refresh();
+        }
+
+        void refresh(){
+            //Set statuses
+            statusLabel.removeAll();
+            for(GameStatus status:playerCharacter.getStatuses()){
+                JLabel statLabel=new JLabel(resizeIcon(status.getIcon(),statusIconSize,statusIconSize));
+                statusLabel.add(statLabel);
             }
         }
 
@@ -212,7 +270,7 @@ public class FightPanel extends JPanel {
                     label.setBorder(flashing?selectedLabelBorder:labelBorder);
                 return true;
             }else if (!isEnemy && fight.getTargetType() == ActionTarget.PLAYER_PARTY){
-                for(JLabel label:playerLabelList )
+                for(PlayerPanel label:playerLabelList )
                     label.setBorder(flashing?selectedLabelBorder:labelBorder);
                 return true;
             }

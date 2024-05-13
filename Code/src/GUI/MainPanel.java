@@ -120,8 +120,7 @@ public class MainPanel extends JPanel {
         //Refresh
         statusPanel.refresh();
         fightPanel.refresh();
-        //this.revalidate();
-        //this.repaint();
-
+        this.revalidate();
+        this.repaint();
     }
 }

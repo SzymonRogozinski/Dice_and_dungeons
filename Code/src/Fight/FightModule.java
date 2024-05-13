@@ -4,6 +4,8 @@ import Character.PlayerParty;
 
 import Dice.Dice;
 import Dice.DiceAction.DiceAction;
+import Fight.Statuses.GameStatus;
+import Fight.Statuses.StatusException;
 import GUI.GUIState;
 import GUI.MainPanel;
 import Character.GameCharacter;
@@ -81,6 +83,34 @@ public class FightModule {
         state.showDiceResult(master.getResults());
     }
 
+    private void startAction(){
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        //Check statuses
+        GameCharacter character = playerTurn?party.getCharacters().get(characterTurn):enemies.get(characterTurn);
+
+        for(GameStatus status:character.getStatuses()){
+            if(status.haveTag(Tags.ON_TURN_START)) {
+                try {
+                    status.effect(character);
+                }catch (StatusException e){
+                    if(e.code==StatusException.DEATH){
+                        setNextCharacterTurn();
+                        break;
+                    } else if (e.code==StatusException.STUN) {
+
+                    }
+                }
+            }
+        }
+        character.statusEvaporate();
+        //Refresh
+        state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
+    }
+
     public void endAction(){
         if(playerTurn)
             master.sumUpResults();
@@ -93,6 +123,8 @@ public class FightModule {
         performAction();
         setNextCharacterTurn();
         state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
+        //Sub state. Do it before next state.
+        startAction();
     }
 
     private void performAction(){

@@ -25,10 +25,12 @@ public class Main {
         mainPanel =new MainPanel();
         state=new GUIState(mainPanel);
         ActionItem item = new ActionItem("Sword", DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getStrength()));
-        ActionItem item2 = new ActionItem("Shield", DiceFactory.buildDice(new int[][]{{0},{0},{2,3},{2,3},{2,3},{2,3}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getEndurance()));
-        SpellAction spell = new SpellAction("Heal", DiceFactory.buildDice(new int[][]{{0},{3,3},{3,3},{3,3},{3,3},{3,3}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),4);
+        ActionItem item2 = new ActionItem("Shield", DiceFactory.buildDice(new int[][]{{0},{0},{2,3,1},{2,3,1},{2,3,1},{2,3,1}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getEndurance()));
+        ActionItem item3 = new ActionItem("Snake", DiceFactory.buildDice(new int[][]{{0},{0},{5,3},{5,3},{5,3},{5,3}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getCunning()));
 
-        ArrayList<ActionItem> items = new ArrayList<>(List.of(new ActionItem[]{item,item2}));
+        SpellAction spell = new SpellAction("Heal", DiceFactory.buildDice(new int[][]{{0},{3,3,1},{3,3,1},{3,3,1},{3,3,1},{3,3,1}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),4);
+
+        ArrayList<ActionItem> items = new ArrayList<>(List.of(new ActionItem[]{item,item2,item3}));
         ArrayList<SpellAction> spells = new ArrayList<>(List.of(new SpellAction[]{spell}));
         PlayerCharacter player=new PlayerCharacter(24,12,12,12,12,12,"Warrior",new ImageIcon("CharacterTexture/player.png"),items,spells);
 

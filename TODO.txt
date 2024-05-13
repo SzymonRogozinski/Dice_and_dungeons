@@ -1,8 +1,8 @@
 > Implementacja inteligencji przeciwnika
-> Wyświetlanie statusów postaci
-> Implementacja statusów [Half Done]
+> Wyświetlanie statusów postaci [Done]
+> Implementacja statusów [Done]
 > Implementacja tagów [Done]
-> Ustawienie akcji onSelf
+> Ustawienie akcji onSelf [Done]
 > Pasek do wyświetlania komunikatów o walce
 > Pasek do wyświetlania komunikatów o statusie
 > Implementacja wszystkich akcji

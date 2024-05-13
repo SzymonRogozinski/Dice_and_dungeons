@@ -40,8 +40,10 @@ public class PlayerCharacter extends GameCharacter{
     }
 
     @Override
-    public void dealDamage(int damage) {
+    public void dealDamage(int damage) throws CharacterDieException {
         party.dealDamage(damage);
+        if(party.getCurrentHealth()==0)
+            throw new CharacterDieException();
     }
 
     @Override
