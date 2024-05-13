@@ -14,11 +14,10 @@ public abstract class GameStatus extends Tagable {
     private int sumUpValue;
     private final ImageIcon icon;
 
-    public GameStatus(int startValue,ImageIcon icon,Tags[] tags){
+    public GameStatus(int startValue,Integer[] startValues,ImageIcon icon,Tags[] tags){
         super(tags);
-        Integer[] tmp = new Integer[]{0,0,startValue};
         sumUpValue=startValue;
-        values=new ArrayList<>(Arrays.stream(tmp).toList());
+        values=new ArrayList<>(Arrays.stream(startValues).toList());
         this.icon=icon;
     }
 

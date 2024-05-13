@@ -30,9 +30,8 @@ public class FightPanel extends JPanel {
         }
     };
 
-    private final ArrayList<JLabel> enemyLabelList;
     private final ArrayList<EnemyPanel> enemyPanelList;
-    private final ArrayList<PlayerPanel> playerLabelList;
+    private final ArrayList<PlayerPanel> playerPanelList;
     private int selectedEnemy;
     private boolean selectableFlag;
     private FightModule fight;
@@ -47,9 +46,8 @@ public class FightPanel extends JPanel {
         selectedEnemy=-1;
         selectableFlag=false;
         //Add character labels
-        enemyLabelList=new ArrayList<>();
         enemyPanelList=new ArrayList<>();
-        playerLabelList=new ArrayList<>();
+        playerPanelList =new ArrayList<>();
         //Border changer
         borderFlash=new BorderFlashingThread(this);
         borderFlash.start();
@@ -69,10 +67,10 @@ public class FightPanel extends JPanel {
         //Draw player
         for(int i=0;i<fight.getParty().getCharacters().size();i++) {
             PlayerPanel player = new PlayerPanel(i);
-            playerLabelList.add(player);
+            playerPanelList.add(player);
         }
 
-        for(PlayerPanel player:playerLabelList){
+        for(PlayerPanel player: playerPanelList){
             this.add(player);
         }
         setLabels();
@@ -84,6 +82,9 @@ public class FightPanel extends JPanel {
     public void refresh(){
         for(EnemyPanel enemy:enemyPanelList){
             enemy.refresh();
+        }
+        for(PlayerPanel player: playerPanelList){
+            player.refresh();
         }
     }
 
@@ -104,9 +105,9 @@ public class FightPanel extends JPanel {
             enemyPanelList.get(i).setLocation((xSpace+ enemyWidth)*i+xSpace,yOffSet);
         }
         //Set player labels. Max 3!
-        xSpace=(GUISettings.PANEL_SIZE- enemyWidth *playerLabelList.size())/(playerLabelList.size()+1);
-        for(int i=0; i<playerLabelList.size();i++){
-            playerLabelList.get(i).setLocation((xSpace+ enemyWidth)*i+xSpace,playerYOffSet);
+        xSpace=(GUISettings.PANEL_SIZE- enemyWidth * playerPanelList.size())/(playerPanelList.size()+1);
+        for(int i = 0; i< playerPanelList.size(); i++){
+            playerPanelList.get(i).setLocation((xSpace+ enemyWidth)*i+xSpace,playerYOffSet);
         }
     }
 
@@ -263,14 +264,14 @@ public class FightPanel extends JPanel {
                 enemyPanelList.get(characterId).setBorder(flashing ? selectedLabelBorder : labelBorder);
                 return true;
             }else if (!isEnemy && fight.getTargetType() == ActionTarget.PLAYER_CHARACTER) {
-                playerLabelList.get(characterId).setBorder(flashing ? selectedLabelBorder : labelBorder);
+                playerPanelList.get(characterId).setBorder(flashing ? selectedLabelBorder : labelBorder);
                 return true;
             }else if (isEnemy && fight.getTargetType() == ActionTarget.ALL_ENEMIES){
                 for(EnemyPanel label:enemyPanelList)
                     label.setBorder(flashing?selectedLabelBorder:labelBorder);
                 return true;
             }else if (!isEnemy && fight.getTargetType() == ActionTarget.PLAYER_PARTY){
-                for(PlayerPanel label:playerLabelList )
+                for(PlayerPanel label: playerPanelList)
                     label.setBorder(flashing?selectedLabelBorder:labelBorder);
                 return true;
             }

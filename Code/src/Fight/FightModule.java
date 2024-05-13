@@ -91,22 +91,28 @@ public class FightModule {
         }
         //Check statuses
         GameCharacter character = playerTurn?party.getCharacters().get(characterTurn):enemies.get(characterTurn);
+        character.resetMod();
 
         for(GameStatus status:character.getStatuses()){
             if(status.haveTag(Tags.ON_TURN_START)) {
                 try {
                     status.effect(character);
                 }catch (StatusException e){
-                    if(e.code==StatusException.DEATH){
-                        setNextCharacterTurn();
-                        break;
-                    } else if (e.code==StatusException.STUN) {
-
-                    }
+                    //e.code==StatusException.DEATH || e.code==StatusException.STUN
+                    setNextCharacterTurn();
+                    break;
                 }
             }
         }
         character.statusEvaporate();
+
+        for(GameStatus status:character.getStatuses()){
+            if(status.haveTag(Tags.AFTER_TURN_START)) {
+                try {
+                    status.effect(character);
+                }catch (StatusException ignore){}
+            }
+        }
         //Refresh
         state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
     }

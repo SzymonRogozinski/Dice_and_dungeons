@@ -13,6 +13,8 @@ public class DiceFactory {
     public static final int HEAL_ACTION=3;
     public static final int MANA_ACTION=4;
     public static final int POISON_ACTION=5;
+    public static final int BLEEDING_ACTION=6;
+    public static final int WEAKNESS_ACTION=7;
 
     private static final int size= GUISettings.SMALL_PANEL_SIZE/2;
 
@@ -62,6 +64,10 @@ public class DiceFactory {
                 case POISON_ACTION -> {
                     actions.add(new PoisonAction(instruction[i+1]));
                     imageCode+="P"+instruction[i+1];
+                }
+                case BLEEDING_ACTION -> {
+                    actions.add(new BleedingAction(instruction[i+1]));
+                    imageCode+="B"+instruction[i+1];
                 }
             }
         }

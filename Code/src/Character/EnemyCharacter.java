@@ -2,6 +2,7 @@ package Character;
 
 import Dice.DiceAction.DamageAction;
 import Dice.DiceAction.DiceAction;
+import Dice.DiceAction.WeaknessAction;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class EnemyCharacter extends GameCharacter{
 
     @Override
     public void dealDamage(int damage) throws CharacterDieException{
+        damage*=getDamageReceivingMod();
         shield-=damage;
         if(shield<0){
             currentHealth+=shield;
@@ -51,12 +53,15 @@ public class EnemyCharacter extends GameCharacter{
     }
 
     public ArrayList<DiceAction> action(){
+        //TODO
+        getStatisticMod();
         System.out.println("Enemy attack!");
         System.out.println(currentHealth+"/"+maxHealth);
 
         //Choose action
         DiceAction action=new DamageAction(3);
-        return new ArrayList<>(List.of(new DiceAction[]{action}));
+        WeaknessAction action2 = new WeaknessAction(2);
+        return new ArrayList<>(List.of(new DiceAction[]{action,action2}));
     }
 
     public void onTurnStart(){

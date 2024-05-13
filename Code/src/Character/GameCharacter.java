@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class GameCharacter {
     private int strength,endurance,intelligence,charisma,cunning,luck,shield;
     private final int startStrength,startEndurance,startIntelligence,startCharisma,startCunning,startLuck;
+    private double statisticMod,damageReceivingMod;
     private final ArrayList<GameStatus> statuses;
     private final String name;
     private final ImageIcon image;
@@ -31,6 +32,8 @@ public class GameCharacter {
         this.image=image;
         this.shield=0;
         this.statuses=new ArrayList<>();
+        this.statisticMod=1;
+        this.damageReceivingMod=1;
     }
 
     public String getName() {
@@ -105,5 +108,23 @@ public class GameCharacter {
 
     public ArrayList<GameStatus> getStatuses() {
         return statuses;
+    }
+
+    public void resetMod(){
+        this.statisticMod=1;
+        this.damageReceivingMod=1;
+    }
+
+    public void multiplyMod(double statisticModChange,double damageReceivingModChange){
+        this.statisticMod*=statisticModChange;
+        this.damageReceivingMod*=damageReceivingModChange;
+    }
+
+    public double getStatisticMod() {
+        return statisticMod;
+    }
+
+    public double getDamageReceivingMod() {
+        return damageReceivingMod;
     }
 }

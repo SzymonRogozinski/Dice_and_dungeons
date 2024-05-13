@@ -24,7 +24,9 @@ public class PlayerCharacter extends GameCharacter{
     }
 
     public int getDiceNumber(int attribute){
-        return attribute/6+1;
+        attribute*=getStatisticMod();
+        int diceNumber=attribute/6+1;
+        return Math.min(Math.max(diceNumber, 1),12);
     }
 
     public int getCharacterRerolls(){
@@ -41,6 +43,7 @@ public class PlayerCharacter extends GameCharacter{
 
     @Override
     public void dealDamage(int damage) throws CharacterDieException {
+        damage*=getDamageReceivingMod();
         party.dealDamage(damage);
         if(party.getCurrentHealth()==0)
             throw new CharacterDieException();
