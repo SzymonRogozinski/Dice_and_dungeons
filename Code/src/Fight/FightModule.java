@@ -104,6 +104,7 @@ public class FightModule {
     }
 
     private void startAction(){
+        boolean skip=false;
         try {
             Thread.sleep(200);
         } catch (InterruptedException e) {
@@ -120,7 +121,7 @@ public class FightModule {
                 }catch (StatusException e){
                     //e.code==StatusException.DEATH || e.code==StatusException.STUN
                     setNextCharacterTurn();
-                    break;
+                    skip=true;
                 }
             }
         }
@@ -134,8 +135,12 @@ public class FightModule {
             }
         }
         //Refresh
-        state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
+        if(skip)
+            startAction();
+        else
+            state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
     }
+
 
     public void endAction(){
         if(playerTurn && !noRoll)

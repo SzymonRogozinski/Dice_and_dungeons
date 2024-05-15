@@ -6,3 +6,4 @@
 > Pasek do wyświetlania komunikatów o walce
 > Pasek do wyświetlania komunikatów o statusie
 > Implementacja wszystkich akcji
+> Używalne przedmioty (Stronicowanie, zużywanie)
