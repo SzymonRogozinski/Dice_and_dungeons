@@ -1,14 +1,18 @@
 package Character;
 
+import Fight.GameActions.UsableItemAction;
+
 import java.util.ArrayList;
 
 public class PlayerParty {
 
     private ArrayList<PlayerCharacter> characters;
+    private ArrayList<UsableItemAction> items;
     private int maxHealth,currentHealth,maxMana,currentMana,shield;
 
-    public PlayerParty(ArrayList<PlayerCharacter> characters) {
+    public PlayerParty(ArrayList<PlayerCharacter> characters,ArrayList<UsableItemAction> items) {
         this.characters = characters;
+        this.items=items;
         int health=0;
         int mana=0;
         for(PlayerCharacter player:characters){
@@ -21,6 +25,10 @@ public class PlayerParty {
         maxMana=mana;
         currentMana=mana;
         shield=0;
+    }
+
+    public ArrayList<UsableItemAction> getItems() {
+        return items;
     }
 
     public int getMaxHealth() {

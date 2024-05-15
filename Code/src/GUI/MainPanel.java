@@ -112,7 +112,7 @@ public class MainPanel extends JPanel {
                 actionPanel.changePage("Pause");
             }
             case GUIState.ENEMY_PERFORMING_ACTION -> {
-                rollPanel.setVisible(true);
+                rollPanel.setVisible(false);
                 actionPanel.setVisible(true);
                 actionPanel.changePage("Enemy");
             }

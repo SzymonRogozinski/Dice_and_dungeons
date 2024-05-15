@@ -51,6 +51,10 @@ public class ActionPanel extends JPanel {
     }
 
     private void roll(){
+        if(fight.isNoRoll()){
+            fight.endAction();
+            return;
+        }
         changePage("Dice");
         fight.rollDices();
     }

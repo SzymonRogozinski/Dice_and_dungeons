@@ -4,12 +4,14 @@ import Character.PlayerParty;
 
 import Dice.Dice;
 import Dice.DiceAction.DiceAction;
+import Fight.GameActions.GameAction;
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusException;
 import GUI.GUIState;
 import GUI.MainPanel;
 import Character.GameCharacter;
 import Character.EnemyCharacter;
+import Character.PlayerCharacter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class FightModule {
     private int characterTurn;
     private int targetId;
     private ActionTarget targetType;
+    private boolean noRoll;
 
     public FightModule(MainPanel panel,GUIState state,PlayerParty party,ArrayList<EnemyCharacter> enemies) {
         this.playerTurn=true;
@@ -35,6 +38,7 @@ public class FightModule {
         this.enemies=enemies;
         this.party=party;
         this.panel.setFightModule(this);
+        this.noRoll=false;
     }
 
     public ActionTarget getTargetType() {
@@ -61,6 +65,10 @@ public class FightModule {
         return master.getRerolls();
     }
 
+    public boolean isNoRoll() {
+        return noRoll;
+    }
+
     public void rerollDice(int diceId){
         master.reroll(diceId);
         state.showDiceResult(master.getResults());
@@ -70,6 +78,18 @@ public class FightModule {
     public void choosedAction(Dice dice, int numDice,int rerolls, ActionTarget targetType){
         this.targetType=targetType;
         master.setDicePool(dice,numDice,rerolls);
+        state.setState(GUIState.PLAYER_CHOOSING_TARGET);
+    }
+
+    public void choosedAction(GameAction action){
+        this.targetType=action.getTarget();
+        noRoll=action.haveTag(Tags.NO_ROLL);
+        if(noRoll){
+            master.setResult(action.getConstActions());
+        }else{
+            PlayerCharacter character = party.getCharacters().get(characterTurn);
+            master.setDicePool(action.getDice(),action.getDiceNumber(character),character.getCharacterRerolls());
+        }
         state.setState(GUIState.PLAYER_CHOOSING_TARGET);
     }
 
@@ -118,9 +138,9 @@ public class FightModule {
     }
 
     public void endAction(){
-        if(playerTurn)
+        if(playerTurn && !noRoll)
             master.sumUpResults();
-        else {
+        else if(!playerTurn){
             //TODO tymczasowe rozwiązanie
             targetType=ActionTarget.PLAYER_CHARACTER;
             targetId=new Random().nextInt(party.getCharacters().size());

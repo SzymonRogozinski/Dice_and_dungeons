@@ -2,6 +2,7 @@ package GUI.FightGUI;
 
 import Fight.GameActions.ActionItem;
 import Fight.GameActions.SpellAction;
+import Fight.GameActions.UsableItemAction;
 import GUI.GUISettings;
 import Fight.FightModule;
 import Character.PlayerCharacter;
@@ -20,7 +21,7 @@ public class ActionListPanel extends JPanel {
     private final static int buttonVGap =(GUISettings.SMALL_PANEL_SIZE-buttonHeight)/2;
     private FightModule fight;
     private CardLayout layout;
-    private CardPanel startPanel, fightPanel,magicPanel;
+    private CardPanel startPanel, fightPanel,magicPanel,itemPanel;
 
     public ActionListPanel(Border border){
         //Set display
@@ -40,13 +41,16 @@ public class ActionListPanel extends JPanel {
         }
 
         actionButtons1.get(0).addActionListener(e->changePage("Fight"));
+        actionButtons1.get(1).addActionListener(e->changePage("Items"));
         actionButtons1.get(2).addActionListener(e->changePage("Magic"));
 
         startPanel=new CardPanel(border,actionButtons1);
         fightPanel=new CardPanel(border,new ArrayList<>(),"Start");
         magicPanel=new CardPanel(border,new ArrayList<>(),"Start");
+        itemPanel=new CardPanel(border,new ArrayList<>(),"Start");
 
         this.add("Start",startPanel);
+        this.add("Items",itemPanel);
         this.add("Fight",fightPanel);
         this.add("Magic",magicPanel);
     }
@@ -66,12 +70,27 @@ public class ActionListPanel extends JPanel {
             JButton button=new JButton(item.getName());
             button.setSize(buttonWidth,buttonHeight);
             button.addActionListener(e-> {
-                fight.choosedAction(item.getDice(), item.getDiceNumber(character), character.getCharacterRerolls(),item.getTarget());
+                fight.choosedAction(item);
                 changePage("Start");
             });
             buttons.add(button);
         }
         fightPanel.loadNewAction(buttons);
+
+        //usable items
+        ArrayList<UsableItemAction> usableItems = character.getUsableItems();
+        buttons=new ArrayList<>();
+
+        for(UsableItemAction item:usableItems){
+            JButton button=new JButton(item.getName());
+            button.setSize(buttonWidth,buttonHeight);
+            button.addActionListener(e-> {
+                fight.choosedAction(item);
+                changePage("Start");
+            });
+            buttons.add(button);
+        }
+        itemPanel.loadNewAction(buttons);
 
         //spells
         ArrayList<SpellAction> spellActions = character.getSpells();
@@ -104,7 +123,7 @@ public class ActionListPanel extends JPanel {
                 }
                 else {
                     fight.getParty().spendMana(spell.getManaCost());
-                    fight.choosedAction(spell.getDice(), spell.getDiceNumber(character), character.getCharacterRerolls(), spell.getTarget());
+                    fight.choosedAction(spell);
                     changePage("Start");
                 }
             });

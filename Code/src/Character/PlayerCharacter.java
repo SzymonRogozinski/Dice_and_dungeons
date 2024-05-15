@@ -2,6 +2,7 @@ package Character;
 
 import Fight.GameActions.ActionItem;
 import Fight.GameActions.SpellAction;
+import Fight.GameActions.UsableItemAction;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ public class PlayerCharacter extends GameCharacter{
     public ArrayList<SpellAction> getSpells() {
         return spells;
     }
+
+    public ArrayList<UsableItemAction> getUsableItems(){return party.getItems();}
 
     @Override
     public void dealDamage(int damage) throws CharacterDieException {
