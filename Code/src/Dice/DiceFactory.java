@@ -15,6 +15,7 @@ public class DiceFactory {
     public static final int POISON_ACTION=5;
     public static final int BLEEDING_ACTION=6;
     public static final int WEAKNESS_ACTION=7;
+    public static final int COUNTER_ACTION=8;
 
     private static final int size= GUISettings.SMALL_PANEL_SIZE/2;
 
@@ -32,17 +33,13 @@ public class DiceFactory {
             NullAction action = new NullAction();
             ArrayList<DiceAction> actions = new ArrayList<>();
             actions.add(action);
-            return new DiceSide(actions,resizeIcon("DiceIcons/NullSide.png",size));
+            return new DiceSide(actions,resizeIcon("DiceIcons/N.png",size));
         }
         ArrayList<DiceAction> actions = new ArrayList<>();
         String imageCode="";
         for(int i=0;i<instruction.length;i+=2){
             int actionType = instruction[i];
             switch (actionType){
-                case NULL_ACTION -> {
-                    actions.add(new NullAction());
-                    imageCode+="N";
-                }
                 case DAMAGE_ACTION -> {
                     actions.add(new DamageAction(instruction[i+1]));
                     imageCode+="D"+instruction[i+1];
@@ -68,6 +65,15 @@ public class DiceFactory {
                 case BLEEDING_ACTION -> {
                     actions.add(new BleedingAction(instruction[i+1]));
                     imageCode+="B"+instruction[i+1];
+                }
+                case WEAKNESS_ACTION -> {
+                    actions.add(new WeaknessAction(instruction[i+1]));
+                    imageCode+="W"+instruction[i+1];
+                }
+                case COUNTER_ACTION -> {
+                    actions.add(new CounterAction(instruction[i+1],instruction[i+2]==1));
+                    imageCode+="C"+instruction[i+1];
+                    i++;
                 }
             }
         }

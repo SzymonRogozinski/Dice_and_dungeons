@@ -82,6 +82,10 @@ public class MainPanel extends JPanel {
         return rollPanel;
     }
 
+    public StatusPanel getStatusPanel() {
+        return statusPanel;
+    }
+
     public void init(){
         actionPanel.getActions().loadAction();
         //Refresh

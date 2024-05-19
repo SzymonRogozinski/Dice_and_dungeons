@@ -30,4 +30,9 @@ public class WeaknessStatus extends GameStatus{
     public void addEffect(int value){
         statusCount+=value;
     }
+
+    @Override
+    public String info(){
+        return "Weakness: "+(statusCount+1);
+    }
 }

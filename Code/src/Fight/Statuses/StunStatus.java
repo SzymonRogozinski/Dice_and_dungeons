@@ -20,4 +20,12 @@ public class StunStatus extends GameStatus{
     public void evaporate() throws StatusEvaporatedException {
         throw new StatusEvaporatedException();
     }
+
+    @Override
+    public void addEffect(int value){}
+
+    @Override
+    public String info(){
+        return "Stunned";
+    }
 }

@@ -22,7 +22,10 @@ public class RollPanel extends JPanel {
         reroll.setForeground(Color.WHITE);
 
         JButton skipButton=new JButton("Skip and sum up");
-        skipButton.addActionListener(e->sumUpDicePool());
+        skipButton.addActionListener(e->{
+            if(!fight.isDiceResultNull())
+                sumUpDicePool();
+        });
 
         this.add(reroll);
         this.add(skipButton);

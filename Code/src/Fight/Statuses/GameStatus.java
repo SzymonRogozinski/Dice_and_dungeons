@@ -41,4 +41,8 @@ public abstract class GameStatus extends Tagable {
         values.set(2,values.get(2)+value);
         sumUpValue+=value;
     }
+
+    public String info(){
+        return "Status: "+sumUpValue;
+    }
 }

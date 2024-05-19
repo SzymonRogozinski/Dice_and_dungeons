@@ -13,6 +13,7 @@ public class DicePool {
     public DicePool(Dice dice,int size){
         this.dice=dice;
         this.size=size;
+        this.rollResult=null;
     }
 
     public void roll(){
@@ -27,6 +28,8 @@ public class DicePool {
         rollResult.set(i,side);
         return side;
     }
+
+    public int getDiceNumber(){return size;}
 
     public ArrayList<DiceSide> getRollResult(){
         return rollResult;

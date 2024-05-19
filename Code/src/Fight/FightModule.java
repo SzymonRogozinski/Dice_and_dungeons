@@ -5,6 +5,7 @@ import Character.PlayerParty;
 import Dice.Dice;
 import Dice.DiceAction.DiceAction;
 import Fight.GameActions.GameAction;
+import Fight.Statuses.BonusDiceStatus;
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusException;
 import GUI.GUIState;
@@ -20,7 +21,6 @@ import java.util.Random;
 public class FightModule {
     private final PlayerParty party;
     private final DiceMaster master;
-    private final MainPanel panel;
     private final GUIState state;
     private final ArrayList<EnemyCharacter> enemies;
     private boolean playerTurn;
@@ -28,16 +28,16 @@ public class FightModule {
     private int targetId;
     private ActionTarget targetType;
     private boolean noRoll;
+    private GameAction action;
 
     public FightModule(MainPanel panel,GUIState state,PlayerParty party,ArrayList<EnemyCharacter> enemies) {
         this.playerTurn=true;
         this.characterTurn=0;
         this.state=state;
-        this.panel=panel;
         this.master = new DiceMaster();
         this.enemies=enemies;
         this.party=party;
-        this.panel.setFightModule(this);
+        panel.setFightModule(this);
         this.noRoll=false;
     }
 
@@ -75,21 +75,27 @@ public class FightModule {
         state.refreshRollPanel();
     }
 
-    public void choosedAction(Dice dice, int numDice,int rerolls, ActionTarget targetType){
-        this.targetType=targetType;
-        master.setDicePool(dice,numDice,rerolls);
-        state.setState(GUIState.PLAYER_CHOOSING_TARGET);
+    public boolean isDiceResultNull(){
+        return master.getResults()==null;
     }
 
     public void choosedAction(GameAction action){
         this.targetType=action.getTarget();
+        this.action=action;
         noRoll=action.haveTag(Tags.NO_ROLL);
+
         if(noRoll){
             master.setResult(action.getConstActions());
         }else{
             PlayerCharacter character = party.getCharacters().get(characterTurn);
             master.setDicePool(action.getDice(),action.getDiceNumber(character),character.getCharacterRerolls());
+            ArrayList<GameStatus> bonuses=character.getStatusWithTag(Tags.BONUS_DICE);
+            for(GameStatus bonus:bonuses){
+                BonusDiceStatus diceStatus = (BonusDiceStatus) bonus;
+                diceStatus.addBonusDice(master,action);
+            }
         }
+
         state.setState(GUIState.PLAYER_CHOOSING_TARGET);
     }
 
@@ -103,6 +109,14 @@ public class FightModule {
         state.showDiceResult(master.getResults());
     }
 
+    public void showStatusInfo(String info){
+        state.showStatusInfo(info);
+    }
+
+    public void hideStatusInfo(){
+        state.hideStatusInfo();
+    }
+
     private void startAction(){
         boolean skip=false;
         try {
@@ -114,26 +128,27 @@ public class FightModule {
         GameCharacter character = playerTurn?party.getCharacters().get(characterTurn):enemies.get(characterTurn);
         character.resetMod();
 
-        for(GameStatus status:character.getStatuses()){
-            if(status.haveTag(Tags.ON_TURN_START)) {
-                try {
-                    status.effect(character);
-                }catch (StatusException e){
-                    //e.code==StatusException.DEATH || e.code==StatusException.STUN
-                    setNextCharacterTurn();
-                    skip=true;
-                }
+        ArrayList<GameStatus> statusOnStart = character.getStatusWithTag(Tags.ON_TURN_START);
+
+        for(GameStatus status:statusOnStart){
+            try {
+                status.effect(character);
+            }catch (StatusException e){
+                //e.code==StatusException.DEATH || e.code==StatusException.STUN
+                setNextCharacterTurn();
+                skip=true;
             }
         }
         character.statusEvaporate();
 
-        for(GameStatus status:character.getStatuses()){
-            if(status.haveTag(Tags.AFTER_TURN_START)) {
-                try {
-                    status.effect(character);
-                }catch (StatusException ignore){}
-            }
+        ArrayList<GameStatus> statusAfterStart = character.getStatusWithTag(Tags.AFTER_TURN_START);
+
+        for(GameStatus status:statusAfterStart){
+            try {
+                status.effect(character);
+            }catch (StatusException ignore){}
         }
+
         //Refresh
         if(skip)
             startAction();
@@ -147,15 +162,20 @@ public class FightModule {
             master.sumUpResults();
         else if(!playerTurn){
             //TODO tymczasowe rozwiązanie
+            action=null;
             targetType=ActionTarget.PLAYER_CHARACTER;
             targetId=new Random().nextInt(party.getCharacters().size());
             master.setResult(enemies.get(characterTurn).action());
         }
         performAction();
-        setNextCharacterTurn();
-        state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
-        //Sub state. Do it before next state.
-        startAction();
+        if(action==null || !action.haveTag(Tags.FREE_ACTION)){
+            setNextCharacterTurn();
+            state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
+            //Sub state. Do it before next state.
+            startAction();
+        }else{
+            state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
+        }
     }
 
     private void performAction(){
@@ -171,12 +191,24 @@ public class FightModule {
             case PLAYER_PARTY -> characters=new ArrayList<>(party.getCharacters());
             default -> characters=null;
         }
-        for (DiceAction action : actions){
-            if(action.onSelf())
-                action.doAction(attacker);
+        for (DiceAction diceAction : actions){
+            if(diceAction.onSelf())
+                diceAction.doAction(attacker);
             else{
                 for(GameCharacter character:characters)
-                    action.doAction(character);
+                    diceAction.doAction(character);
+            }
+        }
+        //Counter
+        for(GameCharacter character:characters) {
+            //TODO not null!
+            if(action==null || action.haveTag(Tags.ATTACK)){
+                ArrayList<GameStatus> defendingStatus = character.getStatusWithTag(Tags.ON_DEFEND);
+                for(GameStatus st:defendingStatus){
+                    try{
+                        st.effect(attacker);
+                    }catch (StatusException ignore){}
+                }
             }
         }
     }

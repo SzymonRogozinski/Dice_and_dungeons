@@ -18,4 +18,9 @@ public class PoisonStatus extends GameStatus{
             throw new StatusException(StatusException.DEATH);
         }
     }
+
+    @Override
+    public String info(){
+        return "Poison: "+getSumUpValue();
+    }
 }

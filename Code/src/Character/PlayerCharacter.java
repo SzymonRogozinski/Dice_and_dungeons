@@ -31,7 +31,7 @@ public class PlayerCharacter extends GameCharacter{
     }
 
     public int getCharacterRerolls(){
-        return getLuck()/10;
+        return getLuck()/10+1;
     }
 
     public ArrayList<ActionItem> getActionItems() {

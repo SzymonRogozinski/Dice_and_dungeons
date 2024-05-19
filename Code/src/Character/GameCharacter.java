@@ -2,6 +2,8 @@ package Character;
 
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusEvaporatedException;
+import Fight.Statuses.StatusException;
+import Fight.Tags;
 import jdk.jshell.spi.ExecutionControl;
 
 import javax.swing.*;
@@ -108,6 +110,16 @@ public class GameCharacter {
 
     public ArrayList<GameStatus> getStatuses() {
         return statuses;
+    }
+
+    public ArrayList<GameStatus> getStatusWithTag(Tags tag){
+        ArrayList<GameStatus> result = new ArrayList<>();
+        for(GameStatus status:statuses){
+            if(status.haveTag(tag)) {
+                result.add(status);
+            }
+        }
+        return result;
     }
 
     public void resetMod(){

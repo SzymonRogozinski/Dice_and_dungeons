@@ -169,6 +169,7 @@ public class FightPanel extends JPanel {
                 statusLabel.removeAll();
                 for(GameStatus status:enemy.getStatuses()){
                     JLabel statLabel=new JLabel(resizeIcon(status.getIcon(),statusIconSize,statusIconSize));
+                    statLabel.addMouseListener(new StatusMouseListener(status));
                     statusLabel.add(statLabel);
                 }
             }
@@ -211,6 +212,7 @@ public class FightPanel extends JPanel {
             statusLabel.removeAll();
             for(GameStatus status:playerCharacter.getStatuses()){
                 JLabel statLabel=new JLabel(resizeIcon(status.getIcon(),statusIconSize,statusIconSize));
+                statLabel.addMouseListener(new StatusMouseListener(status));
                 statusLabel.add(statLabel);
             }
         }
@@ -277,6 +279,35 @@ public class FightPanel extends JPanel {
             }
             return false;
         }
+    }
+
+    private class StatusMouseListener implements MouseListener{
+
+        private final GameStatus status;
+
+        public StatusMouseListener(GameStatus status) {
+            this.status = status;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {}
+
+        @Override
+        public void mousePressed(MouseEvent e) {}
+
+        @Override
+        public void mouseReleased(MouseEvent e) {}
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            fight.showStatusInfo(status.info());
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            fight.hideStatusInfo();
+        }
+
     }
 
     private class BorderFlashingThread extends Thread{

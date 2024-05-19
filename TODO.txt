@@ -4,6 +4,6 @@
 > Implementacja tagów [Done]
 > Ustawienie akcji onSelf [Done]
 > Pasek do wyświetlania komunikatów o walce
-> Pasek do wyświetlania komunikatów o statusie
+> Pasek do wyświetlania komunikatów o statusie [Done]
 > Implementacja wszystkich akcji
 > Używalne przedmioty (Stronicowanie, zużywanie)

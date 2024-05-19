@@ -13,6 +13,7 @@ public class StatusPanel extends JPanel {
     private JProgressBar healthBar;
     private JProgressBar manaBar;
     private JLabel characterName;
+    private JLabel statusInfo;
 
     public StatusPanel(Border border){
         //Set display
@@ -48,6 +49,22 @@ public class StatusPanel extends JPanel {
         characterName=new JLabel();
         characterName.setForeground(Color.WHITE);
         this.add(characterName);
+
+        statusInfo=new JLabel();
+        statusInfo.setForeground(Color.WHITE);
+        this.add(statusInfo);
+    }
+
+    public void showStatusInfo(String info){
+        statusInfo.setText(info);
+        this.revalidate();
+        this.repaint();
+    }
+
+    public void hideStatusInfo(){
+        statusInfo.setText("");
+        this.revalidate();
+        this.repaint();
     }
 
     public void setFight(FightModule fight){

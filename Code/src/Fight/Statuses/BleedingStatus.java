@@ -29,4 +29,9 @@ public class BleedingStatus extends GameStatus{
     public void addEffect(int value){
         statusCount+=value;
     }
+
+    @Override
+    public String info(){
+        return "Bleeding: "+(statusCount+1);
+    }
 }

@@ -34,4 +34,12 @@ public class GUIState {
     }
 
     public void showDiceResult(ArrayList<DiceSide> result){panel.getActionPanel().getDicePanel().showDiceResults(result);}
+
+    public void showStatusInfo(String info){
+        panel.getStatusPanel().showStatusInfo(info);
+    }
+
+    public void hideStatusInfo(){
+        panel.getStatusPanel().hideStatusInfo();
+    }
 }
