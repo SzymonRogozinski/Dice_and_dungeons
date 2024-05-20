@@ -2,8 +2,8 @@ package Fight;
 
 import Character.PlayerParty;
 
-import Dice.Dice;
 import Dice.DiceAction.DiceAction;
+import Fight.GameActions.EnemyAction;
 import Fight.GameActions.GameAction;
 import Fight.Statuses.BonusDiceStatus;
 import Fight.Statuses.GameStatus;
@@ -11,12 +11,11 @@ import Fight.Statuses.StatusException;
 import GUI.GUIState;
 import GUI.MainPanel;
 import Character.GameCharacter;
-import Character.EnemyCharacter;
+import Character.Enemy.EnemyCharacter;
 import Character.PlayerCharacter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class FightModule {
     private final PlayerParty party;
@@ -85,7 +84,7 @@ public class FightModule {
         noRoll=action.haveTag(Tags.NO_ROLL);
 
         if(noRoll){
-            master.setResult(action.getConstActions());
+            master.setResult(action.getActionFactories());
         }else{
             PlayerCharacter character = party.getCharacters().get(characterTurn);
             master.setDicePool(action.getDice(),action.getDiceNumber(character),character.getCharacterRerolls());
@@ -161,11 +160,12 @@ public class FightModule {
         if(playerTurn && !noRoll)
             master.sumUpResults();
         else if(!playerTurn){
-            //TODO tymczasowe rozwiązanie
-            action=null;
-            targetType=ActionTarget.PLAYER_CHARACTER;
-            targetId=new Random().nextInt(party.getCharacters().size());
-            master.setResult(enemies.get(characterTurn).action());
+            EnemyCharacter enemy=enemies.get(characterTurn);
+            EnemyAction enemyAction=enemy.action(enemies,party.getCharacters());
+            targetType=enemyAction.getTarget();
+            targetId=enemy.getTargetId();
+            master.setResult(enemyAction.getConstActions(enemy));
+            action=enemyAction;
         }
         performAction();
         if(action==null || !action.haveTag(Tags.FREE_ACTION)){
@@ -201,8 +201,7 @@ public class FightModule {
         }
         //Counter
         for(GameCharacter character:characters) {
-            //TODO not null!
-            if(action==null || action.haveTag(Tags.ATTACK)){
+            if(action.haveTag(Tags.ATTACK)){
                 ArrayList<GameStatus> defendingStatus = character.getStatusWithTag(Tags.ON_DEFEND);
                 for(GameStatus st:defendingStatus){
                     try{

@@ -4,6 +4,6 @@
 > Ustawienie akcji onSelf [Done]
 > Pasek do wyświetlania komunikatów o statusie [Done]
 > Implementacja wszystkich akcji [Done]
-> Implementacja inteligencji przeciwnika
-> Pasek do wyświetlania komunikatów o walce
+> Implementacja inteligencji przeciwnika [Done]
+> Pasek do wyświetlania komunikatów o walce (Wykonane ataki, kolejne ataki przeciwników)
 > Używalne przedmioty (Stronicowanie, zużywanie)

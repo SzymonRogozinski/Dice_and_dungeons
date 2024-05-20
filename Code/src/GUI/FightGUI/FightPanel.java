@@ -4,7 +4,7 @@ import Fight.ActionTarget;
 import Fight.Statuses.GameStatus;
 import GUI.GUISettings;
 import Fight.FightModule;
-import Character.EnemyCharacter;
+import Character.Enemy.EnemyCharacter;
 import Character.PlayerCharacter;
 
 import javax.swing.*;

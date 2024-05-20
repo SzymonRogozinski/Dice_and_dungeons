@@ -1,11 +1,8 @@
 import Dice.DiceAction.*;
 import Dice.DiceFactory;
-import Fight.GameActions.ActionItem;
+import Fight.GameActions.*;
 import Fight.ActionTarget;
 import Fight.FightModule;
-import Fight.GameActions.GameAction;
-import Fight.GameActions.SpellAction;
-import Fight.GameActions.UsableItemAction;
 import Fight.Tags;
 import GUI.GUIState;
 import GUI.MainFrame;
@@ -13,7 +10,9 @@ import GUI.MainPanel;
 
 import Character.PlayerCharacter;
 import Character.PlayerParty;
-import Character.EnemyCharacter;
+import Character.Enemy.EnemyCharacter;
+import Character.Enemy.EnemyAI;
+import Character.Enemy.EnemyActionFactory;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -59,8 +58,17 @@ public class Main {
 
         PlayerParty party = new PlayerParty(new ArrayList<>(List.of(new PlayerCharacter[]{player,player2})),usableItems);
 
-        EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12,12,"Skeleton",new ImageIcon("CharacterTexture/skeleton.png"));
-        EnemyCharacter enemy2 = new EnemyCharacter(12,12,12,12,12,12,"Skeleton",new ImageIcon("CharacterTexture/skeleton.png"));
+
+        EnemyActionFactory factory1 = new EnemyActionFactory(e->e.getStrength(),0.25,false,1);
+        EnemyActionFactory factory2 = new EnemyActionFactory(e->e.getCunning(),0.20,false,6);
+
+        EnemyAction enemyAction1 = new EnemyAction(ActionTarget.PLAYER_CHARACTER,new Tags[]{Tags.ATTACK},new ArrayList<>(List.of(new EnemyActionFactory[]{factory1})));
+        EnemyAction enemyAction2 = new EnemyAction(ActionTarget.PLAYER_CHARACTER,new Tags[]{},new ArrayList<>(List.of(new EnemyActionFactory[]{factory2})));
+        EnemyAI ai1=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{enemyAction1,enemyAction2})));
+        EnemyAI ai2=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{enemyAction1,enemyAction2})));
+
+        EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12,12,"Skeleton",new ImageIcon("CharacterTexture/skeleton.png"),ai1);
+        EnemyCharacter enemy2 = new EnemyCharacter(12,12,12,12,12,12,"Skeleton",new ImageIcon("CharacterTexture/skeleton.png"),ai2);
 
         FightModule fight = new FightModule(mainPanel,state,party,new ArrayList<>(List.of(new EnemyCharacter[]{enemy,enemy2})));
         fight.initFight();

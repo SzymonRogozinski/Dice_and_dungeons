@@ -1,21 +1,23 @@
-package Character;
+package Character.Enemy;
 
-import Dice.DiceAction.DamageAction;
-import Dice.DiceAction.DiceAction;
-import Dice.DiceAction.WeaknessAction;
+import Fight.GameActions.EnemyAction;
+import Character.GameCharacter;
+import Character.CharacterDieException;
+import Character.PlayerCharacter;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.List;
 
-public class EnemyCharacter extends GameCharacter{
+public class EnemyCharacter extends GameCharacter {
 
     private int maxHealth,currentHealth,shield;
+    private final EnemyAI ai;
 
-    public EnemyCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image) {
+    public EnemyCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image, EnemyAI ai) {
         super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image);
         maxHealth=startEndurance*5;
         currentHealth=startEndurance*5;
+        this.ai=ai;
     }
 
     public int getMaxHealth() {
@@ -27,7 +29,7 @@ public class EnemyCharacter extends GameCharacter{
     }
 
     @Override
-    public void dealDamage(int damage) throws CharacterDieException{
+    public void dealDamage(int damage) throws CharacterDieException {
         damage*=getDamageReceivingMod();
         shield-=damage;
         if(shield<0){
@@ -52,16 +54,16 @@ public class EnemyCharacter extends GameCharacter{
         System.out.println("Enemy cannot gain mana!");
     }
 
-    public ArrayList<DiceAction> action(){
-        //TODO
-        getStatisticMod();
+    public EnemyAction action(ArrayList<EnemyCharacter> enemies, ArrayList<PlayerCharacter> characters){
         System.out.println("Enemy attack!");
         System.out.println(currentHealth+"/"+maxHealth);
 
         //Choose action
-        DiceAction action=new DamageAction(3);
-        WeaknessAction action2 = new WeaknessAction(2);
-        return new ArrayList<>(List.of(new DiceAction[]{action,action2}));
+        return ai.getAction(enemies, characters,this);
+    }
+
+    public int getTargetId(){
+        return ai.getTargetId();
     }
 
     public void onTurnStart(){

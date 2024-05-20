@@ -40,6 +40,6 @@ public abstract class GameAction extends Tagable {
         return countDice.myMethod(p);
     }
 
-    public ArrayList<DiceAction> getConstActions(){throw new RuntimeException("Method not implemented!");}
+    public ArrayList<DiceAction> getActionFactories(){throw new RuntimeException("Method not implemented!");}
 
 }

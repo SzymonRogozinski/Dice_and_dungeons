@@ -16,7 +16,7 @@ public class UsableItemAction extends GameAction{
     }
 
     @Override
-    public ArrayList<DiceAction> getConstActions(){
+    public ArrayList<DiceAction> getActionFactories(){
         return constActions;
     }
 }
