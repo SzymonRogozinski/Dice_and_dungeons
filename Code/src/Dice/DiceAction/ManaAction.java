@@ -18,8 +18,15 @@ public class ManaAction implements DiceAction{
     }
 
     @Override
-    public String action() {
-        return "Character gain " +value + " mana!";
+    public String actionDescription(String characterName, String targetName) {
+        if(targetName==null)
+            return characterName+" give " +value + " mana to self.";
+        return characterName+" give " +value + " mana to " + targetName+".";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "";
     }
 
     @Override

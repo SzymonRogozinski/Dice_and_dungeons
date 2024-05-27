@@ -245,6 +245,8 @@ public class FightPanel extends JPanel {
 
         @Override
         public void mouseEntered(MouseEvent e) {
+            if(isEnemy)
+                fight.showNextMove(enemyPanelList.get(characterId).enemy.getNextAction());
             if(!selectableFlag)
                 return;
             setBorderFlashing(true);
@@ -254,6 +256,8 @@ public class FightPanel extends JPanel {
 
         @Override
         public void mouseExited(MouseEvent e) {
+            if(isEnemy)
+                fight.hideNextMove();
             if(!selectableFlag)
                 return;
             setBorderFlashing(false);

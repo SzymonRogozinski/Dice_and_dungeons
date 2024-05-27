@@ -24,4 +24,13 @@ public class EnemyAction extends GameAction{
         }
         return result;
     }
+
+
+    public String asString(EnemyCharacter enemy){
+        String action="";
+        for(EnemyActionFactory factory:actionFactories){
+            action+=factory.makeAction(enemy).actionDescription()+" ";
+        }
+        return action;
+    }
 }

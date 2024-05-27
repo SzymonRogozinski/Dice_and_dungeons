@@ -21,8 +21,15 @@ public class CounterAction implements DiceAction{
     }
 
     @Override
-    public String action() {
-        return "Applied " +value + " of counter!";
+    public String actionDescription(String characterName, String targetName) {
+        if(targetName==null)
+            return characterName+" applied " +value + " of counter to self.";
+        return characterName+" applied " +value + " of counter to " + targetName+".";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "Apply " +value + "of counter.";
     }
 
     @Override

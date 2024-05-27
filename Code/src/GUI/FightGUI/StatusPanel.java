@@ -12,13 +12,15 @@ public class StatusPanel extends JPanel {
     private FightModule fight;
     private JProgressBar healthBar;
     private JProgressBar manaBar;
-    private JLabel characterName;
-    private JLabel statusInfo;
+    private JLabel characterName,statusInfo,nextMoveInfo,combatLog;
+
+    private JPanel combatLogPanel, nextMovePanel;
+    private String combatLogText;
 
     public StatusPanel(Border border){
         //Set display
         this.setSize(GUISettings.SMALL_PANEL_SIZE,GUISettings.PANEL_SIZE);
-        this.setLayout(new FlowLayout());
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setBackground(Color.BLACK);
 
         //Set health
@@ -50,9 +52,39 @@ public class StatusPanel extends JPanel {
         characterName.setForeground(Color.WHITE);
         this.add(characterName);
 
+        //Set status
         statusInfo=new JLabel();
         statusInfo.setForeground(Color.WHITE);
         this.add(statusInfo);
+
+        //Set next move
+        nextMovePanel = new JPanel();
+        nextMovePanel.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-4,GUISettings.PANEL_SIZE/5));
+        nextMovePanel.setLayout(new BoxLayout(nextMovePanel , BoxLayout.X_AXIS));
+        nextMovePanel.setBackground(Color.BLACK);
+
+        nextMoveInfo=new JLabel();
+        nextMoveInfo.setForeground(Color.WHITE);
+        nextMoveInfo.setVerticalAlignment(SwingConstants.TOP);
+        nextMoveInfo.setVerticalTextPosition(SwingConstants.TOP);
+        nextMovePanel.add(nextMoveInfo);
+        this.add(nextMovePanel);
+
+        //Set combat log
+
+        combatLogText = "";
+
+        combatLogPanel = new JPanel();
+        combatLogPanel.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-4,GUISettings.PANEL_SIZE/3));
+        combatLogPanel.setLayout(new BoxLayout(combatLogPanel, BoxLayout.X_AXIS));
+        combatLogPanel.setBackground(Color.BLACK);
+
+        combatLog=new JLabel();
+        combatLog.setForeground(Color.WHITE);
+        combatLog.setVerticalAlignment(SwingConstants.TOP);
+        combatLog.setVerticalTextPosition(SwingConstants.TOP);
+        combatLogPanel.add(combatLog);
+        this.add(combatLogPanel);
     }
 
     public void showStatusInfo(String info){
@@ -63,6 +95,30 @@ public class StatusPanel extends JPanel {
 
     public void hideStatusInfo(){
         statusInfo.setText("");
+        this.revalidate();
+        this.repaint();
+    }
+
+    public void showNextMove(String info){
+        nextMoveInfo.setText("<html>"+info+"</html>");
+        this.revalidate();
+        this.repaint();
+    }
+
+    public void hideNextMove(){
+        nextMoveInfo.setText("");
+        this.revalidate();
+        this.repaint();
+    }
+
+    public void refreshCombatLog(){
+        String combatText = fight.getCombatLogInfo();
+        if(combatLogText.equals(combatText)) {
+            combatLogText = "";
+        }else {
+            combatLogText = combatText;
+        }
+        combatLog.setText("<html>"+combatLogText+"</html>");
         this.revalidate();
         this.repaint();
     }

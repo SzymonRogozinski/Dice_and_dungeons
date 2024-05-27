@@ -20,6 +20,9 @@ public class CounterStatus extends GameStatus{
     }
 
     @Override
+    public String effectCommunicate(String name) { return name+" counter attack.";}
+
+    @Override
     public String info(){
         return "Counter: "+getSumUpValue();
     }

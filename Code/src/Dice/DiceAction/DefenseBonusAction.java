@@ -25,8 +25,15 @@ public class DefenseBonusAction implements DiceAction {
     }
 
     @Override
-    public String action() {
-        return "Applied " +value + " of shield bonus!";
+    public String actionDescription(String characterName, String targetName) {
+        if(targetName==null)
+            return characterName+" applied " +value + " of shield bonus to self.";
+        return characterName+" applied " +value + " of shield bonus to " + targetName+".";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "";
     }
 
     @Override

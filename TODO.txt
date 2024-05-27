@@ -5,5 +5,5 @@
 > Pasek do wyświetlania komunikatów o statusie [Done]
 > Implementacja wszystkich akcji [Done]
 > Implementacja inteligencji przeciwnika [Done]
-> Pasek do wyświetlania komunikatów o walce (Wykonane ataki, kolejne ataki przeciwników)
+> Pasek do wyświetlania komunikatów o walce (Wykonane ataki, kolejne ataki przeciwników) [Done]
 > Używalne przedmioty (Stronicowanie, zużywanie)

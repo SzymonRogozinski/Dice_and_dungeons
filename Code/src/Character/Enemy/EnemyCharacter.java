@@ -59,7 +59,7 @@ public class EnemyCharacter extends GameCharacter {
         System.out.println(currentHealth+"/"+maxHealth);
 
         //Choose action
-        return ai.getAction(enemies, characters,this);
+        return ai.getAction(enemies, characters);
     }
 
     public int getTargetId(){
@@ -71,4 +71,8 @@ public class EnemyCharacter extends GameCharacter {
     }
 
     public int getShield(){return shield;}
+
+    public String getNextAction(){
+        return ai.getNextAction(this);
+    }
 }

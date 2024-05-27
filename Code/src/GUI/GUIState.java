@@ -42,4 +42,18 @@ public class GUIState {
     public void hideStatusInfo(){
         panel.getStatusPanel().hideStatusInfo();
     }
+
+
+
+    public void refreshCombatLog(){
+        panel.getStatusPanel().refreshCombatLog();
+    }
+
+    public void showNextMove(String info){
+        panel.getStatusPanel().showNextMove(info);
+    }
+
+    public void hideNextMove(){
+        panel.getStatusPanel().hideNextMove();
+    }
 }

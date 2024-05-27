@@ -19,17 +19,16 @@ public class EnemyAI {
         random=new Random();
     }
 
-    public EnemyAction getAction(ArrayList<EnemyCharacter> enemies, ArrayList<PlayerCharacter> characters, EnemyCharacter enemy){
+    public EnemyAction getAction(ArrayList<EnemyCharacter> enemies, ArrayList<PlayerCharacter> characters){
         if(actionCounter>=actionList.size())
             actionCounter=0;
         setTargetId(enemies,characters);
         return actionList.get(actionCounter++);
     }
 
-    public String getNextAction(){
+    public String getNextAction(EnemyCharacter enemy){
         EnemyAction action = actionList.get(actionCounter);
-        //TODO
-        return null;
+        return "Next move: " + action.asString(enemy);
     }
 
     public void setTargetId(ArrayList<EnemyCharacter> enemies,ArrayList<PlayerCharacter> characters){

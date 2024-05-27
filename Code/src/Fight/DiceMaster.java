@@ -81,12 +81,7 @@ public class DiceMaster {
         if(bonusPool!=null){
             actions.addAll(bonusPool.sumUp());
         }
-        StringBuilder res= new StringBuilder();
-        for(DiceAction a:actions){
-            res.append(a.action()).append(" ");
-        }
         sumUpActions=actions;
-        System.out.println(res);
     }
 
     public ArrayList<DiceAction> getSumUpResults(){

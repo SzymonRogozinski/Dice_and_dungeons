@@ -19,8 +19,13 @@ public class PoisonAction implements DiceAction{
     }
 
     @Override
-    public String action() {
-        return "Attack apply " +value + " of poison!";
+    public String actionDescription(String characterName, String targetName) {
+        return characterName+" applied " +value + " of poison to " + targetName+".";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "Apply " +value + " of poison.";
     }
 
     @Override

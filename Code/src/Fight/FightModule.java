@@ -28,8 +28,11 @@ public class FightModule {
     private ActionTarget targetType;
     private boolean noRoll;
     private GameAction action;
+    private String combatLogInfo;
 
     public FightModule(MainPanel panel,GUIState state,PlayerParty party,ArrayList<EnemyCharacter> enemies) {
+        this.combatLogInfo="";
+        this.noRoll=false;
         this.playerTurn=true;
         this.characterTurn=0;
         this.state=state;
@@ -37,7 +40,6 @@ public class FightModule {
         this.enemies=enemies;
         this.party=party;
         panel.setFightModule(this);
-        this.noRoll=false;
     }
 
     public ActionTarget getTargetType() {
@@ -54,6 +56,12 @@ public class FightModule {
 
     public ArrayList<EnemyCharacter> getEnemies() {
         return enemies;
+    }
+
+    public String getCombatLogInfo() {
+        String respond = combatLogInfo;
+        combatLogInfo="";
+        return respond;
     }
 
     public void initFight(){
@@ -94,7 +102,7 @@ public class FightModule {
                 diceStatus.addBonusDice(master,action);
             }
         }
-
+        state.refreshCombatLog();
         state.setState(GUIState.PLAYER_CHOOSING_TARGET);
     }
 
@@ -114,6 +122,14 @@ public class FightModule {
 
     public void hideStatusInfo(){
         state.hideStatusInfo();
+    }
+
+    public void showNextMove(String info){
+        state.showNextMove(info);
+    }
+
+    public void hideNextMove(){
+        state.hideNextMove();
     }
 
     private void startAction(){
@@ -137,6 +153,7 @@ public class FightModule {
                 setNextCharacterTurn();
                 skip=true;
             }
+            combatLogInfo+=status.effectCommunicate(character.getName())+" ";
         }
         character.statusEvaporate();
 
@@ -147,14 +164,13 @@ public class FightModule {
                 status.effect(character);
             }catch (StatusException ignore){}
         }
-
         //Refresh
-        if(skip)
+        if(skip) {
             startAction();
-        else
-            state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
+        }else {
+            state.setState(playerTurn ? GUIState.PLAYER_CHOOSING_ACTION : GUIState.ENEMY_PERFORMING_ACTION);
+        }
     }
-
 
     public void endAction(){
         if(playerTurn && !noRoll)
@@ -168,6 +184,7 @@ public class FightModule {
             action=enemyAction;
         }
         performAction();
+        state.refreshCombatLog();
         if(action==null || !action.haveTag(Tags.FREE_ACTION)){
             setNextCharacterTurn();
             state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
@@ -192,11 +209,15 @@ public class FightModule {
             default -> characters=null;
         }
         for (DiceAction diceAction : actions){
-            if(diceAction.onSelf())
+            if(diceAction.onSelf()){
                 diceAction.doAction(attacker);
+                combatLogInfo+=diceAction.actionDescription(attacker.getName(),null)+" ";
+            }
             else{
-                for(GameCharacter character:characters)
+                for(GameCharacter character:characters) {
                     diceAction.doAction(character);
+                    combatLogInfo+=diceAction.actionDescription(attacker.getName(), character.getName())+" ";
+                }
             }
         }
         //Counter
@@ -207,6 +228,7 @@ public class FightModule {
                     try{
                         st.effect(attacker);
                     }catch (StatusException ignore){}
+                    combatLogInfo+=st.effectCommunicate(character.getName())+" ";
                 }
             }
         }

@@ -20,6 +20,9 @@ public class PoisonStatus extends GameStatus{
     }
 
     @Override
+    public String effectCommunicate(String name) { return "Poison deal "+ getSumUpValue() +" damage to "+ name+".";}
+
+    @Override
     public String info(){
         return "Poison: "+getSumUpValue();
     }

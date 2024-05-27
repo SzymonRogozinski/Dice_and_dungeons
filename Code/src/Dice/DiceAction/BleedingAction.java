@@ -18,8 +18,13 @@ public class BleedingAction implements DiceAction{
     }
 
     @Override
-    public String action() {
-        return "Attack apply Bleeding!";
+    public String actionDescription(String characterName, String targetName) {
+        return characterName+" applied " +value + " of bleeding to " + targetName+".";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "Apply " +value + "of bleeding.";
     }
 
     @Override

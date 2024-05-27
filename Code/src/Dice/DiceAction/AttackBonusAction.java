@@ -24,8 +24,15 @@ public class AttackBonusAction implements DiceAction{
     }
 
     @Override
-    public String action() {
-        return "Applied " +value + " of attack bonus!";
+    public String actionDescription(String characterName, String targetName) {
+        if(targetName==null)
+            return characterName+" applied " +value + " of attack bonus to self.";
+        return characterName+" applied " +value + " of attack bonus to " + targetName+".";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "";
     }
 
     @Override

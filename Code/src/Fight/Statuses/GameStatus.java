@@ -25,6 +25,8 @@ public abstract class GameStatus extends Tagable {
 
     public void effect(GameCharacter character) throws StatusException{throw new RuntimeException("Method not implemented!");}
 
+    public String effectCommunicate(String name) { return null;}
+
     public ImageIcon getIcon() {
         return icon;
     }

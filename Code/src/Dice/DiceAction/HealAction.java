@@ -19,8 +19,15 @@ public class HealAction implements DiceAction{
     }
 
     @Override
-    public String action() {
-        return "Character heal " +value + "!";
+    public String actionDescription(String characterName, String targetName) {
+        if(targetName==null)
+            return characterName+" heal " +value + " of health to self.";
+        return characterName+" heal " +value + " of health to " + targetName+".";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "Heal " +value + ".";
     }
 
     @Override

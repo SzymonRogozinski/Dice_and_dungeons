@@ -17,6 +17,9 @@ public class StunStatus extends GameStatus{
     }
 
     @Override
+    public String effectCommunicate(String name) { return name+" lose turn due to stun.";}
+
+    @Override
     public void evaporate() throws StatusEvaporatedException {
         throw new StatusEvaporatedException();
     }

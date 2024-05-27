@@ -18,8 +18,13 @@ public class DamageAction implements DiceAction{
     }
 
     @Override
-    public String action() {
-        return "Attack hit for " +value + " damage!";
+    public String actionDescription(String characterName, String targetName) {
+        return characterName + " hit " + targetName + " for " +value + " damage.";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "Hit for " +value + " damage.";
     }
 
     @Override

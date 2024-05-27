@@ -14,8 +14,13 @@ public class NullAction implements DiceAction{
     }
 
     @Override
-    public String action() {
-        return null;
+    public String actionDescription(String characterName, String targetName) {
+        return "";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "";
     }
 
     @Override

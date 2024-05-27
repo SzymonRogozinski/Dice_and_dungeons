@@ -14,8 +14,13 @@ public class StunAction implements DiceAction{
     }
 
     @Override
-    public String action() {
-        return "Attack stunned enemy!";
+    public String actionDescription(String characterName, String targetName) {
+        return characterName+" applied stun to " + targetName+".";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "Apply stun.";
     }
 
     @Override

@@ -20,8 +20,15 @@ public class ShieldAction implements DiceAction{
     }
 
     @Override
-    public String action() {
-        return "Character shield rise by " +value + "!";
+    public String actionDescription(String characterName, String targetName) {
+        if(targetName==null)
+            return characterName+" give " +value + " shield to self.";
+        return characterName+" give " +value + " shield to " + targetName+".";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "Apply " +value + " shield.";
     }
 
     @Override

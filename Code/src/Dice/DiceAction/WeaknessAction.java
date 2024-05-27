@@ -18,8 +18,13 @@ public class WeaknessAction implements DiceAction{
     }
 
     @Override
-    public String action() {
-        return "Attack apply Weakness!";
+    public String actionDescription(String characterName, String targetName) {
+        return characterName+" applied " +value + " of weakness to " + targetName+".";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "Apply " +value + " of weakness.";
     }
 
     @Override

@@ -25,8 +25,15 @@ public class MagicBonusAction implements DiceAction{
     }
 
     @Override
-    public String action() {
-        return "Applied " +value + " of magic bonus!";
+    public String actionDescription(String characterName, String targetName) {
+        if(targetName==null)
+            return characterName+" applied " +value + " of magic bonus to self.";
+        return characterName+" applied " +value + " of magic bonus to " + targetName+".";
+    }
+
+    @Override
+    public String actionDescription() {
+        return "";
     }
 
     @Override
