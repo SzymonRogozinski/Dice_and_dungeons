@@ -1,7 +1,9 @@
 package Fight;
 
+import Character.Enemy.EnemyCharacter;
+import Character.GameCharacter;
+import Character.PlayerCharacter;
 import Character.PlayerParty;
-
 import Dice.DiceAction.DiceAction;
 import Fight.GameActions.EnemyAction;
 import Fight.GameActions.GameAction;
@@ -10,9 +12,7 @@ import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusException;
 import GUI.GUIState;
 import GUI.MainPanel;
-import Character.GameCharacter;
-import Character.Enemy.EnemyCharacter;
-import Character.PlayerCharacter;
+import Game.Tags;
 
 import java.util.ArrayList;
 import java.util.List;

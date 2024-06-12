@@ -1,12 +1,12 @@
 package Fight.Statuses;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import Character.GameCharacter;
-import Fight.Tagable;
-import Fight.Tags;
+import Game.Tagable;
+import Game.Tags;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class GameStatus extends Tagable {
 

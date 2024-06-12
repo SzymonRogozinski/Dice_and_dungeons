@@ -1,4 +1,4 @@
-package Fight;
+package Game;
 
 public abstract class Tagable {
     private final Tags[] tags;

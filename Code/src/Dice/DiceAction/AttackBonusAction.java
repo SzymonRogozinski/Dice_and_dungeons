@@ -1,10 +1,10 @@
 package Dice.DiceAction;
 
+import Character.GameCharacter;
 import Dice.Dice;
 import Dice.DiceFactory;
 import Fight.Statuses.BonusDiceStatus;
-import Character.GameCharacter;
-import Fight.Tags;
+import Game.Tags;
 
 public class AttackBonusAction implements DiceAction{
     private static final String id="AttackBonus";

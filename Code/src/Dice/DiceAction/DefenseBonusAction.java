@@ -4,7 +4,7 @@ import Character.GameCharacter;
 import Dice.Dice;
 import Dice.DiceFactory;
 import Fight.Statuses.BonusDiceStatus;
-import Fight.Tags;
+import Game.Tags;
 
 public class DefenseBonusAction implements DiceAction {
 

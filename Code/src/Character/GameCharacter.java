@@ -2,33 +2,24 @@ package Character;
 
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusEvaporatedException;
-import Fight.Statuses.StatusException;
-import Fight.Tags;
-import jdk.jshell.spi.ExecutionControl;
+import Game.Tags;
 
 import javax.swing.*;
 import java.util.ArrayList;
 
 public class GameCharacter {
     private int strength,endurance,intelligence,charisma,cunning,luck,shield;
-    private final int startStrength,startEndurance,startIntelligence,startCharisma,startCunning,startLuck;
     private double statisticMod,damageReceivingMod;
     private final ArrayList<GameStatus> statuses;
     private final String name;
     private final ImageIcon image;
 
     public GameCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck,String name,ImageIcon image) {
-        this.startStrength = startStrength;
         strength = startStrength;
-        this.startEndurance = startEndurance;
         endurance = startEndurance;
-        this.startIntelligence = startIntelligence;
         intelligence = startIntelligence;
-        this.startCharisma = startCharisma;
         charisma = startCharisma;
-        this.startCunning = startCunning;
         cunning = startCunning;
-        this.startLuck = startLuck;
         luck = startLuck;
         this.name=name;
         this.image=image;
@@ -102,6 +93,15 @@ public class GameCharacter {
                 statuses.remove(i);
             }
         }
+    }
+
+    public void modifyStats(int strengthMod,int enduranceMod,int intelligenceMod,int charismaMod,int cunningMod,int luckMod){
+        strength+=strengthMod;
+        endurance+=enduranceMod;
+        intelligence+=intelligenceMod;
+        charisma+=charismaMod;
+        cunning+=cunningMod;
+        luck+=luckMod;
     }
 
     public void resetStatus(){

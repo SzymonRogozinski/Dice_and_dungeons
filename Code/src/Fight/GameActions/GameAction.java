@@ -1,31 +1,25 @@
 package Fight.GameActions;
 
+import Character.PlayerCharacter;
 import Dice.Dice;
 import Dice.DiceAction.DiceAction;
 import Fight.ActionTarget;
-import Character.PlayerCharacter;
-import Fight.Tagable;
-import Fight.Tags;
+import Game.Tagable;
+import Game.Tags;
 
 import java.util.ArrayList;
 
 public abstract class GameAction extends Tagable {
 
-    private final String name;
     private final Dice dice;
     private final ActionTarget target;
     private final DiceLambda countDice;
 
-    public GameAction(String name, Dice dice, ActionTarget target, DiceLambda countDice, Tags[] tags) {
+    public GameAction(Dice dice, ActionTarget target, DiceLambda countDice, Tags[] tags) {
         super(tags);
-        this.name = name;
         this.dice = dice;
         this.target = target;
         this.countDice = countDice;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public Dice getDice() {
@@ -37,7 +31,7 @@ public abstract class GameAction extends Tagable {
     }
 
     public int getDiceNumber(PlayerCharacter p){
-        return countDice.myMethod(p);
+        return Math.min(countDice.myMethod(p),12);
     }
 
     public ArrayList<DiceAction> getActionFactories(){throw new RuntimeException("Method not implemented!");}

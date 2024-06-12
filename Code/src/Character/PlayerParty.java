@@ -1,5 +1,7 @@
 package Character;
 
+import Equipment.Items.Item;
+import Equipment.PartyBackpack;
 import Fight.GameActions.UsableItemAction;
 
 import java.util.ArrayList;
@@ -7,12 +9,12 @@ import java.util.ArrayList;
 public class PlayerParty {
 
     private ArrayList<PlayerCharacter> characters;
-    private ArrayList<UsableItemAction> items;
     private int maxHealth,currentHealth,maxMana,currentMana,shield;
+    private final PartyBackpack backpack;
 
-    public PlayerParty(ArrayList<PlayerCharacter> characters,ArrayList<UsableItemAction> items) {
+    public PlayerParty(ArrayList<PlayerCharacter> characters,ArrayList<Item> items) {
         this.characters = characters;
-        this.items=items;
+        backpack=new PartyBackpack(items);
         int health=0;
         int mana=0;
         for(PlayerCharacter player:characters){
@@ -27,8 +29,23 @@ public class PlayerParty {
         shield=0;
     }
 
-    public ArrayList<UsableItemAction> getItems() {
-        return items;
+    public PartyBackpack getBackpack() {
+        return backpack;
+    }
+
+    public void calculateHealthAndMana(){
+        int health=0;
+        int mana=0;
+        for(PlayerCharacter player:characters){
+            health+=player.getEndurance();
+            mana+=player.getIntelligence();
+        }
+        int healthDif=health-maxHealth;
+        maxHealth=health;
+        currentHealth=Math.max(currentHealth+healthDif,1);
+        int manaDif=mana-maxMana;
+        maxMana=mana;
+        currentMana=Math.max(currentMana+manaDif,1);
     }
 
     public int getMaxHealth() {

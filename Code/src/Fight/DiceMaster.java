@@ -1,14 +1,10 @@
 package Fight;
 
 import Dice.Dice;
-import Dice.DiceAction.DamageAction;
 import Dice.DiceAction.DiceAction;
-import Dice.DiceAction.NullAction;
-import Dice.DiceSide;
 import Dice.DicePool;
-import GUI.GUISettings;
+import Dice.DiceSide;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class DiceMaster {
@@ -32,6 +28,9 @@ public class DiceMaster {
     }
 
     public void setBonusDicePool(Dice dice, int diceNumber){
+        if(pool.getDiceNumber()+diceNumber>12){
+            diceNumber=12-pool.getDiceNumber();
+        }
         bonusPool=new DicePool(dice,diceNumber);
     }
 
