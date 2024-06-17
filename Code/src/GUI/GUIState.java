@@ -1,8 +1,7 @@
 package GUI;
 
 import Dice.DiceSide;
-
-import Character.PlayerCharacter;
+import GUI.FightGUI.FightView;
 
 import java.util.ArrayList;
 
@@ -12,9 +11,9 @@ public class GUIState {
     public static final int PLAYER_PERFORMING_ACTION=2;
     public static final int ENEMY_PERFORMING_ACTION=3;
     private int currentState;
-    private final MainPanel panel;
+    private final FightView panel;
 
-    public GUIState(MainPanel panel){
+    public GUIState(FightView panel){
         currentState=PLAYER_CHOOSING_ACTION;
         this.panel=panel;
         panel.setState(currentState,currentState);

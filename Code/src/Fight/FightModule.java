@@ -11,7 +11,7 @@ import Fight.Statuses.BonusDiceStatus;
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusException;
 import GUI.GUIState;
-import GUI.MainPanel;
+import GUI.FightGUI.FightView;
 import Game.Tags;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class FightModule {
     private GameAction action;
     private String combatLogInfo;
 
-    public FightModule(MainPanel panel,GUIState state,PlayerParty party,ArrayList<EnemyCharacter> enemies) {
+    public FightModule(FightView panel, GUIState state, PlayerParty party, ArrayList<EnemyCharacter> enemies) {
         this.combatLogInfo="";
         this.noRoll=false;
         this.playerTurn=true;

@@ -18,7 +18,7 @@ import Fight.GameActions.SpellAction;
 import Fight.GameActions.UsableItemAction;
 import GUI.GUIState;
 import GUI.MainFrame;
-import GUI.MainPanel;
+import GUI.FightGUI.FightView;
 import Game.Tags;
 
 import javax.swing.*;
@@ -27,13 +27,13 @@ import java.util.List;
 
 public class Main {
     private static final JFrame mainFrame=new MainFrame();
-    private static MainPanel mainPanel;
+    private static FightView fightView;
     private static GUIState state;
 
     public static void main(String[] args) {
 
-        mainPanel =new MainPanel();
-        state=new GUIState(mainPanel);
+        fightView =new FightView();
+        state=new GUIState(fightView);
         //ItemAction item = new ItemAction("Sword", DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getStrength()),new Tags[]{Tags.ATTACK});
         //ItemAction item2 = new ItemAction("Shield", DiceFactory.buildDice(new int[][]{{0},{0},{2,3,1},{2,3,1},{2,3,1},{2,3,1}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getEndurance()),new Tags[]{Tags.DEFENCE});
         //ActionItem item3 = new ActionItem("Trap", DiceFactory.buildDice(new int[][]{{0},{0},{0},{6,1},{6,1},{6,1}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getCunning()),new Tags[]{});
@@ -102,10 +102,10 @@ public class Main {
         EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12,12,"Skeleton1",new ImageIcon("CharacterTexture/skeleton.png"),ai1);
         EnemyCharacter enemy2 = new EnemyCharacter(12,12,12,12,12,12,"Skeleton2",new ImageIcon("CharacterTexture/skeleton.png"),ai2);
 
-        FightModule fight = new FightModule(mainPanel,state,party,new ArrayList<>(List.of(new EnemyCharacter[]{enemy,enemy2})));
+        FightModule fight = new FightModule(fightView,state,party,new ArrayList<>(List.of(new EnemyCharacter[]{enemy,enemy2})));
         fight.initFight();
 
-        mainFrame.add(mainPanel);
+        mainFrame.add(fightView);
 
         mainFrame.pack();
         mainFrame.setVisible(true);
