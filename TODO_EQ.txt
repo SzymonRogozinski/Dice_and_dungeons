@@ -1,7 +1,7 @@
 # Podstawa
 > implementacja struktury przedmiotów [Done]
 > implementacja ekwipowania i deekwipowania [Done]
-> Stworzenie GUI pozwalającego na zarządanie ekwipunkiem
+> Stworzenie GUI pozwalającego na zarządanie ekwipunkiem [Half done]
 > Implementacja zużywalności przedmiotów jednorazowych [Done]
 # Generacja przedmiotów
 > Implementcja szkieletu/ wzorca podstawowych statystyk

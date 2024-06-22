@@ -58,9 +58,9 @@ public abstract class MainPanel extends JPanel {
         return BorderFactory.createLineBorder(Color.WHITE, 2);
     }
 
-    public void setPanelsContent(JPanel smallPanelContent,JPanel bigPanelContent,JPanel bottomPanelContent,JPanel sidePanelContent){
-        smallPanel.add(smallPanelContent);
+    public void setPanelsContent(JPanel bigPanelContent,JPanel smallPanelContent,JPanel bottomPanelContent,JPanel sidePanelContent){
         bigPanel.add(bigPanelContent);
+        smallPanel.add(smallPanelContent);
         bottomPanel.add(bottomPanelContent);
         sidePanel.add(sidePanelContent);
 
