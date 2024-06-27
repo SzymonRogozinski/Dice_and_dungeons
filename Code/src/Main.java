@@ -16,7 +16,7 @@ import Fight.GameActions.EnemyAction;
 import Fight.GameActions.ItemAction;
 import Fight.GameActions.SpellAction;
 import Fight.GameActions.UsableItemAction;
-import GUI.GUIState;
+import GUI.FightGUI.FightGUIState;
 import GUI.MainFrame;
 import GUI.FightGUI.FightView;
 import Game.Tags;
@@ -28,12 +28,12 @@ import java.util.List;
 public class Main {
     private static final JFrame mainFrame=new MainFrame();
     private static FightView fightView;
-    private static GUIState state;
+    private static FightGUIState state;
 
     public static void main(String[] args) {
 
         fightView =new FightView();
-        state=new GUIState(fightView);
+        state=new FightGUIState(fightView);
 
         ActionItem item1 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getStrength()),new Tags[]{Tags.ATTACK}), new Tags[]{},null,"Sword");
         ActionItem item2 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{8,3,0},{8,3,0},{8,3,0},{8,3,0},{8,3,0}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getCharisma()),new Tags[]{Tags.DEFENCE}), new Tags[]{},null,"Shield");

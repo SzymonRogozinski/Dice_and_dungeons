@@ -11,10 +11,14 @@ import java.util.ArrayList;
 
 public class PartyBackpack {
 
-    public ArrayList<Item> items;
+    private ArrayList<Item> items;
 
     public PartyBackpack(){
         items = new ArrayList<>();
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
     public PartyBackpack(ArrayList<Item> items){

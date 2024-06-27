@@ -1,5 +1,6 @@
 package GUI.EquipmentGUI;
 
+import Equipment.EquipmentModule;
 import GUI.MainPanel;
 
 public class EquipmentView extends MainPanel {
@@ -17,5 +18,52 @@ public class EquipmentView extends MainPanel {
         charactersInfoPanel=new CharactersInfoPanel(getBorder());
 
         setPanelsContent(itemManagementPanel,switchPanel,itemInfoPanel,charactersInfoPanel);
+    }
+
+    public void setEquipmentModule(EquipmentModule module){
+        switchPanel.setEquipment(module);
+        itemInfoPanel.setEquipment(module);
+        charactersInfoPanel.setEquipment(module);
+        itemManagementPanel.setEquipment(module);
+
+        refresh();
+    }
+
+    public SwitchPanel getSwitchPanel() {
+        return switchPanel;
+    }
+
+    public ItemInfoPanel getItemInfoPanel() {
+        return itemInfoPanel;
+    }
+
+    public CharactersInfoPanel getCharactersInfoPanel() {
+        return charactersInfoPanel;
+    }
+
+    public ItemManagementPanel getItemManagementPanel() {
+        return itemManagementPanel;
+    }
+
+    public void setState(int newState,int currentState){
+        switch (newState){
+            case EquipmentGUIState.EQUIPMENT -> {
+                charactersInfoPanel.setEquipmentVisibility(true);
+                itemManagementPanel.changeCard("Equipment");
+            }
+            case EquipmentGUIState.BACKPACK -> {
+                charactersInfoPanel.setEquipmentVisibility(false);
+                itemManagementPanel.changeCard("Backpack");
+            }
+        }
+        refresh();
+    }
+
+    public void refresh(){
+        charactersInfoPanel.refresh();
+        itemManagementPanel.refresh();
+        //Refresh
+        this.revalidate();
+        this.repaint();
     }
 }

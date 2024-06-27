@@ -1,13 +1,7 @@
 package GUI.FightGUI;
 
-import GUI.FightGUI.*;
 import Fight.FightModule;
-import GUI.GUIState;
 import GUI.MainPanel;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
 
 public class FightView extends MainPanel {
 
@@ -25,7 +19,7 @@ public class FightView extends MainPanel {
         actionPanel =  new ActionPanel(getBorder());
         statusPanel=new StatusPanel(getBorder());
 
-        setPanelsContent(rollPanel,fightPanel,actionPanel,statusPanel);
+        setPanelsContent(fightPanel,rollPanel,actionPanel,statusPanel);
         //Refresh
         this.revalidate();
         this.repaint();
@@ -57,27 +51,27 @@ public class FightView extends MainPanel {
 
     public void setState(int newState,int currentState){
         switch (newState){
-            case GUIState.PLAYER_CHOOSING_ACTION -> {
-                if(currentState==GUIState.PLAYER_PERFORMING_ACTION || currentState==GUIState.ENEMY_PERFORMING_ACTION){
+            case FightGUIState.PLAYER_CHOOSING_ACTION -> {
+                if(currentState== FightGUIState.PLAYER_PERFORMING_ACTION || currentState== FightGUIState.ENEMY_PERFORMING_ACTION){
                     actionPanel.getActions().loadAction();
                 }
                 rollPanel.setVisible(false);
                 actionPanel.setVisible(true);
                 actionPanel.changePage("Actions");
             }
-            case GUIState.PLAYER_CHOOSING_TARGET -> {
+            case FightGUIState.PLAYER_CHOOSING_TARGET -> {
                 rollPanel.setVisible(false);
                 rollPanel.rerollsChange();
                 actionPanel.setVisible(false);
                 fightPanel.enemySelectable(true);
             }
-            case GUIState.PLAYER_PERFORMING_ACTION -> {
+            case FightGUIState.PLAYER_PERFORMING_ACTION -> {
                 rollPanel.setVisible(true);
                 fightPanel.enemySelectable(false);
                 actionPanel.setVisible(true);
                 actionPanel.changePage("Pause");
             }
-            case GUIState.ENEMY_PERFORMING_ACTION -> {
+            case FightGUIState.ENEMY_PERFORMING_ACTION -> {
                 rollPanel.setVisible(false);
                 actionPanel.setVisible(true);
                 actionPanel.changePage("Enemy");

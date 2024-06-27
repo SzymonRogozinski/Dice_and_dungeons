@@ -1,5 +1,6 @@
 package GUI.EquipmentGUI;
 
+import Equipment.EquipmentModule;
 import GUI.GUISettings;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ public class ItemInfoPanel extends JPanel {
     private DiceItemInfoPanel diceItemInfoPanel;
     private ArmorInfoPanel armorInfoPanel;
     private DiceLessItemInfoPanel diceLessItemInfoPanel;
+    private EquipmentModule equipment;
 
     public ItemInfoPanel(Border border){
         this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
@@ -55,6 +57,10 @@ public class ItemInfoPanel extends JPanel {
             this.add(nameLabel);
             this.add(diceSidesPanel);
         }
+    }
+
+    public void setEquipment(EquipmentModule equipment) {
+        this.equipment = equipment;
     }
 
     private class ArmorInfoPanel extends JPanel{

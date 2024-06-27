@@ -16,6 +16,10 @@ public abstract class Item extends Tagable {
         this.name=name;
     }
 
+    public ImageIcon getIcon() {
+        return icon;
+    }
+
     @Override
     public boolean equals(Object o){
         return o.getClass().equals(this.getClass()) && ((Item) o).name.equals(name);

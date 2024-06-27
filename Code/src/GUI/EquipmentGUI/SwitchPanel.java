@@ -1,5 +1,6 @@
 package GUI.EquipmentGUI;
 
+import Equipment.EquipmentModule;
 import GUI.GUISettings;
 
 import javax.swing.*;
@@ -7,6 +8,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class SwitchPanel extends JPanel {
+
+    private EquipmentModule equipment;
 
     public SwitchPanel(Border border){
         //Set display
@@ -19,9 +22,11 @@ public class SwitchPanel extends JPanel {
 
         JButton eqButton=new JButton("Equipment");
         eqButton.setPreferredSize(new Dimension((int)(GUISettings.SMALL_PANEL_SIZE*0.8),(int)(GUISettings.SMALL_PANEL_SIZE*0.20)));
+        eqButton.addActionListener(e->equipment.changeViewToEquipment());
 
         JButton backButton=new JButton("Backpack");
         backButton.setPreferredSize(new Dimension((int)(GUISettings.SMALL_PANEL_SIZE*0.8),(int)(GUISettings.SMALL_PANEL_SIZE*0.20)));
+        backButton.addActionListener(e->equipment.changeViewToBackpack());
 
         JButton returnButton=new JButton("Close");
         returnButton.setPreferredSize(new Dimension((int)(GUISettings.SMALL_PANEL_SIZE*0.8),(int)(GUISettings.SMALL_PANEL_SIZE*0.20)));
@@ -32,4 +37,7 @@ public class SwitchPanel extends JPanel {
 
     }
 
+    public void setEquipment(EquipmentModule equipment) {
+        this.equipment = equipment;
+    }
 }

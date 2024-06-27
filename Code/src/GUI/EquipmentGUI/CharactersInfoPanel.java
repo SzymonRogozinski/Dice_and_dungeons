@@ -1,6 +1,8 @@
 package GUI.EquipmentGUI;
 
+import Equipment.EquipmentModule;
 import GUI.GUISettings;
+import Character.PlayerCharacter;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -9,12 +11,15 @@ import java.awt.event.ActionListener;
 
 public class CharactersInfoPanel extends JPanel {
 
+    private static ImageIcon BAG_SLOT_ICON =new ImageIcon("ItemsIcons/slot-bag.png");
+
     private JLabel headline;
     private CharacterInfoPanel charactersInfoPanel;
     private PartyInfoPanel partyInfoPanel;
     private ChangePanel changeCharacterPanel;
     private UseItemPanel useItemPanel;
     private ChangePanel changeBackpackPagePanel;
+    private EquipmentModule equipment;
 
     public CharactersInfoPanel(Border border){
         this.setSize(GUISettings.SMALL_PANEL_SIZE,GUISettings.PANEL_SIZE);
@@ -30,7 +35,7 @@ public class CharactersInfoPanel extends JPanel {
 
         charactersInfoPanel=new CharacterInfoPanel();
         partyInfoPanel=new PartyInfoPanel();
-        changeCharacterPanel=new ChangePanel("Next character","Previous character",e->System.out.println("click"),e->System.out.println("click"));
+        changeCharacterPanel=new ChangePanel("Next character","Previous character",e->equipment.changeCharacter(true),e->equipment.changeCharacter(false));
         useItemPanel=new UseItemPanel();
         changeBackpackPagePanel=new ChangePanel("Next page","Previous page",e->System.out.println("click"),e->System.out.println("click"));
 
@@ -40,8 +45,11 @@ public class CharactersInfoPanel extends JPanel {
         this.add(changeCharacterPanel);
         this.add(useItemPanel);
         this.add(changeBackpackPagePanel);
+    }
 
-        setEquipmentVisibility(false);
+    public void setEquipment(EquipmentModule equipment) {
+        this.equipment = equipment;
+        refresh();
     }
 
     public void setEquipmentVisibility(boolean isVisible){
@@ -50,6 +58,13 @@ public class CharactersInfoPanel extends JPanel {
 
         useItemPanel.setVisible(!isVisible);
         changeBackpackPagePanel.setVisible(!isVisible);
+    }
+
+    public void refresh(){
+        if(equipment==null)
+            return;
+        partyInfoPanel.refresh();
+        charactersInfoPanel.refresh();
     }
 
     public class CharacterInfoPanel extends JPanel{
@@ -71,17 +86,28 @@ public class CharactersInfoPanel extends JPanel {
                 statisticLabels[i].setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-20,GUISettings.SMALL_PANEL_SIZE/10));
             }
             //TEST DATA
-            statisticLabels[0].setText("Bandit");
-            statisticLabels[1].setText("Strength: 12");
-            statisticLabels[2].setText("Endurance: 12");
-            statisticLabels[3].setText("Intelligence: 10");
-            statisticLabels[4].setText("Charisma: 10");
-            statisticLabels[5].setText("Cunning: 12");
-            statisticLabels[6].setText("Luck: 12");
+            statisticLabels[0].setText("");
+            statisticLabels[1].setText("");
+            statisticLabels[2].setText("");
+            statisticLabels[3].setText("");
+            statisticLabels[4].setText("");
+            statisticLabels[5].setText("");
+            statisticLabels[6].setText("");
 
             for(int i=0;i<7;i++){
                 this.add(statisticLabels[i]);
             }
+        }
+
+        public void refresh(){
+            PlayerCharacter player=equipment.getCurrentCharacter();
+            statisticLabels[0].setText(player.getName());
+            statisticLabels[1].setText("Strength: "+player.getStrength());
+            statisticLabels[2].setText("Endurance: "+player.getEndurance());
+            statisticLabels[3].setText("Intelligence: "+player.getIntelligence());
+            statisticLabels[4].setText("Charisma: "+player.getCharisma());
+            statisticLabels[5].setText("Cunning: "+player.getCunning());
+            statisticLabels[6].setText("Luck: "+player.getLuck());
         }
     }
 
@@ -102,14 +128,18 @@ public class CharactersInfoPanel extends JPanel {
                 statisticLabels[i].setForeground(Color.WHITE);
                 statisticLabels[i].setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-20,GUISettings.SMALL_PANEL_SIZE/10));
             }
-            //TEST DATA
             statisticLabels[0].setText("Party");
-            statisticLabels[1].setText("Health: 100/120");
-            statisticLabels[2].setText("Mana: 80/90");
+            statisticLabels[1].setText("0/0");
+            statisticLabels[2].setText("0/0");
 
             for(int i=0;i<3;i++){
                 this.add(statisticLabels[i]);
             }
+        }
+
+        public void refresh(){
+            statisticLabels[1].setText("Health: "+equipment.getParty().getCurrentHealth()+"/"+equipment.getParty().getMaxHealth());
+            statisticLabels[2].setText("Mana: "+equipment.getParty().getCurrentMana()+"/"+equipment.getParty().getMaxMana());
         }
     }
 
@@ -154,7 +184,7 @@ public class CharactersInfoPanel extends JPanel {
             useItem=new JButton("Use item");
             useItem.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-50,(int)(GUISettings.PANEL_SIZE*0.05)));
 
-            itemSlot=new ItemSlot();
+            itemSlot=new ItemSlot(null, BAG_SLOT_ICON);
 
             this.add(itemSlot);
             this.add(useItem);
