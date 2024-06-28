@@ -48,6 +48,7 @@ public class ItemManagementPanel extends JPanel {
 
     public void setEquipment(EquipmentModule equipment) {
         this.equipment = equipment;
+        equipmentPanel.setEquipment();
     }
 
     public void refresh(){
@@ -88,6 +89,15 @@ public class ItemManagementPanel extends JPanel {
             this.add(smallBackpackItemsPanel);
         }
 
+        void setEquipment(){
+            //TODO delete refactor
+            armor.setEquipment();
+            items.setEquipment();
+            spells.setEquipment();
+            smallBackpackItemsPanel.setEquipment();
+            backpackPanel.setEquipment();
+        }
+
         void refresh(){
             armor.refresh();
             items.refresh();
@@ -122,9 +132,14 @@ public class ItemManagementPanel extends JPanel {
             }
         }
 
+        void setEquipment(){
+            for(ItemSlot slot:itemSlots){
+                slot.setEquipment(equipment);
+            }
+        }
+
         void refresh(){
             ArrayList<Item> items;
-
             if(slotType == CharacterEquipment.ACTION_SLOT){
                 items=castArray(equipment.getCurrentCharacter().getEquipment().getActionItems());
             }else if(slotType == CharacterEquipment.SPELL_SLOT){
@@ -169,6 +184,10 @@ public class ItemManagementPanel extends JPanel {
             this.add(backpackItemsPanel);
         }
 
+        void setEquipment(){
+            backpackItemsPanel.setEquipment();
+        }
+
         void refresh(){
             backpackItemsPanel.refresh();
         }
@@ -194,6 +213,12 @@ public class ItemManagementPanel extends JPanel {
             }
         }
 
+        void setEquipment(){
+            for(ItemSlot slot:itemSlots){
+                slot.setEquipment(equipment);
+            }
+        }
+
         public void refresh(){
             int i=0;
             var items=equipment.getParty().getBackpack().getItems();
@@ -208,6 +233,8 @@ public class ItemManagementPanel extends JPanel {
 
     private class SmallBackpackItemsPanel extends JPanel{
 
+        private ArrayList<ItemSlot> itemSlots;
+
         public SmallBackpackItemsPanel() {
             this.setPreferredSize(new Dimension(GUISettings.ITEM_ICON_SIZE*7,GUISettings.ITEM_ICON_SIZE*2));
             FlowLayout layout=new FlowLayout(FlowLayout.CENTER);
@@ -216,10 +243,14 @@ public class ItemManagementPanel extends JPanel {
             this.setLayout(layout);
             this.setBackground(Color.BLACK);
 
+            itemSlots=new ArrayList<>();
+
             for(int i=0;i<14;i++){
-                if(i%7!=6)
-                    this.add(new ItemSlot(null, BAG_SLOT_ICON));
-                else{
+                if(i%7!=6) {
+                    ItemSlot slot=new ItemSlot(null, BAG_SLOT_ICON);
+                    itemSlots.add(slot);
+                    this.add(slot);
+                }else{
                     JButton button = new JButton(i<7?"Next":"Prev");
                     button.setForeground(Color.WHITE);
                     button.setPreferredSize(new Dimension(GUISettings.ITEM_ICON_SIZE,GUISettings.ITEM_ICON_SIZE));
@@ -227,6 +258,12 @@ public class ItemManagementPanel extends JPanel {
                     button.setBorder(BorderFactory.createLineBorder(Color.WHITE,1));
                     this.add(button);
                 }
+            }
+        }
+
+        void setEquipment(){
+            for(ItemSlot slot:itemSlots){
+                slot.setEquipment(equipment);
             }
         }
     }

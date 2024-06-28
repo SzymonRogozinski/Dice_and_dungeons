@@ -1,7 +1,11 @@
 package GUI.EquipmentGUI;
 
+import Dice.DiceAction.DiceAction;
+import Dice.DiceSide;
 import Equipment.EquipmentModule;
+import Equipment.Items.*;
 import GUI.GUISettings;
+import Game.Tags;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -22,16 +26,33 @@ public class ItemInfoPanel extends JPanel {
         this.setBorder(border);
         this.setBackground(Color.BLACK);
 
+        JPanel emptyPanel=new JPanel();
+        emptyPanel.setBackground(Color.BLACK);
+
         diceItemInfoPanel=new DiceItemInfoPanel();
         armorInfoPanel=new ArmorInfoPanel();
         diceLessItemInfoPanel=new DiceLessItemInfoPanel();
 
+        this.add(emptyPanel,"Empty");
         this.add(diceItemInfoPanel,"Dice");
         this.add(armorInfoPanel,"Armor");
         this.add(diceLessItemInfoPanel,"Diceless");
+    }
 
-        //Test
-        layout.show(this,"Dice");
+    public void refresh(){
+        Item item = equipment.getPointedItem();
+        if(item==null){
+            layout.show(this,"Empty");
+        }else if(item instanceof ArmorItem){
+            layout.show(this,"Armor");
+            armorInfoPanel.refresh();
+        }else if(item instanceof ActionItem || item instanceof SpellItem){
+            layout.show(this,"Dice");
+            diceItemInfoPanel.refresh();
+        }else if (item instanceof UsableItem){
+            layout.show(this,"Diceless");
+            diceLessItemInfoPanel.refresh();
+        }
     }
 
     private class DiceItemInfoPanel extends JPanel{
@@ -51,11 +72,19 @@ public class ItemInfoPanel extends JPanel {
 
             diceSidesPanel=new DiceSidesPanel();
 
-            //TEST DATA
-            nameLabel.setText("Sword");
-
             this.add(nameLabel);
             this.add(diceSidesPanel);
+        }
+
+        public void refresh(){
+            //TODO not always without dice
+            if(equipment.getPointedItem() instanceof ActionItem aItem) {
+                nameLabel.setText(aItem.name);
+                diceSidesPanel.setDiceSides(aItem.getAction().getDice().getSides());
+            } else if (equipment.getPointedItem() instanceof SpellItem sItem) {
+                nameLabel.setText(sItem.name);
+                diceSidesPanel.setDiceSides(sItem.getAction().getDice().getSides());
+            }
         }
     }
 
@@ -66,6 +95,7 @@ public class ItemInfoPanel extends JPanel {
     private class ArmorInfoPanel extends JPanel{
 
         private JLabel nameLabel, requirementsLabel, bonusLabel;
+        private final static String[] statsName=new String[]{"Strength","Endurance","Intelligence","Charisma","Cunning","Luck"};
 
         public ArmorInfoPanel() {
             this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
@@ -85,20 +115,51 @@ public class ItemInfoPanel extends JPanel {
             bonusLabel.setForeground(Color.WHITE);
             bonusLabel.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE-10,GUISettings.SMALL_PANEL_SIZE/7));
 
-            //TEST DATA
-            nameLabel.setText("Helmet");
-            requirementsLabel.setText("Requirements: Warrior");
-            bonusLabel.setText("Statistics: Strength 6, Endurance 4, Charisma 3");
-
             this.add(nameLabel);
             this.add(requirementsLabel);
             this.add(bonusLabel);
+        }
+
+        public void refresh(){
+            ArmorItem item=(ArmorItem) equipment.getPointedItem();
+
+            StringBuilder statsBuilder=new StringBuilder("Statistics:");
+            StringBuilder requirementsBuilder=new StringBuilder("Requirements:");
+
+            int[] stats=item.getStats();
+
+            for(int i=0;i<stats.length;i++) {
+                if (stats[i] != 0){
+                    statsBuilder.append(" ").append(statsName[i]).append(" ").append(stats[i]).append(",");
+                }
+            }
+            if(statsBuilder.toString().equals("Statistics:")){
+                statsBuilder.append(" None");
+            }else{
+                statsBuilder.deleteCharAt(statsBuilder.toString().length()-1);
+            }
+
+            Tags[] tags=item.tags;
+            for(Tags tag:tags) {
+                String s=tag.name().toLowerCase();
+                s=s.substring(0,1).toUpperCase()+s.substring(1);
+                requirementsBuilder.append(" ").append(s).append(",");
+            }
+            if(requirementsBuilder.toString().equals("Requirements:")){
+                requirementsBuilder.append(" None");
+            }else{
+                requirementsBuilder.deleteCharAt(requirementsBuilder.toString().length()-1);
+            }
+
+            nameLabel.setText(item.name);
+            requirementsLabel.setText(statsBuilder.toString());
+            bonusLabel.setText(requirementsBuilder.toString());
         }
     }
 
     private class DiceLessItemInfoPanel extends JPanel{
 
-        private JLabel nameLabel, effectLabel;
+        private JLabel nameLabel, effectLabel,quantityLabel;
 
         public DiceLessItemInfoPanel() {
             this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
@@ -114,12 +175,34 @@ public class ItemInfoPanel extends JPanel {
             effectLabel.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE-20,GUISettings.SMALL_PANEL_SIZE/7));
             effectLabel.setForeground(Color.WHITE);
 
-            //TEST DATA
-            nameLabel.setText("Rock");
-            effectLabel.setText("Effects: Stun");
+            quantityLabel = new JLabel("",SwingConstants.LEFT);
+            quantityLabel.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE-20,GUISettings.SMALL_PANEL_SIZE/7));
+            quantityLabel.setForeground(Color.WHITE);
 
             this.add(nameLabel);
             this.add(effectLabel);
+            this.add(quantityLabel);
+        }
+
+        void refresh(){
+            //TODO not always usable item
+            UsableItem item = (UsableItem) equipment.getPointedItem();
+            StringBuilder builder=new StringBuilder("Effects:");
+
+            var x = item.getAction().getActionFactories();
+
+            for(DiceAction action: x) {
+                builder.append(" ").append(action.getIdentification()).append(" ").append(action.getValue()).append(",");
+            }
+            if(builder.toString().equals("Effects:")){
+                builder.append(" None");
+            }else{
+                builder.deleteCharAt(builder.toString().length()-1);
+            }
+
+            nameLabel.setText(item.name);
+            effectLabel.setText(builder.toString());
+            quantityLabel.setText("Uses: "+item.getNumberOfItems());
         }
     }
 
@@ -136,14 +219,19 @@ public class ItemInfoPanel extends JPanel {
             int diceSize= Math.min((GUISettings.PANEL_SIZE-10)/6,GUISettings.SMALL_PANEL_SIZE/2);
             this.diceSides = new JLabel[6];
 
-            for(JLabel side:diceSides){
-                //TEST DATA
-                side=new JLabel(resizeIcon("DiceIcons/D4.png",diceSize));
-                side.setPreferredSize(new Dimension(diceSize,diceSize));
-                side.setBorder(BorderFactory.createLineBorder(Color.WHITE,1));
-                this.add(side);
+            for(int i=0;i<6;i++){
+                diceSides[i]=new JLabel();
+                diceSides[i].setPreferredSize(new Dimension(diceSize,diceSize));
+                diceSides[i].setBorder(BorderFactory.createLineBorder(Color.WHITE,1));
+                this.add(diceSides[i]);
             }
 
+        }
+
+        void setDiceSides(DiceSide[] sides){
+            for(int i=0;i<6;i++){
+                diceSides[i].setIcon(sides[i].getIcon());
+            }
         }
 
         private static ImageIcon resizeIcon(String path,int size){

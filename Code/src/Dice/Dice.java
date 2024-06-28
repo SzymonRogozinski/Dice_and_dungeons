@@ -14,4 +14,8 @@ public class Dice {
         int rollValue= Dice.globalRandom.nextInt(6);
         return sides[rollValue];
     }
+
+    public DiceSide[] getSides() {
+        return sides;
+    }
 }

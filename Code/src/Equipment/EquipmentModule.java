@@ -1,5 +1,6 @@
 package Equipment;
 
+import Equipment.Items.Item;
 import GUI.EquipmentGUI.EquipmentGUIState;
 import GUI.EquipmentGUI.EquipmentView;
 import Character.*;
@@ -8,6 +9,8 @@ public class EquipmentModule {
     private EquipmentGUIState state;
     private PlayerParty party;
     private int currentCharacter=0;
+
+    private Item pointedItem;
 
     public EquipmentModule(EquipmentView view, EquipmentGUIState state, PlayerParty party) {
         this.state=state;
@@ -21,6 +24,15 @@ public class EquipmentModule {
 
     public PlayerCharacter getCurrentCharacter(){
         return party.getCharacters().get(currentCharacter);
+    }
+
+    public void setPointedItem(Item item){
+        pointedItem=item;
+        state.refresh();
+    }
+
+    public Item getPointedItem() {
+        return pointedItem;
     }
 
     public void changeCharacter(boolean forward){

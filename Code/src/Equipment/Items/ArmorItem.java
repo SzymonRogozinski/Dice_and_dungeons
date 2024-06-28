@@ -32,6 +32,10 @@ public class ArmorItem extends Item implements EquipableItem{
         character.recalculateStats();
     }
 
+    public int[] getStats(){
+        return new int[]{strength,endurance,intelligence,charisma,cunning,luck};
+    }
+
     public int getBodyPart() {
         return bodyPart;
     }

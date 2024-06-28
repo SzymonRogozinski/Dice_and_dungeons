@@ -1,14 +1,8 @@
-import Dice.DiceAction.AttackBonusAction;
-import Dice.DiceAction.DefenseBonusAction;
-import Dice.DiceAction.DiceAction;
-import Dice.DiceAction.StunAction;
+import Dice.DiceAction.*;
 import Dice.DiceFactory;
 import Equipment.CharacterEquipment;
 import Equipment.EquipmentModule;
-import Equipment.Items.ActionItem;
-import Equipment.Items.Item;
-import Equipment.Items.SpellItem;
-import Equipment.Items.UsableItem;
+import Equipment.Items.*;
 import Fight.ActionTarget;
 import Fight.GameActions.ItemAction;
 import Fight.GameActions.SpellAction;
@@ -43,8 +37,10 @@ public class Test {
 
         UsableItem usItem1 = new UsableItem(new UsableItemAction(ActionTarget.ENEMY_CHARACTER,new ArrayList<>(List.of(new DiceAction[]{new StunAction()})),new Tags[]{Tags.NO_ROLL,Tags.FREE_ACTION}),1,new Tags[]{},new ImageIcon("ItemsIcons/bag-pl.png"),"Rock");
         UsableItem usItem2 = new UsableItem(new UsableItemAction(ActionTarget.PLAYER_CHARACTER,new ArrayList<>(List.of(new DiceAction[]{new AttackBonusAction(3,true)})),new Tags[]{Tags.NO_ROLL,Tags.FREE_ACTION}),3,new Tags[]{},new ImageIcon("ItemsIcons/bag-pl.png"),"Power up");
-        UsableItem usItem3 = new UsableItem(new UsableItemAction(ActionTarget.PLAYER_CHARACTER,new ArrayList<>(List.of(new DiceAction[]{new DefenseBonusAction(2,true)})),new Tags[]{Tags.NO_ROLL,Tags.FREE_ACTION}),3,new Tags[]{},new ImageIcon("ItemsIcons/bag-pl.png"),"Magic powder");
+        UsableItem usItem3 = new UsableItem(new UsableItemAction(ActionTarget.PLAYER_CHARACTER,new ArrayList<>(List.of(new DiceAction[]{new MagicBonusAction(2,true)})),new Tags[]{Tags.NO_ROLL,Tags.FREE_ACTION}),3,new Tags[]{},new ImageIcon("ItemsIcons/bag-pl.png"),"Magic powder");
         UsableItem usItem4 = new UsableItem(new UsableItemAction(ActionTarget.PLAYER_CHARACTER,new ArrayList<>(List.of(new DiceAction[]{new DefenseBonusAction(2,true)})),new Tags[]{Tags.NO_ROLL,Tags.FREE_ACTION}),3,new Tags[]{},new ImageIcon("ItemsIcons/bag-pl.png"),"Defense potion");
+
+        ArmorItem arItem1=new ArmorItem(5,0,0,2,2,1,CharacterEquipment.HEAD_ARMOR,new Tags[]{},new ImageIcon("ItemsIcons/helm-pl.png"),"Gold helmet");
 
         PlayerCharacter player=new PlayerCharacter(24,12,12,12,12,12,"Warrior",new ImageIcon("CharacterTexture/player.png"));
         PlayerCharacter player2=new PlayerCharacter(12,18,12,12,12,12,"Bandit",new ImageIcon("CharacterTexture/player.png"));
@@ -58,6 +54,7 @@ public class Test {
         player.getEquipment().equip(item2,1, CharacterEquipment.ACTION_SLOT);
         player.getEquipment().equip(item3,2, CharacterEquipment.ACTION_SLOT);
         player.getEquipment().equip(spell1,0, CharacterEquipment.SPELL_SLOT);
+        player.getEquipment().equip(arItem1,0,CharacterEquipment.ARMOR_SLOT);
 
         player2.getEquipment().equip(item5,0, CharacterEquipment.ACTION_SLOT);
         player2.getEquipment().equip(item6,1, CharacterEquipment.ACTION_SLOT);

@@ -49,6 +49,7 @@ public class CharactersInfoPanel extends JPanel {
 
     public void setEquipment(EquipmentModule equipment) {
         this.equipment = equipment;
+        useItemPanel.setEquipment();
         refresh();
     }
 
@@ -188,6 +189,10 @@ public class CharactersInfoPanel extends JPanel {
 
             this.add(itemSlot);
             this.add(useItem);
+        }
+
+        void setEquipment(){
+            itemSlot.setEquipment(equipment);
         }
     }
 

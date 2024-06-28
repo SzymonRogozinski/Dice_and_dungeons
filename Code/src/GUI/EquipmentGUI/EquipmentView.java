@@ -10,6 +10,8 @@ public class EquipmentView extends MainPanel {
     private CharactersInfoPanel charactersInfoPanel;
     private ItemManagementPanel itemManagementPanel;
 
+    private boolean isEquipmentSet;
+
     public EquipmentView() {
         super();
         switchPanel=new SwitchPanel(getBorder());
@@ -21,11 +23,14 @@ public class EquipmentView extends MainPanel {
     }
 
     public void setEquipmentModule(EquipmentModule module){
+        if(isEquipmentSet)
+            return;
         switchPanel.setEquipment(module);
         itemInfoPanel.setEquipment(module);
         charactersInfoPanel.setEquipment(module);
         itemManagementPanel.setEquipment(module);
 
+        isEquipmentSet=true;
         refresh();
     }
 
@@ -60,8 +65,11 @@ public class EquipmentView extends MainPanel {
     }
 
     public void refresh(){
+        if(!isEquipmentSet)
+            return;
         charactersInfoPanel.refresh();
         itemManagementPanel.refresh();
+        itemInfoPanel.refresh();
         //Refresh
         this.revalidate();
         this.repaint();
