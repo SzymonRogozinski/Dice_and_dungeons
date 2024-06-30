@@ -30,7 +30,7 @@ public class FightModule {
     private GameAction action;
     private String combatLogInfo;
 
-    public FightModule(FightView panel, FightGUIState state, PlayerParty party, ArrayList<EnemyCharacter> enemies) {
+    public FightModule(FightGUIState state, PlayerParty party, ArrayList<EnemyCharacter> enemies) {
         this.combatLogInfo="";
         this.noRoll=false;
         this.playerTurn=true;
@@ -39,7 +39,6 @@ public class FightModule {
         this.master = new DiceMaster();
         this.enemies=enemies;
         this.party=party;
-        panel.setFightModule(this);
     }
 
     public ActionTarget getTargetType() {

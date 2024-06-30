@@ -16,7 +16,6 @@ public class FightGUIState {
     public FightGUIState(FightView panel){
         currentState=PLAYER_CHOOSING_ACTION;
         this.panel=panel;
-        panel.setState(currentState,currentState);
     }
 
     public void initState(){
@@ -42,8 +41,6 @@ public class FightGUIState {
         panel.getStatusPanel().hideStatusInfo();
     }
 
-
-
     public void refreshCombatLog(){
         panel.getStatusPanel().refreshCombatLog();
     }
@@ -54,5 +51,10 @@ public class FightGUIState {
 
     public void hideNextMove(){
         panel.getStatusPanel().hideNextMove();
+    }
+
+    public void refresh(){
+        panel.refresh();
+        panel.setState(currentState,currentState);
     }
 }

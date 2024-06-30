@@ -12,10 +12,9 @@ public class EquipmentModule {
 
     private Item pointedItem;
 
-    public EquipmentModule(EquipmentView view, EquipmentGUIState state, PlayerParty party) {
+    public EquipmentModule(EquipmentGUIState state, PlayerParty party) {
         this.state=state;
         this.party = party;
-        view.setEquipmentModule(this);
     }
 
     public PlayerParty getParty() {

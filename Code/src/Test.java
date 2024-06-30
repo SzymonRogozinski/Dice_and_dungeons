@@ -11,6 +11,7 @@ import GUI.EquipmentGUI.EquipmentGUIState;
 import GUI.EquipmentGUI.EquipmentView;
 import GUI.MainFrame;
 import Character.*;
+import Game.GameCollection;
 import Game.Tags;
 
 import javax.swing.*;
@@ -65,7 +66,10 @@ public class Test {
 
         view = new EquipmentView();
         EquipmentGUIState state=new EquipmentGUIState(view);
-        EquipmentModule module = new EquipmentModule(view,state,party);
+        EquipmentModule module = new EquipmentModule(state,party);
+
+        GameCollection.setEquipment(module);
+        state.refresh();
 
         mainFrame.add(view);
         mainFrame.pack();

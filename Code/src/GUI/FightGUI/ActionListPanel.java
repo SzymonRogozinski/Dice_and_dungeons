@@ -9,6 +9,7 @@ import Fight.GameActions.ItemAction;
 import Fight.GameActions.SpellAction;
 import Fight.GameActions.UsableItemAction;
 import GUI.GUISettings;
+import Game.GameCollection;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -23,7 +24,6 @@ public class ActionListPanel extends JPanel {
     private final static int buttonHeight=GUISettings.SMALL_PANEL_SIZE/3;
     private final static int buttonHGap =GUISettings.PANEL_SIZE/5-buttonWidth*2/3;
     private final static int buttonVGap =(GUISettings.SMALL_PANEL_SIZE-buttonHeight)/2;
-    private FightModule fight;
     private CardLayout layout;
     private CardPanel startPanel, fightPanel,magicPanel,itemPanel;
 
@@ -59,14 +59,10 @@ public class ActionListPanel extends JPanel {
         this.add("Magic",magicPanel);
     }
 
-    public void setFight(FightModule fight){
-        this.fight=fight;
-    }
-
     public void loadAction(){
-        if(!(fight.getCharacter() instanceof PlayerCharacter))
+        if(!(GameCollection.getFight().getCharacter() instanceof PlayerCharacter))
             throw new RuntimeException("Illegal state, enemy and player character were mixed!");
-        PlayerCharacter character=(PlayerCharacter) fight.getCharacter();
+        PlayerCharacter character=(PlayerCharacter) GameCollection.getFight().getCharacter();
         //items
         ArrayList<ActionItem> items = character.getEquipment().getNotNullActionItems();
         ArrayList<JButton> buttons=new ArrayList<>();
@@ -74,7 +70,7 @@ public class ActionListPanel extends JPanel {
             JButton button=new JButton(item.name);
             button.setSize(buttonWidth,buttonHeight);
             button.addActionListener(e-> {
-                fight.choosedAction(item.getAction());
+                GameCollection.getFight().choosedAction(item.getAction());
                 changePage("Start");
             });
             buttons.add(button);
@@ -90,7 +86,7 @@ public class ActionListPanel extends JPanel {
             JButton button=new JButton(item.name);
             button.setSize(buttonWidth,buttonHeight);
             button.addActionListener(e-> {
-                fight.choosedAction(item.getAction());
+                GameCollection.getFight().choosedAction(item.getAction());
                 character.getParty().getBackpack().removeFromBackpack(item);
                 changePage("Start");
             });
@@ -125,12 +121,12 @@ public class ActionListPanel extends JPanel {
 
             button.setSize(buttonWidth,buttonHeight);
             button.addActionListener(e-> {
-                if(fight.getParty().getCurrentMana()<spell.getAction().getManaCost()){
+                if(GameCollection.getFight().getParty().getCurrentMana()<spell.getAction().getManaCost()){
                     System.out.println("You don't have enough mana!");
                 }
                 else {
-                    fight.getParty().spendMana(spell.getAction().getManaCost());
-                    fight.choosedAction(spell.getAction());
+                    GameCollection.getFight().getParty().spendMana(spell.getAction().getManaCost());
+                    GameCollection.getFight().choosedAction(spell.getAction());
                     changePage("Start");
                 }
             });

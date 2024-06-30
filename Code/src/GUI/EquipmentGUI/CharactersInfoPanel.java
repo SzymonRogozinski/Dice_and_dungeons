@@ -3,6 +3,7 @@ package GUI.EquipmentGUI;
 import Equipment.EquipmentModule;
 import GUI.GUISettings;
 import Character.PlayerCharacter;
+import Game.GameCollection;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -19,7 +20,6 @@ public class CharactersInfoPanel extends JPanel {
     private ChangePanel changeCharacterPanel;
     private UseItemPanel useItemPanel;
     private ChangePanel changeBackpackPagePanel;
-    private EquipmentModule equipment;
 
     public CharactersInfoPanel(Border border){
         this.setSize(GUISettings.SMALL_PANEL_SIZE,GUISettings.PANEL_SIZE);
@@ -35,9 +35,11 @@ public class CharactersInfoPanel extends JPanel {
 
         charactersInfoPanel=new CharacterInfoPanel();
         partyInfoPanel=new PartyInfoPanel();
-        changeCharacterPanel=new ChangePanel("Next character","Previous character",e->equipment.changeCharacter(true),e->equipment.changeCharacter(false));
+        changeCharacterPanel=new ChangePanel("Next character","Previous character",e->GameCollection.getEquipment().changeCharacter(true),e->GameCollection.getEquipment().changeCharacter(false));
         useItemPanel=new UseItemPanel();
         changeBackpackPagePanel=new ChangePanel("Next page","Previous page",e->System.out.println("click"),e->System.out.println("click"));
+
+        setEquipmentVisibility(true);
 
         this.add(headline);
         this.add(charactersInfoPanel);
@@ -45,12 +47,6 @@ public class CharactersInfoPanel extends JPanel {
         this.add(changeCharacterPanel);
         this.add(useItemPanel);
         this.add(changeBackpackPagePanel);
-    }
-
-    public void setEquipment(EquipmentModule equipment) {
-        this.equipment = equipment;
-        useItemPanel.setEquipment();
-        refresh();
     }
 
     public void setEquipmentVisibility(boolean isVisible){
@@ -62,8 +58,6 @@ public class CharactersInfoPanel extends JPanel {
     }
 
     public void refresh(){
-        if(equipment==null)
-            return;
         partyInfoPanel.refresh();
         charactersInfoPanel.refresh();
     }
@@ -101,7 +95,7 @@ public class CharactersInfoPanel extends JPanel {
         }
 
         public void refresh(){
-            PlayerCharacter player=equipment.getCurrentCharacter();
+            PlayerCharacter player= GameCollection.getEquipment().getCurrentCharacter();
             statisticLabels[0].setText(player.getName());
             statisticLabels[1].setText("Strength: "+player.getStrength());
             statisticLabels[2].setText("Endurance: "+player.getEndurance());
@@ -139,8 +133,8 @@ public class CharactersInfoPanel extends JPanel {
         }
 
         public void refresh(){
-            statisticLabels[1].setText("Health: "+equipment.getParty().getCurrentHealth()+"/"+equipment.getParty().getMaxHealth());
-            statisticLabels[2].setText("Mana: "+equipment.getParty().getCurrentMana()+"/"+equipment.getParty().getMaxMana());
+            statisticLabels[1].setText("Health: "+GameCollection.getEquipment().getParty().getCurrentHealth()+"/"+GameCollection.getEquipment().getParty().getMaxHealth());
+            statisticLabels[2].setText("Mana: "+GameCollection.getEquipment().getParty().getCurrentMana()+"/"+GameCollection.getEquipment().getParty().getMaxMana());
         }
     }
 
@@ -191,9 +185,6 @@ public class CharactersInfoPanel extends JPanel {
             this.add(useItem);
         }
 
-        void setEquipment(){
-            itemSlot.setEquipment(equipment);
-        }
     }
 
 }

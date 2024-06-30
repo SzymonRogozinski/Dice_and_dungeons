@@ -25,11 +25,9 @@ public class FightView extends MainPanel {
         this.repaint();
     }
 
-    public void setFightModule(FightModule fightModule){
-        rollPanel.setFight(fightModule);
-        fightPanel.setFight(fightModule);
-        actionPanel.setFight(fightModule);
-        statusPanel.setFight(fightModule);
+    public void refresh(){
+        statusPanel.refresh();
+        fightPanel.refresh();
     }
 
     public ActionPanel getActionPanel(){ return actionPanel;}

@@ -9,7 +9,6 @@ public class EquipmentGUIState {
     public EquipmentGUIState(EquipmentView panel) {
         currentState=EQUIPMENT;
         this.panel = panel;
-        panel.setState(currentState,currentState);
     }
 
     public void setState(int newState){

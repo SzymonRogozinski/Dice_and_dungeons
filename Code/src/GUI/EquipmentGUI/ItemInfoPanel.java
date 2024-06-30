@@ -5,6 +5,7 @@ import Dice.DiceSide;
 import Equipment.EquipmentModule;
 import Equipment.Items.*;
 import GUI.GUISettings;
+import Game.GameCollection;
 import Game.Tags;
 
 import javax.swing.*;
@@ -17,7 +18,6 @@ public class ItemInfoPanel extends JPanel {
     private DiceItemInfoPanel diceItemInfoPanel;
     private ArmorInfoPanel armorInfoPanel;
     private DiceLessItemInfoPanel diceLessItemInfoPanel;
-    private EquipmentModule equipment;
 
     public ItemInfoPanel(Border border){
         this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
@@ -40,7 +40,7 @@ public class ItemInfoPanel extends JPanel {
     }
 
     public void refresh(){
-        Item item = equipment.getPointedItem();
+        Item item = GameCollection.getEquipment().getPointedItem();
         if(item==null){
             layout.show(this,"Empty");
         }else if(item instanceof ArmorItem){
@@ -78,18 +78,14 @@ public class ItemInfoPanel extends JPanel {
 
         public void refresh(){
             //TODO not always without dice
-            if(equipment.getPointedItem() instanceof ActionItem aItem) {
+            if(GameCollection.getEquipment().getPointedItem() instanceof ActionItem aItem) {
                 nameLabel.setText(aItem.name);
                 diceSidesPanel.setDiceSides(aItem.getAction().getDice().getSides());
-            } else if (equipment.getPointedItem() instanceof SpellItem sItem) {
+            } else if (GameCollection.getEquipment().getPointedItem() instanceof SpellItem sItem) {
                 nameLabel.setText(sItem.name);
                 diceSidesPanel.setDiceSides(sItem.getAction().getDice().getSides());
             }
         }
-    }
-
-    public void setEquipment(EquipmentModule equipment) {
-        this.equipment = equipment;
     }
 
     private class ArmorInfoPanel extends JPanel{
@@ -121,7 +117,7 @@ public class ItemInfoPanel extends JPanel {
         }
 
         public void refresh(){
-            ArmorItem item=(ArmorItem) equipment.getPointedItem();
+            ArmorItem item=(ArmorItem) GameCollection.getEquipment().getPointedItem();
 
             StringBuilder statsBuilder=new StringBuilder("Statistics:");
             StringBuilder requirementsBuilder=new StringBuilder("Requirements:");
@@ -186,7 +182,7 @@ public class ItemInfoPanel extends JPanel {
 
         void refresh(){
             //TODO not always usable item
-            UsableItem item = (UsableItem) equipment.getPointedItem();
+            UsableItem item = (UsableItem) GameCollection.getEquipment().getPointedItem();
             StringBuilder builder=new StringBuilder("Effects:");
 
             var x = item.getAction().getActionFactories();

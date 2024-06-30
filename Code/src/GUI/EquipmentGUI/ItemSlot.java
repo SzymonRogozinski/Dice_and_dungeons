@@ -3,6 +3,7 @@ package GUI.EquipmentGUI;
 import Equipment.EquipmentModule;
 import Equipment.Items.Item;
 import GUI.GUISettings;
+import Game.GameCollection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,21 +45,11 @@ public class ItemSlot extends JPanel {
         this.item=item;
         label.setIcon(item==null?emptySlotIcon:item.getIcon());
     }
-
-    public void setEquipment(EquipmentModule equipment){
-        mouseListener.setEquipmentModule(equipment);
-    }
-
     private class ItemSlotMouseListener implements MouseListener{
 
-        private EquipmentModule equipmentModule;
 
 
         public ItemSlotMouseListener() {}
-
-        void setEquipmentModule(EquipmentModule equipmentModule){
-            this.equipmentModule=equipmentModule;
-        }
 
         @Override
         public void mouseClicked(MouseEvent e) {}
@@ -70,14 +61,11 @@ public class ItemSlot extends JPanel {
         public void mouseReleased(MouseEvent e) {}
 
         @Override
-        public void mouseEntered(MouseEvent e) {
-
-            equipmentModule.setPointedItem(item);
-        }
+        public void mouseEntered(MouseEvent e) {GameCollection.getEquipment().setPointedItem(item);}
 
         @Override
         public void mouseExited(MouseEvent e) {
-            equipmentModule.setPointedItem(null);
+            GameCollection.getEquipment().setPointedItem(null);
         }
     }
 

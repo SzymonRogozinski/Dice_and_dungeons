@@ -2,6 +2,7 @@ package GUI.EquipmentGUI;
 
 import Equipment.EquipmentModule;
 import GUI.MainPanel;
+import Game.GameCollection;
 
 public class EquipmentView extends MainPanel {
 
@@ -9,8 +10,6 @@ public class EquipmentView extends MainPanel {
     private ItemInfoPanel itemInfoPanel;
     private CharactersInfoPanel charactersInfoPanel;
     private ItemManagementPanel itemManagementPanel;
-
-    private boolean isEquipmentSet;
 
     public EquipmentView() {
         super();
@@ -20,18 +19,6 @@ public class EquipmentView extends MainPanel {
         charactersInfoPanel=new CharactersInfoPanel(getBorder());
 
         setPanelsContent(itemManagementPanel,switchPanel,itemInfoPanel,charactersInfoPanel);
-    }
-
-    public void setEquipmentModule(EquipmentModule module){
-        if(isEquipmentSet)
-            return;
-        switchPanel.setEquipment(module);
-        itemInfoPanel.setEquipment(module);
-        charactersInfoPanel.setEquipment(module);
-        itemManagementPanel.setEquipment(module);
-
-        isEquipmentSet=true;
-        refresh();
     }
 
     public SwitchPanel getSwitchPanel() {
@@ -65,7 +52,7 @@ public class EquipmentView extends MainPanel {
     }
 
     public void refresh(){
-        if(!isEquipmentSet)
+        if(GameCollection.getEquipment()==null)
             return;
         charactersInfoPanel.refresh();
         itemManagementPanel.refresh();

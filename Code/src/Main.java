@@ -19,6 +19,7 @@ import Fight.GameActions.UsableItemAction;
 import GUI.FightGUI.FightGUIState;
 import GUI.MainFrame;
 import GUI.FightGUI.FightView;
+import Game.GameCollection;
 import Game.Tags;
 
 import javax.swing.*;
@@ -81,7 +82,10 @@ public class Main {
         EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12,12,"Skeleton1",new ImageIcon("CharacterTexture/skeleton.png"),ai1);
         EnemyCharacter enemy2 = new EnemyCharacter(12,12,12,12,12,12,"Skeleton2",new ImageIcon("CharacterTexture/skeleton.png"),ai2);
 
-        FightModule fight = new FightModule(fightView,state,party,new ArrayList<>(List.of(new EnemyCharacter[]{enemy,enemy2})));
+        FightModule fight = new FightModule(state,party,new ArrayList<>(List.of(new EnemyCharacter[]{enemy,enemy2})));
+        GameCollection.setFight(fight);
+        state.refresh();
+
         fight.initFight();
 
         mainFrame.add(fightView);
