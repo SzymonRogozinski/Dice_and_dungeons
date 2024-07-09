@@ -1,19 +1,16 @@
 package Character;
 
 import Equipment.CharacterEquipment;
-import Fight.GameActions.ItemAction;
-import Fight.GameActions.SpellAction;
-import Fight.GameActions.UsableItemAction;
+import Game.Tags;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class PlayerCharacter extends GameCharacter{
     private PlayerParty party;
     private final CharacterEquipment equipment;
 
-    public PlayerCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image) {
-        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image);
+    public PlayerCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image, Tags[] tags) {
+        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image,tags);
         equipment=new CharacterEquipment(this);
     }
 

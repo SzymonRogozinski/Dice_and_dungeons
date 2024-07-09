@@ -22,6 +22,7 @@ public class StatusPanel extends JPanel {
         this.setSize(GUISettings.SMALL_PANEL_SIZE,GUISettings.PANEL_SIZE);
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setBackground(Color.BLACK);
+        this.setBorder(border);
 
         //Set health
         JLabel health=new JLabel("Party health");

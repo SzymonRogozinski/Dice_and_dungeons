@@ -16,11 +16,14 @@ public class ItemSlot extends JPanel {
     private JLabel label;
     private ImageIcon emptySlotIcon;
     private ItemSlotMouseListener mouseListener;
+    private final int slotNumber,slotType;
 
-    public ItemSlot(Item item, ImageIcon emptySlotIcon) {
+    public ItemSlot(Item item, ImageIcon emptySlotIcon,int slotNumber,int slotType) {
         this.item=item;
         this.emptySlotIcon=emptySlotIcon;
-        mouseListener=new ItemSlotMouseListener();
+        this.slotNumber=slotNumber;
+        this.slotType=slotType;
+        mouseListener=new ItemSlotMouseListener(this);
 
         this.setPreferredSize(new Dimension(GUISettings.ITEM_ICON_SIZE,GUISettings.ITEM_ICON_SIZE));
         this.setBackground(Color.BLACK);
@@ -38,8 +41,20 @@ public class ItemSlot extends JPanel {
 
         this.add(label);
         this.addMouseListener(mouseListener);
+        this.addMouseMotionListener(EquipmentView.getMouseMotionAdp());
     }
 
+    public int getSlotNumber() {
+        return slotNumber;
+    }
+
+    public int getSlotType() {
+        return slotType;
+    }
+
+    public Item getItem() {
+        return item;
+    }
 
     public void setItem(Item item){
         this.item=item;
@@ -47,21 +62,29 @@ public class ItemSlot extends JPanel {
     }
     private class ItemSlotMouseListener implements MouseListener{
 
+        private final ItemSlot reference;
 
-
-        public ItemSlotMouseListener() {}
+        public ItemSlotMouseListener(ItemSlot reference) { this.reference=reference;}
 
         @Override
         public void mouseClicked(MouseEvent e) {}
 
         @Override
-        public void mousePressed(MouseEvent e) {}
+        public void mousePressed(MouseEvent e) {
+            //Select item
+            System.out.println("Clicked "+item.name);
+            GameCollection.getEquipment().setClickedItem(reference);
+        }
 
         @Override
-        public void mouseReleased(MouseEvent e) {}
+        public void mouseReleased(MouseEvent e) {
+            //Send info
+            System.out.println("Drop on "+item.name);
+            GameCollection.getEquipment().equipItem();
+        }
 
         @Override
-        public void mouseEntered(MouseEvent e) {GameCollection.getEquipment().setPointedItem(item);}
+        public void mouseEntered(MouseEvent e) {GameCollection.getEquipment().setPointedItem(reference);}
 
         @Override
         public void mouseExited(MouseEvent e) {

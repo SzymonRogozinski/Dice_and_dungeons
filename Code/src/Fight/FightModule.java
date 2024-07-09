@@ -131,6 +131,10 @@ public class FightModule {
         state.hideNextMove();
     }
 
+    public void clear(){
+        //TODO
+    }
+
     private void startAction(){
         boolean skip=false;
         try {

@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public abstract class MainPanel extends JPanel {
+public abstract class MainPanel extends JLayeredPane {
 
     private final JPanel smallPanel,bigPanel,bottomPanel,sidePanel;
 
@@ -44,10 +44,10 @@ public abstract class MainPanel extends JPanel {
         bottomPanel.setBorder(border);
 
         //Adding component to panel
-        this.add(bigPanel);
-        this.add(smallPanel);
-        this.add(sidePanel);
-        this.add(bottomPanel);
+        this.add(bigPanel,JLayeredPane.DEFAULT_LAYER);
+        this.add(smallPanel,JLayeredPane.DEFAULT_LAYER);
+        this.add(sidePanel,JLayeredPane.DEFAULT_LAYER);
+        this.add(bottomPanel,JLayeredPane.DEFAULT_LAYER);
 
         //Refresh
         this.revalidate();

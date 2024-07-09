@@ -1,10 +1,7 @@
 package Equipment;
 
 import Character.PlayerCharacter;
-import Equipment.Items.ActionItem;
-import Equipment.Items.ArmorItem;
-import Equipment.Items.Item;
-import Equipment.Items.SpellItem;
+import Equipment.Items.*;
 import Fight.GameActions.ItemAction;
 import Fight.GameActions.SpellAction;
 import Fight.GameActions.UsableItemAction;
@@ -13,13 +10,15 @@ import java.util.ArrayList;
 
 public class CharacterEquipment {
     public final static int HEAD_ARMOR = 0;
-    public final static int CHEST_ARMOR = 1;
-    public final static int ARM_ARMOR = 2;
+    public final static int ARM_ARMOR = 1;
+    public final static int CHEST_ARMOR = 2;
     public final static int LEG_ARMOR = 3;
 
     public final static int ACTION_SLOT=10;
     public final static int SPELL_SLOT=11;
     public final static int ARMOR_SLOT=12;
+    public final static int BAG_SLOT=13;
+    public final static int USE_SLOT=14;
 
     private ActionItem[] actionItems;
     private SpellItem[] spellItems;
@@ -62,14 +61,14 @@ public class CharacterEquipment {
         return spellItemList;
     }
 
-    public void equip(Item item, int slot, int slotType){
-        //TODO tags check
+    public boolean equip(Item item, int slot, int slotType){
+        if(!(item instanceof EquipableItem eItem) || !eItem.canEquip(player))
+            return false;
 
         if(item instanceof ActionItem aItem && slotType==ACTION_SLOT){
             if(actionItems[slot] != null){
                 ActionItem removeItem = actionItems[slot];
                 removeItem.deEquip(player);
-                threwToBackpack(removeItem);
                 actionItems[slot] = null;
             }
             actionItems[slot] = aItem;
@@ -78,7 +77,6 @@ public class CharacterEquipment {
             if(spellItems[slot] != null){
                 SpellItem removeItem = spellItems[slot];
                 removeItem.deEquip(player);
-                threwToBackpack(removeItem);
                 spellItems[slot] = null;
             }
             spellItems[slot] = sItem;
@@ -87,38 +85,32 @@ public class CharacterEquipment {
             if(armorItems[slot] != null){
                 ArmorItem removeItem = armorItems[slot];
                 removeItem.deEquip(player);
-                threwToBackpack(removeItem);
                 armorItems[slot] = null;
             }
             armorItems[slot] = arItem;
             arItem.equip(player);
         }else{
             System.err.println("Error! Cannot equip item.");
+            return false;
         }
+        return true;
     }
 
     public void deEquip(int slot, int slotType){
         if(slotType==ACTION_SLOT && actionItems[slot]!=null){
             ActionItem aItem = actionItems[slot];
             aItem.deEquip(player);
-            threwToBackpack(aItem);
             actionItems[slot]=null;
         }else if(slotType==SPELL_SLOT && spellItems[slot]!=null){
             SpellItem sItem = spellItems[slot];
             sItem.deEquip(player);
-            threwToBackpack(sItem);
             spellItems[slot]=null;
         } else if (slotType==ARMOR_SLOT && armorItems[slot]!=null) {
             ArmorItem arItem = armorItems[slot];
             arItem.deEquip(player);
-            threwToBackpack(arItem);
             armorItems[slot]=null;
         }else{
             System.err.println("Error! Cannot de equip item.");
         }
-    }
-
-    private void threwToBackpack(Item item){
-        player.getParty().getBackpack().removeFromBackpack(item);
     }
 }

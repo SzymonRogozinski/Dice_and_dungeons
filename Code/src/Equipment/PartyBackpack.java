@@ -1,28 +1,76 @@
 package Equipment;
 
+import Equipment.Items.EquipableItem;
 import Equipment.Items.Item;
-import Equipment.Items.SpellItem;
 import Equipment.Items.UsableItem;
 import Equipment.Items.UsedAllOfItemsException;
-import Fight.GameActions.SpellAction;
-import Fight.GameActions.UsableItemAction;
+import Character.PlayerCharacter;
 
 import java.util.ArrayList;
 
 public class PartyBackpack {
 
     private ArrayList<Item> items;
-
-    public PartyBackpack(){
-        items = new ArrayList<>();
-    }
-
-    public ArrayList<Item> getItems() {
-        return items;
-    }
+    private int pageNumber;
+    private int maxSmallPages;
+    private boolean isEquipment;
+    private final static int pageSize = 42;
+    private final static int smallPageSize = 12;
 
     public PartyBackpack(ArrayList<Item> items){
         this.items = items;
+    }
+
+    public ArrayList<Item> getAllItems() {
+        return items;
+    }
+
+    public ArrayList<Item> getPageOfItems() {
+        isEquipment=true;
+        maxSmallPages=0;
+        ArrayList<Item> itemList=new ArrayList<>();
+        for(int i=pageNumber*pageSize;i<(pageNumber+1)*pageSize && i< items.size();i++){
+            itemList.add(items.get(i));
+        }
+        if(itemList.isEmpty()){
+            pageNumber=0;
+            return getPageOfItems();
+        }
+        return itemList;
+    }
+
+    public void setNextPage(){
+        if(!isEquipment && (pageNumber+1)*pageSize<items.size())
+            pageNumber++;
+        else if(isEquipment && maxSmallPages>pageNumber)
+            pageNumber++;
+    }
+
+    public void setPrevPage(){
+        pageNumber=Math.max(pageNumber-1,0);
+    }
+
+    public void changeMode(boolean isEquipment){
+        this.isEquipment=isEquipment;
+        pageNumber=0;
+    }
+
+    public ArrayList<Item> getPageOfItemsForCharacter(PlayerCharacter player) {
+        ArrayList<Item> characterItems = new ArrayList<>();
+        for (Item i:items){
+            if(i instanceof EquipableItem eItem && eItem.canEquip(player))
+                characterItems.add(i);
+        }
+        maxSmallPages=characterItems.size()/smallPageSize;
+        ArrayList<Item> pageItems = new ArrayList<>();
+        for(int i = smallPageSize*pageNumber; i< smallPageSize*(pageNumber+1) && i<characterItems.size(); i++){
+            pageItems.add(characterItems.get(i));
+        }
+        if(pageItems.isEmpty()){
+            pageNumber=0;
+            return getPageOfItemsForCharacter(player);
+        }
+        return pageItems;
     }
 
     public ArrayList<UsableItem> getUsableItems(){
@@ -35,6 +83,8 @@ public class PartyBackpack {
     }
 
     public void putToBackpack(Item item){
+        if(item==null)
+            return;
         int id=0;
         if(item instanceof UsableItem usableItem && (id=items.indexOf(item))!=-1){
             ((UsableItem) items.get(id)).addNewItems(usableItem.getNumberOfItems());
@@ -44,7 +94,7 @@ public class PartyBackpack {
     }
 
     public void removeFromBackpack(Item item){
-        int id=0;
+        int id;
         if(item instanceof UsableItem && (id=items.indexOf(item))!=-1){
             try {
                 ((UsableItem) items.get(id)).useItem();

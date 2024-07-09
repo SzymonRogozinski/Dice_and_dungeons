@@ -1,5 +1,6 @@
 package GUI.EquipmentGUI;
 
+import Equipment.CharacterEquipment;
 import Equipment.EquipmentModule;
 import GUI.GUISettings;
 import Character.PlayerCharacter;
@@ -37,7 +38,7 @@ public class CharactersInfoPanel extends JPanel {
         partyInfoPanel=new PartyInfoPanel();
         changeCharacterPanel=new ChangePanel("Next character","Previous character",e->GameCollection.getEquipment().changeCharacter(true),e->GameCollection.getEquipment().changeCharacter(false));
         useItemPanel=new UseItemPanel();
-        changeBackpackPagePanel=new ChangePanel("Next page","Previous page",e->System.out.println("click"),e->System.out.println("click"));
+        changeBackpackPagePanel=new ChangePanel("Next page","Previous page",e->GameCollection.getEquipment().changeBackpackPage(true),e->GameCollection.getEquipment().changeBackpackPage(false));
 
         setEquipmentVisibility(true);
 
@@ -60,6 +61,7 @@ public class CharactersInfoPanel extends JPanel {
     public void refresh(){
         partyInfoPanel.refresh();
         charactersInfoPanel.refresh();
+        useItemPanel.refresh();
     }
 
     public class CharacterInfoPanel extends JPanel{
@@ -178,11 +180,16 @@ public class CharactersInfoPanel extends JPanel {
 
             useItem=new JButton("Use item");
             useItem.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-50,(int)(GUISettings.PANEL_SIZE*0.05)));
+            useItem.addActionListener(e->GameCollection.getEquipment().useChosenItem());
 
-            itemSlot=new ItemSlot(null, BAG_SLOT_ICON);
+            itemSlot=new ItemSlot(null, BAG_SLOT_ICON,0, CharacterEquipment.USE_SLOT);
 
             this.add(itemSlot);
             this.add(useItem);
+        }
+
+        void refresh(){
+            itemSlot.setItem(GameCollection.getEquipment().getUseItem());
         }
 
     }

@@ -1,7 +1,6 @@
 package GUI.EquipmentGUI;
 
 import Equipment.CharacterEquipment;
-import Equipment.EquipmentModule;
 import Equipment.Items.Item;
 import GUI.GUISettings;
 import Game.GameCollection;
@@ -10,8 +9,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ItemManagementPanel extends JPanel {
 
@@ -88,6 +85,7 @@ public class ItemManagementPanel extends JPanel {
             armor.refresh();
             items.refresh();
             spells.refresh();
+            smallBackpackItemsPanel.refresh();
         }
 
     }
@@ -113,7 +111,7 @@ public class ItemManagementPanel extends JPanel {
             this.slotType=slotType;
 
             for(int i=0;i<slotNumber;i++){
-                itemSlots[i]=new ItemSlot(null,emptySlotIcons[i]);
+                itemSlots[i]=new ItemSlot(null,emptySlotIcons[i],i,slotType);
                 this.add(itemSlots[i]);
             }
         }
@@ -184,14 +182,14 @@ public class ItemManagementPanel extends JPanel {
             itemSlots=new ItemSlot[42];
 
             for(int i=0;i<42;i++){
-                itemSlots[i]=new ItemSlot(null, BAG_SLOT_ICON);
+                itemSlots[i]=new ItemSlot(null, BAG_SLOT_ICON,i,CharacterEquipment.BAG_SLOT);
                 this.add(itemSlots[i]);
             }
         }
 
         public void refresh(){
             int i=0;
-            var items=GameCollection.getEquipment().getParty().getBackpack().getItems();
+            ArrayList<Item> items=GameCollection.getEquipment().getParty().getBackpack().getPageOfItems();
             for(;i<items.size() && i<42;i++){
                 itemSlots[i].setItem(items.get(i));
             }
@@ -217,7 +215,7 @@ public class ItemManagementPanel extends JPanel {
 
             for(int i=0;i<14;i++){
                 if(i%7!=6) {
-                    ItemSlot slot=new ItemSlot(null, BAG_SLOT_ICON);
+                    ItemSlot slot=new ItemSlot(null, BAG_SLOT_ICON,i,CharacterEquipment.BAG_SLOT);
                     itemSlots.add(slot);
                     this.add(slot);
                 }else{
@@ -228,6 +226,22 @@ public class ItemManagementPanel extends JPanel {
                     button.setBorder(BorderFactory.createLineBorder(Color.WHITE,1));
                     this.add(button);
                 }
+            }
+        }
+
+        public void refresh(){
+            int i,j;
+            j=0;
+            ArrayList<Item> items=GameCollection.getEquipment().getParty().getBackpack().getPageOfItemsForCharacter(GameCollection.getEquipment().getCurrentCharacter());
+            for(i=0;i<14;i++){
+                if(i%7==6)
+                    continue;
+                else if(j<items.size()){
+                    itemSlots.get(j).setItem(items.get(j));
+                }else{
+                    itemSlots.get(j).setItem(null);
+                }
+                j++;
             }
         }
     }

@@ -32,6 +32,15 @@ public class ArmorItem extends Item implements EquipableItem{
         character.recalculateStats();
     }
 
+    @Override
+    public boolean canEquip(PlayerCharacter character){
+        for(Tags tag:tags){
+            if(!character.haveTag(tag))
+                return false;
+        }
+        return true;
+    }
+
     public int[] getStats(){
         return new int[]{strength,endurance,intelligence,charisma,cunning,luck};
     }

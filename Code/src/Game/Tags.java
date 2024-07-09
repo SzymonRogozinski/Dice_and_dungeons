@@ -13,8 +13,9 @@ public enum Tags {
     DEFENCE,
     BONUS_DICE,
     //Equipment tags
+    USABLE_OUT_OF_FIGHT,
+    //Class
     WARRIOR,
     MAGE,
     THIEF,
-    BARBARIAN,
 }

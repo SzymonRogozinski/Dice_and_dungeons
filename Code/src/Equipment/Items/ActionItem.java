@@ -25,4 +25,13 @@ public class ActionItem extends Item implements EquipableItem{
     @Override
     public void deEquip(PlayerCharacter character) {
     }
+
+    @Override
+    public boolean canEquip(PlayerCharacter character) {
+        for(Tags tag:tags){
+            if(!character.haveTag(tag))
+                return false;
+        }
+        return true;
+    }
 }

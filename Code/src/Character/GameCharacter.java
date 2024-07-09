@@ -2,19 +2,21 @@ package Character;
 
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusEvaporatedException;
+import Game.Tagable;
 import Game.Tags;
 
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class GameCharacter {
+public class GameCharacter extends Tagable {
     private int strength,endurance,intelligence,charisma,cunning,luck,shield;
     private double statisticMod,damageReceivingMod;
     private final ArrayList<GameStatus> statuses;
     private final String name;
     private final ImageIcon image;
 
-    public GameCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck,String name,ImageIcon image) {
+    public GameCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck,String name,ImageIcon image,Tags[] tags) {
+        super(tags);
         strength = startStrength;
         endurance = startEndurance;
         intelligence = startIntelligence;
