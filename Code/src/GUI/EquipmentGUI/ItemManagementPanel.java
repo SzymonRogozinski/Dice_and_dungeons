@@ -87,7 +87,6 @@ public class ItemManagementPanel extends JPanel {
             spells.refresh();
             smallBackpackItemsPanel.refresh();
         }
-
     }
 
     private class ItemSlotRow extends JPanel{
@@ -220,6 +219,7 @@ public class ItemManagementPanel extends JPanel {
                     this.add(slot);
                 }else{
                     JButton button = new JButton(i<7?"Next":"Prev");
+                    button.addActionListener(i<7?e->GameCollection.getEquipment().changeBackpackPage(true):e->GameCollection.getEquipment().changeBackpackPage(false));
                     button.setForeground(Color.WHITE);
                     button.setPreferredSize(new Dimension(GUISettings.ITEM_ICON_SIZE,GUISettings.ITEM_ICON_SIZE));
                     button.setBackground(Color.BLACK);

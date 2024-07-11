@@ -57,7 +57,7 @@ public class ItemInfoPanel extends JPanel {
 
     private class DiceItemInfoPanel extends JPanel{
 
-        private JLabel nameLabel;
+        private JLabel nameLabel, requirements;
         private DiceSidesPanel diceSidesPanel;
 
         public DiceItemInfoPanel() {
@@ -72,19 +72,43 @@ public class ItemInfoPanel extends JPanel {
 
             diceSidesPanel=new DiceSidesPanel();
 
+            requirements = new JLabel();
+            requirements.setForeground(Color.WHITE);
+            requirements.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE-10,GUISettings.SMALL_PANEL_SIZE/10));
+            nameLabel.setVerticalAlignment(SwingConstants.CENTER);
+
             this.add(nameLabel);
             this.add(diceSidesPanel);
+            this.add(requirements);
         }
 
         public void refresh(){
             //TODO not always without dice
-            if(GameCollection.getEquipment().getPointedItem() instanceof ActionItem aItem) {
+            Item item = GameCollection.getEquipment().getPointedItem();
+
+            if(item instanceof ActionItem aItem) {
                 nameLabel.setText(aItem.name);
                 diceSidesPanel.setDiceSides(aItem.getAction().getDice().getSides());
-            } else if (GameCollection.getEquipment().getPointedItem() instanceof SpellItem sItem) {
+            } else if (item instanceof SpellItem sItem) {
                 nameLabel.setText(sItem.name);
                 diceSidesPanel.setDiceSides(sItem.getAction().getDice().getSides());
             }
+
+            StringBuilder requirementsBuilder=new StringBuilder("Requirements:");
+
+            Tags[] tags=item.tags;
+            for(Tags tag:tags) {
+                String s=tag.name().toLowerCase();
+                s=s.substring(0,1).toUpperCase()+s.substring(1);
+                requirementsBuilder.append(" ").append(s).append(",");
+            }
+            if(requirementsBuilder.toString().equals("Requirements:")){
+                requirementsBuilder.append(" None");
+            }else{
+                requirementsBuilder.deleteCharAt(requirementsBuilder.toString().length()-1);
+            }
+
+            requirements.setText(requirementsBuilder.toString());
         }
     }
 

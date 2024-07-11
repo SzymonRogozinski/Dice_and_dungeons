@@ -1,5 +1,3 @@
-# Podstawa
-> Dodanie wyświetlania wymagań
 # Generacja przedmiotów
 > Implementcja szkieletu/ wzorca podstawowych statystyk
 > Implementacja różnych metod rozdysponowania statystyk
