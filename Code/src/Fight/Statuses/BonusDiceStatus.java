@@ -1,10 +1,10 @@
 package Fight.Statuses;
 
+import Character.GameCharacter;
 import Dice.Dice;
 import Fight.DiceMaster;
 import Fight.GameActions.GameAction;
-import Fight.Tags;
-import Character.GameCharacter;
+import Game.Tags;
 
 import javax.swing.*;
 

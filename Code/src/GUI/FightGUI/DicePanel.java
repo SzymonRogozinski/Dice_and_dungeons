@@ -4,6 +4,7 @@ import Dice.DiceSide;
 import Fight.DiceMaster;
 import GUI.GUISettings;
 import Fight.FightModule;
+import Game.GameCollection;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -11,8 +12,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class DicePanel extends JPanel {
-
-    private FightModule fight;
     private static final int diceNumber=12;
     private static final int diceRow=2;
     private static final int diceColumns=6;
@@ -22,10 +21,6 @@ public class DicePanel extends JPanel {
         this.setLayout(new GridLayout(diceRow,diceColumns));
         this.setBorder(border);
         this.setBackground(Color.BLACK);
-    }
-
-    public void setFight(FightModule fight){
-        this.fight=fight;
     }
 
     public void showDiceResults(ArrayList<DiceSide> diceResults){
@@ -47,7 +42,7 @@ public class DicePanel extends JPanel {
 
         public DiceButton(int index,ImageIcon icon) {
             super(icon);
-            this.addActionListener(e->fight.rerollDice(index));
+            this.addActionListener(e-> GameCollection.getFight().rerollDice(index));
         }
     }
 }

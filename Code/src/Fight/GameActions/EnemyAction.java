@@ -1,10 +1,10 @@
 package Fight.GameActions;
 
-import Dice.DiceAction.DiceAction;
 import Character.Enemy.EnemyActionFactory;
 import Character.Enemy.EnemyCharacter;
+import Dice.DiceAction.DiceAction;
 import Fight.ActionTarget;
-import Fight.Tags;
+import Game.Tags;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class EnemyAction extends GameAction{
     private final ArrayList<EnemyActionFactory> actionFactories;
 
     public EnemyAction(ActionTarget target, Tags[] tags, ArrayList<EnemyActionFactory> actionFactories) {
-        super("", null, target, null, tags);
+        super( null, target, null, tags);
         this.actionFactories =actionFactories;
     }
 

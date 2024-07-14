@@ -1,18 +1,12 @@
 package GUI;
 
-import GUI.FightGUI.*;
-import Fight.FightModule;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public class MainPanel extends JPanel {
+public abstract class MainPanel extends JLayeredPane {
 
-    private RollPanel rollPanel;
-    private FightPanel fightPanel;
-    private ActionPanel actionPanel;
-    private StatusPanel statusPanel;
+    private final JPanel smallPanel,bigPanel,bottomPanel,sidePanel;
 
     public MainPanel( ){
         //Setting panel
@@ -22,108 +16,55 @@ public class MainPanel extends JPanel {
 
         //Panel components
         //Big four
-        JPanel bigPanel=new JPanel();
-        JPanel smallPanel = new JPanel();
-        JPanel leftInfoPanel = new JPanel();
-        JPanel downInfoPanel = new JPanel();
+        bigPanel=new JPanel();
+        smallPanel = new JPanel();
+        bottomPanel = new JPanel();
+        sidePanel = new JPanel();
         Border border = BorderFactory.createLineBorder(Color.WHITE, 2);
-        //Real components
-        rollPanel =new RollPanel(border);
-        fightPanel = new FightPanel(border);
-        actionPanel =  new ActionPanel(border);
-        statusPanel=new StatusPanel(border);
 
         //Settings components
         bigPanel.setBounds(0,0, GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE);
         bigPanel.setLayout(null);
         bigPanel.setBackground(Color.BLACK);
         bigPanel.setBorder(border);
-        bigPanel.add(fightPanel);
 
         smallPanel.setBounds(GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
         smallPanel.setLayout(null);
         smallPanel.setBackground(Color.BLACK);
         smallPanel.setBorder(border);
-        smallPanel.add(rollPanel);
 
-        leftInfoPanel.setBounds(GUISettings.PANEL_SIZE,0,GUISettings.SMALL_PANEL_SIZE,GUISettings.PANEL_SIZE);
-        leftInfoPanel.setLayout(null);
-        leftInfoPanel.setBackground(Color.BLACK);
-        leftInfoPanel.setBorder(border);
-        leftInfoPanel.add(statusPanel);
+        sidePanel.setBounds(GUISettings.PANEL_SIZE,0,GUISettings.SMALL_PANEL_SIZE,GUISettings.PANEL_SIZE);
+        sidePanel.setLayout(null);
+        sidePanel.setBackground(Color.BLACK);
+        sidePanel.setBorder(border);
 
-        downInfoPanel.setBounds(0,GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
-        downInfoPanel.setLayout(null);
-        downInfoPanel.setBackground(Color.BLACK);
-        downInfoPanel.setBorder(border);
-        downInfoPanel.add(actionPanel);
+        bottomPanel.setBounds(0,GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
+        bottomPanel.setLayout(null);
+        bottomPanel.setBackground(Color.BLACK);
+        bottomPanel.setBorder(border);
 
         //Adding component to panel
-        this.add(bigPanel);
-        this.add(smallPanel);
-        this.add(leftInfoPanel);
-        this.add(downInfoPanel);
+        this.add(bigPanel,JLayeredPane.DEFAULT_LAYER);
+        this.add(smallPanel,JLayeredPane.DEFAULT_LAYER);
+        this.add(sidePanel,JLayeredPane.DEFAULT_LAYER);
+        this.add(bottomPanel,JLayeredPane.DEFAULT_LAYER);
 
         //Refresh
         this.revalidate();
         this.repaint();
     }
 
-    public void setFightModule(FightModule fightModule){
-        rollPanel.setFight(fightModule);
-        fightPanel.setFight(fightModule);
-        actionPanel.setFight(fightModule);
-        statusPanel.setFight(fightModule);
+    public Border getBorder(){
+        return BorderFactory.createLineBorder(Color.WHITE, 2);
     }
 
-    public ActionPanel getActionPanel(){ return actionPanel;}
+    public void setPanelsContent(JPanel bigPanelContent,JPanel smallPanelContent,JPanel bottomPanelContent,JPanel sidePanelContent){
+        bigPanel.add(bigPanelContent);
+        smallPanel.add(smallPanelContent);
+        bottomPanel.add(bottomPanelContent);
+        sidePanel.add(sidePanelContent);
 
-    public RollPanel getRollPanel() {
-        return rollPanel;
-    }
-
-    public StatusPanel getStatusPanel() {
-        return statusPanel;
-    }
-
-    public void init(){
-        actionPanel.getActions().loadAction();
         //Refresh
-        this.revalidate();
-        this.repaint();
-    }
-
-    public void setState(int newState,int currentState){
-        switch (newState){
-            case GUIState.PLAYER_CHOOSING_ACTION -> {
-                if(currentState==GUIState.PLAYER_PERFORMING_ACTION || currentState==GUIState.ENEMY_PERFORMING_ACTION){
-                    actionPanel.getActions().loadAction();
-                }
-                rollPanel.setVisible(false);
-                actionPanel.setVisible(true);
-                actionPanel.changePage("Actions");
-            }
-            case GUIState.PLAYER_CHOOSING_TARGET -> {
-                rollPanel.setVisible(false);
-                rollPanel.rerollsChange();
-                actionPanel.setVisible(false);
-                fightPanel.enemySelectable(true);
-            }
-            case GUIState.PLAYER_PERFORMING_ACTION -> {
-                rollPanel.setVisible(true);
-                fightPanel.enemySelectable(false);
-                actionPanel.setVisible(true);
-                actionPanel.changePage("Pause");
-            }
-            case GUIState.ENEMY_PERFORMING_ACTION -> {
-                rollPanel.setVisible(false);
-                actionPanel.setVisible(true);
-                actionPanel.changePage("Enemy");
-            }
-        }
-        //Refresh
-        statusPanel.refresh();
-        fightPanel.refresh();
         this.revalidate();
         this.repaint();
     }

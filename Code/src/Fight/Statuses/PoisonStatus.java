@@ -1,9 +1,10 @@
 package Fight.Statuses;
 
-import javax.swing.*;
-import Character.GameCharacter;
-import Fight.Tags;
 import Character.CharacterDieException;
+import Character.GameCharacter;
+import Game.Tags;
+
+import javax.swing.*;
 
 public class PoisonStatus extends GameStatus{
     public PoisonStatus(int startValue) {

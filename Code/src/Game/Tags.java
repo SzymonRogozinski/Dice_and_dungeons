@@ -1,6 +1,7 @@
-package Fight;
+package Game;
 
 public enum Tags {
+    //Fight tags
     ON_TURN_START,      //React before anything
     AFTER_TURN_START,   //React after
     NO_ROLL,
@@ -11,4 +12,10 @@ public enum Tags {
     MAGIC,
     DEFENCE,
     BONUS_DICE,
+    //Equipment tags
+    USABLE_OUT_OF_FIGHT,
+    //Class
+    WARRIOR,
+    MAGE,
+    THIEF,
 }

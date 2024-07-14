@@ -1,10 +1,10 @@
 package Dice.DiceAction;
 
-import Dice.Dice;
-import Fight.Statuses.BonusDiceStatus;
-import Fight.Tags;
 import Character.GameCharacter;
+import Dice.Dice;
 import Dice.DiceFactory;
+import Fight.Statuses.BonusDiceStatus;
+import Game.Tags;
 
 public class MagicBonusAction implements DiceAction{
 

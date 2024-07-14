@@ -1,8 +1,3 @@
-# Podstawa
-> implementacja struktury przedmiotów
-> implementacja ekwipowania i deekwipowania
-> Stworzenie GUI pozwalającego na zarządanie ekwipunkiem
-> Implementacja zużywalności przedmiotów jednorazowych
 # Generacja przedmiotów
 > Implementcja szkieletu/ wzorca podstawowych statystyk
 > Implementacja różnych metod rozdysponowania statystyk

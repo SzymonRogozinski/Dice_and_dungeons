@@ -2,6 +2,7 @@ package GUI.FightGUI;
 
 import GUI.GUISettings;
 import Fight.FightModule;
+import Game.GameCollection;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -9,7 +10,6 @@ import java.awt.*;
 
 public class StatusPanel extends JPanel {
 
-    private FightModule fight;
     private JProgressBar healthBar;
     private JProgressBar manaBar;
     private JLabel characterName,statusInfo,nextMoveInfo,combatLog;
@@ -22,6 +22,7 @@ public class StatusPanel extends JPanel {
         this.setSize(GUISettings.SMALL_PANEL_SIZE,GUISettings.PANEL_SIZE);
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setBackground(Color.BLACK);
+        this.setBorder(border);
 
         //Set health
         JLabel health=new JLabel("Party health");
@@ -112,7 +113,7 @@ public class StatusPanel extends JPanel {
     }
 
     public void refreshCombatLog(){
-        String combatText = fight.getCombatLogInfo();
+        String combatText = GameCollection.getFight().getCombatLogInfo();
         if(combatLogText.equals(combatText)) {
             combatLogText = "";
         }else {
@@ -123,24 +124,17 @@ public class StatusPanel extends JPanel {
         this.repaint();
     }
 
-    public void setFight(FightModule fight){
-        this.fight=fight;
-        healthBar.setMaximum(fight.getParty().getMaxHealth());
-        manaBar.setMaximum(fight.getParty().getMaxMana());
-        refresh();
-    }
-
     public void refresh(){
-        if(fight==null)
-            return;
-        healthBar.setValue(fight.getParty().getCurrentHealth());
-        String healthString = fight.getParty().getCurrentHealth()+"/"+fight.getParty().getMaxHealth();
-        if(fight.getParty().getShield()>0)
-            healthString+=" +"+fight.getParty().getShield();
+        healthBar.setMaximum(GameCollection.getFight().getParty().getMaxHealth());
+        manaBar.setMaximum(GameCollection.getFight().getParty().getMaxMana());
+        healthBar.setValue(GameCollection.getFight().getParty().getCurrentHealth());
+        String healthString = GameCollection.getFight().getParty().getCurrentHealth()+"/"+GameCollection.getFight().getParty().getMaxHealth();
+        if(GameCollection.getFight().getParty().getShield()>0)
+            healthString+=" +"+GameCollection.getFight().getParty().getShield();
         healthBar.setString(healthString);
-        manaBar.setValue(fight.getParty().getCurrentMana());
-        manaBar.setString(fight.getParty().getCurrentMana()+"/"+fight.getParty().getMaxMana());
-        characterName.setText(fight.getCharacter().getName());
+        manaBar.setValue(GameCollection.getFight().getParty().getCurrentMana());
+        manaBar.setString(GameCollection.getFight().getParty().getCurrentMana()+"/"+GameCollection.getFight().getParty().getMaxMana());
+        characterName.setText(GameCollection.getFight().getCharacter().getName());
         this.revalidate();
         this.repaint();
     }

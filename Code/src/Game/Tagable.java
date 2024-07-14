@@ -1,7 +1,7 @@
-package Fight;
+package Game;
 
 public abstract class Tagable {
-    private final Tags[] tags;
+    public final Tags[] tags;
 
     public Tagable(Tags[] tags) {
         this.tags = tags;

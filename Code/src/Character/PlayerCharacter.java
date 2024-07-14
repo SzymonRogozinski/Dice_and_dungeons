@@ -1,27 +1,29 @@
 package Character;
 
-import Fight.GameActions.ActionItem;
-import Fight.GameActions.SpellAction;
-import Fight.GameActions.UsableItemAction;
+import Equipment.CharacterEquipment;
+import Game.Tags;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class PlayerCharacter extends GameCharacter{
-
-    private static final int MAX_ACTION_ITEM=3;
-    private final ArrayList<ActionItem> actionItems;
-    private final ArrayList<SpellAction> spells;
     private PlayerParty party;
+    private final CharacterEquipment equipment;
 
-    public PlayerCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image,ArrayList<ActionItem> actionItems,ArrayList<SpellAction> spells) {
-        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image);
-        this.actionItems = actionItems;
-        this.spells=spells;
+    public PlayerCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image, Tags[] tags) {
+        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image,tags);
+        equipment=new CharacterEquipment(this);
     }
 
     public void setParty(PlayerParty party){
         this.party=party;
+    }
+
+    public PlayerParty getParty() {
+        return party;
+    }
+
+    public CharacterEquipment getEquipment() {
+        return equipment;
     }
 
     public int getDiceNumber(int attribute){
@@ -34,15 +36,9 @@ public class PlayerCharacter extends GameCharacter{
         return getLuck()/10+1;
     }
 
-    public ArrayList<ActionItem> getActionItems() {
-        return actionItems;
+    public void recalculateStats(){
+        party.calculateHealthAndMana();
     }
-
-    public ArrayList<SpellAction> getSpells() {
-        return spells;
-    }
-
-    public ArrayList<UsableItemAction> getUsableItems(){return party.getItems();}
 
     @Override
     public void dealDamage(int damage) throws CharacterDieException {

@@ -1,18 +1,18 @@
 package Fight;
 
+import Character.Enemy.EnemyCharacter;
+import Character.GameCharacter;
+import Character.PlayerCharacter;
 import Character.PlayerParty;
-
 import Dice.DiceAction.DiceAction;
 import Fight.GameActions.EnemyAction;
 import Fight.GameActions.GameAction;
 import Fight.Statuses.BonusDiceStatus;
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusException;
-import GUI.GUIState;
-import GUI.MainPanel;
-import Character.GameCharacter;
-import Character.Enemy.EnemyCharacter;
-import Character.PlayerCharacter;
+import GUI.FightGUI.FightGUIState;
+import GUI.FightGUI.FightView;
+import Game.Tags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
 public class FightModule {
     private final PlayerParty party;
     private final DiceMaster master;
-    private final GUIState state;
+    private final FightGUIState state;
     private final ArrayList<EnemyCharacter> enemies;
     private boolean playerTurn;
     private int characterTurn;
@@ -30,7 +30,7 @@ public class FightModule {
     private GameAction action;
     private String combatLogInfo;
 
-    public FightModule(MainPanel panel,GUIState state,PlayerParty party,ArrayList<EnemyCharacter> enemies) {
+    public FightModule(FightGUIState state, PlayerParty party, ArrayList<EnemyCharacter> enemies) {
         this.combatLogInfo="";
         this.noRoll=false;
         this.playerTurn=true;
@@ -39,7 +39,6 @@ public class FightModule {
         this.master = new DiceMaster();
         this.enemies=enemies;
         this.party=party;
-        panel.setFightModule(this);
     }
 
     public ActionTarget getTargetType() {
@@ -103,12 +102,12 @@ public class FightModule {
             }
         }
         state.refreshCombatLog();
-        state.setState(GUIState.PLAYER_CHOOSING_TARGET);
+        state.setState(FightGUIState.PLAYER_CHOOSING_TARGET);
     }
 
     public void targetSelected(int targetId){
         this.targetId=targetId;
-        state.setState(GUIState.PLAYER_PERFORMING_ACTION);
+        state.setState(FightGUIState.PLAYER_PERFORMING_ACTION);
     }
 
     public void rollDices(){
@@ -130,6 +129,10 @@ public class FightModule {
 
     public void hideNextMove(){
         state.hideNextMove();
+    }
+
+    public void clear(){
+        //TODO
     }
 
     private void startAction(){
@@ -168,7 +171,7 @@ public class FightModule {
         if(skip) {
             startAction();
         }else {
-            state.setState(playerTurn ? GUIState.PLAYER_CHOOSING_ACTION : GUIState.ENEMY_PERFORMING_ACTION);
+            state.setState(playerTurn ? FightGUIState.PLAYER_CHOOSING_ACTION : FightGUIState.ENEMY_PERFORMING_ACTION);
         }
     }
 
@@ -187,11 +190,11 @@ public class FightModule {
         state.refreshCombatLog();
         if(action==null || !action.haveTag(Tags.FREE_ACTION)){
             setNextCharacterTurn();
-            state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
+            state.setState(playerTurn? FightGUIState.PLAYER_CHOOSING_ACTION: FightGUIState.ENEMY_PERFORMING_ACTION);
             //Sub state. Do it before next state.
             startAction();
         }else{
-            state.setState(playerTurn?GUIState.PLAYER_CHOOSING_ACTION:GUIState.ENEMY_PERFORMING_ACTION);
+            state.setState(playerTurn? FightGUIState.PLAYER_CHOOSING_ACTION: FightGUIState.ENEMY_PERFORMING_ACTION);
         }
     }
 

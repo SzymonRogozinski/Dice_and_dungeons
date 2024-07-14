@@ -4,6 +4,7 @@ import Fight.GameActions.EnemyAction;
 import Character.GameCharacter;
 import Character.CharacterDieException;
 import Character.PlayerCharacter;
+import Game.Tags;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class EnemyCharacter extends GameCharacter {
     private final EnemyAI ai;
 
     public EnemyCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image, EnemyAI ai) {
-        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image);
+        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image, new Tags[]{});
         maxHealth=startEndurance*5;
         currentHealth=startEndurance*5;
         this.ai=ai;

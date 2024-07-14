@@ -1,9 +1,9 @@
 package Fight.Statuses;
 
-import Fight.Tags;
+import Character.GameCharacter;
+import Game.Tags;
 
 import javax.swing.*;
-import Character.GameCharacter;
 
 public class StunStatus extends GameStatus{
 

@@ -2,6 +2,7 @@ package GUI.FightGUI;
 
 import GUI.GUISettings;
 import Fight.FightModule;
+import Game.GameCollection;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -9,8 +10,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ActionPanel extends JPanel {
-
-    private FightModule fight;
     private CardLayout layout;
     private ActionListPanel actions;
     private DicePanel dice;
@@ -36,12 +35,6 @@ public class ActionPanel extends JPanel {
         this.add("Dice", dice);
     }
 
-    public void setFight(FightModule fight){
-        this.fight=fight;
-        dice.setFight(fight);
-        actions.setFight(fight);
-    }
-
     public DicePanel getDicePanel(){return dice;}
 
     public void changePage(String pageName){layout.show(this,pageName);}
@@ -51,16 +44,16 @@ public class ActionPanel extends JPanel {
     }
 
     private void roll(){
-        if(fight.isNoRoll()){
-            fight.endAction();
+        if(GameCollection.getFight().isNoRoll()){
+            GameCollection.getFight().endAction();
             return;
         }
         changePage("Dice");
-        fight.rollDices();
+        GameCollection.getFight().rollDices();
     }
 
     private void enemy(){
-        fight.endAction();
+        GameCollection.getFight().endAction();
     }
 
     private class StopPanel extends JPanel{

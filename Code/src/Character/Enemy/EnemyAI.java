@@ -20,10 +20,11 @@ public class EnemyAI {
     }
 
     public EnemyAction getAction(ArrayList<EnemyCharacter> enemies, ArrayList<PlayerCharacter> characters){
+        setTargetId(enemies,characters);
+        int c = actionCounter++;
         if(actionCounter>=actionList.size())
             actionCounter=0;
-        setTargetId(enemies,characters);
-        return actionList.get(actionCounter++);
+        return actionList.get(c);
     }
 
     public String getNextAction(EnemyCharacter enemy){
