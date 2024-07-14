@@ -26,15 +26,9 @@ public class PartyBackpack {
     }
 
     public ArrayList<Item> getPageOfItems() {
-        isEquipment=true;
-        maxSmallPages=0;
         ArrayList<Item> itemList=new ArrayList<>();
         for(int i=pageNumber*pageSize;i<(pageNumber+1)*pageSize && i< items.size();i++){
             itemList.add(items.get(i));
-        }
-        if(itemList.isEmpty()){
-            pageNumber=0;
-            return getPageOfItems();
         }
         return itemList;
     }
@@ -53,6 +47,7 @@ public class PartyBackpack {
     public void changeMode(boolean isEquipment){
         this.isEquipment=isEquipment;
         pageNumber=0;
+        maxSmallPages=0;
     }
 
     public ArrayList<Item> getPageOfItemsForCharacter(PlayerCharacter player) {
@@ -65,10 +60,6 @@ public class PartyBackpack {
         ArrayList<Item> pageItems = new ArrayList<>();
         for(int i = smallPageSize*pageNumber; i< smallPageSize*(pageNumber+1) && i<characterItems.size(); i++){
             pageItems.add(characterItems.get(i));
-        }
-        if(pageItems.isEmpty()){
-            pageNumber=0;
-            return getPageOfItemsForCharacter(player);
         }
         return pageItems;
     }
