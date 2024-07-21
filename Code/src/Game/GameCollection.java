@@ -3,7 +3,11 @@ package Game;
 import Equipment.EquipmentModule;
 import Fight.FightModule;
 
+import java.util.Random;
+
 public class GameCollection {
+
+    public static final Random random = new Random();
     private static FightModule fightModule;
     private static EquipmentModule equipmentModule;
 

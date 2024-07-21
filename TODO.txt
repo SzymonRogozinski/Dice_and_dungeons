@@ -1,1 +1,5 @@
 > Używalne przedmioty (Stronicowanie, zużywanie)
+> Poprawić label ManaCost
+> Dodać kolor jakości przedmiotu
+> Przenieść party do GameCollection
+
