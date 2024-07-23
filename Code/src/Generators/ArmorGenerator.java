@@ -51,18 +51,16 @@ public class ArmorGenerator {
         int highStatCount=0;
         while(points>0){
             int statIndex = GameCollection.random.nextInt(STATS_COUNT);
-            int value = GameCollection.random.nextInt(Math.min(maxStatValue,points));
-            if(stats[statIndex]+value > maxStatValue){
+            int value = GameCollection.random.nextInt(1,Math.min(maxStatValue,points)+1);
+            if(stats[statIndex] == maxStatValue){
+                value=0;
+            } else if(stats[statIndex]+value >= maxStatValue){
                 //Save stat index
                 highStatIndex[highStatCount++]=statIndex;
-                //Count points
-                int difference = maxStatValue - value - stats[statIndex];
-                stats[statIndex]=maxStatValue;
-                points-=value-difference;
-            }else{
-                stats[statIndex]=+value;
-                points-=value;
+                value = maxStatValue - stats[statIndex];
             }
+            stats[statIndex]+=value;
+            points-=value;
         }
         name = getArmorAdjective(name,highStatIndex,highStatCount);
 
