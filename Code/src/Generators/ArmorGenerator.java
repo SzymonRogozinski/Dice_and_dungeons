@@ -7,9 +7,7 @@ import Game.Tags;
 
 import javax.swing.*;
 
-public class ArmorGenerator {
-
-    private static final Tags[] classTags = new Tags[]{Tags.WARRIOR, Tags.THIEF, Tags.MAGE};
+public class ArmorGenerator extends Generator{
     private static final int STATS_COUNT=6;
     private static final int ARMOR_PARTS_COUNT=4;
     private static final double MAX_STAT_VALUE_PROP=0.4;
@@ -67,17 +65,6 @@ public class ArmorGenerator {
         ImageIcon icon = null; //TODO
         Tags [] tags = tag==null ? new Tags[]{}:new Tags[]{tag};
         return new ArmorItem(stats[0],stats[1],stats[2],stats[3],stats[4],stats[5],armor_part,tags,icon,name,quality);
-    }
-
-
-    private static Tags getRandomTag(){
-        return classTags[GameCollection.random.nextInt(classTags.length)];
-    }
-
-    private static int getPoints(int medium){
-        int variance = (int) (medium*GeneratorConst.VARIANCE);
-        return GameCollection.random.nextInt(medium-variance,medium+variance+1);
-
     }
 
     private static String getArmorAdjective(String name, int[] stats, int len){
