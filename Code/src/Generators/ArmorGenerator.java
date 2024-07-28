@@ -4,6 +4,7 @@ import Equipment.Items.ArmorItem;
 import Equipment.Items.ItemQuality;
 import Game.GameCollection;
 import Game.Tags;
+import Generators.Dictionaries.ArmorDictionary;
 
 import javax.swing.*;
 

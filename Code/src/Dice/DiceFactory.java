@@ -7,15 +7,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class DiceFactory {
-    public static final int NULL_ACTION=0;
-    public static final int DAMAGE_ACTION=1;
-    public static final int SHIELD_ACTION=2;
-    public static final int HEAL_ACTION=3;
-    public static final int MANA_ACTION=4;
-    public static final int POISON_ACTION=5;
-    public static final int BLEEDING_ACTION=6;
-    public static final int WEAKNESS_ACTION=7;
-    public static final int COUNTER_ACTION=8;
 
     private static final int size= GUISettings.SMALL_PANEL_SIZE/2;
 
@@ -40,37 +31,37 @@ public class DiceFactory {
         for(int i=0;i<instruction.length;i+=2){
             int actionType = instruction[i];
             switch (actionType){
-                case DAMAGE_ACTION -> {
+                case ActionEnum.DAMAGE_ACTION -> {
                     actions.add(new DamageAction(instruction[i+1]));
                     imageCode+="D"+instruction[i+1];
                 }
-                case SHIELD_ACTION -> {
+                case ActionEnum.SHIELD_ACTION -> {
                     actions.add(new ShieldAction(instruction[i+1],instruction[i+2]==1));
                     imageCode+="S"+instruction[i+1];
                     i++;
                 }
-                case HEAL_ACTION -> {
+                case ActionEnum.HEAL_ACTION -> {
                     actions.add(new HealAction(instruction[i+1],instruction[i+2]==1));
                     imageCode+="H"+instruction[i+1];
                     i++;
                 }
-                case MANA_ACTION -> {
+                case ActionEnum.MANA_ACTION -> {
                     actions.add(new ManaAction(instruction[i+1]));
                     imageCode+="M"+instruction[i+1];
                 }
-                case POISON_ACTION -> {
+                case ActionEnum.POISON_ACTION -> {
                     actions.add(new PoisonAction(instruction[i+1]));
                     imageCode+="P"+instruction[i+1];
                 }
-                case BLEEDING_ACTION -> {
+                case ActionEnum.BLEEDING_ACTION -> {
                     actions.add(new BleedingAction(instruction[i+1]));
                     imageCode+="B"+instruction[i+1];
                 }
-                case WEAKNESS_ACTION -> {
+                case ActionEnum.WEAKNESS_ACTION -> {
                     actions.add(new WeaknessAction(instruction[i+1]));
                     imageCode+="W"+instruction[i+1];
                 }
-                case COUNTER_ACTION -> {
+                case ActionEnum.COUNTER_ACTION -> {
                     actions.add(new CounterAction(instruction[i+1],instruction[i+2]==1));
                     imageCode+="C"+instruction[i+1];
                     i++;

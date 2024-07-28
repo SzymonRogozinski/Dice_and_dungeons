@@ -1,6 +1,7 @@
 package Generators;
 
 import Fight.ActionTarget;
+import Fight.GameActions.DiceLambda;
 import Game.GameCollection;
 import Game.Tags;
 
@@ -21,13 +22,17 @@ public class DiceItemFrames {
         final String name;
         final ActionTarget target;
         final Tags[] tags;
+        final int[] secondaryActionType;
+        final DiceLambda diceLambda;
 
-        DiceItemFrame(double[] values, int diceAction, String name, ActionTarget target, Tags[] tags) {
+        DiceItemFrame(double[] values, int diceAction, String name, ActionTarget target, Tags[] tags,int[] secondaryActionType,DiceLambda diceLambda) {
             this.values = values;
             this.diceAction = diceAction;
             this.name = name;
             this.target = target;
             this.tags = tags;
+            this.secondaryActionType=secondaryActionType;
+            this.diceLambda=diceLambda;
         }
 
         DiceItemBase getDiceItemBase(int points){
@@ -50,7 +55,7 @@ public class DiceItemFrames {
             ArrayList<Tags> tagsArrayList=new ArrayList<>();
             tagsArrayList.addAll(Arrays.asList(tags));
 
-            return new DiceItemBase(stats,diceAction,name,target,tagsArrayList);
+            return new DiceItemBase(stats,diceAction,name,target,tagsArrayList,secondaryActionType,diceLambda);
         }
     }
 }
