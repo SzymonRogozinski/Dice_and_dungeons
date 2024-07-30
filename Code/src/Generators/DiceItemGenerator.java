@@ -7,6 +7,8 @@ import Game.GameCollection;
 import Game.Tags;
 import Generators.Dictionaries.DiceIemDictionary;
 import Dice.Dice;
+import Dice.DiceFactory;
+import Generators.Dictionaries.ItemDictionary;
 
 import javax.swing.*;
 
@@ -22,7 +24,6 @@ public class DiceItemGenerator extends Generator{
 
         int points;
         Tags tag=null;
-        String name=""; //TODO
 
         switch (quality){
             case COMMON -> points = getPoints(GeneratorConst.MEDIUM_POINTS*GeneratorConst.COMMON_MOD);
@@ -32,13 +33,11 @@ public class DiceItemGenerator extends Generator{
                 if (GameCollection.random.nextBoolean()) {
                     tag = getRandomTag();
                     points += GeneratorConst.TAG_BONUS*GeneratorConst.RARE_MOD;
-                    name = DiceIemDictionary.getNameFromTag(tag)+" "+name;
                 }
             }
             case LEGENDARY -> {
                 points = getPoints(GeneratorConst.MEDIUM_POINTS*GeneratorConst.LEGENDARY_MOD)+GeneratorConst.TAG_BONUS*GeneratorConst.LEGENDARY_MOD;
                 tag = getRandomTag();
-                name = DiceIemDictionary.getNameFromTag(tag)+" "+name;
             }
             default -> throw new RuntimeException("Quality not implemented");
         }
@@ -68,8 +67,9 @@ public class DiceItemGenerator extends Generator{
             }
         }
 
-        Dice dice =null;    //TODO
-        Tags[] actionTags=null; //TODO
+        String name = ItemDictionary.getNameFromItemBase(base);
+        Dice dice = DiceFactory.buildDice(base);
+        Tags[] actionTags= ItemDictionary.getTagsFromAction(base.firstAction,base.secondAction);
 
         ItemAction action=new ItemAction(dice,base.target,base.diceLambda,actionTags);
         ImageIcon icon = null; //TODO

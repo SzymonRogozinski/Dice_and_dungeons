@@ -19,20 +19,22 @@ public class DiceItemFrames {
     private class DiceItemFrame {
         final double[] values;
         final int diceAction;
-        final String name;
+        final String[] names;
         final ActionTarget target;
         final Tags[] tags;
         final int[] secondaryActionType;
         final DiceLambda diceLambda;
+        final boolean actionOnSelf;
 
-        DiceItemFrame(double[] values, int diceAction, String name, ActionTarget target, Tags[] tags,int[] secondaryActionType,DiceLambda diceLambda) {
+        DiceItemFrame(double[] values, int diceAction, String[] names, ActionTarget target, Tags[] tags,int[] secondaryActionType,DiceLambda diceLambda,boolean actionOnSelf) {
             this.values = values;
             this.diceAction = diceAction;
-            this.name = name;
+            this.names = names;
             this.target = target;
             this.tags = tags;
             this.secondaryActionType=secondaryActionType;
             this.diceLambda=diceLambda;
+            this.actionOnSelf=actionOnSelf;
         }
 
         DiceItemBase getDiceItemBase(int points){
@@ -55,7 +57,7 @@ public class DiceItemFrames {
             ArrayList<Tags> tagsArrayList=new ArrayList<>();
             tagsArrayList.addAll(Arrays.asList(tags));
 
-            return new DiceItemBase(stats,diceAction,name,target,tagsArrayList,secondaryActionType,diceLambda);
+            return new DiceItemBase(stats,diceAction,names,target,tagsArrayList,secondaryActionType,diceLambda,actionOnSelf);
         }
     }
 }

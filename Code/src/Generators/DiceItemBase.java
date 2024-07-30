@@ -12,20 +12,22 @@ public class DiceItemBase {
     public int firstAction;
     public int[] secondActionValues;
     public int secondAction;
-    public String name;
+    public String[] names;
     public ActionTarget target;
     public ArrayList<Tags> tags;
     public boolean haveEmptySide;
     public DiceLambda diceLambda;
+    public boolean actionOnSelf;
 
-    public DiceItemBase(int[] firstActionValues, int firstAction, String name, ActionTarget target, ArrayList<Tags> tags,int[] secondaryActionType,DiceLambda diceLambda) {
+    public DiceItemBase(int[] firstActionValues, int firstAction, String[] names, ActionTarget target, ArrayList<Tags> tags,int[] secondaryActionType,DiceLambda diceLambda,boolean actionOnSelf) {
         this.firstActionValues = firstActionValues;
         this.firstAction = firstAction;
-        this.name = name;
+        this.names = names;
         this.target = target;
         this.tags = tags;
         this.haveEmptySide=true;
         this.secondaryActionType=secondaryActionType;
         this.diceLambda=diceLambda;
+        this.actionOnSelf=actionOnSelf;
     }
 }
