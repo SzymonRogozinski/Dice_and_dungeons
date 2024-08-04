@@ -38,7 +38,7 @@ public class DiceFactory {
                 action1[i]=value;
             }
             //second action
-            if(base.secondActionValues[i]>0){
+            if(base.secondAction!=ActionEnum.NULL_ACTION && base.secondActionValues[i]>0){
                 cost = ActionEnum.actionCost(base.secondAction);
                 value = base.secondActionValues[i]/cost;
                 if(value>20)
@@ -55,16 +55,23 @@ public class DiceFactory {
                 action2CostRest += action1CostRest;
                 action1CostRest = 0;
             }else{
-                action1[i--]++;
-                action1CostRest-=cost;
+                if(action1[i]<20) {
+                    action1[i]++;
+                    action1CostRest -= cost;
+                }else if(checkIfLocked(action1)){
+                    action2CostRest += action1CostRest;
+                    action1CostRest = 0;
+                }
+                i--;
                 if(action1[i]==0)
                     i=5;
             }
         }
         //Add rest to second action
         //Calc returnPoint
+        cost = ActionEnum.actionCost(base.secondAction);
         int returnPoint=-1;
-        for(i=5;i>=0;i++){
+        for(i=5;i>=0;i--){
             if(action2[i]>0){
                 returnPoint=i;
                 break;
@@ -72,13 +79,18 @@ public class DiceFactory {
         }
         i = returnPoint;
         //returnPoint=0 -> No values for second action
-        while(action2CostRest>0 && returnPoint>0){
+        while(action2CostRest>0 && returnPoint>=0){
             if(cost>action2CostRest) {
                 action2CostRest = 0;
             }else{
-                action2[i--]++;
-                action2CostRest-=cost;
-                if(action1[2]==0)
+                if(action2[i]<20) {
+                    action2[i]++;
+                    action2CostRest -= cost;
+                }else if(checkIfLocked(action2)){
+                    action2CostRest = 0;
+                }
+                i--;
+                if(action2[2]==0)
                     i=returnPoint;
             }
         }
@@ -86,13 +98,13 @@ public class DiceFactory {
         //Allocating memory
         for(i = 0;i<6;i++){
             int size = 1;
-            if (base.firstActionValues[i]>0)
+            if (action1[i]>0)
                 size++;
-            if (base.secondActionValues[i]>0)
-                size+= size==1?1:2;
-            if (base.firstAction==ActionEnum.COUNTER_ACTION || base.firstAction==ActionEnum.SHIELD_ACTION )
+            if (base.firstAction==ActionEnum.COUNTER_ACTION || base.firstAction==ActionEnum.SHIELD_ACTION || base.firstAction==ActionEnum.HEAL_ACTION)
                 size++;
-            if (base.secondAction==ActionEnum.COUNTER_ACTION || base.secondAction==ActionEnum.SHIELD_ACTION )
+            if (base.secondAction!=ActionEnum.NULL_ACTION && action2[i]>0)
+                size+= (size==1?1:2);
+            if (base.secondAction==ActionEnum.COUNTER_ACTION || base.secondAction==ActionEnum.SHIELD_ACTION || base.firstAction==ActionEnum.HEAL_ACTION)
                 size++;
             ins[i]=new int[size];
         }
@@ -101,20 +113,20 @@ public class DiceFactory {
         for(i = 0;i<6;i++){
             j=0;
             //First action
-            if(base.firstAction==ActionEnum.NULL_ACTION)
+            if(action1[i]==0 && action2[i]==0)
                 ins[i][j]=ActionEnum.NULL_ACTION;
-            else{
+            else if(action1[i]>0){
                 ins[i][j++]= base.firstAction;
                 ins[i][j++]=action1[i];
             }
-            if(base.firstAction==ActionEnum.COUNTER_ACTION || base.firstAction==ActionEnum.SHIELD_ACTION)
+            if(action1[i]>0 && (base.firstAction==ActionEnum.COUNTER_ACTION || base.firstAction==ActionEnum.SHIELD_ACTION || base.firstAction==ActionEnum.HEAL_ACTION))
                 ins[i][j++]=base.actionOnSelf?1:0;
             //Second action
-            if(base.secondAction!=ActionEnum.NULL_ACTION){
+            if(base.secondAction!=ActionEnum.NULL_ACTION && action2[i]>0){
                 ins[i][j++]= base.secondAction;
                 ins[i][j++]=action2[i];
             }
-            if(base.secondAction==ActionEnum.COUNTER_ACTION || base.secondAction==ActionEnum.SHIELD_ACTION)
+            if(action2[i]>0 && (base.secondAction==ActionEnum.COUNTER_ACTION || base.secondAction==ActionEnum.SHIELD_ACTION || base.firstAction==ActionEnum.HEAL_ACTION))
                 ins[i][j]=base.actionOnSelf?1:0;
         }
         return buildDice(ins);
@@ -174,5 +186,13 @@ public class DiceFactory {
 
     private static ImageIcon resizeIcon(String path,int size){
         return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(size,size,java.awt.Image.SCALE_SMOOTH));
+    }
+
+    private static boolean checkIfLocked(int[]array){
+        for(int i:array){
+            if(i!=0 && i!=20)
+                return false;
+        }
+        return true;
     }
 }

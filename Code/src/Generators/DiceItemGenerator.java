@@ -5,12 +5,13 @@ import Equipment.Items.ItemQuality;
 import Fight.GameActions.ItemAction;
 import Game.GameCollection;
 import Game.Tags;
-import Generators.Dictionaries.DiceIemDictionary;
 import Dice.Dice;
+import Dice.ActionEnum;
 import Dice.DiceFactory;
 import Generators.Dictionaries.ItemDictionary;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 public class DiceItemGenerator extends Generator{
 
@@ -41,17 +42,24 @@ public class DiceItemGenerator extends Generator{
             }
             default -> throw new RuntimeException("Quality not implemented");
         }
+        System.out.println("Points: "+points);
+
         int startPoints = points;
         int basePoints;
         // Item Concentrated
         if(quality == ItemQuality.COMMON)
             basePoints=points;
-        else if(GameCollection.random.nextDouble()>=CONCENTRATED_PROP)
+        else if(GameCollection.random.nextDouble()>=CONCENTRATED_PROP) {
             basePoints = points;
-        else
-            basePoints = Math.min(GeneratorConst.MEDIUM_POINTS*GeneratorConst.COMMON_MOD,points);
+            System.out.println("Item concentrated");
+        }else
+            basePoints = GeneratorConst.MEDIUM_POINTS*GeneratorConst.COMMON_MOD;
         points-=basePoints;
         DiceItemBase base = DiceItemFrames.getRandomDiceItemBase(basePoints);
+
+        System.out.println("Base: "+base.names[0]);
+        System.out.println("On start");
+        printBase(base);
 
         while (points>0){
             //Too little points to other action
@@ -60,7 +68,10 @@ public class DiceItemGenerator extends Generator{
                 points=0;
             }else if(base.haveEmptySide && GameCollection.random.nextDouble()<REPLACE_EMPTY_SIDE_PROP){
                 points-=replaceEmptySide(base,points);
+                System.out.println("Add new side");
+                printBase(base);
             }else{
+                base.secondActionValues=new int[6];
                 getRandomAction(base);
                 addActionRandomly(base,points);
                 points=0;
@@ -90,47 +101,73 @@ public class DiceItemGenerator extends Generator{
     }
 
     private static void addEffectEqualAll(DiceItemBase base,int points){
+        System.out.println("Second action distribution: addEffectEqualAll");
         int sidePoints = points/6;
         for(int i=0;i<6;i++)
-            base.secondaryActionType[i]=sidePoints;
+            base.secondActionValues[i]=sidePoints;
         points-=(sidePoints*6);
-        giveAwayPoints(base.secondaryActionType,points,true);
+        System.out.println("Give Away Points");
+        System.out.println("Before");
+        printBase(base);
+        giveAwayPoints(base.secondActionValues,points,true);
+        System.out.println("After");
+        printBase(base);
     }
 
     private static void addEffectEqualEmptySides(DiceItemBase base,int points){
+        System.out.println("Second action distribution: addEffectEqualEmptySides");
         int index = findFirstEmptySide(base.firstActionValues);
         int sidePoints = points/(index+1);
         for(int i=0;i<(index+1);i++)
-            base.secondaryActionType[i]=sidePoints;
+            base.secondActionValues[i]=sidePoints;
         points-=(sidePoints*(index+1));
-        giveAwayPoints(base.secondaryActionType,points,true);
+        System.out.println("Give Away Points");
+        System.out.println("Before");
+        printBase(base);
+        giveAwayPoints(base.secondActionValues,points,true);
+        System.out.println("After");
+        printBase(base);
     }
 
     private static void addEffectEqualFullSides(DiceItemBase base,int points){
+        System.out.println("Second action distribution: addEffectEqualFullSides");
         int index = findFirstEmptySide(base.firstActionValues);
         int sidePoints = points/(5-index);
         for(int i=index+1;i<6;i++)
-            base.secondaryActionType[i]=sidePoints;
+            base.secondActionValues[i]=sidePoints;
         points-=(sidePoints*(5-index));
-        giveAwayPoints(base.secondaryActionType,points,true);
+        System.out.println("Give Away Points");
+        System.out.println("Before");
+        printBase(base);
+        giveAwayPoints(base.secondActionValues,points,true);
+        System.out.println("After");
+        printBase(base);
     }
 
     private static void addEffectProportional(DiceItemBase base,int points){
+        System.out.println("Second action distribution: addEffectProportional");
         int index = findFirstEmptySide(base.firstActionValues);
         int sum=0;
         for(int i=index+1;i<6;i++)
             sum+=base.firstActionValues[i];
 
+        int pointsCopy=points;
         for(int i=index+1;i<6;i++) {
             //Calculate proportional value
-            int tmp = (base.firstActionValues[i] / sum) * points;
-            base.secondaryActionType[i] = tmp;
+            int tmp = (int)(((double)(base.firstActionValues[i]) / sum) * pointsCopy);
+            base.secondActionValues[i] = tmp;
             points-=tmp;
         }
-        giveAwayPoints(base.secondaryActionType,points,true);
+        System.out.println("Give Away Points");
+        System.out.println("Before");
+        printBase(base);
+        giveAwayPoints(base.secondActionValues,points,true);
+        System.out.println("After");
+        printBase(base);
     }
 
     private static void addEffectInverselyProportional(DiceItemBase base,int points){
+        System.out.println("Second action distribution: addEffectInverselyProportional");
         int index = findFirstEmptySide(base.firstActionValues);
         int sum=0;
         for(int i=index+1;i<6;i++)
@@ -144,24 +181,34 @@ public class DiceItemGenerator extends Generator{
             prop[i] = tmp;
             iSum+=tmp;
         }
-
+        int pointsCopy=points;
         for(int i=index+1;i<6;i++) {
             //Calculate proportional value
-            int tmp = (int)((prop[i] / iSum) * points);
-            base.secondaryActionType[i] = tmp;
+            int tmp = (int)((prop[i] / iSum) * pointsCopy);
+            base.secondActionValues[i] = tmp;
             points-=tmp;
         }
-        giveAwayPoints(base.secondaryActionType,points,true);
+        System.out.println("Give Away Points");
+        System.out.println("Before");
+        printBase(base);
+        giveAwayPoints(base.secondActionValues,points,true);
+        System.out.println("After");
+        printBase(base);
     }
 
     private static void redistributePointsEqual(DiceItemBase base,int points){
+        System.out.println("Redistribute Points Equal");
+        System.out.println("Before");
+        printBase(base);
         boolean isFirstValue=true;
         while(points>0){
             points = giveAwayPoints(isFirstValue?base.firstActionValues:base.secondActionValues,points,false);
             //If base use second action, change focused action
-            if(base.secondAction!=0)
+            if(base.secondAction!= ActionEnum.NULL_ACTION)
                 isFirstValue=!isFirstValue;
         }
+        System.out.println("After");
+        printBase(base);
     }
 
     private static int replaceEmptySide(DiceItemBase base,int points){
@@ -174,9 +221,9 @@ public class DiceItemGenerator extends Generator{
     }
 
     private static void getRandomAction(DiceItemBase base){
-        if (base.secondaryActionType.length==0)
+        if (base.secondaryActionList.length==0)
             return;
-        base.secondAction = base.secondaryActionType[GameCollection.random.nextInt(base.secondaryActionType.length)];
+        base.secondAction = base.secondaryActionList[GameCollection.random.nextInt(base.secondaryActionList.length)];
         if(base.secondAction == base.firstAction)
             getRandomAction(base);
     }
@@ -191,15 +238,16 @@ public class DiceItemGenerator extends Generator{
     }
 
     private static int giveAwayPoints(int[]array,int points, boolean isLooped){
+
         int goBackIndex=-1;
         for(int i=5;i>=0;i--){
-            if(array[i]==0){
+            if(array[i]>0){
                 goBackIndex=i;
                 break;
             }
         }
         if(goBackIndex<0)
-            throw new RuntimeException("Error, array cannot be empty!");
+            goBackIndex=5;
 
         int i=5;
         while(points>0){
@@ -214,6 +262,16 @@ public class DiceItemGenerator extends Generator{
             points--;
         }
         return points;
+    }
+
+
+    //TODO remove this, only for debug
+    private static void printBase(DiceItemBase base){
+        System.out.println("Action1: "+ base.firstAction);
+        System.out.println("Values: " + Arrays.toString(base.firstActionValues));
+        System.out.println("Action2: "+ base.secondAction);
+        System.out.println("Values: " + (base.secondActionValues==null?"None":Arrays.toString(base.secondActionValues)));
+
     }
 
 }

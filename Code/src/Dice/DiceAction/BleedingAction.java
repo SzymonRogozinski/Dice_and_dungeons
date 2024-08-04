@@ -24,7 +24,7 @@ public class BleedingAction implements DiceAction{
 
     @Override
     public String actionDescription() {
-        return "Apply " +value + "of bleeding.";
+        return "Apply " +value + " of bleeding.";
     }
 
     @Override

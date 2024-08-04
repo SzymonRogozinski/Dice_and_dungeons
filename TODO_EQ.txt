@@ -1,4 +1,0 @@
-# Generacja przedmiotów
-> Implementcja szkieletu/ wzorca podstawowych statystyk
-> Implementacja różnych metod rozdysponowania statystyk
-> Implementacja generacji icony DiceSide

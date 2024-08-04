@@ -50,12 +50,11 @@ public class ItemDictionary {
     }
 
     public static Tags[] getTagsFromAction(int action1,int action2){
-        ArrayList<Tags> tags=new ArrayList<>();
         Tags[] t1 = ACTION_TAGS.get(action1);
         Tags[] t2 = ACTION_TAGS.get(action2);
-        tags.addAll(Arrays.asList(t1));
-        tags.addAll(Arrays.asList(t2));
-        return (Tags[]) tags.toArray();
+        Tags[] result = Arrays.copyOf(t1,t1.length+t2.length);
+        System.arraycopy(t2,0,result,t1.length,t2.length);
+        return result;
     }
 
     public static String getNameFromItemBase(DiceItemBase base){
@@ -63,7 +62,8 @@ public class ItemDictionary {
         //Base name
         name = base.names[GameCollection.random.nextInt(base.names.length)];
         //Class-Tag name
-        name = getNameFromTag(base.tags.get(0))+" "+name;
+        if(!base.tags.isEmpty())
+            name = getNameFromTag(base.tags.get(0))+" "+name;
 
         //ADJECTIVES names
         if(GameCollection.random.nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {

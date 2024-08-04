@@ -1,5 +1,6 @@
 package Generators;
 
+import Dice.ActionEnum;
 import Fight.ActionTarget;
 import Fight.GameActions.DiceLambda;
 import Game.Tags;
@@ -7,7 +8,7 @@ import Game.Tags;
 import java.util.ArrayList;
 
 public class DiceItemBase {
-    final int[] secondaryActionType;
+    final int[] secondaryActionList;
     public int[] firstActionValues;
     public int firstAction;
     public int[] secondActionValues;
@@ -19,15 +20,16 @@ public class DiceItemBase {
     public DiceLambda diceLambda;
     public boolean actionOnSelf;
 
-    public DiceItemBase(int[] firstActionValues, int firstAction, String[] names, ActionTarget target, ArrayList<Tags> tags,int[] secondaryActionType,DiceLambda diceLambda,boolean actionOnSelf) {
+    public DiceItemBase(int[] firstActionValues, int firstAction, String[] names, ActionTarget target, int[] secondaryActionList, DiceLambda diceLambda, boolean actionOnSelf) {
         this.firstActionValues = firstActionValues;
         this.firstAction = firstAction;
         this.names = names;
         this.target = target;
-        this.tags = tags;
+        this.tags = new ArrayList<>();
         this.haveEmptySide=true;
-        this.secondaryActionType=secondaryActionType;
+        this.secondaryActionList = secondaryActionList;
         this.diceLambda=diceLambda;
         this.actionOnSelf=actionOnSelf;
+        this.secondAction= ActionEnum.NULL_ACTION;
     }
 }

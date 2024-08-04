@@ -26,7 +26,7 @@ public class ManaAction implements DiceAction{
 
     @Override
     public String actionDescription() {
-        return "";
+        return "Mana " + value + ".";
     }
 
     @Override
