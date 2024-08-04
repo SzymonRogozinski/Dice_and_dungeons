@@ -1,5 +1,4 @@
 > Używalne przedmioty (Stronicowanie, zużywanie)
-> Dodać kolor jakości przedmiotu
 > Przenieść party do GameCollection
 > Dodać więcej typów przedmiotów i wagi akcji
 > Stworzenie zbioru parametrów związanych z balansem w jednym miejscu
