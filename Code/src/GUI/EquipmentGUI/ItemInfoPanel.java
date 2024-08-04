@@ -56,8 +56,8 @@ public class ItemInfoPanel extends JPanel {
     }
 
     private class DiceItemInfoPanel extends JPanel{
-
-        private JLabel nameLabel, requirements;
+        private final static double MANA_COST_TO_ALL_PROPORTION=0.3;
+        private JLabel nameLabel, requirements, manaCost;
         private DiceSidesPanel diceSidesPanel;
 
         public DiceItemInfoPanel() {
@@ -74,12 +74,16 @@ public class ItemInfoPanel extends JPanel {
 
             requirements = new JLabel();
             requirements.setForeground(Color.WHITE);
-            requirements.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE-10,GUISettings.SMALL_PANEL_SIZE/10));
-            nameLabel.setVerticalAlignment(SwingConstants.CENTER);
+            requirements.setPreferredSize(new Dimension((int)((GUISettings.PANEL_SIZE)*(1-MANA_COST_TO_ALL_PROPORTION)-20),GUISettings.SMALL_PANEL_SIZE/10));
+
+            manaCost = new JLabel();
+            manaCost.setForeground(Color.WHITE);
+            manaCost.setPreferredSize(new Dimension((int)((GUISettings.PANEL_SIZE-10)*MANA_COST_TO_ALL_PROPORTION),GUISettings.SMALL_PANEL_SIZE/10));
 
             this.add(nameLabel);
             this.add(diceSidesPanel);
             this.add(requirements);
+            this.add(manaCost);
         }
 
         public void refresh(){
@@ -89,9 +93,11 @@ public class ItemInfoPanel extends JPanel {
             if(item instanceof ActionItem aItem) {
                 nameLabel.setText(aItem.name);
                 diceSidesPanel.setDiceSides(aItem.getAction().getDice().getSides());
+                manaCost.setText("");
             } else if (item instanceof SpellItem sItem) {
                 nameLabel.setText(sItem.name);
                 diceSidesPanel.setDiceSides(sItem.getAction().getDice().getSides());
+                manaCost.setText("Mana: "+sItem.getAction().getManaCost());
             }
 
             StringBuilder requirementsBuilder=new StringBuilder("Requirements:");
