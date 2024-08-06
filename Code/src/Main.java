@@ -66,6 +66,7 @@ public class Main {
         ArrayList<Item> usableItems=new ArrayList<>(List.of(new Item[]{usItem1,usItem2,usItem3,usItem4}));
 
         PlayerParty party = new PlayerParty(new ArrayList<>(List.of(new PlayerCharacter[]{player,player2})),usableItems);
+        GameCollection.setParty(party);
 
         EnemyActionFactory factory1 = new EnemyActionFactory(e->e.getStrength(),0.25,false,1);
         EnemyActionFactory factory2 = new EnemyActionFactory(e->e.getCunning(),0.20,false,6);
@@ -78,7 +79,7 @@ public class Main {
         EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12,12,"Skeleton1",new ImageIcon("CharacterTexture/skeleton.png"),ai1);
         EnemyCharacter enemy2 = new EnemyCharacter(12,12,12,12,12,12,"Skeleton2",new ImageIcon("CharacterTexture/skeleton.png"),ai2);
 
-        FightModule fight = new FightModule(state,party,new ArrayList<>(List.of(new EnemyCharacter[]{enemy,enemy2})));
+        FightModule fight = new FightModule(state,new ArrayList<>(List.of(new EnemyCharacter[]{enemy,enemy2})));
         GameCollection.setFight(fight);
         state.refresh();
 

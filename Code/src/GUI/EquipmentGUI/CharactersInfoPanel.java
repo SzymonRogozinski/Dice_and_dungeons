@@ -135,8 +135,8 @@ public class CharactersInfoPanel extends JPanel {
         }
 
         public void refresh(){
-            statisticLabels[1].setText("Health: "+GameCollection.getEquipment().getParty().getCurrentHealth()+"/"+GameCollection.getEquipment().getParty().getMaxHealth());
-            statisticLabels[2].setText("Mana: "+GameCollection.getEquipment().getParty().getCurrentMana()+"/"+GameCollection.getEquipment().getParty().getMaxMana());
+            statisticLabels[1].setText("Health: "+GameCollection.getParty().getCurrentHealth()+"/"+GameCollection.getParty().getMaxHealth());
+            statisticLabels[2].setText("Mana: "+GameCollection.getParty().getCurrentMana()+"/"+GameCollection.getParty().getMaxMana());
         }
     }
 

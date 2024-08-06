@@ -1,4 +1,3 @@
 > Używalne przedmioty (Stronicowanie, zużywanie)
-> Przenieść party do GameCollection
+> Naprawić Dragable gdy przeciągniesz okienko
 > Dodać więcej typów przedmiotów i wagi akcji
-> Stworzenie zbioru parametrów związanych z balansem w jednym miejscu

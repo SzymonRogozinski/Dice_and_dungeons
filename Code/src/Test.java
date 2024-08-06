@@ -52,6 +52,7 @@ public class Test {
         ArrayList<Item> usableItems=new ArrayList<>(List.of(new Item[]{usItem1,usItem2,usItem3,usItem4,usItem5}));
 
         PlayerParty party = new PlayerParty(new ArrayList<>(List.of(new PlayerCharacter[]{player,player2})),usableItems);
+        GameCollection.setParty(party);
 
         //Set eq
         player.getEquipment().equip(item1,0, CharacterEquipment.ACTION_SLOT);
@@ -147,8 +148,8 @@ public class Test {
 
         view = new EquipmentView();
         EquipmentGUIState state=new EquipmentGUIState(view);
-        EquipmentModule module = new EquipmentModule(state,party);
-        FightModule fModule = new FightModule(null,party,null);
+        EquipmentModule module = new EquipmentModule(state);
+        FightModule fModule = new FightModule(null,null);
 
         GameCollection.setEquipment(module);
         GameCollection.setFight(fModule);

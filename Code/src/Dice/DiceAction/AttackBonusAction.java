@@ -4,6 +4,7 @@ import Character.GameCharacter;
 import Dice.Dice;
 import Dice.DiceFactory;
 import Fight.Statuses.BonusDiceStatus;
+import Game.GameBalance;
 import Game.Tags;
 
 public class AttackBonusAction implements DiceAction{
@@ -47,7 +48,8 @@ public class AttackBonusAction implements DiceAction{
 
     @Override
     public void doAction(GameCharacter character) {
-        int diceStrength = (character.getStrength()+5)/10+4;
+        int diceStrength = (character.getStrength() + GameBalance.DICE_BONUS_ADD_TO_STAT_MOD)/GameBalance.DICE_BONUS_DIVIDE + GameBalance.MIN_DICE_BONUS_VALUE;
+        diceStrength = Math.min(diceStrength, GameBalance.MAX_DICE_VALUE);
         Dice dice = DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,diceStrength},{1,diceStrength},{1,diceStrength}});
         character.addStatus(new BonusDiceStatus(value,imagePath,dice, Tags.ATTACK));
     }

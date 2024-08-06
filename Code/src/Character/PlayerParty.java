@@ -18,7 +18,6 @@ public class PlayerParty {
         int health=0;
         int mana=0;
         for(PlayerCharacter player:characters){
-            player.setParty(this);
             health+=player.getEndurance();
             mana+=player.getIntelligence();
         }

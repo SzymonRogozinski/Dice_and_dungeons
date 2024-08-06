@@ -188,7 +188,7 @@ public class ItemManagementPanel extends JPanel {
 
         public void refresh(){
             int i=0;
-            ArrayList<Item> items=GameCollection.getEquipment().getParty().getBackpack().getPageOfItems();
+            ArrayList<Item> items=GameCollection.getParty().getBackpack().getPageOfItems();
             for(;i<items.size() && i<42;i++){
                 itemSlots[i].setItem(items.get(i));
             }
@@ -232,7 +232,7 @@ public class ItemManagementPanel extends JPanel {
         public void refresh(){
             int i,j;
             j=0;
-            ArrayList<Item> items=GameCollection.getEquipment().getParty().getBackpack().getPageOfItemsForCharacter(GameCollection.getEquipment().getCurrentCharacter());
+            ArrayList<Item> items=GameCollection.getParty().getBackpack().getPageOfItemsForCharacter(GameCollection.getEquipment().getCurrentCharacter());
             for(i=0;i<14;i++){
                 if(i%7==6)
                     continue;

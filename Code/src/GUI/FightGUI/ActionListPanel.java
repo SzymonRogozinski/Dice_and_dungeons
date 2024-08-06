@@ -79,7 +79,7 @@ public class ActionListPanel extends JPanel {
 
         //usable items
         //ArrayList<UsableItemAction> usableItems = character.getUsableItems();
-        ArrayList<UsableItem> usableItems = character.getParty().getBackpack().getUsableItems();
+        ArrayList<UsableItem> usableItems = GameCollection.getParty().getBackpack().getUsableItems();
         buttons=new ArrayList<>();
 
         for(UsableItem item:usableItems){
@@ -87,7 +87,7 @@ public class ActionListPanel extends JPanel {
             button.setSize(buttonWidth,buttonHeight);
             button.addActionListener(e-> {
                 GameCollection.getFight().choosedAction(item.getAction());
-                character.getParty().getBackpack().removeFromBackpack(item);
+                GameCollection.getParty().getBackpack().removeFromBackpack(item);
                 changePage("Start");
             });
             buttons.add(button);
@@ -121,11 +121,11 @@ public class ActionListPanel extends JPanel {
 
             button.setSize(buttonWidth,buttonHeight);
             button.addActionListener(e-> {
-                if(GameCollection.getFight().getParty().getCurrentMana()<spell.getAction().getManaCost()){
+                if(GameCollection.getParty().getCurrentMana()<spell.getAction().getManaCost()){
                     System.out.println("You don't have enough mana!");
                 }
                 else {
-                    GameCollection.getFight().getParty().spendMana(spell.getAction().getManaCost());
+                    GameCollection.getParty().spendMana(spell.getAction().getManaCost());
                     GameCollection.getFight().choosedAction(spell.getAction());
                     changePage("Start");
                 }

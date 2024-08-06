@@ -14,6 +14,7 @@ public class ActionEnum {
     public static final int BLEEDING_ACTION=6;
     public static final int WEAKNESS_ACTION=7;
     public static final int COUNTER_ACTION=8;
+    public static final int STUN_ACTION=9;
 
     //TODO Set value
     public static final Map<Integer,Integer> ACTION_COST=Map.of(

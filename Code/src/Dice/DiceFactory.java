@@ -2,6 +2,7 @@ package Dice;
 
 import Dice.DiceAction.*;
 import GUI.GUISettings;
+import Game.GameBalance;
 import Generators.DiceItemBase;
 
 import javax.swing.*;
@@ -32,8 +33,8 @@ public class DiceFactory {
             if(base.firstActionValues[i]>0){
                 cost = ActionEnum.actionCost(base.firstAction);
                 value = base.firstActionValues[i]/cost;
-                if(value>20)
-                    value=20;
+                if(value> GameBalance.MAX_DICE_VALUE)
+                    value=GameBalance.MAX_DICE_VALUE;
                 action1CostRest+=(base.firstActionValues[i]-value*cost);
                 action1[i]=value;
             }
@@ -41,8 +42,8 @@ public class DiceFactory {
             if(base.secondAction!=ActionEnum.NULL_ACTION && base.secondActionValues[i]>0){
                 cost = ActionEnum.actionCost(base.secondAction);
                 value = base.secondActionValues[i]/cost;
-                if(value>20)
-                    value=20;
+                if(value>GameBalance.MAX_DICE_VALUE)
+                    value=GameBalance.MAX_DICE_VALUE;
                 action2CostRest+=(base.secondActionValues[i]-value*cost);
                 action2[i]=value;
             }
@@ -55,7 +56,7 @@ public class DiceFactory {
                 action2CostRest += action1CostRest;
                 action1CostRest = 0;
             }else{
-                if(action1[i]<20) {
+                if(action1[i]<GameBalance.MAX_DICE_VALUE) {
                     action1[i]++;
                     action1CostRest -= cost;
                 }else if(checkIfLocked(action1)){
@@ -83,7 +84,7 @@ public class DiceFactory {
             if(cost>action2CostRest) {
                 action2CostRest = 0;
             }else{
-                if(action2[i]<20) {
+                if(action2[i]<GameBalance.MAX_DICE_VALUE) {
                     action2[i]++;
                     action2CostRest -= cost;
                 }else if(checkIfLocked(action2)){
@@ -190,7 +191,7 @@ public class DiceFactory {
 
     private static boolean checkIfLocked(int[]array){
         for(int i:array){
-            if(i!=0 && i!=20)
+            if(i!=0 && i!=GameBalance.MAX_DICE_VALUE)
                 return false;
         }
         return true;
