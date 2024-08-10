@@ -4,24 +4,28 @@ import Dice.ActionEnum;
 import Fight.ActionTarget;
 import Fight.GameActions.DiceLambda;
 import Game.GameCollection;
-import Character.PlayerCharacter;
-import Game.Tags;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DiceItemFrames {
 
-    private final static DiceItemFrame[] FRAMES=new DiceItemFrame[]{
+    private final static DiceItemFrame[] DICE_ITEM_FRAMES =new DiceItemFrame[]{
             new DiceItemFrame(new double[]{0,0,0.2,0.2,0.3,0.3}, ActionEnum.DAMAGE_ACTION,new String[]{"sword"},ActionTarget.ENEMY_CHARACTER,new int[]{ActionEnum.POISON_ACTION,ActionEnum.BLEEDING_ACTION,ActionEnum.WEAKNESS_ACTION},p->p.getDiceNumber(p.getStrength()),false),
             new DiceItemFrame(new double[]{0,0.2,0.2,0.2,0.2,0.2}, ActionEnum.HEAL_ACTION,new String[]{"bag of healing"},ActionTarget.PLAYER_CHARACTER,new int[]{ActionEnum.MANA_ACTION},p->p.getDiceNumber(p.getCharisma()),false)
+    };
 
+    private final static DiceItemFrame[] SPELL_FRAMES =new DiceItemFrame[]{
+            new DiceItemFrame(new double[]{0,0,0,0.2,0.4,0.4}, ActionEnum.DAMAGE_ACTION,new String[]{"fire ball"},ActionTarget.ENEMY_CHARACTER,new int[]{ActionEnum.WEAKNESS_ACTION},p->p.getDiceNumber(p.getIntelligence()),false),
     };
 
     public static DiceItemBase getRandomDiceItemBase(int points){
-        int i = GameCollection.random.nextInt(FRAMES.length);
-        return FRAMES[i].getDiceItemBase(points);
+        int i = GameCollection.random.nextInt(DICE_ITEM_FRAMES.length);
+        return DICE_ITEM_FRAMES[i].getDiceItemBase(points);
     }
+
+    public static DiceItemBase getRandomSpellItemBase(int points){
+        int i = GameCollection.random.nextInt(SPELL_FRAMES.length);
+        return SPELL_FRAMES[i].getDiceItemBase(points);
+    }
+
     private static class DiceItemFrame {
         final double[] values;
         final int diceAction;

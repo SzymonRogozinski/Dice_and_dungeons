@@ -1,8 +1,9 @@
 package Generators;
 
-import Equipment.Items.ActionItem;
 import Equipment.Items.ItemQuality;
-import Fight.GameActions.ItemAction;
+import Equipment.Items.SpellItem;
+import Fight.ActionTarget;
+import Fight.GameActions.SpellAction;
 import Game.GameCollection;
 import Game.Tags;
 import Dice.Dice;
@@ -14,13 +15,16 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiceItemGenerator extends Generator{
+public class SpellItemGenerator extends Generator{
 
     private final static double CONCENTRATED_PROP = 0.9;
     private final static double REPLACE_EMPTY_SIDE_PROP = 0.5;
+    private final static double RAISE_RANGE_PROP = 0.33;
     private final static double EQUALITY_EDGE = 0.15;
+    private final static double MANA_COST_MOD=0.8;
+    private final static double SPELL_ACTION_MOD = 0.33;
 
-    public static ActionItem generateItem(ItemQuality quality){
+    public static SpellItem generateItem(ItemQuality quality){
         if (quality==null)
             throw new IllegalArgumentException("Quality of item cannot be null!");
 
@@ -44,8 +48,11 @@ public class DiceItemGenerator extends Generator{
             default -> throw new RuntimeException("Quality not implemented");
         }
 
+        // Additional points for spell
+        points= (int)(points*(1+SPELL_ACTION_MOD));
         int startPoints = points;
         int basePoints;
+
         // Item Concentrated
         if(quality == ItemQuality.COMMON)
             basePoints=points;
@@ -54,7 +61,16 @@ public class DiceItemGenerator extends Generator{
         }else
             basePoints = GeneratorConst.MEDIUM_POINTS*GeneratorConst.COMMON_MOD;
         points-=basePoints;
-        DiceItemBase base = DiceItemFrames.getRandomDiceItemBase(basePoints);
+        DiceItemBase base = DiceItemFrames.getRandomSpellItemBase(basePoints);
+
+        //Raise range
+        if(quality != ItemQuality.COMMON && (base.target== ActionTarget.PLAYER_CHARACTER || base.target==ActionTarget.ENEMY_CHARACTER) && points>0 && GameCollection.random.nextDouble()<=RAISE_RANGE_PROP){
+            if(base.target== ActionTarget.PLAYER_CHARACTER)
+                base.target=ActionTarget.PLAYER_PARTY;
+            else if (base.target==ActionTarget.ENEMY_CHARACTER)
+                base.target=ActionTarget.ALL_ENEMIES;
+            points/=2;
+        }
 
         while (points>0){
             //Too little points to other action
@@ -72,13 +88,15 @@ public class DiceItemGenerator extends Generator{
         }
         Tags [] tags = tag==null ? new Tags[]{}:new Tags[]{tag};
         base.tags=new ArrayList<>(List.of(tags));
-        String name = ItemDictionary.getItemNameFromItemBase(base);
+        String name = ItemDictionary.getSpellNameFromItemBase(base);
         Dice dice = DiceFactory.buildDice(base);
-        Tags[] actionTags= ItemDictionary.getTagsFromAction(base.firstAction,base.secondAction);
+        Tags[] actionTags= ItemDictionary.getTagsFromActionSpellAction(base.firstAction,base.secondAction);
 
-        ItemAction action=new ItemAction(dice,base.target,base.diceLambda,actionTags);
+        int mana =(int)(startPoints*MANA_COST_MOD);
+
+        SpellAction action=new SpellAction(dice,base.target,base.diceLambda,mana,actionTags);
         ImageIcon icon = null; //TODO
-        return new ActionItem(action,tags,icon,name,quality);
+        return new SpellItem(action,tags,icon,name,quality);
     }
 
     private static void addActionRandomly(DiceItemBase base, int points){
@@ -223,3 +241,4 @@ public class DiceItemGenerator extends Generator{
     }
 
 }
+

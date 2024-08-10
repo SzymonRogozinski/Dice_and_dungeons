@@ -1,3 +1,7 @@
 > Używalne przedmioty (Stronicowanie, zużywanie)
 > Naprawić Dragable gdy przeciągniesz okienko
-> Dodać więcej typów przedmiotów i wagi akcji
+> Dodać więcej typów przedmiotów, wagi akcji i nazw
+> Dodać składanie ikon + obrazki
+> Dodać moduł lootu
+> "Generator" UsableItems
+> Generator przeciwników
