@@ -3,5 +3,5 @@
 > Dodać więcej typów przedmiotów, wagi akcji i nazw
 > Dodać składanie ikon + obrazki
 > Dodać moduł lootu
-> "Generator" UsableItems
 > Generator przeciwników
+> Poprawić wyświetlanie granic ikon kostek
