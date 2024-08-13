@@ -248,7 +248,6 @@ public class ItemInfoPanel extends JPanel {
             for(int i=0;i<6;i++){
                 diceSides[i]=new JLabel();
                 diceSides[i].setPreferredSize(new Dimension(diceSize,diceSize));
-                diceSides[i].setBorder(BorderFactory.createLineBorder(Color.WHITE,1));
                 this.add(diceSides[i]);
             }
 

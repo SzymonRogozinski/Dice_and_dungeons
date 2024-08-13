@@ -5,12 +5,18 @@ import GUI.GUISettings;
 import Game.GameBalance;
 import Generators.DiceItemBase;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DiceFactory {
 
-    private static final int size= GUISettings.SMALL_PANEL_SIZE/2;
+    private static final int size= GUISettings.SMALL_PANEL_SIZE/2-3;
+    private static final int ICON_SIZE= 40;
 
     public static Dice buildDice(int[][] instruction){
         if(instruction.length!=6)
@@ -138,55 +144,96 @@ public class DiceFactory {
             NullAction action = new NullAction();
             ArrayList<DiceAction> actions = new ArrayList<>();
             actions.add(action);
-            return new DiceSide(actions,resizeIcon("DiceIcons/N.png",size));
+            return new DiceSide(actions,resizeIcon("DiceIcons/N.png",size));    //TODO
         }
         ArrayList<DiceAction> actions = new ArrayList<>();
-        String imageCode="";
+        ArrayList<String> imageCode=new ArrayList<>();
         for(int i=0;i<instruction.length;i+=2){
             int actionType = instruction[i];
             switch (actionType){
                 case ActionEnum.DAMAGE_ACTION -> {
                     actions.add(new DamageAction(instruction[i+1]));
-                    imageCode+="D"+instruction[i+1];
+                    imageCode.add("D");
+                    imageCode.add(""+instruction[i+1]);
                 }
                 case ActionEnum.SHIELD_ACTION -> {
                     actions.add(new ShieldAction(instruction[i+1],instruction[i+2]==1));
-                    imageCode+="S"+instruction[i+1];
+                    imageCode.add("S");
+                    imageCode.add(""+instruction[i+1]);
                     i++;
                 }
                 case ActionEnum.HEAL_ACTION -> {
                     actions.add(new HealAction(instruction[i+1],instruction[i+2]==1));
-                    imageCode+="H"+instruction[i+1];
+                    imageCode.add("H");
+                    imageCode.add(""+instruction[i+1]);
                     i++;
                 }
                 case ActionEnum.MANA_ACTION -> {
                     actions.add(new ManaAction(instruction[i+1]));
-                    imageCode+="M"+instruction[i+1];
+                    imageCode.add("M");
+                    imageCode.add(""+instruction[i+1]);
                 }
                 case ActionEnum.POISON_ACTION -> {
                     actions.add(new PoisonAction(instruction[i+1]));
-                    imageCode+="P"+instruction[i+1];
+                    imageCode.add("P");
+                    imageCode.add(""+instruction[i+1]);
                 }
                 case ActionEnum.BLEEDING_ACTION -> {
                     actions.add(new BleedingAction(instruction[i+1]));
-                    imageCode+="B"+instruction[i+1];
+                    imageCode.add("B");
+                    imageCode.add(""+instruction[i+1]);
                 }
                 case ActionEnum.WEAKNESS_ACTION -> {
                     actions.add(new WeaknessAction(instruction[i+1]));
-                    imageCode+="W"+instruction[i+1];
+                    imageCode.add("W");
+                    imageCode.add(""+instruction[i+1]);
                 }
                 case ActionEnum.COUNTER_ACTION -> {
                     actions.add(new CounterAction(instruction[i+1],instruction[i+2]==1));
-                    imageCode+="C"+instruction[i+1];
+                    imageCode.add("C");
+                    imageCode.add(""+instruction[i+1]);
                     i++;
                 }
             }
         }
-        return new DiceSide(actions,resizeIcon("DiceIcons/"+imageCode+".png",size));
+        return new DiceSide(actions,buildIcon(imageCode));
     }
 
     private static ImageIcon resizeIcon(String path,int size){
         return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(size,size,java.awt.Image.SCALE_SMOOTH));
+    }
+
+    private static ImageIcon buildIcon(ArrayList<String> iconCode) {
+        BufferedImage completeImage = new BufferedImage(ICON_SIZE,ICON_SIZE,BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = completeImage.createGraphics();
+        g.setBackground(Color.WHITE);
+        g.clearRect(0,0,ICON_SIZE,ICON_SIZE);
+        try {
+            if (iconCode.size() == 2) {         //One symbol
+                BufferedImage symbol = ImageIO.read(new File("DiceSymbols/"+iconCode.get(0)+".png"));
+                BufferedImage value = ImageIO.read(new File("DiceNumber/"+iconCode.get(1)+".png"));
+                g.drawImage(value,1,1,null);
+                g.drawImage(symbol,20,20,null);
+            } else if (iconCode.size() == 4) {  //Two symbol
+                BufferedImage symbol1 = ImageIO.read(new File("DiceSymbols/"+iconCode.get(0)+".png"));
+                BufferedImage value1 = ImageIO.read(new File("DiceNumber/"+iconCode.get(1)+".png"));
+                BufferedImage symbol2 = ImageIO.read(new File("DiceSymbols/"+iconCode.get(2)+".png"));
+                BufferedImage value2 = ImageIO.read(new File("DiceNumber/"+iconCode.get(3)+".png"));
+                g.drawImage(value1,1,1,null);
+                g.drawImage(symbol1,20,1,null);
+                g.drawImage(value2,20,20,null);
+                g.drawImage(symbol2,1,20,null);
+
+            } else {                            //Error
+                throw new RuntimeException("iconCode has illegal number of elements: "+iconCode.size());
+            }
+        }catch (IOException e){
+            throw new RuntimeException("Cannot find/open texture!");
+        }
+        g.setColor(Color.BLACK);
+        g.draw(new Rectangle(39,39));
+        g.dispose();
+        return new ImageIcon(completeImage.getScaledInstance(size,size,java.awt.Image.SCALE_SMOOTH));
     }
 
     private static boolean checkIfLocked(int[]array){

@@ -1,7 +1,6 @@
 > Używalne przedmioty (Stronicowanie, zużywanie)
 > Naprawić Dragable gdy przeciągniesz okienko
 > Dodać więcej typów przedmiotów, wagi akcji i nazw
-> Dodać składanie ikon + obrazki
+> Dodać obrazki
 > Dodać moduł lootu
 > Generator przeciwników
-> Poprawić wyświetlanie granic ikon kostek
