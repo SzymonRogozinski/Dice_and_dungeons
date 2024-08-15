@@ -1,6 +1,9 @@
-> Używalne przedmioty (Stronicowanie, zużywanie)
-> Naprawić Dragable gdy przeciągniesz okienko
 > Dodać więcej typów przedmiotów, wagi akcji i nazw
-> Dodać obrazki
+> Podmienić placeholdery
+
+> Naprawić Dragable gdy przeciągniesz okienko
 > Dodać moduł lootu
+> Loot popup
 > Generator przeciwników
+> TODOs
+> Poprawić GUI

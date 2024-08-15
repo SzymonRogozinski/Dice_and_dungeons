@@ -8,7 +8,7 @@ import javax.swing.*;
 public class StunStatus extends GameStatus{
 
     public StunStatus() {
-        super(1, new Integer[]{}, new ImageIcon("StatusIcons/Stun.png"), new Tags[]{Tags.ON_TURN_START});
+        super(1, new Integer[]{}, new ImageIcon("Texture/StatusIcons/Stun.png"), new Tags[]{Tags.ON_TURN_START});
     }
 
     @Override

@@ -10,7 +10,7 @@ import Game.Tags;
 public class MagicBonusAction implements DiceAction{
 
     private static final String id="MagicBonus";
-    private static final String imagePath="StatusIcons/SpellDice.png";
+    private static final String imagePath="Texture/StatusIcons/SpellDice.png";
     private final int value;
     private boolean actionOnSelf;
 

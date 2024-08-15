@@ -5,15 +5,17 @@ import Fight.ActionTarget;
 import Fight.GameActions.DiceLambda;
 import Game.GameCollection;
 
+import javax.swing.*;
+
 public class DiceItemFrames {
 
     private final static DiceItemFrame[] DICE_ITEM_FRAMES =new DiceItemFrame[]{
-            new DiceItemFrame(new double[]{0,0,0.2,0.2,0.3,0.3}, ActionEnum.DAMAGE_ACTION,new String[]{"sword"},ActionTarget.ENEMY_CHARACTER,new int[]{ActionEnum.POISON_ACTION,ActionEnum.BLEEDING_ACTION,ActionEnum.WEAKNESS_ACTION},p->p.getDiceNumber(p.getStrength()),false),
-            new DiceItemFrame(new double[]{0,0.2,0.2,0.2,0.2,0.2}, ActionEnum.HEAL_ACTION,new String[]{"bag of healing"},ActionTarget.PLAYER_CHARACTER,new int[]{ActionEnum.MANA_ACTION},p->p.getDiceNumber(p.getCharisma()),false)
+            new DiceItemFrame(new double[]{0,0,0.2,0.2,0.3,0.3}, ActionEnum.DAMAGE_ACTION,new String[]{"sword"},ActionTarget.ENEMY_CHARACTER,new int[]{ActionEnum.POISON_ACTION,ActionEnum.BLEEDING_ACTION,ActionEnum.WEAKNESS_ACTION},p->p.getDiceNumber(p.getStrength()),false, new ImageIcon("Texture/Items/sword.png")),
+            new DiceItemFrame(new double[]{0,0.2,0.2,0.2,0.2,0.2}, ActionEnum.HEAL_ACTION,new String[]{"bag of healing"},ActionTarget.PLAYER_CHARACTER,new int[]{ActionEnum.MANA_ACTION},p->p.getDiceNumber(p.getCharisma()),false, new ImageIcon("Texture/Items/bag_healing.png"))
     };
 
     private final static DiceItemFrame[] SPELL_FRAMES =new DiceItemFrame[]{
-            new DiceItemFrame(new double[]{0,0,0,0.2,0.4,0.4}, ActionEnum.DAMAGE_ACTION,new String[]{"fire ball"},ActionTarget.ENEMY_CHARACTER,new int[]{ActionEnum.WEAKNESS_ACTION},p->p.getDiceNumber(p.getIntelligence()),false),
+            new DiceItemFrame(new double[]{0,0,0,0.2,0.4,0.4}, ActionEnum.DAMAGE_ACTION,new String[]{"fire ball"},ActionTarget.ENEMY_CHARACTER,new int[]{ActionEnum.WEAKNESS_ACTION},p->p.getDiceNumber(p.getIntelligence()),false,new ImageIcon("Texture/Items/fireball.png")),
     };
 
     public static DiceItemBase getRandomDiceItemBase(int points){
@@ -34,8 +36,9 @@ public class DiceItemFrames {
         final int[] secondaryActionType;
         final DiceLambda diceLambda;
         final boolean actionOnSelf;
+        final ImageIcon icon;
 
-        DiceItemFrame(double[] values, int diceAction, String[] names, ActionTarget target,int[] secondaryActionType,DiceLambda diceLambda,boolean actionOnSelf) {
+        DiceItemFrame(double[] values, int diceAction, String[] names, ActionTarget target,int[] secondaryActionType,DiceLambda diceLambda,boolean actionOnSelf,ImageIcon icon) {
             this.values = values;
             this.diceAction = diceAction;
             this.names = names;
@@ -43,6 +46,7 @@ public class DiceItemFrames {
             this.secondaryActionType=secondaryActionType;
             this.diceLambda=diceLambda;
             this.actionOnSelf=actionOnSelf;
+            this.icon=icon;
         }
 
         DiceItemBase getDiceItemBase(int points){
@@ -63,7 +67,7 @@ public class DiceItemFrames {
                 count++;
             }
 
-            return new DiceItemBase(stats,diceAction,names,target,secondaryActionType,diceLambda,actionOnSelf);
+            return new DiceItemBase(stats,diceAction,names,target,secondaryActionType,diceLambda,actionOnSelf,icon);
         }
     }
 }

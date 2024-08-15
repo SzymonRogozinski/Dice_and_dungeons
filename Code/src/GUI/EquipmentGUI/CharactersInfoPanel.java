@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 
 public class CharactersInfoPanel extends JPanel {
 
-    private static ImageIcon BAG_SLOT_ICON =new ImageIcon("ItemsIcons/slot-bag.png");
+    private static ImageIcon BAG_SLOT_ICON =new ImageIcon("Texture/EmptySlots/slot-bag.png");
 
     private JLabel headline;
     private CharacterInfoPanel charactersInfoPanel;

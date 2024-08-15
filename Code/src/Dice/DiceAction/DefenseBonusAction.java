@@ -10,7 +10,7 @@ import Game.Tags;
 public class DefenseBonusAction implements DiceAction {
 
     private static final String id="DefenseBonus";
-    private static final String imagePath="StatusIcons/DefendDice.png";
+    private static final String imagePath="Texture/StatusIcons/DefendDice.png";
     private final int value;
     private boolean actionOnSelf;
 

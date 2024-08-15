@@ -49,8 +49,8 @@ public class Main {
         UsableItem usItem3 = new UsableItem(new UsableItemAction(ActionTarget.PLAYER_CHARACTER,new ArrayList<>(List.of(new DiceAction[]{new DefenseBonusAction(2,true)})),new Tags[]{Tags.NO_ROLL,Tags.FREE_ACTION}),3,new Tags[]{},null,"Magic powder",ItemQuality.COMMON);
         UsableItem usItem4 = new UsableItem(new UsableItemAction(ActionTarget.PLAYER_CHARACTER,new ArrayList<>(List.of(new DiceAction[]{new MagicBonusAction(2,true)})),new Tags[]{Tags.NO_ROLL,Tags.FREE_ACTION}),3,new Tags[]{},null,"Defense potion",ItemQuality.COMMON);
 
-        PlayerCharacter player=new PlayerCharacter(24,12,12,12,12,12,"Warrior",new ImageIcon("CharacterTexture/player.png"),new Tags[]{Tags.WARRIOR});
-        PlayerCharacter player2=new PlayerCharacter(12,18,12,12,12,12,"Bandit",new ImageIcon("CharacterTexture/player.png"),new Tags[]{Tags.THIEF});
+        PlayerCharacter player=new PlayerCharacter(24,12,12,12,12,12,"Warrior",new ImageIcon("Texture/CharacterTexture/player.png"),new Tags[]{Tags.WARRIOR});
+        PlayerCharacter player2=new PlayerCharacter(12,18,12,12,12,12,"Bandit",new ImageIcon("Texture/CharacterTexture/player.png"),new Tags[]{Tags.THIEF});
 
         //Set eq
         player.getEquipment().equip(item1,0, CharacterEquipment.ACTION_SLOT);
@@ -63,7 +63,7 @@ public class Main {
         player2.getEquipment().equip(item7,2, CharacterEquipment.ACTION_SLOT);
         player2.getEquipment().equip(spell2,0, CharacterEquipment.SPELL_SLOT);
 
-        ArrayList<Item> usableItems=new ArrayList<>(List.of(new Item[]{usItem1,usItem2,usItem3,usItem4}));
+        ArrayList<Item> usableItems=new ArrayList<>(List.of(usItem1,usItem2,usItem3,usItem4,usItem1,usItem2,usItem3,usItem1,usItem2,usItem3,usItem4,usItem1,usItem2,usItem3,usItem4));
 
         PlayerParty party = new PlayerParty(new ArrayList<>(List.of(new PlayerCharacter[]{player,player2})),usableItems);
         GameCollection.setParty(party);
@@ -76,8 +76,8 @@ public class Main {
         EnemyAI ai1=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{enemyAction1,enemyAction2})));
         EnemyAI ai2=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{enemyAction1,enemyAction2})));
 
-        EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12,12,"Skeleton1",new ImageIcon("CharacterTexture/skeleton.png"),ai1);
-        EnemyCharacter enemy2 = new EnemyCharacter(12,12,12,12,12,12,"Skeleton2",new ImageIcon("CharacterTexture/skeleton.png"),ai2);
+        EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12,12,"Skeleton1",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai1);
+        EnemyCharacter enemy2 = new EnemyCharacter(12,12,12,12,12,12,"Skeleton2",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai2);
 
         FightModule fight = new FightModule(state,new ArrayList<>(List.of(new EnemyCharacter[]{enemy,enemy2})));
         GameCollection.setFight(fight);

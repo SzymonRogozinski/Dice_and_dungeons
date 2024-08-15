@@ -9,7 +9,7 @@ public class BleedingStatus extends GameStatus{
 
     private int statusCount;
     public BleedingStatus(int startValue) {
-        super(startValue, new Integer[]{}, new ImageIcon("StatusIcons/Bleeding.png"), new Tags[]{Tags.AFTER_TURN_START});
+        super(startValue, new Integer[]{}, new ImageIcon("Texture/StatusIcons/Bleeding.png"), new Tags[]{Tags.AFTER_TURN_START});
         statusCount=startValue;
     }
 

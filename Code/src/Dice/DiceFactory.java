@@ -17,6 +17,8 @@ public class DiceFactory {
 
     private static final int size= GUISettings.SMALL_PANEL_SIZE/2-3;
     private static final int ICON_SIZE= 40;
+    private static final String SYMBOL_PATH = "Texture/DiceSymbols/";
+    private static final String NUMBER_PATH = "Texture/DiceNumber/";
 
     public static Dice buildDice(int[][] instruction){
         if(instruction.length!=6)
@@ -144,7 +146,7 @@ public class DiceFactory {
             NullAction action = new NullAction();
             ArrayList<DiceAction> actions = new ArrayList<>();
             actions.add(action);
-            return new DiceSide(actions,resizeIcon("DiceIcons/N.png",size));    //TODO
+            return new DiceSide(actions,resizeIcon(SYMBOL_PATH+"N.png",size));
         }
         ArrayList<DiceAction> actions = new ArrayList<>();
         ArrayList<String> imageCode=new ArrayList<>();
@@ -210,15 +212,15 @@ public class DiceFactory {
         g.clearRect(0,0,ICON_SIZE,ICON_SIZE);
         try {
             if (iconCode.size() == 2) {         //One symbol
-                BufferedImage symbol = ImageIO.read(new File("DiceSymbols/"+iconCode.get(0)+".png"));
-                BufferedImage value = ImageIO.read(new File("DiceNumber/"+iconCode.get(1)+".png"));
+                BufferedImage symbol = ImageIO.read(new File(SYMBOL_PATH+iconCode.get(0)+".png"));
+                BufferedImage value = ImageIO.read(new File(NUMBER_PATH+iconCode.get(1)+".png"));
                 g.drawImage(value,1,1,null);
                 g.drawImage(symbol,20,20,null);
             } else if (iconCode.size() == 4) {  //Two symbol
-                BufferedImage symbol1 = ImageIO.read(new File("DiceSymbols/"+iconCode.get(0)+".png"));
-                BufferedImage value1 = ImageIO.read(new File("DiceNumber/"+iconCode.get(1)+".png"));
-                BufferedImage symbol2 = ImageIO.read(new File("DiceSymbols/"+iconCode.get(2)+".png"));
-                BufferedImage value2 = ImageIO.read(new File("DiceNumber/"+iconCode.get(3)+".png"));
+                BufferedImage symbol1 = ImageIO.read(new File(SYMBOL_PATH+iconCode.get(0)+".png"));
+                BufferedImage value1 = ImageIO.read(new File(NUMBER_PATH+iconCode.get(1)+".png"));
+                BufferedImage symbol2 = ImageIO.read(new File(SYMBOL_PATH+iconCode.get(2)+".png"));
+                BufferedImage value2 = ImageIO.read(new File(NUMBER_PATH+iconCode.get(3)+".png"));
                 g.drawImage(value1,1,1,null);
                 g.drawImage(symbol1,20,1,null);
                 g.drawImage(value2,20,20,null);

@@ -5,6 +5,7 @@ import Fight.ActionTarget;
 import Fight.GameActions.DiceLambda;
 import Game.Tags;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class DiceItemBase {
@@ -19,8 +20,9 @@ public class DiceItemBase {
     public boolean haveEmptySide;
     public DiceLambda diceLambda;
     public boolean actionOnSelf;
+    public ImageIcon icon;
 
-    public DiceItemBase(int[] firstActionValues, int firstAction, String[] names, ActionTarget target, int[] secondaryActionList, DiceLambda diceLambda, boolean actionOnSelf) {
+    public DiceItemBase(int[] firstActionValues, int firstAction, String[] names, ActionTarget target, int[] secondaryActionList, DiceLambda diceLambda, boolean actionOnSelf, ImageIcon icon) {
         this.firstActionValues = firstActionValues;
         this.firstAction = firstAction;
         this.names = names;
@@ -31,5 +33,6 @@ public class DiceItemBase {
         this.diceLambda=diceLambda;
         this.actionOnSelf=actionOnSelf;
         this.secondAction= ActionEnum.NULL_ACTION;
+        this.icon=icon;
     }
 }

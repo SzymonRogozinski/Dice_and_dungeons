@@ -9,7 +9,7 @@ import javax.swing.*;
 public class CounterStatus extends GameStatus{
 
     public CounterStatus(int startValue) {
-        super(startValue,new Integer[]{0,0,startValue}, new ImageIcon("StatusIcons/Counter.png"),new Tags[]{Tags.ON_DEFEND});
+        super(startValue,new Integer[]{0,0,startValue}, new ImageIcon("Texture/StatusIcons/Counter.png"),new Tags[]{Tags.ON_DEFEND});
     }
 
     @Override

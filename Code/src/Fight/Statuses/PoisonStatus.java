@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class PoisonStatus extends GameStatus{
     public PoisonStatus(int startValue) {
-        super(startValue,new Integer[]{0,0,startValue}, new ImageIcon("StatusIcons/Poison.png"),new Tags[]{Tags.ON_TURN_START});
+        super(startValue,new Integer[]{0,0,startValue}, new ImageIcon("Texture/StatusIcons/Poison.png"),new Tags[]{Tags.ON_TURN_START});
     }
 
     @Override

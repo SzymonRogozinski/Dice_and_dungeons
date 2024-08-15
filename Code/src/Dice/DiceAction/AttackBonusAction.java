@@ -9,7 +9,7 @@ import Game.Tags;
 
 public class AttackBonusAction implements DiceAction{
     private static final String id="AttackBonus";
-    private static final String imagePath="StatusIcons/AttackDice.png";
+    private static final String imagePath="Texture/StatusIcons/AttackDice.png";
     private final int value;
     private boolean actionOnSelf;
 

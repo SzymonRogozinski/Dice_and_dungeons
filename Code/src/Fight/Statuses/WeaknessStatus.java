@@ -10,7 +10,7 @@ public class WeaknessStatus extends GameStatus{
     private int statusCount;
 
     public WeaknessStatus(int startValue) {
-        super(startValue, new Integer[]{}, new ImageIcon("StatusIcons/Weakness.png"), new Tags[]{Tags.AFTER_TURN_START});
+        super(startValue, new Integer[]{}, new ImageIcon("Texture/StatusIcons/Weakness.png"), new Tags[]{Tags.AFTER_TURN_START});
         statusCount=startValue;
     }
 
