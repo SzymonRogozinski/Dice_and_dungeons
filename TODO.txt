@@ -2,7 +2,6 @@
 > Podmienić placeholdery
 
 > Naprawić Dragable gdy przeciągniesz okienko
-> Dodać moduł lootu
 > Loot popup
 > Generator przeciwników
 > TODOs

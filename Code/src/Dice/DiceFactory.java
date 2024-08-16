@@ -107,14 +107,15 @@ public class DiceFactory {
         //Allocating memory
         for(i = 0;i<6;i++){
             int size = 1;
-            if (action1[i]>0)
+            if (action1[i]>0) {
                 size++;
-            if (base.firstAction==ActionEnum.COUNTER_ACTION || base.firstAction==ActionEnum.SHIELD_ACTION || base.firstAction==ActionEnum.HEAL_ACTION)
-                size++;
-            if (base.secondAction!=ActionEnum.NULL_ACTION && action2[i]>0)
-                size+= (size==1?1:2);
-            if (base.secondAction==ActionEnum.COUNTER_ACTION || base.secondAction==ActionEnum.SHIELD_ACTION || base.firstAction==ActionEnum.HEAL_ACTION)
-                size++;
+                if (base.firstAction == ActionEnum.COUNTER_ACTION || base.firstAction == ActionEnum.SHIELD_ACTION || base.firstAction == ActionEnum.HEAL_ACTION)
+                    size++;
+            }if (base.secondAction!=ActionEnum.NULL_ACTION && action2[i]>0) {
+                size += (size == 1 ? 1 : 2);
+                if (base.secondAction == ActionEnum.COUNTER_ACTION || base.secondAction == ActionEnum.SHIELD_ACTION || base.secondAction == ActionEnum.HEAL_ACTION)
+                    size++;
+            }
             ins[i]=new int[size];
         }
         //Putting values
@@ -122,9 +123,10 @@ public class DiceFactory {
         for(i = 0;i<6;i++){
             j=0;
             //First action
-            if(action1[i]==0 && action2[i]==0)
-                ins[i][j]=ActionEnum.NULL_ACTION;
-            else if(action1[i]>0){
+            if(action1[i]==0 && action2[i]==0) {
+                ins[i][j] = ActionEnum.NULL_ACTION;
+                continue;
+            }else if(action1[i]>0){
                 ins[i][j++]= base.firstAction;
                 ins[i][j++]=action1[i];
             }
@@ -135,7 +137,7 @@ public class DiceFactory {
                 ins[i][j++]= base.secondAction;
                 ins[i][j++]=action2[i];
             }
-            if(action2[i]>0 && (base.secondAction==ActionEnum.COUNTER_ACTION || base.secondAction==ActionEnum.SHIELD_ACTION || base.firstAction==ActionEnum.HEAL_ACTION))
+            if(action2[i]>0 && (base.secondAction==ActionEnum.COUNTER_ACTION || base.secondAction==ActionEnum.SHIELD_ACTION || base.secondAction==ActionEnum.HEAL_ACTION))
                 ins[i][j]=base.actionOnSelf?1:0;
         }
         return buildDice(ins);
@@ -195,6 +197,9 @@ public class DiceFactory {
                     imageCode.add("C");
                     imageCode.add(""+instruction[i+1]);
                     i++;
+                }
+                default -> {
+                    throw new RuntimeException("Illegal actionType: "+actionType);
                 }
             }
         }

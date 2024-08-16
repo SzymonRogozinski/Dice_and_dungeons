@@ -3,6 +3,7 @@ package Game;
 import Equipment.EquipmentModule;
 import Fight.FightModule;
 import Character.PlayerParty;
+import Loot.LootModule;
 
 import java.util.Random;
 
@@ -12,6 +13,7 @@ public class GameCollection {
     private static FightModule fightModule;
     private static EquipmentModule equipmentModule;
     private static PlayerParty party;
+    private static LootModule lootModule;
 
     public static void setFight(FightModule fightModule) {
         if(GameCollection.fightModule==null)
@@ -28,11 +30,18 @@ public class GameCollection {
             GameCollection.party = party;
     }
 
-    public static FightModule getFight() {return fightModule;}
+    public static void setLoot(LootModule lootModule){
+        if(GameCollection.lootModule==null)
+            GameCollection.lootModule=lootModule;
+    }
+
+    public static FightModule getFight() { return fightModule; }
 
     public static EquipmentModule getEquipment() {
         return equipmentModule;
     }
 
-    public static PlayerParty getParty() {return party;}
+    public static PlayerParty getParty() { return party; }
+
+    public static LootModule getLootModule() { return lootModule; }
 }
