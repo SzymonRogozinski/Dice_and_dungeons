@@ -1,4 +1,4 @@
-package Generators;
+package Generators.ItemGenerators;
 
 import Dice.DiceAction.*;
 import Equipment.Items.ItemQuality;

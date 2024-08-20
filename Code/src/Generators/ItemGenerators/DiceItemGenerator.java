@@ -1,4 +1,4 @@
-package Generators;
+package Generators.ItemGenerators;
 
 import Equipment.Items.ActionItem;
 import Equipment.Items.ItemQuality;
@@ -8,13 +8,15 @@ import Game.Tags;
 import Dice.Dice;
 import Dice.ActionEnum;
 import Dice.DiceFactory;
-import Generators.Dictionaries.ItemDictionary;
+import Generators.Generator;
+import Generators.GeneratorConst;
+import Generators.ItemGenerators.Dictionaries.ItemDictionary;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiceItemGenerator extends Generator{
+public class DiceItemGenerator extends Generator {
 
     private final static double CONCENTRATED_PROP = 0.9;
     private final static double REPLACE_EMPTY_SIDE_PROP = 0.5;

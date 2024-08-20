@@ -13,6 +13,8 @@ public class GameBalance {
     public static final int DICE_BONUS_ADD_TO_STAT_MOD=5;
     public static final int DICE_BONUS_DIVIDE=12;
     public static final int MIN_DICE_BONUS_VALUE=2;
+    public static final int ENEMY_HP_MOD = 5;
+    public static final int ENEMY_MIN_COST=1;
 
     //Levels
     public static final GameLevel DUNGEON = new GameLevel(new LootSettings(5,new double[]{0.7,0.3}));

@@ -1,14 +1,16 @@
-package Generators;
+package Generators.ItemGenerators;
 
 import Equipment.Items.ArmorItem;
 import Equipment.Items.ItemQuality;
 import Game.GameCollection;
 import Game.Tags;
-import Generators.Dictionaries.ArmorDictionary;
+import Generators.Generator;
+import Generators.GeneratorConst;
+import Generators.ItemGenerators.Dictionaries.ArmorDictionary;
 
 import javax.swing.*;
 
-public class ArmorGenerator extends Generator{
+public class ArmorGenerator extends Generator {
     private static final int STATS_COUNT=6;
     private static final int ARMOR_PARTS_COUNT=4;
     private static final double MAX_STAT_VALUE_PROP=0.4;

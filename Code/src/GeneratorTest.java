@@ -6,7 +6,7 @@ import Equipment.Items.*;
 import Fight.ActionTarget;
 import Game.GameBalance;
 import Game.Tags;
-import Generators.*;
+import Generators.ItemGenerators.*;
 import Loot.LootModule;
 import Loot.LootSettings;
 

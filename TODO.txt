@@ -6,3 +6,4 @@
 > Generator przeciwników
 > TODOs
 > Poprawić GUI
+> Frames -> Base

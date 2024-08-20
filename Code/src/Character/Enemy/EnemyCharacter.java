@@ -4,6 +4,7 @@ import Fight.GameActions.EnemyAction;
 import Character.GameCharacter;
 import Character.CharacterDieException;
 import Character.PlayerCharacter;
+import Game.GameBalance;
 import Game.Tags;
 
 import javax.swing.*;
@@ -13,12 +14,14 @@ public class EnemyCharacter extends GameCharacter {
 
     private int maxHealth,currentHealth,shield;
     private final EnemyAI ai;
+    private final EnemyCategory category;
 
-    public EnemyCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image, EnemyAI ai) {
-        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image, new Tags[]{});
-        maxHealth=startEndurance*5;
-        currentHealth=startEndurance*5;
+    public EnemyCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, EnemyCategory category, String name, ImageIcon image, EnemyAI ai) {
+        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, 0,name,image, new Tags[]{});
+        maxHealth=startEndurance* GameBalance.ENEMY_HP_MOD;
+        currentHealth=maxHealth;
         this.ai=ai;
+        this.category=category;
     }
 
     public int getMaxHealth() {
@@ -27,6 +30,10 @@ public class EnemyCharacter extends GameCharacter {
 
     public int getCurrentHealth() {
         return currentHealth;
+    }
+
+    public EnemyCategory getCategory() {
+        return category;
     }
 
     @Override

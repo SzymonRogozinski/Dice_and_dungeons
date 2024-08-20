@@ -1,8 +1,7 @@
-package Generators.Dictionaries;
+package Generators.ItemGenerators.Dictionaries;
 
 import Equipment.CharacterEquipment;
 import Game.GameCollection;
-import Generators.Dictionaries.ItemDictionary;
 
 import java.util.Map;
 

@@ -3,7 +3,7 @@ package Dice;
 import Dice.DiceAction.*;
 import GUI.GUISettings;
 import Game.GameBalance;
-import Generators.DiceItemBase;
+import Generators.ItemGenerators.DiceItemBase;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

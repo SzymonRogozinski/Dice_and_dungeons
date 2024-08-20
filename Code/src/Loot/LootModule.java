@@ -4,10 +4,10 @@ import Equipment.Items.Item;
 import Equipment.Items.ItemQuality;
 import Equipment.Items.UsableItem;
 import Game.GameCollection;
-import Generators.ArmorGenerator;
-import Generators.DiceItemGenerator;
-import Generators.SpellItemGenerator;
-import Generators.UsableItemGenerator;
+import Generators.ItemGenerators.ArmorGenerator;
+import Generators.ItemGenerators.DiceItemGenerator;
+import Generators.ItemGenerators.SpellItemGenerator;
+import Generators.ItemGenerators.UsableItemGenerator;
 
 import java.util.ArrayList;
 
@@ -35,12 +35,12 @@ public class LootModule {
 
         //Place in backpack
         for(Item item:loot) {
-            //GameCollection.getParty().getBackpack().putToBackpack(item);
-            System.out.println("Name: "+item.name);
-            System.out.println("Quality: "+item.getQuality());
-            if(item instanceof UsableItem usableItem)
-                System.out.println("Uses: "+usableItem.getNumberOfItems());
-            System.out.println();
+            GameCollection.getParty().getBackpack().putToBackpack(item);
+//            System.out.println("Name: "+item.name);
+//            System.out.println("Quality: "+item.getQuality());
+//            if(item instanceof UsableItem usableItem)
+//                System.out.println("Uses: "+usableItem.getNumberOfItems());
+//            System.out.println();
         }
     }
 

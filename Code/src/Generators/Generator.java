@@ -12,7 +12,7 @@ public class Generator {
     }
 
     protected static int getPoints(int medium){
-        int variance = (int) (medium*GeneratorConst.VARIANCE);
+        int variance = (int) (medium* GeneratorConst.VARIANCE);
         return GameCollection.random.nextInt(medium-variance,medium+variance+1);
 
     }

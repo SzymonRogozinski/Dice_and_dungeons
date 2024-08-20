@@ -1,4 +1,4 @@
-package Generators;
+package Generators.ItemGenerators;
 
 import Dice.ActionEnum;
 import Fight.ActionTarget;

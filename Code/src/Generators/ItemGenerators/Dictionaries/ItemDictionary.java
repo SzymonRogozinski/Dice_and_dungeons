@@ -1,10 +1,10 @@
-package Generators.Dictionaries;
+package Generators.ItemGenerators.Dictionaries;
 
 import Dice.ActionEnum;
 import Fight.ActionTarget;
 import Game.GameCollection;
 import Game.Tags;
-import Generators.DiceItemBase;
+import Generators.ItemGenerators.DiceItemBase;
 
 import java.util.Arrays;
 import java.util.Map;

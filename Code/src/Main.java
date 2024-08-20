@@ -1,5 +1,6 @@
 import Character.Enemy.EnemyAI;
 import Character.Enemy.EnemyActionFactory;
+import Character.Enemy.EnemyCategory;
 import Character.Enemy.EnemyCharacter;
 import Character.PlayerCharacter;
 import Character.PlayerParty;
@@ -76,8 +77,8 @@ public class Main {
         EnemyAI ai1=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{enemyAction1,enemyAction2})));
         EnemyAI ai2=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{enemyAction1,enemyAction2})));
 
-        EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12,12,"Skeleton1",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai1);
-        EnemyCharacter enemy2 = new EnemyCharacter(12,12,12,12,12,12,"Skeleton2",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai2);
+        EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12, EnemyCategory.Minion,"Skeleton1",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai1);
+        EnemyCharacter enemy2 = new EnemyCharacter(12,12,12,12,12,EnemyCategory.Minion,"Skeleton2",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai2);
 
         FightModule fight = new FightModule(state,new ArrayList<>(List.of(new EnemyCharacter[]{enemy,enemy2})));
         GameCollection.setFight(fight);
