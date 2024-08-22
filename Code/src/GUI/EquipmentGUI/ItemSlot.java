@@ -1,7 +1,9 @@
 package GUI.EquipmentGUI;
 
+import Equipment.CharacterEquipment;
 import Equipment.EquipmentModule;
 import Equipment.Items.Item;
+import Equipment.Items.ItemQuality;
 import GUI.GUISettings;
 import Game.GameCollection;
 
@@ -59,6 +61,14 @@ public class ItemSlot extends JPanel {
     public void setItem(Item item){
         this.item=item;
         label.setIcon(item==null?emptySlotIcon:item.getIcon());
+        if(item==null)
+            this.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY,1));
+        else if (item.getQuality()== ItemQuality.COMMON)
+            this.setBorder(BorderFactory.createLineBorder(Color.WHITE,1));
+        else if (item.getQuality()== ItemQuality.RARE)
+            this.setBorder(BorderFactory.createLineBorder(Color.BLUE,1));
+        else if (item.getQuality()== ItemQuality.LEGENDARY)
+            this.setBorder(BorderFactory.createLineBorder(Color.MAGENTA,1));
     }
     private class ItemSlotMouseListener implements MouseListener{
 

@@ -11,8 +11,8 @@ public class SpellItem extends Item  implements EquipableItem{
 
     private final SpellAction action;
 
-    public SpellItem(SpellAction action,Tags[] tags, ImageIcon icon,String name) {
-        super(tags,icon,name);
+    public SpellItem(SpellAction action,Tags[] tags, ImageIcon icon,String name,ItemQuality quality) {
+        super(tags,icon,name,quality);
         this.action=action;
     }
 

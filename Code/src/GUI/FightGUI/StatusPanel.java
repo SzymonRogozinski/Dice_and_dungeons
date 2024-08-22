@@ -125,15 +125,15 @@ public class StatusPanel extends JPanel {
     }
 
     public void refresh(){
-        healthBar.setMaximum(GameCollection.getFight().getParty().getMaxHealth());
-        manaBar.setMaximum(GameCollection.getFight().getParty().getMaxMana());
-        healthBar.setValue(GameCollection.getFight().getParty().getCurrentHealth());
-        String healthString = GameCollection.getFight().getParty().getCurrentHealth()+"/"+GameCollection.getFight().getParty().getMaxHealth();
-        if(GameCollection.getFight().getParty().getShield()>0)
-            healthString+=" +"+GameCollection.getFight().getParty().getShield();
+        healthBar.setMaximum(GameCollection.getParty().getMaxHealth());
+        manaBar.setMaximum(GameCollection.getParty().getMaxMana());
+        healthBar.setValue(GameCollection.getParty().getCurrentHealth());
+        String healthString = GameCollection.getParty().getCurrentHealth()+"/"+GameCollection.getParty().getMaxHealth();
+        if(GameCollection.getParty().getShield()>0)
+            healthString+=" +"+GameCollection.getParty().getShield();
         healthBar.setString(healthString);
-        manaBar.setValue(GameCollection.getFight().getParty().getCurrentMana());
-        manaBar.setString(GameCollection.getFight().getParty().getCurrentMana()+"/"+GameCollection.getFight().getParty().getMaxMana());
+        manaBar.setValue(GameCollection.getParty().getCurrentMana());
+        manaBar.setString(GameCollection.getParty().getCurrentMana()+"/"+GameCollection.getParty().getMaxMana());
         characterName.setText(GameCollection.getFight().getCharacter().getName());
         this.revalidate();
         this.repaint();

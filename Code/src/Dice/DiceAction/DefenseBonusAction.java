@@ -4,12 +4,13 @@ import Character.GameCharacter;
 import Dice.Dice;
 import Dice.DiceFactory;
 import Fight.Statuses.BonusDiceStatus;
+import Game.GameBalance;
 import Game.Tags;
 
 public class DefenseBonusAction implements DiceAction {
 
     private static final String id="DefenseBonus";
-    private static final String imagePath="StatusIcons/DefendDice.png";
+    private static final String imagePath="Texture/StatusIcons/DefendDice.png";
     private final int value;
     private boolean actionOnSelf;
 
@@ -48,7 +49,8 @@ public class DefenseBonusAction implements DiceAction {
 
     @Override
     public void doAction(GameCharacter character) {
-        int diceStrength = (character.getEndurance()+5)/10+2;
+        int diceStrength = (character.getEndurance() + GameBalance.DICE_BONUS_ADD_TO_STAT_MOD)/GameBalance.DICE_BONUS_DIVIDE + GameBalance.MIN_DICE_BONUS_VALUE;
+        diceStrength = Math.min(diceStrength, GameBalance.MAX_DICE_VALUE);
         Dice dice = DiceFactory.buildDice(new int[][]{{0},{0},{0},{2,diceStrength,1},{2,diceStrength,1},{2,diceStrength,1}});
         character.addStatus(new BonusDiceStatus(value,imagePath,dice, Tags.DEFENCE));
     }

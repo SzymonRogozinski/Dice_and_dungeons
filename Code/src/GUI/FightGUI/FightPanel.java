@@ -66,7 +66,7 @@ public class FightPanel extends JPanel {
                 this.add(enemy);
             }
             //Draw player
-            for (int i = 0; i < GameCollection.getFight().getParty().getCharacters().size(); i++) {
+            for (int i = 0; i < GameCollection.getParty().getCharacters().size(); i++) {
                 PlayerPanel player = new PlayerPanel(i);
                 playerPanelList.add(player);
             }
@@ -185,7 +185,7 @@ public class FightPanel extends JPanel {
             FlowLayout layout=new FlowLayout();
             layout.setVgap(1);
             this.setLayout(layout);
-            playerCharacter=GameCollection.getFight().getParty().getCharacters().get(i);
+            playerCharacter=GameCollection.getParty().getCharacters().get(i);
 
             playerLabel = new JLabel(resizeIcon(playerCharacter.getImage(), enemyWidth-2, (int)(enemyHeight*0.85)-2));
 

@@ -27,7 +27,7 @@ public class HealAction implements DiceAction{
 
     @Override
     public String actionDescription() {
-        return "Heal " +value + ".";
+        return "Heal " + value + ".";
     }
 
     @Override

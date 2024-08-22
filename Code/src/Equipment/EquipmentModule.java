@@ -13,23 +13,17 @@ import Game.Tags;
 
 public class EquipmentModule {
     private EquipmentGUIState state;
-    private PlayerParty party;
     private int currentCharacter=0;
     private ItemSlot pointedItem;
     private ItemSlot clickedSlot;
     private Item useItem;
 
-    public EquipmentModule(EquipmentGUIState state, PlayerParty party) {
+    public EquipmentModule(EquipmentGUIState state) {
         this.state=state;
-        this.party = party;
-    }
-
-    public PlayerParty getParty() {
-        return party;
     }
 
     public PlayerCharacter getCurrentCharacter(){
-        return party.getCharacters().get(currentCharacter);
+        return GameCollection.getParty().getCharacters().get(currentCharacter);
     }
 
     public void setPointedItem(ItemSlot slot){
@@ -46,22 +40,22 @@ public class EquipmentModule {
     }
 
     public void changeCharacter(boolean forward){
-        party.getBackpack().changeMode(true);
+        GameCollection.getParty().getBackpack().changeMode(true);
         currentCharacter+=forward?1:-1;
-        if(party.getCharacters().size()<=currentCharacter)
+        if(GameCollection.getParty().getCharacters().size()<=currentCharacter)
             currentCharacter=0;
         else if(currentCharacter<0)
-            currentCharacter=party.getCharacters().size()-1;
+            currentCharacter=GameCollection.getParty().getCharacters().size()-1;
         state.refresh();
     }
 
     public void changeViewToBackpack(){
-        party.getBackpack().changeMode(false);
+        GameCollection.getParty().getBackpack().changeMode(false);
         state.setState(EquipmentGUIState.BACKPACK);
     }
 
     public void changeViewToEquipment(){
-        party.getBackpack().changeMode(true);
+        GameCollection.getParty().getBackpack().changeMode(true);
         state.setState(EquipmentGUIState.EQUIPMENT);
     }
 
@@ -79,12 +73,12 @@ public class EquipmentModule {
             setUseItem(clickedSlot.getItem());
         else if (clickedSlot.getSlotType()==CharacterEquipment.USE_SLOT && pointedItem.getSlotType()==CharacterEquipment.BAG_SLOT)
             setUseItem(null);
-        else if(clickedSlot.getSlotType()==CharacterEquipment.BAG_SLOT && party.getCharacters().get(currentCharacter).getEquipment().equip(clickedSlot.getItem(), pointedItem.getSlotNumber(), pointedItem.getSlotType())){
-            party.getBackpack().putToBackpack(pointedItem.getItem());
-            party.getBackpack().removeFromBackpack(clickedSlot.getItem());
+        else if(clickedSlot.getSlotType()==CharacterEquipment.BAG_SLOT && GameCollection.getParty().getCharacters().get(currentCharacter).getEquipment().equip(clickedSlot.getItem(), pointedItem.getSlotNumber(), pointedItem.getSlotType())){
+            GameCollection.getParty().getBackpack().putToBackpack(pointedItem.getItem());
+            GameCollection.getParty().getBackpack().removeFromBackpack(clickedSlot.getItem());
         }else if(pointedItem.getSlotType()==CharacterEquipment.BAG_SLOT){
-            party.getCharacters().get(currentCharacter).getEquipment().deEquip(clickedSlot.getSlotNumber(), clickedSlot.getSlotType());
-            party.getBackpack().putToBackpack(clickedSlot.getItem());
+            GameCollection.getParty().getCharacters().get(currentCharacter).getEquipment().deEquip(clickedSlot.getSlotNumber(), clickedSlot.getSlotType());
+            GameCollection.getParty().getBackpack().putToBackpack(clickedSlot.getItem());
         }
         //After all
         clickedSlot=null;
@@ -96,14 +90,14 @@ public class EquipmentModule {
             return;
         UsableItem item=(UsableItem) useItem;
         for(DiceAction action:item.getAction().getActionFactories()){
-            action.doAction(party.getCharacters().get(currentCharacter));
+            action.doAction(GameCollection.getParty().getCharacters().get(currentCharacter));
         }
         GameCollection.getFight().clear();
         try {
             item.useItem();
         } catch (UsedAllOfItemsException e) {
             useItem=null;
-            party.getBackpack().removeFromBackpack(item);
+            GameCollection.getParty().getBackpack().removeFromBackpack(item);
         }
         state.refresh();
     }
@@ -114,16 +108,16 @@ public class EquipmentModule {
 
     public void changeBackpackPage(boolean forward){
         if(forward)
-            party.getBackpack().setNextPage();
+            GameCollection.getParty().getBackpack().setNextPage();
         else
-            party.getBackpack().setPrevPage();
+            GameCollection.getParty().getBackpack().setPrevPage();
         state.refresh();
     }
 
     private void swapItems(){
-        if(party.getCharacters().get(currentCharacter).getEquipment().equip(clickedSlot.getItem(), pointedItem.getSlotNumber(), pointedItem.getSlotType())) {
-            if(!party.getCharacters().get(currentCharacter).getEquipment().equip(pointedItem.getItem(), clickedSlot.getSlotNumber(), clickedSlot.getSlotType()))
-                party.getCharacters().get(currentCharacter).getEquipment().deEquip(clickedSlot.getSlotNumber(), clickedSlot.getSlotType());
+        if(GameCollection.getParty().getCharacters().get(currentCharacter).getEquipment().equip(clickedSlot.getItem(), pointedItem.getSlotNumber(), pointedItem.getSlotType())) {
+            if(!GameCollection.getParty().getCharacters().get(currentCharacter).getEquipment().equip(pointedItem.getItem(), clickedSlot.getSlotNumber(), clickedSlot.getSlotType()))
+                GameCollection.getParty().getCharacters().get(currentCharacter).getEquipment().deEquip(clickedSlot.getSlotNumber(), clickedSlot.getSlotType());
         }
     }
 

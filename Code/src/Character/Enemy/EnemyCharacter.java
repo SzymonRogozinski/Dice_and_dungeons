@@ -4,6 +4,7 @@ import Fight.GameActions.EnemyAction;
 import Character.GameCharacter;
 import Character.CharacterDieException;
 import Character.PlayerCharacter;
+import Game.GameBalance;
 import Game.Tags;
 
 import javax.swing.*;
@@ -11,14 +12,25 @@ import java.util.ArrayList;
 
 public class EnemyCharacter extends GameCharacter {
 
-    private int maxHealth,currentHealth,shield;
+    private final int maxHealth;
+    private int currentHealth,shield;
     private final EnemyAI ai;
+    private final EnemyCategory category;
 
-    public EnemyCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image, EnemyAI ai) {
-        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image, new Tags[]{});
-        maxHealth=startEndurance*5;
-        currentHealth=startEndurance*5;
+    public EnemyCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, EnemyCategory category, String name, ImageIcon image, EnemyAI ai) {
+        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, 0,name,image, new Tags[]{});
         this.ai=ai;
+        this.category=category;
+        if(category==EnemyCategory.Minion)
+            maxHealth=startEndurance* GameBalance.ENEMY_MINION_HP_MOD;
+        else if(category==EnemyCategory.Strong)
+            maxHealth=startEndurance* GameBalance.ENEMY_STRONG_HP_MOD;
+        else if (category==EnemyCategory.Boss)
+            maxHealth=startEndurance* GameBalance.ENEMY_BOSS_HP_MOD;
+        else
+            throw new IllegalArgumentException("EnemyCategory "+category+" is not supported!");
+
+        currentHealth=maxHealth;
     }
 
     public int getMaxHealth() {
@@ -29,9 +41,13 @@ public class EnemyCharacter extends GameCharacter {
         return currentHealth;
     }
 
+    public EnemyCategory getCategory() {
+        return category;
+    }
+
     @Override
     public void dealDamage(int damage) throws CharacterDieException {
-        damage*=getDamageReceivingMod();
+        damage= (int) (damage * getDamageReceivingMod());
         shield-=damage;
         if(shield<0){
             currentHealth+=shield;

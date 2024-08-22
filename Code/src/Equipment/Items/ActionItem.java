@@ -10,8 +10,8 @@ public class ActionItem extends Item implements EquipableItem{
 
     private final ItemAction action;
 
-    public ActionItem(ItemAction action,Tags[] tags, ImageIcon icon,String name) {
-        super(tags,icon,name);
+    public ActionItem(ItemAction action,Tags[] tags, ImageIcon icon,String name,ItemQuality quality) {
+        super(tags,icon,name,quality);
         this.action=action;
     }
 

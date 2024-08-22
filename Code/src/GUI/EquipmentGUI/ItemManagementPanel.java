@@ -12,13 +12,13 @@ import java.util.ArrayList;
 
 public class ItemManagementPanel extends JPanel {
 
-    private static ImageIcon HELM_SLOT_ICON =new ImageIcon("ItemsIcons/slot-helm.png");
-    private static ImageIcon CHEST_SLOT_ICON =new ImageIcon("ItemsIcons/slot-chest.png");
-    private static ImageIcon GAUNTLET_SLOT_ICON =new ImageIcon("ItemsIcons/slot-gauntlet.png");
-    private static ImageIcon LEG_SLOT_ICON =new ImageIcon("ItemsIcons/slot-leg.png");
-    private static ImageIcon SCROLL_SLOT_ICON =new ImageIcon("ItemsIcons/slot-scroll.png");
-    private static ImageIcon DICE_SLOT_ICON =new ImageIcon("ItemsIcons/slot-dice.png");
-    private static ImageIcon BAG_SLOT_ICON =new ImageIcon("ItemsIcons/slot-bag.png");
+    private static ImageIcon HELM_SLOT_ICON =new ImageIcon("Texture/EmptySlots/slot-helm.png");
+    private static ImageIcon CHEST_SLOT_ICON =new ImageIcon("Texture/EmptySlots/slot-chest.png");
+    private static ImageIcon GAUNTLET_SLOT_ICON =new ImageIcon("Texture/EmptySlots/slot-gauntlet.png");
+    private static ImageIcon LEG_SLOT_ICON =new ImageIcon("Texture/EmptySlots/slot-leg.png");
+    private static ImageIcon SCROLL_SLOT_ICON =new ImageIcon("Texture/EmptySlots/slot-scroll.png");
+    private static ImageIcon DICE_SLOT_ICON =new ImageIcon("Texture/EmptySlots/slot-dice.png");
+    private static ImageIcon BAG_SLOT_ICON =new ImageIcon("Texture/EmptySlots/slot-bag.png");
 
     private BackpackPanel backpackPanel;
     private EquipmentPanel equipmentPanel;
@@ -188,7 +188,7 @@ public class ItemManagementPanel extends JPanel {
 
         public void refresh(){
             int i=0;
-            ArrayList<Item> items=GameCollection.getEquipment().getParty().getBackpack().getPageOfItems();
+            ArrayList<Item> items=GameCollection.getParty().getBackpack().getPageOfItems();
             for(;i<items.size() && i<42;i++){
                 itemSlots[i].setItem(items.get(i));
             }
@@ -232,7 +232,7 @@ public class ItemManagementPanel extends JPanel {
         public void refresh(){
             int i,j;
             j=0;
-            ArrayList<Item> items=GameCollection.getEquipment().getParty().getBackpack().getPageOfItemsForCharacter(GameCollection.getEquipment().getCurrentCharacter());
+            ArrayList<Item> items=GameCollection.getParty().getBackpack().getPageOfItemsForCharacter(GameCollection.getEquipment().getCurrentCharacter());
             for(i=0;i<14;i++){
                 if(i%7==6)
                     continue;
