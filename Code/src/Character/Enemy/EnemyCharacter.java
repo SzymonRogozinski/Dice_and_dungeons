@@ -1,9 +1,9 @@
 package Character.Enemy;
 
-import Fight.GameActions.EnemyAction;
-import Character.GameCharacter;
 import Character.CharacterDieException;
+import Character.GameCharacter;
 import Character.PlayerCharacter;
+import Fight.GameActions.EnemyAction;
 import Game.GameBalance;
 import Game.Tags;
 

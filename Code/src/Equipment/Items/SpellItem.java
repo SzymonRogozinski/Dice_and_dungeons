@@ -2,7 +2,6 @@ package Equipment.Items;
 
 import Character.PlayerCharacter;
 import Fight.GameActions.SpellAction;
-import Fight.GameActions.UsableItemAction;
 import Game.Tags;
 
 import javax.swing.*;

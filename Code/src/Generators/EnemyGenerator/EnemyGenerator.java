@@ -3,7 +3,6 @@ package Generators.EnemyGenerator;
 import Character.Enemy.EnemyAI;
 import Character.Enemy.EnemyCategory;
 import Character.Enemy.EnemyCharacter;
-import Fight.GameActions.EnemyAction;
 import Game.GameBalance;
 import Generators.Generator;
 

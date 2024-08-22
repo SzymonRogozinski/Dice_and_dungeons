@@ -1,11 +1,9 @@
 package Generators.EnemyGenerator;
 
-import Character.Enemy.EnemyCategory;
 import Fight.GameActions.EnemyAction;
 import Game.GameBalance;
 import Game.GameCollection;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 

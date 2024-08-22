@@ -1,9 +1,7 @@
 package GUI.FightGUI;
 
 import Dice.DiceSide;
-import Fight.DiceMaster;
 import GUI.GUISettings;
-import Fight.FightModule;
 import Game.GameCollection;
 
 import javax.swing.*;

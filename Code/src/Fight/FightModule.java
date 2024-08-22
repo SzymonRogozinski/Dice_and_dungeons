@@ -3,7 +3,6 @@ package Fight;
 import Character.Enemy.EnemyCharacter;
 import Character.GameCharacter;
 import Character.PlayerCharacter;
-import Character.PlayerParty;
 import Dice.DiceAction.DiceAction;
 import Fight.GameActions.EnemyAction;
 import Fight.GameActions.GameAction;
@@ -11,7 +10,6 @@ import Fight.Statuses.BonusDiceStatus;
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusException;
 import GUI.FightGUI.FightGUIState;
-import GUI.FightGUI.FightView;
 import Game.GameCollection;
 import Game.Tags;
 
@@ -127,7 +125,10 @@ public class FightModule {
     }
 
     public void clear(){
-        //TODO
+        for(PlayerCharacter p:GameCollection.getParty().getCharacters())
+            p.resetStatus();
+        for(EnemyCharacter e: enemies)
+            e.resetStatus();
     }
 
     private void startAction(){
@@ -147,7 +148,6 @@ public class FightModule {
             try {
                 status.effect(character);
             }catch (StatusException e){
-                //e.code==StatusException.DEATH || e.code==StatusException.STUN
                 setNextCharacterTurn();
                 skip=true;
             }

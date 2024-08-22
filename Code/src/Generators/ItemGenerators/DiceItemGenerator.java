@@ -1,14 +1,15 @@
 package Generators.ItemGenerators;
 
+import Dice.ActionEnum;
+import Dice.Dice;
+import Dice.DiceFactory;
 import Equipment.Items.ActionItem;
 import Equipment.Items.ItemQuality;
 import Fight.GameActions.ItemAction;
 import Game.GameCollection;
 import Game.Tags;
-import Dice.Dice;
-import Dice.ActionEnum;
-import Dice.DiceFactory;
-import Generators.*;
+import Generators.Generator;
+import Generators.GeneratorConst;
 import Generators.ItemGenerators.Dictionaries.ItemDictionary;
 
 import javax.swing.*;
@@ -78,7 +79,7 @@ public class DiceItemGenerator extends Generator {
         Tags[] actionTags= ItemDictionary.getTagsFromAction(base.firstAction,base.secondAction);
 
         ItemAction action=new ItemAction(dice,base.target,base.diceLambda,actionTags);
-        ImageIcon icon = null; //TODO
+        ImageIcon icon = base.icon;
         return new ActionItem(action,tags,icon,name,quality);
     }
 

@@ -1,7 +1,6 @@
 package GUI.FightGUI;
 
 import Dice.DiceSide;
-import GUI.FightGUI.FightView;
 
 import java.util.ArrayList;
 

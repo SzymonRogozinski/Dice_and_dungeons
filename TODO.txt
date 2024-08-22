@@ -4,7 +4,4 @@
 
 > Naprawić Dragable gdy przeciągniesz okienko
 > Loot popup
-> Generator przeciwników
-> TODOs
 > Poprawić GUI
-> Frames -> Base

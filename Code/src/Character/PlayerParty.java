@@ -2,7 +2,6 @@ package Character;
 
 import Equipment.Items.Item;
 import Equipment.PartyBackpack;
-import Fight.GameActions.UsableItemAction;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,8 @@
 package Game;
 
+import Character.PlayerParty;
 import Equipment.EquipmentModule;
 import Fight.FightModule;
-import Character.PlayerParty;
 import Loot.LootModule;
 
 import java.util.Random;

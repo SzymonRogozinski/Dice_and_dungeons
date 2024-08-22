@@ -1,7 +1,7 @@
 package Dice.DiceAction;
 
-import Fight.Statuses.CounterStatus;
 import Character.GameCharacter;
+import Fight.Statuses.CounterStatus;
 
 public class CounterAction implements DiceAction{
 

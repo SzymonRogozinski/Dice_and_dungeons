@@ -1,6 +1,5 @@
 package GUI.EquipmentGUI;
 
-import Equipment.EquipmentModule;
 import GUI.GUISettings;
 import Game.GameCollection;
 

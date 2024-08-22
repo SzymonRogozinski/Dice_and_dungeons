@@ -1,3 +1,5 @@
+import Character.PlayerCharacter;
+import Character.PlayerParty;
 import Dice.DiceAction.*;
 import Dice.DiceFactory;
 import Equipment.CharacterEquipment;
@@ -11,7 +13,6 @@ import Fight.GameActions.UsableItemAction;
 import GUI.EquipmentGUI.EquipmentGUIState;
 import GUI.EquipmentGUI.EquipmentView;
 import GUI.MainFrame;
-import Character.*;
 import Game.GameCollection;
 import Game.Tags;
 

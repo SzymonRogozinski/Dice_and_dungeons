@@ -2,7 +2,6 @@ package GUI.EquipmentGUI;
 
 import Dice.DiceAction.DiceAction;
 import Dice.DiceSide;
-import Equipment.EquipmentModule;
 import Equipment.Items.*;
 import GUI.GUISettings;
 import Game.GameCollection;
@@ -87,7 +86,6 @@ public class ItemInfoPanel extends JPanel {
         }
 
         public void refresh(){
-            //TODO not always without dice
             Item item = GameCollection.getEquipment().getPointedItem();
 
             if(item instanceof ActionItem aItem) {
@@ -211,7 +209,6 @@ public class ItemInfoPanel extends JPanel {
         }
 
         void refresh(){
-            //TODO not always usable item
             UsableItem item = (UsableItem) GameCollection.getEquipment().getPointedItem();
             StringBuilder builder=new StringBuilder("Effects:");
 

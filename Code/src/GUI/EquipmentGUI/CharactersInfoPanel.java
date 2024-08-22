@@ -1,9 +1,8 @@
 package GUI.EquipmentGUI;
 
-import Equipment.CharacterEquipment;
-import Equipment.EquipmentModule;
-import GUI.GUISettings;
 import Character.PlayerCharacter;
+import Equipment.CharacterEquipment;
+import GUI.GUISettings;
 import Game.GameCollection;
 
 import javax.swing.*;

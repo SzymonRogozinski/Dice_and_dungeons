@@ -1,10 +1,10 @@
 package Equipment;
 
+import Character.PlayerCharacter;
 import Equipment.Items.EquipableItem;
 import Equipment.Items.Item;
 import Equipment.Items.UsableItem;
 import Equipment.Items.UsedAllOfItemsException;
-import Character.PlayerCharacter;
 
 import java.util.ArrayList;
 

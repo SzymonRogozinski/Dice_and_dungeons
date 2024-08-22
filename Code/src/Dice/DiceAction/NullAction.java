@@ -1,6 +1,5 @@
 package Dice.DiceAction;
 
-import Fight.FightModule;
 import Character.GameCharacter;
 
 public class NullAction implements DiceAction{

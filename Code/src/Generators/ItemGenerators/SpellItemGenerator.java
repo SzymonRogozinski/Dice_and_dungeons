@@ -1,15 +1,16 @@
 package Generators.ItemGenerators;
 
+import Dice.ActionEnum;
+import Dice.Dice;
+import Dice.DiceFactory;
 import Equipment.Items.ItemQuality;
 import Equipment.Items.SpellItem;
 import Fight.ActionTarget;
 import Fight.GameActions.SpellAction;
 import Game.GameCollection;
 import Game.Tags;
-import Dice.Dice;
-import Dice.ActionEnum;
-import Dice.DiceFactory;
-import Generators.*;
+import Generators.Generator;
+import Generators.GeneratorConst;
 import Generators.ItemGenerators.Dictionaries.ItemDictionary;
 
 import javax.swing.*;
@@ -96,7 +97,7 @@ public class SpellItemGenerator extends Generator {
         int mana =(int)(startPoints*MANA_COST_MOD);
 
         SpellAction action=new SpellAction(dice,base.target,base.diceLambda,mana,actionTags);
-        ImageIcon icon = null; //TODO
+        ImageIcon icon = base.icon;
         return new SpellItem(action,tags,icon,name,quality);
     }
 
