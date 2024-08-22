@@ -70,7 +70,7 @@ public class EquipmentView extends MainPanel {
         ItemSlot it = GameCollection.getEquipment().getClickedSlot();
         if(it!=null && it.getItem()!=null) {
             position=MouseInfo.getPointerInfo().getLocation();
-            it.getItem().getIcon().paintIcon(this, g, (int) position.getX() - GUISettings.ITEM_ICON_SIZE/2, (int) position.getY() - GUISettings.ITEM_ICON_SIZE/2);
+            it.getItem().getIcon().paintIcon(this, g, (int) position.getX() - GUISettings.ITEM_ICON_SIZE/2 - this.getLocationOnScreen().x, (int) position.getY() - GUISettings.ITEM_ICON_SIZE/2- this.getLocationOnScreen().y);
         }
     }
 
