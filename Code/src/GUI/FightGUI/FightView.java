@@ -1,6 +1,5 @@
 package GUI.FightGUI;
 
-import Fight.FightModule;
 import GUI.MainPanel;
 
 public class FightView extends MainPanel {

@@ -4,10 +4,6 @@ import Character.PlayerCharacter;
 import Equipment.Items.ActionItem;
 import Equipment.Items.SpellItem;
 import Equipment.Items.UsableItem;
-import Fight.FightModule;
-import Fight.GameActions.ItemAction;
-import Fight.GameActions.SpellAction;
-import Fight.GameActions.UsableItemAction;
 import GUI.GUISettings;
 import Game.GameCollection;
 
@@ -15,7 +11,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ActionListPanel extends JPanel {
 

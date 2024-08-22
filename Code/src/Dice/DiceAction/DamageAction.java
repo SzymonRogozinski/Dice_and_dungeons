@@ -1,7 +1,7 @@
 package Dice.DiceAction;
 
-import Character.GameCharacter;
 import Character.CharacterDieException;
+import Character.GameCharacter;
 
 public class DamageAction implements DiceAction{
     private static final String id="Damage";

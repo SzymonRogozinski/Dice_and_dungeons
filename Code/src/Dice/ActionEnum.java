@@ -1,7 +1,5 @@
 package Dice;
 
-import Game.Tags;
-
 import java.util.Map;
 
 public class ActionEnum {
@@ -16,7 +14,6 @@ public class ActionEnum {
     public static final int COUNTER_ACTION=8;
     public static final int STUN_ACTION=9;
 
-    //TODO Set value
     public static final Map<Integer,Integer> ACTION_COST=Map.of(
             ActionEnum.NULL_ACTION,0,
             ActionEnum.DAMAGE_ACTION,1,

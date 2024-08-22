@@ -1,7 +1,7 @@
 package Dice.DiceAction;
 
-import Fight.Statuses.StunStatus;
 import Character.GameCharacter;
+import Fight.Statuses.StunStatus;
 
 public class StunAction implements DiceAction{
     private static final String id="Stun";

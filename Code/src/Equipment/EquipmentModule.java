@@ -1,12 +1,11 @@
 package Equipment;
 
+import Character.PlayerCharacter;
 import Dice.DiceAction.DiceAction;
 import Equipment.Items.Item;
 import Equipment.Items.UsableItem;
 import Equipment.Items.UsedAllOfItemsException;
 import GUI.EquipmentGUI.EquipmentGUIState;
-import GUI.EquipmentGUI.EquipmentView;
-import Character.*;
 import GUI.EquipmentGUI.ItemSlot;
 import Game.GameCollection;
 import Game.Tags;

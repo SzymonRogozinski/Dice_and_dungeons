@@ -1,7 +1,7 @@
 package Dice.DiceAction;
 
-import Fight.Statuses.BleedingStatus;
 import Character.GameCharacter;
+import Fight.Statuses.BleedingStatus;
 
 public class BleedingAction implements DiceAction{
     private static final String id="Bleeding";

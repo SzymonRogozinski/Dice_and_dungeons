@@ -4,7 +4,8 @@ import Equipment.Items.ArmorItem;
 import Equipment.Items.ItemQuality;
 import Game.GameCollection;
 import Game.Tags;
-import Generators.*;
+import Generators.Generator;
+import Generators.GeneratorConst;
 import Generators.ItemGenerators.Dictionaries.ArmorDictionary;
 
 import javax.swing.*;
@@ -64,7 +65,7 @@ public class ArmorGenerator extends Generator {
         }
         name = getArmorAdjective(name,highStatIndex,highStatCount);
 
-        ImageIcon icon = null; //TODO
+        ImageIcon icon = ArmorDictionary.getArmorPartIcon(armor_part);
         Tags [] tags = tag==null ? new Tags[]{}:new Tags[]{tag};
         return new ArmorItem(stats[0],stats[1],stats[2],stats[3],stats[4],stats[5],armor_part,tags,icon,name,quality);
     }

@@ -1,25 +1,10 @@
 import Character.Enemy.EnemyCategory;
 import Character.Enemy.EnemyCharacter;
-import Dice.Dice;
-import Dice.DiceAction.DiceAction;
-import Dice.DiceFactory;
-import Dice.DiceSide;
-import Equipment.Items.*;
-import Fight.ActionTarget;
 import Game.GameBalance;
 import Game.GameLevel;
-import Game.Tags;
 import Generators.EnemyGenerator.EnemyGenerator;
-import Generators.ItemGenerators.*;
-import Loot.LootModule;
-import Loot.LootSettings;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class GeneratorTest {
 

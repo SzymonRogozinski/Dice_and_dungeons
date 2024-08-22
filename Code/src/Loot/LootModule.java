@@ -2,7 +2,6 @@ package Loot;
 
 import Equipment.Items.Item;
 import Equipment.Items.ItemQuality;
-import Equipment.Items.UsableItem;
 import Game.GameCollection;
 import Generators.ItemGenerators.ArmorGenerator;
 import Generators.ItemGenerators.DiceItemGenerator;
@@ -31,7 +30,7 @@ public class LootModule {
                 points-=q;
             }
         }
-        //TODO popup
+        //popup
 
         //Place in backpack
         for(Item item:loot) {

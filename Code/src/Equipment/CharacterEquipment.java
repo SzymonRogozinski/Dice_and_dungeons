@@ -2,9 +2,6 @@ package Equipment;
 
 import Character.PlayerCharacter;
 import Equipment.Items.*;
-import Fight.GameActions.ItemAction;
-import Fight.GameActions.SpellAction;
-import Fight.GameActions.UsableItemAction;
 
 import java.util.ArrayList;
 

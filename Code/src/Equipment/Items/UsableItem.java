@@ -1,6 +1,5 @@
 package Equipment.Items;
 
-import Fight.GameActions.ItemAction;
 import Fight.GameActions.UsableItemAction;
 import Game.Tags;
 

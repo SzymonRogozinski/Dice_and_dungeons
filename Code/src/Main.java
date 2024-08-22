@@ -15,8 +15,8 @@ import Fight.GameActions.ItemAction;
 import Fight.GameActions.SpellAction;
 import Fight.GameActions.UsableItemAction;
 import GUI.FightGUI.FightGUIState;
-import GUI.MainFrame;
 import GUI.FightGUI.FightView;
+import GUI.MainFrame;
 import Game.GameCollection;
 import Game.Tags;
 

@@ -1,7 +1,5 @@
 package GUI.EquipmentGUI;
 
-import Equipment.CharacterEquipment;
-import Equipment.EquipmentModule;
 import Equipment.Items.Item;
 import Equipment.Items.ItemQuality;
 import GUI.GUISettings;
