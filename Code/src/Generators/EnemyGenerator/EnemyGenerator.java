@@ -3,6 +3,7 @@ package Generators.EnemyGenerator;
 import Character.Enemy.EnemyAI;
 import Character.Enemy.EnemyCategory;
 import Character.Enemy.EnemyCharacter;
+import Fight.GameActions.EnemyAction;
 import Game.GameBalance;
 import Generators.Generator;
 
@@ -15,7 +16,7 @@ public class EnemyGenerator extends Generator {
 
     public static EnemyCharacter generate(EnemyCategory category, int cost) {
         EnemyBase base = EnemyBase.getBase(category, cost);
-        return generate(base, cost);
+        return generate((EnemyBase)base.clone(), cost);
     }
 
     public static EnemyCharacter generate(EnemyBase base, int cost) {

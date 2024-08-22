@@ -8,8 +8,7 @@ import Game.Tags;
 import Dice.Dice;
 import Dice.ActionEnum;
 import Dice.DiceFactory;
-import Generators.Generator;
-import Generators.GeneratorConst;
+import Generators.*;
 import Generators.ItemGenerators.Dictionaries.ItemDictionary;
 
 import javax.swing.*;
