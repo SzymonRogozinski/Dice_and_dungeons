@@ -4,6 +4,7 @@ import Character.PlayerParty;
 import Equipment.EquipmentModule;
 import Fight.FightModule;
 import Loot.LootModule;
+import Walking.WalkingManager;
 
 import java.util.Random;
 
@@ -14,6 +15,7 @@ public class GameCollection {
     private static EquipmentModule equipmentModule;
     private static PlayerParty party;
     private static LootModule lootModule;
+    private static WalkingManager walkingManager;
 
     public static void setFight(FightModule fightModule) {
         if(GameCollection.fightModule==null)
@@ -35,6 +37,11 @@ public class GameCollection {
             GameCollection.lootModule=lootModule;
     }
 
+    public static void setWalkingManager(WalkingManager walkingManager) {
+        if(GameCollection.walkingManager==null)
+            GameCollection.walkingManager = walkingManager;
+    }
+
     public static FightModule getFight() { return fightModule; }
 
     public static EquipmentModule getEquipment() {
@@ -44,4 +51,8 @@ public class GameCollection {
     public static PlayerParty getParty() { return party; }
 
     public static LootModule getLootModule() { return lootModule; }
+
+    public static WalkingManager getWalkingManager() {
+        return walkingManager;
+    }
 }
