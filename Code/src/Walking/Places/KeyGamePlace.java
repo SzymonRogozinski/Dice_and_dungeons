@@ -2,6 +2,7 @@ package Walking.Places;
 
 import Walking.Collision.EnemyKilledException;
 import Walking.Collision.KeyCollectedException;
+import Walking.Drones.Drone;
 
 public class KeyGamePlace extends GamePlace {
 
@@ -10,7 +11,7 @@ public class KeyGamePlace extends GamePlace {
     }
 
     @Override
-    public boolean getCollision(GameCharacter goingToCollideCharacter) throws EnemyKilledException, KeyCollectedException {
+    public boolean getCollision(Drone goingToCollideCharacter) throws EnemyKilledException, KeyCollectedException {
         if(goingToCollideCharacter.getIcon() instanceof EnemyGamePlace){
             return true;
         }else if(goingToCollideCharacter.getIcon() instanceof PlayerGamePlace){

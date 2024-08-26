@@ -1,58 +1,21 @@
 package GUI.WalkingGUI;
 
-import GUI.GUISettings;
+import GUI.MainPanel;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
 
-public class WalkingView extends JPanel {
+public class WalkingView extends MainPanel {
 
     public WalkingView(){
-        //TODO Refactor!
-        //Setting panel
-        this.setLayout(null);
-        this.setPreferredSize(new Dimension(GUISettings.heightAndWidth,GUISettings.heightAndWidth));
-        this.setBackground(Color.BLACK);
+        super();
 
-        //Panel components
-        //Big four
-        JPanel bigPanel=new JPanel();
-        JPanel smallPanel = new JPanel();
-        JPanel leftInfoPanel = new JPanel();
-        JPanel downInfoPanel = new JPanel();
-        Border border = BorderFactory.createLineBorder(Color.WHITE, 2);
-        //Actual components
-        Arrows arrows = new Arrows(border);
-        ViewPanel viewPanel = new ViewPanel();
+        //Real components
+        Arrows arrows = new Arrows(getSharedBorder());
+        WalkingPanel walkingPanel = new WalkingPanel();
+        JPanel placeholder1 = new JPanel();
+        JPanel placeholder2=new JPanel();
 
-        //Settings components
-        bigPanel.setBounds(0,0, GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE);
-        bigPanel.setLayout(null);
-        bigPanel.setBorder(border);
-        bigPanel.add(viewPanel);
-
-        smallPanel.setBounds(GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
-        smallPanel.setLayout(null);
-        smallPanel.setBorder(border);
-        smallPanel.add(arrows);
-
-        leftInfoPanel.setBounds(GUISettings.PANEL_SIZE,0,GUISettings.SMALL_PANEL_SIZE,GUISettings.PANEL_SIZE);
-        leftInfoPanel.setLayout(null);
-        leftInfoPanel.setBackground(Color.BLACK);
-        leftInfoPanel.setBorder(border);
-
-        downInfoPanel.setBounds(0,GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
-        downInfoPanel.setLayout(null);
-        downInfoPanel.setBackground(Color.BLACK);
-        downInfoPanel.setBorder(border);
-
-        //Adding component to panel
-        this.add(bigPanel);
-        this.add(smallPanel);
-        this.add(leftInfoPanel);
-        this.add(downInfoPanel);
-
+        setPanelsContent(walkingPanel,arrows,placeholder1,placeholder2);
         //Refresh
         this.revalidate();
         this.repaint();

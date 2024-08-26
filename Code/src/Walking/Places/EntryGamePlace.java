@@ -1,6 +1,7 @@
 package Walking.Places;
 
 import Walking.Collision.EnterExitException;
+import Walking.Drones.Drone;
 
 public class EntryGamePlace extends GamePlace {
     private boolean isStart;
@@ -11,7 +12,7 @@ public class EntryGamePlace extends GamePlace {
     }
 
     @Override
-    public boolean getCollision(GameCharacter goingToCollideCharacter) throws EnterExitException {
+    public boolean getCollision(Drone goingToCollideCharacter) throws EnterExitException {
         if(goingToCollideCharacter.getIcon() instanceof EnemyGamePlace && !isStart)
             return true;
         else if(!isStart)

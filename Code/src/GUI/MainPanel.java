@@ -54,7 +54,7 @@ public abstract class MainPanel extends JLayeredPane {
         this.repaint();
     }
 
-    public Border getBorder(){
+    public static Border getSharedBorder(){
         return BorderFactory.createLineBorder(Color.WHITE, 2);
     }
 

@@ -13,10 +13,10 @@ public class FightView extends MainPanel {
         super();
 
         //Real components
-        rollPanel =new RollPanel(getBorder());
-        fightPanel = new FightPanel(getBorder());
-        actionPanel =  new ActionPanel(getBorder());
-        statusPanel=new StatusPanel(getBorder());
+        rollPanel =new RollPanel(getSharedBorder());
+        fightPanel = new FightPanel(getSharedBorder());
+        actionPanel =  new ActionPanel(getSharedBorder());
+        statusPanel=new StatusPanel(getSharedBorder());
 
         setPanelsContent(fightPanel,rollPanel,actionPanel,statusPanel);
         //Refresh

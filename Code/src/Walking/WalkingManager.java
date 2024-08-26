@@ -1,5 +1,7 @@
 package Walking;
 
+import GUI.WalkingGUI.WalkingGUIState;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -8,8 +10,10 @@ public class WalkingManager {
     private WalkingModule walking;
     private final ArrayList<WalkingSettings> settings;
     private int pointer;
+    private final WalkingGUIState state;
 
-    public WalkingManager(String filename) throws Exception {
+    public WalkingManager(String filename,WalkingGUIState state) throws Exception {
+        this.state=state;
         settings=new ArrayList<>();
         pointer=1;
         BufferedReader reader=new BufferedReader(new FileReader(filename));
@@ -23,6 +27,10 @@ public class WalkingManager {
 
     public WalkingModule getWalking(){
         return walking;
+    }
+
+    public WalkingGUIState getState() {
+        return state;
     }
 
     public void setNextMap() throws Exception {

@@ -83,7 +83,7 @@ public class WalkingModule {
             }
         }finally {
             fogOfWar.refreshFog();
-            WalkingMain.basePanel.repaint();
+            manager.getState().refresh();
         }
     }
 
@@ -100,7 +100,7 @@ public class WalkingModule {
             enemy.ifPlayerWasSeen(player.getPosX(), player.getPosY(), gameMap);
             enemy.enemyMove(gameMap);
         }
-        WalkingMain.basePanel.repaint();
+        manager.getState().refresh();
     }
 
     private class EnemyThread extends Thread{

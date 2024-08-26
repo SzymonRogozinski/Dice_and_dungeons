@@ -1,0 +1,4 @@
+3
+1234,2,100,100,1000,25,20,2,Texture/MapTextures/dungeon/
+1234,1,100,100,1000,25,20,2,Texture/MapTextures/mine/
+1234,0,100,100,1000,25,20,2,Texture/MapTextures/cave/

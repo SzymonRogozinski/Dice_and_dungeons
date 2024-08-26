@@ -1,5 +1,6 @@
 
 import GUI.MainFrame;
+import GUI.WalkingGUI.WalkingGUIState;
 import GUI.WalkingGUI.WalkingKeyListener;
 import GUI.WalkingGUI.WalkingView;
 import Game.GameCollection;
@@ -13,16 +14,17 @@ public class WalkingMain {
     private static final JFrame mainFrame=new MainFrame();
 
     public static void main(String[] args) {
+        mainFrame.addKeyListener(new WalkingKeyListener());
+        walkingView = new WalkingView();
+        WalkingGUIState state = new WalkingGUIState(walkingView);
+
         try {
-            WalkingManager manager=new WalkingManager("config.txt");
+            WalkingManager manager=new WalkingManager("config.txt", state);
             GameCollection.setWalkingManager(manager);
         }catch(Exception e){
             System.err.println(e.getMessage());
             return;
         }
-
-        walkingView = new WalkingView();
-        walkingView.addKeyListener(new WalkingKeyListener());
 
         mainFrame.add(walkingView);
 
@@ -32,7 +34,5 @@ public class WalkingMain {
 
         //Start
        GameCollection.getWalkingManager().getWalking().walkingStart();
-//        walkingView.revalidate();
-//        walkingView.repaint();
     }
 }

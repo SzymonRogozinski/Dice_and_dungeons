@@ -23,10 +23,10 @@ public class EquipmentView extends MainPanel {
         super();
         mouseMotionAdp=new DragListener();
         this.addMouseMotionListener(mouseMotionAdp);
-        switchPanel=new SwitchPanel(getBorder());
-        itemManagementPanel=new ItemManagementPanel(getBorder());
-        itemInfoPanel = new ItemInfoPanel(getBorder());
-        charactersInfoPanel=new CharactersInfoPanel(getBorder());
+        switchPanel=new SwitchPanel(getSharedBorder());
+        itemManagementPanel=new ItemManagementPanel(getSharedBorder());
+        itemInfoPanel = new ItemInfoPanel(getSharedBorder());
+        charactersInfoPanel=new CharactersInfoPanel(getSharedBorder());
 
         setPanelsContent(itemManagementPanel,switchPanel,itemInfoPanel,charactersInfoPanel);
 

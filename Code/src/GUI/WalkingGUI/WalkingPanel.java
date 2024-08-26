@@ -5,19 +5,18 @@ import Game.GameCollection;
 import Walking.FogOfWar;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 //Panel for rendering map view
-public class ViewPanel extends JPanel {
+public class WalkingPanel extends JPanel {
     private final int scale;
     private final int viewSize;
 
-    public ViewPanel() {
+    public WalkingPanel() {
         //set panel
         this.setSize(GUISettings.PANEL_SIZE,GUISettings.PANEL_SIZE);
         this.setLayout(null);
-        this.setBackground(Color.BLACK);
+        //this.setBackground(Color.BLACK);
         this.setOpaque(true);
 
         viewSize= FogOfWar.getSize();
