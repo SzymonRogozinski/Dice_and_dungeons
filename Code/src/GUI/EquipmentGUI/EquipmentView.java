@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 
 public class EquipmentView extends MainPanel {
 
@@ -20,15 +21,17 @@ public class EquipmentView extends MainPanel {
     private Point position;
 
     public EquipmentView() {
-        super();
+        super(new ItemManagementPanel(getSharedBorder()),new SwitchPanel(getSharedBorder()),new ItemInfoPanel(getSharedBorder()),new CharactersInfoPanel(getSharedBorder()));
+
+        //Get child component
+        ArrayList<JPanel> panels = getChildPanels();
+        itemManagementPanel = (ItemManagementPanel) panels.get(0);
+        switchPanel = (SwitchPanel) panels.get(1);
+        itemInfoPanel = (ItemInfoPanel) panels.get(2);
+        charactersInfoPanel = (CharactersInfoPanel) panels.get(3);
+
         mouseMotionAdp=new DragListener();
         this.addMouseMotionListener(mouseMotionAdp);
-        switchPanel=new SwitchPanel(getSharedBorder());
-        itemManagementPanel=new ItemManagementPanel(getSharedBorder());
-        itemInfoPanel = new ItemInfoPanel(getSharedBorder());
-        charactersInfoPanel=new CharactersInfoPanel(getSharedBorder());
-
-        setPanelsContent(itemManagementPanel,switchPanel,itemInfoPanel,charactersInfoPanel);
 
         position=new Point(0,0);
         dragableIcon=new ImageIcon("ItemsIcons/bag-pl.png");

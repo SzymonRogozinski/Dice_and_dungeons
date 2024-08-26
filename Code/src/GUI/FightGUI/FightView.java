@@ -2,6 +2,9 @@ package GUI.FightGUI;
 
 import GUI.MainPanel;
 
+import javax.swing.*;
+import java.util.ArrayList;
+
 public class FightView extends MainPanel {
 
     private RollPanel rollPanel;
@@ -10,15 +13,15 @@ public class FightView extends MainPanel {
     private StatusPanel statusPanel;
 
     public FightView( ){
-        super();
+        super(new FightPanel(getSharedBorder()), new RollPanel(getSharedBorder()), new ActionPanel(getSharedBorder()), new StatusPanel(getSharedBorder()));
 
-        //Real components
-        rollPanel =new RollPanel(getSharedBorder());
-        fightPanel = new FightPanel(getSharedBorder());
-        actionPanel =  new ActionPanel(getSharedBorder());
-        statusPanel=new StatusPanel(getSharedBorder());
+        //Get child component
+        ArrayList<JPanel> panels = getChildPanels();
+        fightPanel = (FightPanel) panels.get(0);
+        rollPanel =(RollPanel) panels.get(1);
+        actionPanel = (ActionPanel) panels.get(2);
+        statusPanel= (StatusPanel) panels.get(3);
 
-        setPanelsContent(fightPanel,rollPanel,actionPanel,statusPanel);
         //Refresh
         this.revalidate();
         this.repaint();

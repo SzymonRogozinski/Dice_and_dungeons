@@ -3,19 +3,18 @@ package GUI.WalkingGUI;
 import GUI.MainPanel;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class WalkingView extends MainPanel {
 
     public WalkingView(){
-        super();
+        super(new WalkingPanel(),new Arrows(getSharedBorder()),new JPanel(),new JPanel());
 
-        //Real components
-        Arrows arrows = new Arrows(getSharedBorder());
-        WalkingPanel walkingPanel = new WalkingPanel();
-        JPanel placeholder1 = new JPanel();
-        JPanel placeholder2=new JPanel();
+        //Get child component
+        ArrayList<JPanel> panels = getChildPanels();
+        WalkingPanel walkingPanel = (WalkingPanel) panels.get(0);
+        Arrows arrows = (Arrows) panels.get(1);
 
-        setPanelsContent(walkingPanel,arrows,placeholder1,placeholder2);
         //Refresh
         this.revalidate();
         this.repaint();

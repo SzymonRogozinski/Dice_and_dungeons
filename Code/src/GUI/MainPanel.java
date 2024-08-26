@@ -3,12 +3,15 @@ package GUI;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class MainPanel extends JLayeredPane {
 
     private final JPanel smallPanel,bigPanel,bottomPanel,sidePanel;
+    private ArrayList<JPanel> childPanels;
 
-    public MainPanel( ){
+    public MainPanel(JPanel bigPanelContent,JPanel smallPanelContent,JPanel bottomPanelContent,JPanel sidePanelContent){
         //Setting panel
         this.setLayout(null);
         this.setPreferredSize(new Dimension(GUISettings.heightAndWidth,GUISettings.heightAndWidth));
@@ -49,6 +52,14 @@ public abstract class MainPanel extends JLayeredPane {
         this.add(sidePanel,JLayeredPane.DEFAULT_LAYER);
         this.add(bottomPanel,JLayeredPane.DEFAULT_LAYER);
 
+        //Adding child components
+        bigPanel.add(bigPanelContent);
+        smallPanel.add(smallPanelContent);
+        bottomPanel.add(bottomPanelContent);
+        sidePanel.add(sidePanelContent);
+
+        childPanels=new ArrayList<>(List.of(bigPanelContent,smallPanelContent,bottomPanelContent,sidePanelContent));
+
         //Refresh
         this.revalidate();
         this.repaint();
@@ -58,14 +69,7 @@ public abstract class MainPanel extends JLayeredPane {
         return BorderFactory.createLineBorder(Color.WHITE, 2);
     }
 
-    public void setPanelsContent(JPanel bigPanelContent,JPanel smallPanelContent,JPanel bottomPanelContent,JPanel sidePanelContent){
-        bigPanel.add(bigPanelContent);
-        smallPanel.add(smallPanelContent);
-        bottomPanel.add(bottomPanelContent);
-        sidePanel.add(sidePanelContent);
-
-        //Refresh
-        this.revalidate();
-        this.repaint();
+    public ArrayList<JPanel> getChildPanels() {
+        return childPanels;
     }
 }
