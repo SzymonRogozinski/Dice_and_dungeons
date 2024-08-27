@@ -4,7 +4,7 @@ import Dice.DiceAction.DiceAction;
 import Dice.DiceSide;
 import Equipment.Items.*;
 import GUI.GUISettings;
-import Game.GameCollection;
+import Game.Game;
 import Game.Tags;
 
 import javax.swing.*;
@@ -39,7 +39,7 @@ public class ItemInfoPanel extends JPanel {
     }
 
     public void refresh(){
-        Item item = GameCollection.getEquipment().getPointedItem();
+        Item item = Game.getEquipment().getPointedItem();
         if(item==null){
             layout.show(this,"Empty");
         }else if(item instanceof ArmorItem){
@@ -86,7 +86,7 @@ public class ItemInfoPanel extends JPanel {
         }
 
         public void refresh(){
-            Item item = GameCollection.getEquipment().getPointedItem();
+            Item item = Game.getEquipment().getPointedItem();
 
             if(item instanceof ActionItem aItem) {
                 nameLabel.setText(aItem.name);
@@ -145,7 +145,7 @@ public class ItemInfoPanel extends JPanel {
         }
 
         public void refresh(){
-            ArmorItem item=(ArmorItem) GameCollection.getEquipment().getPointedItem();
+            ArmorItem item=(ArmorItem) Game.getEquipment().getPointedItem();
 
             StringBuilder statsBuilder=new StringBuilder("Statistics:");
             StringBuilder requirementsBuilder=new StringBuilder("Requirements:");
@@ -209,7 +209,7 @@ public class ItemInfoPanel extends JPanel {
         }
 
         void refresh(){
-            UsableItem item = (UsableItem) GameCollection.getEquipment().getPointedItem();
+            UsableItem item = (UsableItem) Game.getEquipment().getPointedItem();
             StringBuilder builder=new StringBuilder("Effects:");
 
             var x = item.getAction().getActionFactories();

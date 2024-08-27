@@ -4,35 +4,37 @@ import Character.PlayerParty;
 import Equipment.EquipmentModule;
 import Fight.FightModule;
 import Loot.LootModule;
+import Walking.WalkingModule;
 
 import java.util.Random;
 
-public class GameCollection {
+public class Game {
 
     public static final Random random = new Random();
     private static FightModule fightModule;
     private static EquipmentModule equipmentModule;
     private static PlayerParty party;
     private static LootModule lootModule;
+    private static WalkingModule walkingModule;
 
     public static void setFight(FightModule fightModule) {
-        if(GameCollection.fightModule==null)
-            GameCollection.fightModule = fightModule;
+        if(Game.fightModule==null)
+            Game.fightModule = fightModule;
     }
 
     public static void setEquipment(EquipmentModule equipmentModule) {
-        if(GameCollection.equipmentModule==null)
-            GameCollection.equipmentModule = equipmentModule;
-    }
-
-    public static void setParty(PlayerParty party) {
-        if(GameCollection.party==null)
-            GameCollection.party = party;
+        if(Game.equipmentModule==null)
+            Game.equipmentModule = equipmentModule;
     }
 
     public static void setLoot(LootModule lootModule){
-        if(GameCollection.lootModule==null)
-            GameCollection.lootModule=lootModule;
+        if(Game.lootModule==null)
+            Game.lootModule=lootModule;
+    }
+
+    public static void setWalkingManager(WalkingModule walkingModule) {
+        if(Game.walkingModule ==null)
+            Game.walkingModule = walkingModule;
     }
 
     public static FightModule getFight() { return fightModule; }
@@ -41,7 +43,9 @@ public class GameCollection {
         return equipmentModule;
     }
 
-    public static PlayerParty getParty() { return party; }
-
     public static LootModule getLootModule() { return lootModule; }
+
+    public static WalkingModule getWalkingManager() {
+        return walkingModule;
+    }
 }

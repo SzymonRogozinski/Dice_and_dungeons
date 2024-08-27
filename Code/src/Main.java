@@ -17,8 +17,9 @@ import Fight.GameActions.UsableItemAction;
 import GUI.FightGUI.FightGUIState;
 import GUI.FightGUI.FightView;
 import GUI.MainFrame;
-import Game.GameCollection;
+import Game.Game;
 import Game.Tags;
+import Game.PlayerInfo;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class Main {
         ArrayList<Item> usableItems=new ArrayList<>(List.of(usItem1,usItem2,usItem3,usItem4,usItem1,usItem2,usItem3,usItem1,usItem2,usItem3,usItem4,usItem1,usItem2,usItem3,usItem4));
 
         PlayerParty party = new PlayerParty(new ArrayList<>(List.of(new PlayerCharacter[]{player,player2})),usableItems);
-        GameCollection.setParty(party);
+        PlayerInfo.setParty(party);
 
         EnemyActionFactory factory1 = new EnemyActionFactory(e->e.getStrength(),0.25,false,1);
         EnemyActionFactory factory2 = new EnemyActionFactory(e->e.getCunning(),0.20,false,6);
@@ -81,7 +82,7 @@ public class Main {
         EnemyCharacter enemy2 = new EnemyCharacter(12,12,12,12,12,EnemyCategory.Minion,"Skeleton2",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai2);
 
         FightModule fight = new FightModule(state,new ArrayList<>(List.of(new EnemyCharacter[]{enemy,enemy2})));
-        GameCollection.setFight(fight);
+        Game.setFight(fight);
         state.refresh();
 
         fight.initFight();

@@ -2,12 +2,13 @@ package GUI.EquipmentGUI;
 
 import GUI.GUISettings;
 import GUI.MainPanel;
-import Game.GameCollection;
+import Game.Game;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 
 public class EquipmentView extends MainPanel {
 
@@ -20,15 +21,17 @@ public class EquipmentView extends MainPanel {
     private Point position;
 
     public EquipmentView() {
-        super();
+        super(new ItemManagementPanel(getSharedBorder()),new SwitchPanel(getSharedBorder()),new ItemInfoPanel(getSharedBorder()),new CharactersInfoPanel(getSharedBorder()));
+
+        //Get child component
+        ArrayList<JPanel> panels = getChildPanels();
+        itemManagementPanel = (ItemManagementPanel) panels.get(0);
+        switchPanel = (SwitchPanel) panels.get(1);
+        itemInfoPanel = (ItemInfoPanel) panels.get(2);
+        charactersInfoPanel = (CharactersInfoPanel) panels.get(3);
+
         mouseMotionAdp=new DragListener();
         this.addMouseMotionListener(mouseMotionAdp);
-        switchPanel=new SwitchPanel(getBorder());
-        itemManagementPanel=new ItemManagementPanel(getBorder());
-        itemInfoPanel = new ItemInfoPanel(getBorder());
-        charactersInfoPanel=new CharactersInfoPanel(getBorder());
-
-        setPanelsContent(itemManagementPanel,switchPanel,itemInfoPanel,charactersInfoPanel);
 
         position=new Point(0,0);
         dragableIcon=new ImageIcon("ItemsIcons/bag-pl.png");
@@ -53,7 +56,7 @@ public class EquipmentView extends MainPanel {
     }
 
     public void refresh(){
-        if(GameCollection.getEquipment()==null)
+        if(Game.getEquipment()==null)
             return;
         charactersInfoPanel.refresh();
         itemManagementPanel.refresh();
@@ -67,7 +70,7 @@ public class EquipmentView extends MainPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
-        ItemSlot it = GameCollection.getEquipment().getClickedSlot();
+        ItemSlot it = Game.getEquipment().getClickedSlot();
         if(it!=null && it.getItem()!=null) {
             position=MouseInfo.getPointerInfo().getLocation();
             it.getItem().getIcon().paintIcon(this, g, (int) position.getX() - GUISettings.ITEM_ICON_SIZE/2 - this.getLocationOnScreen().x, (int) position.getY() - GUISettings.ITEM_ICON_SIZE/2- this.getLocationOnScreen().y);

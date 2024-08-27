@@ -2,7 +2,8 @@ package Loot;
 
 import Equipment.Items.Item;
 import Equipment.Items.ItemQuality;
-import Game.GameCollection;
+import Game.Game;
+import Game.PlayerInfo;
 import Generators.ItemGenerators.ArmorGenerator;
 import Generators.ItemGenerators.DiceItemGenerator;
 import Generators.ItemGenerators.SpellItemGenerator;
@@ -34,7 +35,7 @@ public class LootModule {
 
         //Place in backpack
         for(Item item:loot) {
-            GameCollection.getParty().getBackpack().putToBackpack(item);
+            PlayerInfo.getParty().getBackpack().putToBackpack(item);
 //            System.out.println("Name: "+item.name);
 //            System.out.println("Quality: "+item.getQuality());
 //            if(item instanceof UsableItem usableItem)
@@ -53,11 +54,11 @@ public class LootModule {
     }
 
     private Item generateLoot(ItemQuality quality){
-        double roll = GameCollection.random.nextDouble();
+        double roll = Game.random.nextDouble();
         if(roll<=USABLE_PROB)
             return UsableItemGenerator.generate(quality);
         else{
-            roll = GameCollection.random.nextDouble();
+            roll = Game.random.nextDouble();
             if(ARMOR_PROB>=roll)
                 return ArmorGenerator.generateArmor(quality);
             else if(DICE_PROB>=roll)

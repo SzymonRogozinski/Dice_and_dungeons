@@ -1,6 +1,5 @@
 > Dodać więcej typów przedmiotów, wagi akcji i nazw
 > To samo, ale do przeciwników
 > Podmienić placeholdery
-
 > Loot popup
 > Poprawić GUI
