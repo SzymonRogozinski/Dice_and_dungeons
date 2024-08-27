@@ -2,7 +2,7 @@ package GUI.EquipmentGUI;
 
 import GUI.GUISettings;
 import GUI.MainPanel;
-import Game.GameCollection;
+import Game.Game;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,7 +56,7 @@ public class EquipmentView extends MainPanel {
     }
 
     public void refresh(){
-        if(GameCollection.getEquipment()==null)
+        if(Game.getEquipment()==null)
             return;
         charactersInfoPanel.refresh();
         itemManagementPanel.refresh();
@@ -70,7 +70,7 @@ public class EquipmentView extends MainPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
-        ItemSlot it = GameCollection.getEquipment().getClickedSlot();
+        ItemSlot it = Game.getEquipment().getClickedSlot();
         if(it!=null && it.getItem()!=null) {
             position=MouseInfo.getPointerInfo().getLocation();
             it.getItem().getIcon().paintIcon(this, g, (int) position.getX() - GUISettings.ITEM_ICON_SIZE/2 - this.getLocationOnScreen().x, (int) position.getY() - GUISettings.ITEM_ICON_SIZE/2- this.getLocationOnScreen().y);

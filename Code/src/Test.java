@@ -13,8 +13,9 @@ import Fight.GameActions.UsableItemAction;
 import GUI.EquipmentGUI.EquipmentGUIState;
 import GUI.EquipmentGUI.EquipmentView;
 import GUI.MainFrame;
-import Game.GameCollection;
+import Game.Game;
 import Game.Tags;
+import Game.PlayerInfo;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class Test {
         ArrayList<Item> usableItems=new ArrayList<>(List.of(new Item[]{usItem1,usItem2,usItem3,usItem4,usItem5}));
 
         PlayerParty party = new PlayerParty(new ArrayList<>(List.of(new PlayerCharacter[]{player,player2})),usableItems);
-        GameCollection.setParty(party);
+        PlayerInfo.setParty(party);
 
         //Set eq
         player.getEquipment().equip(item1,0, CharacterEquipment.ACTION_SLOT);
@@ -152,8 +153,8 @@ public class Test {
         EquipmentModule module = new EquipmentModule(state);
         FightModule fModule = new FightModule(null,null);
 
-        GameCollection.setEquipment(module);
-        GameCollection.setFight(fModule);
+        Game.setEquipment(module);
+        Game.setFight(fModule);
         state.refresh();
 
         mainFrame.add(view);

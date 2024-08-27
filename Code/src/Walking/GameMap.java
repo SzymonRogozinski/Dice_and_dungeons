@@ -1,5 +1,6 @@
 package Walking;
 
+import Game.PlayerInfo;
 import Walking.Drones.Drone;
 import Walking.Drones.PlayerDrone;
 import Walking.Collision.*;
@@ -173,7 +174,7 @@ public class GameMap {
         }catch(EnemyKilledException | EnterExitException e){
             throw e;
         }catch(KeyCollectedException e){
-            ((PlayerDrone)gc).collectKey();
+            PlayerInfo.collectKey();
             originalGamePlaces[gc.getPosY() + dy][gc.getPosX() + dx] = new SpaceGamePlace(PATH);
         }catch(DoorOpenException e){
             originalGamePlaces[gc.getPosY() + dy][gc.getPosX() + dx] = new SpaceGamePlace(PATH);

@@ -1,128 +1,65 @@
 package Walking;
 
-import Walking.Drones.Drone;
-import Walking.Drones.EnemyDrone;
-import Walking.Drones.PlayerDrone;
-import Walking.Collision.EnemyKilledException;
-import Walking.Collision.EnterExitException;
-import Walking.Places.PlayerGamePlace;
-import dg.generator.dungeon.Map;
+import GUI.WalkingGUI.WalkingGUIState;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
 
 public class WalkingModule {
-    private final GameMap gameMap;
-    private final Enemies enemies;
-    private final EnemyThread enemyThread;
-    private final PlayerDrone player;
-    private final WalkingManager manager;
-    public final FogOfWar fogOfWar;
+    private WalkingLevel walking;
+    private final ArrayList<WalkingSettings> settings;
+    private int levelPointer;
+    private final WalkingGUIState state;
 
-    public WalkingModule(String filename) {
-        File input=new File(filename);
-        //Loading enemies
-        this.enemies=new Enemies(input);
-        //Loading map
-        this.gameMap =new GameMap(input);
-        setEnemy();
-        enemyThread=new EnemyThread();
-        //Add player
-        player=new PlayerDrone(gameMap.getStartX(), gameMap.getStartY(),new PlayerGamePlace(gameMap.getPATH()));
-        gameMap.addCharacterPlace(player.getIcon(), player.getPosX(), player.getPosY());
-        //Add fog
-        fogOfWar=new FogOfWar(player,gameMap);
-        manager=null;
+    public WalkingModule(String filename, WalkingGUIState state) throws Exception {
+        this.state=state;
+        settings=new ArrayList<>();
+        levelPointer =1;
+        BufferedReader reader=new BufferedReader(new FileReader(filename));
+        int levels=Integer.parseInt(reader.readLine());
+        for(int i=0; i<levels;i++){
+            settings.add(new WalkingSettings(reader.readLine()));
+        }
+        WalkingSettings startSetting=settings.get(0);
+        walking = new WalkingLevel(this,startSetting.seed, startSetting.algGen,startSetting.width,startSetting.height,startSetting.size, startSetting.enemies, startSetting.treasures,startSetting.vaults,startSetting.path);
     }
 
-    public WalkingModule(WalkingManager manager,int seed, int genAlg, int width, int height, int size, int enemies, int treasures, int vaults, String path) throws Exception {
-        MapCreator creator;
-        if(seed==0)
-            creator=new MapCreator();
-        else
-            creator=new MapCreator(seed);
-        if(!creator.createMap(genAlg,width,height,size,enemies,treasures,vaults))
-            throw new Exception("Dungeon map was not generated!");
-        Map map=creator.getMap();
-        //Loading enemies
-        this.enemies=new Enemies(map,path);
-        //Loading map
-        this.gameMap =new GameMap(map,path);
-        setEnemy();
-        enemyThread=new EnemyThread();
-        //Add player
-        player=new PlayerDrone(gameMap.getStartX(), gameMap.getStartY(),new PlayerGamePlace(gameMap.getPATH()));
-        gameMap.addCharacterPlace(player.getIcon(), player.getPosX(), player.getPosY());
-        //Add fog
-        fogOfWar=new FogOfWar(player,gameMap);
-        this.manager=manager;
+    public WalkingLevel getWalking(){
+        return walking;
     }
 
-    public GameMap getMap() {
-        return gameMap;
+    public WalkingGUIState getState() {
+        return state;
     }
 
-    public void walkingStart(){
-        enemyThread.start();
-    }
-
-    private void setEnemy(){
-        for (Drone enemy:enemies)
-            gameMap.addCharacterPlace(enemy.getIcon(),enemy.getPosX(),enemy.getPosY());
-    }
-
-    public synchronized void playerMove(int dx,int dy) {
+    public void setNextMap() throws Exception {
+        if(levelPointer >=settings.size())
+            throw new Exception("Cannot load new map!");
         try {
-            gameMap.changeCharacterPlace(player, dx, dy);
-        }catch (EnemyKilledException e){
-            enemies.removeEnemy(e.getReference());
-        }catch (EnterExitException e){
-            try {
-                manager.setNextMap();
-            }catch (Exception ex){
-                throw new RuntimeException(ex.getMessage());
-            }
-        }finally {
-            fogOfWar.refreshFog();
-            manager.getState().refresh();
-        }
+            walking.killModule();
+            WalkingSettings startSetting = settings.get(levelPointer);
+            walking = new WalkingLevel(this, startSetting.seed, startSetting.algGen, startSetting.width, startSetting.height, startSetting.size, startSetting.enemies, startSetting.treasures, startSetting.vaults, startSetting.path);
+            levelPointer++;
+            walking.walkingStart();
+        }catch (Exception ignore){}
     }
 
-    public synchronized void killModule(){
-        try {
-            enemyThread.endThread();
-            enemyThread.join();
-        }catch (InterruptedException ignored){}
-    }
-
-    private synchronized void enemiesMove(){
-        EnemyDrone enemy=enemies.getNextEnemy();
-        if (enemy.ifMove()) {
-            enemy.ifPlayerWasSeen(player.getPosX(), player.getPosY(), gameMap);
-            enemy.enemyMove(gameMap);
-        }
-        manager.getState().refresh();
-    }
-
-    private class EnemyThread extends Thread{
-
-        private final static int oneRoundTime=500;
-        private boolean endThread;
-
-        @Override
-        public void run(){
-            while(enemies.countEnemy()>0 && !endThread) {
-                enemiesMove();
-                try {
-                    Thread.sleep(oneRoundTime/enemies.countEnemy());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            System.out.println("Thread end");
-        }
-
-        synchronized void endThread(){
-            endThread=true;
+    private class WalkingSettings{
+        // 0-> No predefine
+        final int seed,algGen,width,height,size,enemies,treasures,vaults;
+        final String path;
+        WalkingSettings(String fileLine){
+            String[] settings=fileLine.split(",");
+            this.seed=Integer.parseInt(settings[0]);
+            this.algGen=Integer.parseInt(settings[1]);
+            this.width=Integer.parseInt(settings[2]);
+            this.height=Integer.parseInt(settings[3]);
+            this.size=Integer.parseInt(settings[4]);
+            this.enemies=Integer.parseInt(settings[5]);
+            this.treasures=Integer.parseInt(settings[6]);
+            this.vaults=Integer.parseInt(settings[7]);
+            this.path=settings[8];
         }
     }
 }

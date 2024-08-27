@@ -2,7 +2,7 @@ package Generators.EnemyGenerator;
 
 import Fight.GameActions.EnemyAction;
 import Game.GameBalance;
-import Game.GameCollection;
+import Game.Game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ public class EnemyAdjective {
     ));
 
     public static EnemyAdjective getAdjective(int cost){
-        EnemyAdjective adjective = ADJECTIVES.get(GameCollection.random.nextInt(ADJECTIVES.size()));
+        EnemyAdjective adjective = ADJECTIVES.get(Game.random.nextInt(ADJECTIVES.size()));
         return adjective.cost>cost?getAdjective(cost):adjective;
     }
 

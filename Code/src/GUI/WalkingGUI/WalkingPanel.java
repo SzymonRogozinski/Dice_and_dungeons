@@ -1,7 +1,7 @@
 package GUI.WalkingGUI;
 
 import GUI.GUISettings;
-import Game.GameCollection;
+import Game.Game;
 import Walking.FogOfWar;
 
 import javax.swing.*;
@@ -29,7 +29,7 @@ public class WalkingPanel extends JPanel {
 
         for (int i = 0; i < viewSize; i++) {
             for (int j = 0; j < viewSize; j++) {
-                g2D.drawImage(GameCollection.getWalkingManager().getWalking().getMap().getPlace(j+ GameCollection.getWalkingManager().getWalking().fogOfWar.getMinX(), i+ GameCollection.getWalkingManager().getWalking().fogOfWar.getMinY()).getImage(), j * scale, i * scale, scale, scale, null);
+                g2D.drawImage(Game.getWalkingManager().getWalking().getMap().getPlace(j+ Game.getWalkingManager().getWalking().fogOfWar.getMinX(), i+ Game.getWalkingManager().getWalking().fogOfWar.getMinY()).getImage(), j * scale, i * scale, scale, scale, null);
             }
         }
     }

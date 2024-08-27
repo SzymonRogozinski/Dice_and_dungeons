@@ -5,7 +5,8 @@ import Character.PlayerCharacter;
 import Fight.ActionTarget;
 import Fight.Statuses.GameStatus;
 import GUI.GUISettings;
-import Game.GameCollection;
+import Game.Game;
+import Game.PlayerInfo;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -57,7 +58,7 @@ public class FightPanel extends JPanel {
         if(enemyPanelList.isEmpty() && playerPanelList.isEmpty()) {
 
             //Draw enemies
-            for (int i = 0; i < GameCollection.getFight().getEnemyCount(); i++) {
+            for (int i = 0; i < Game.getFight().getEnemyCount(); i++) {
                 EnemyPanel enemy = new EnemyPanel(i);
                 enemyPanelList.add(enemy);
             }
@@ -65,7 +66,7 @@ public class FightPanel extends JPanel {
                 this.add(enemy);
             }
             //Draw player
-            for (int i = 0; i < GameCollection.getParty().getCharacters().size(); i++) {
+            for (int i = 0; i < PlayerInfo.getParty().getCharacters().size(); i++) {
                 PlayerPanel player = new PlayerPanel(i);
                 playerPanelList.add(player);
             }
@@ -127,7 +128,7 @@ public class FightPanel extends JPanel {
             FlowLayout layout=new FlowLayout();
             layout.setVgap(1);
             this.setLayout(layout);
-            enemy= GameCollection.getFight().getEnemies().get(i);
+            enemy= Game.getFight().getEnemies().get(i);
 
             enemyLabel = new JLabel(resizeIcon(enemy.getImage(), enemyWidth-2, (int)(enemyHeight*0.85)-2));
             healthBar=new JProgressBar(0,enemy.getMaxHealth());
@@ -184,7 +185,7 @@ public class FightPanel extends JPanel {
             FlowLayout layout=new FlowLayout();
             layout.setVgap(1);
             this.setLayout(layout);
-            playerCharacter=GameCollection.getParty().getCharacters().get(i);
+            playerCharacter= PlayerInfo.getParty().getCharacters().get(i);
 
             playerLabel = new JLabel(resizeIcon(playerCharacter.getImage(), enemyWidth-2, (int)(enemyHeight*0.85)-2));
 
@@ -232,7 +233,7 @@ public class FightPanel extends JPanel {
             if(!selectableFlag || !setBorderFlashing(false))
                 return;
             borderFlash.makeStop();
-            GameCollection.getFight().targetSelected(selectedEnemy);
+            Game.getFight().targetSelected(selectedEnemy);
             selectedEnemy = -1;
         }
 
@@ -245,7 +246,7 @@ public class FightPanel extends JPanel {
         @Override
         public void mouseEntered(MouseEvent e) {
             if(isEnemy)
-                GameCollection.getFight().showNextMove(enemyPanelList.get(characterId).enemy.getNextAction());
+                Game.getFight().showNextMove(enemyPanelList.get(characterId).enemy.getNextAction());
             if(!selectableFlag)
                 return;
             setBorderFlashing(true);
@@ -256,7 +257,7 @@ public class FightPanel extends JPanel {
         @Override
         public void mouseExited(MouseEvent e) {
             if(isEnemy)
-                GameCollection.getFight().hideNextMove();
+                Game.getFight().hideNextMove();
             if(!selectableFlag)
                 return;
             setBorderFlashing(false);
@@ -265,17 +266,17 @@ public class FightPanel extends JPanel {
         }
 
         private boolean setBorderFlashing(boolean flashing){
-            if(isEnemy && GameCollection.getFight().getTargetType() == ActionTarget.ENEMY_CHARACTER) {
+            if(isEnemy && Game.getFight().getTargetType() == ActionTarget.ENEMY_CHARACTER) {
                 enemyPanelList.get(characterId).setBorder(flashing ? selectedLabelBorder : labelBorder);
                 return true;
-            }else if (!isEnemy && GameCollection.getFight().getTargetType() == ActionTarget.PLAYER_CHARACTER) {
+            }else if (!isEnemy && Game.getFight().getTargetType() == ActionTarget.PLAYER_CHARACTER) {
                 playerPanelList.get(characterId).setBorder(flashing ? selectedLabelBorder : labelBorder);
                 return true;
-            }else if (isEnemy && GameCollection.getFight().getTargetType() == ActionTarget.ALL_ENEMIES){
+            }else if (isEnemy && Game.getFight().getTargetType() == ActionTarget.ALL_ENEMIES){
                 for(EnemyPanel label:enemyPanelList)
                     label.setBorder(flashing?selectedLabelBorder:labelBorder);
                 return true;
-            }else if (!isEnemy && GameCollection.getFight().getTargetType() == ActionTarget.PLAYER_PARTY){
+            }else if (!isEnemy && Game.getFight().getTargetType() == ActionTarget.PLAYER_PARTY){
                 for(PlayerPanel label: playerPanelList)
                     label.setBorder(flashing?selectedLabelBorder:labelBorder);
                 return true;
@@ -303,12 +304,12 @@ public class FightPanel extends JPanel {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            GameCollection.getFight().showStatusInfo(status.info());
+            Game.getFight().showStatusInfo(status.info());
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            GameCollection.getFight().hideStatusInfo();
+            Game.getFight().hideStatusInfo();
         }
 
     }

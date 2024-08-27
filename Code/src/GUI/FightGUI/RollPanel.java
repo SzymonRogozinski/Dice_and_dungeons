@@ -1,7 +1,7 @@
 package GUI.FightGUI;
 
 import GUI.GUISettings;
-import Game.GameCollection;
+import Game.Game;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -22,7 +22,7 @@ public class RollPanel extends JPanel {
 
         JButton skipButton=new JButton("Skip and sum up");
         skipButton.addActionListener(e->{
-            if(!GameCollection.getFight().isDiceResultNull())
+            if(!Game.getFight().isDiceResultNull())
                 sumUpDicePool();
         });
 
@@ -32,11 +32,11 @@ public class RollPanel extends JPanel {
 
 
     public void rerollsChange(){
-        reroll.setText("You have "+GameCollection.getFight().getRerolls()+" rerolls.");
+        reroll.setText("You have "+ Game.getFight().getRerolls()+" rerolls.");
     }
 
     private void sumUpDicePool(){
-        GameCollection.getFight().endAction();
+        Game.getFight().endAction();
     }
 
 }

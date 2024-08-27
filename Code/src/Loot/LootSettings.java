@@ -1,6 +1,6 @@
 package Loot;
 
-import Game.GameCollection;
+import Game.Game;
 
 public class LootSettings {
 
@@ -22,7 +22,7 @@ public class LootSettings {
     }
 
     public int getQualityId(){
-        double randomValue = GameCollection.random.nextDouble();
+        double randomValue = Game.random.nextDouble();
         double probability = 0;
         int i=0;
         for(;i<probabilities.length;i++){

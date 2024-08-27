@@ -2,7 +2,8 @@ package Character;
 
 import Equipment.CharacterEquipment;
 import Game.GameBalance;
-import Game.GameCollection;
+import Game.Game;
+import Game.PlayerInfo;
 import Game.Tags;
 
 import javax.swing.*;
@@ -30,29 +31,29 @@ public class PlayerCharacter extends GameCharacter{
     }
 
     public void recalculateStats(){
-        GameCollection.getParty().calculateHealthAndMana();
+        PlayerInfo.getParty().calculateHealthAndMana();
     }
 
     @Override
     public void dealDamage(int damage) throws CharacterDieException {
         damage*=getDamageReceivingMod();
-        GameCollection.getParty().dealDamage(damage);
-        if(GameCollection.getParty().getCurrentHealth()==0)
+        PlayerInfo.getParty().dealDamage(damage);
+        if(PlayerInfo.getParty().getCurrentHealth()==0)
             throw new CharacterDieException();
     }
 
     @Override
     public void healDamage(int heal){
-        GameCollection.getParty().healDamage(heal);
+        PlayerInfo.getParty().healDamage(heal);
     }
 
     @Override
     public void gainMana(int mana){
-        GameCollection.getParty().gainMana(mana);
+        PlayerInfo.getParty().gainMana(mana);
     }
 
     @Override
     public void addShield(int shield){
-        GameCollection.getParty().addShield(shield);
+        PlayerInfo.getParty().addShield(shield);
     }
 }

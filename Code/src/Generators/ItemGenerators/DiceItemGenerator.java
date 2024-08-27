@@ -6,7 +6,7 @@ import Dice.DiceFactory;
 import Equipment.Items.ActionItem;
 import Equipment.Items.ItemQuality;
 import Fight.GameActions.ItemAction;
-import Game.GameCollection;
+import Game.Game;
 import Game.Tags;
 import Generators.Generator;
 import Generators.GeneratorConst;
@@ -34,7 +34,7 @@ public class DiceItemGenerator extends Generator {
             case RARE -> {
                 points = getPoints(GeneratorConst.MEDIUM_POINTS*GeneratorConst.RARE_MOD);
                 //Add tag
-                if (GameCollection.random.nextBoolean()) {
+                if (Game.random.nextBoolean()) {
                     tag = getRandomTag();
                     points += GeneratorConst.TAG_BONUS*GeneratorConst.RARE_MOD;
                 }
@@ -51,7 +51,7 @@ public class DiceItemGenerator extends Generator {
         // Item Concentrated
         if(quality == ItemQuality.COMMON)
             basePoints=points;
-        else if(GameCollection.random.nextDouble()>=CONCENTRATED_PROP) {
+        else if(Game.random.nextDouble()>=CONCENTRATED_PROP) {
             basePoints = points;
         }else
             basePoints = GeneratorConst.MEDIUM_POINTS*GeneratorConst.COMMON_MOD;
@@ -63,7 +63,7 @@ public class DiceItemGenerator extends Generator {
             if(points<(int)(startPoints*EQUALITY_EDGE)){
                 redistributePointsEqual(base,points);
                 points=0;
-            }else if(base.haveEmptySide && GameCollection.random.nextDouble()<REPLACE_EMPTY_SIDE_PROP){
+            }else if(base.haveEmptySide && Game.random.nextDouble()<REPLACE_EMPTY_SIDE_PROP){
                 points-=replaceEmptySide(base,points);
             }else{
                 base.secondActionValues=new int[6];
@@ -85,7 +85,7 @@ public class DiceItemGenerator extends Generator {
 
     private static void addActionRandomly(DiceItemBase base, int points){
         int bound = base.firstActionValues[0]==0?5:4;
-        int roll=GameCollection.random.nextInt(bound);
+        int roll= Game.random.nextInt(bound);
         switch (roll){
             case 0 -> addEffectEqualAll(base,points);
             case 1 -> addEffectEqualFullSides(base,points);
@@ -183,7 +183,7 @@ public class DiceItemGenerator extends Generator {
     private static void getRandomAction(DiceItemBase base){
         if (base.secondaryActionList.length==0)
             return;
-        base.secondAction = base.secondaryActionList[GameCollection.random.nextInt(base.secondaryActionList.length)];
+        base.secondAction = base.secondaryActionList[Game.random.nextInt(base.secondaryActionList.length)];
         if(base.secondAction == base.firstAction)
             getRandomAction(base);
     }

@@ -1,7 +1,8 @@
 package GUI.FightGUI;
 
 import GUI.GUISettings;
-import Game.GameCollection;
+import Game.Game;
+import Game.PlayerInfo;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -112,7 +113,7 @@ public class StatusPanel extends JPanel {
     }
 
     public void refreshCombatLog(){
-        String combatText = GameCollection.getFight().getCombatLogInfo();
+        String combatText = Game.getFight().getCombatLogInfo();
         if(combatLogText.equals(combatText)) {
             combatLogText = "";
         }else {
@@ -124,16 +125,16 @@ public class StatusPanel extends JPanel {
     }
 
     public void refresh(){
-        healthBar.setMaximum(GameCollection.getParty().getMaxHealth());
-        manaBar.setMaximum(GameCollection.getParty().getMaxMana());
-        healthBar.setValue(GameCollection.getParty().getCurrentHealth());
-        String healthString = GameCollection.getParty().getCurrentHealth()+"/"+GameCollection.getParty().getMaxHealth();
-        if(GameCollection.getParty().getShield()>0)
-            healthString+=" +"+GameCollection.getParty().getShield();
+        healthBar.setMaximum(PlayerInfo.getParty().getMaxHealth());
+        manaBar.setMaximum(PlayerInfo.getParty().getMaxMana());
+        healthBar.setValue(PlayerInfo.getParty().getCurrentHealth());
+        String healthString = PlayerInfo.getParty().getCurrentHealth()+"/"+ PlayerInfo.getParty().getMaxHealth();
+        if(PlayerInfo.getParty().getShield()>0)
+            healthString+=" +"+ PlayerInfo.getParty().getShield();
         healthBar.setString(healthString);
-        manaBar.setValue(GameCollection.getParty().getCurrentMana());
-        manaBar.setString(GameCollection.getParty().getCurrentMana()+"/"+GameCollection.getParty().getMaxMana());
-        characterName.setText(GameCollection.getFight().getCharacter().getName());
+        manaBar.setValue(PlayerInfo.getParty().getCurrentMana());
+        manaBar.setString(PlayerInfo.getParty().getCurrentMana()+"/"+ PlayerInfo.getParty().getMaxMana());
+        characterName.setText(Game.getFight().getCharacter().getName());
         this.revalidate();
         this.repaint();
     }

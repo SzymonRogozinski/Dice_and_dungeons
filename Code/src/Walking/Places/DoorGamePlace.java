@@ -1,5 +1,6 @@
 package Walking.Places;
 
+import Game.PlayerInfo;
 import Walking.Collision.DoorOpenException;
 import Walking.Drones.Drone;
 import Walking.Drones.PlayerDrone;
@@ -14,8 +15,7 @@ public class DoorGamePlace extends GamePlace {
         if(goingToCollideCharacter.getIcon() instanceof EnemyGamePlace){
             return true;
         }else if(goingToCollideCharacter.getIcon() instanceof PlayerGamePlace){
-            var p=(PlayerDrone)goingToCollideCharacter;
-            if(p.useKey()){
+            if(PlayerInfo.useKey()){
                 throw new DoorOpenException();
             }else{
                 System.out.println("You don't have key to open door!");

@@ -3,8 +3,8 @@ import GUI.MainFrame;
 import GUI.WalkingGUI.WalkingGUIState;
 import GUI.WalkingGUI.WalkingKeyListener;
 import GUI.WalkingGUI.WalkingView;
-import Game.GameCollection;
-import Walking.WalkingManager;
+import Game.Game;
+import Walking.WalkingModule;
 
 import javax.swing.*;
 
@@ -19,8 +19,8 @@ public class WalkingMain {
         WalkingGUIState state = new WalkingGUIState(walkingView);
 
         try {
-            WalkingManager manager=new WalkingManager("config.txt", state);
-            GameCollection.setWalkingManager(manager);
+            WalkingModule manager=new WalkingModule("config.txt", state);
+            Game.setWalkingManager(manager);
         }catch(Exception e){
             System.err.println(e.getMessage());
             return;
@@ -33,6 +33,6 @@ public class WalkingMain {
 
 
         //Start
-       GameCollection.getWalkingManager().getWalking().walkingStart();
+       Game.getWalkingManager().getWalking().walkingStart();
     }
 }

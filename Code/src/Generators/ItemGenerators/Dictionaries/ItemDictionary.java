@@ -2,7 +2,7 @@ package Generators.ItemGenerators.Dictionaries;
 
 import Dice.ActionEnum;
 import Fight.ActionTarget;
-import Game.GameCollection;
+import Game.Game;
 import Game.Tags;
 import Generators.ItemGenerators.DiceItemBase;
 
@@ -59,7 +59,7 @@ public class ItemDictionary {
         String[] names = CLASS_TAGS.get(tag);
         if(names==null)
             throw new RuntimeException("Tag "+tag+" has no name!");
-        return names[GameCollection.random.nextInt(names.length)];
+        return names[Game.random.nextInt(names.length)];
     }
 
     public static Tags[] getTagsFromAction(int action1,int action2){
@@ -82,19 +82,19 @@ public class ItemDictionary {
     public static String getItemNameFromItemBase(DiceItemBase base){
         String name="";
         //Base name
-        name = base.names[GameCollection.random.nextInt(base.names.length)];
+        name = base.names[Game.random.nextInt(base.names.length)];
         //Class-Tag name
         if(!base.tags.isEmpty())
             name = getNameFromTag(base.tags.get(0))+" "+name;
         //ADJECTIVES names
-        if(GameCollection.random.nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
+        if(Game.random.nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
             String[] adjNames = ADJECTIVES.get(base.firstAction);
-            String adj = adjNames[GameCollection.random.nextInt(adjNames.length)];
+            String adj = adjNames[Game.random.nextInt(adjNames.length)];
             name = String.format(adj,name);
         }
         if(base.secondAction!=ActionEnum.NULL_ACTION){
             String[] adjNames = ADJECTIVES.get(base.secondAction);
-            String adj = adjNames[GameCollection.random.nextInt(adjNames.length)];
+            String adj = adjNames[Game.random.nextInt(adjNames.length)];
             name = String.format(adj,name);
         }
         return name;
@@ -103,22 +103,22 @@ public class ItemDictionary {
     public static String getSpellNameFromItemBase(DiceItemBase base){
         String name="";
         //Base name
-        name = base.names[GameCollection.random.nextInt(base.names.length)];
+        name = base.names[Game.random.nextInt(base.names.length)];
         //Range name
         if(base.target== ActionTarget.PLAYER_PARTY || base.target==ActionTarget.ALL_ENEMIES)
-            name = WIDE_RANGE[GameCollection.random.nextInt(WIDE_RANGE.length)]+" "+name;
+            name = WIDE_RANGE[Game.random.nextInt(WIDE_RANGE.length)]+" "+name;
         //Class-Tag name
         if(!base.tags.isEmpty())
             name = getNameFromTag(base.tags.get(0))+" "+name;
         //ADJECTIVES_FOR_SPELLS names
-        if(GameCollection.random.nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
+        if(Game.random.nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
             String[] adjNames = ADJECTIVES_FOR_SPELLS.get(base.firstAction);
-            String adj = adjNames[GameCollection.random.nextInt(adjNames.length)];
+            String adj = adjNames[Game.random.nextInt(adjNames.length)];
             name = String.format(adj,name);
         }
         if(base.secondAction!=ActionEnum.NULL_ACTION){
             String[] adjNames = ADJECTIVES_FOR_SPELLS.get(base.secondAction);
-            String adj = adjNames[GameCollection.random.nextInt(adjNames.length)];
+            String adj = adjNames[Game.random.nextInt(adjNames.length)];
             name = String.format(adj,name);
         }
         return name;

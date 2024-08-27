@@ -3,7 +3,8 @@ package GUI.EquipmentGUI;
 import Character.PlayerCharacter;
 import Equipment.CharacterEquipment;
 import GUI.GUISettings;
-import Game.GameCollection;
+import Game.Game;
+import Game.PlayerInfo;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -35,9 +36,9 @@ public class CharactersInfoPanel extends JPanel {
 
         charactersInfoPanel=new CharacterInfoPanel();
         partyInfoPanel=new PartyInfoPanel();
-        changeCharacterPanel=new ChangePanel("Next character","Previous character",e->GameCollection.getEquipment().changeCharacter(true),e->GameCollection.getEquipment().changeCharacter(false));
+        changeCharacterPanel=new ChangePanel("Next character","Previous character",e-> Game.getEquipment().changeCharacter(true), e-> Game.getEquipment().changeCharacter(false));
         useItemPanel=new UseItemPanel();
-        changeBackpackPagePanel=new ChangePanel("Next page","Previous page",e->GameCollection.getEquipment().changeBackpackPage(true),e->GameCollection.getEquipment().changeBackpackPage(false));
+        changeBackpackPagePanel=new ChangePanel("Next page","Previous page",e-> Game.getEquipment().changeBackpackPage(true), e-> Game.getEquipment().changeBackpackPage(false));
 
         setEquipmentVisibility(true);
 
@@ -96,7 +97,7 @@ public class CharactersInfoPanel extends JPanel {
         }
 
         public void refresh(){
-            PlayerCharacter player= GameCollection.getEquipment().getCurrentCharacter();
+            PlayerCharacter player= Game.getEquipment().getCurrentCharacter();
             statisticLabels[0].setText(player.getName());
             statisticLabels[1].setText("Strength: "+player.getStrength());
             statisticLabels[2].setText("Endurance: "+player.getEndurance());
@@ -134,8 +135,8 @@ public class CharactersInfoPanel extends JPanel {
         }
 
         public void refresh(){
-            statisticLabels[1].setText("Health: "+GameCollection.getParty().getCurrentHealth()+"/"+GameCollection.getParty().getMaxHealth());
-            statisticLabels[2].setText("Mana: "+GameCollection.getParty().getCurrentMana()+"/"+GameCollection.getParty().getMaxMana());
+            statisticLabels[1].setText("Health: "+ PlayerInfo.getParty().getCurrentHealth()+"/"+ PlayerInfo.getParty().getMaxHealth());
+            statisticLabels[2].setText("Mana: "+ PlayerInfo.getParty().getCurrentMana()+"/"+ PlayerInfo.getParty().getMaxMana());
         }
     }
 
@@ -179,7 +180,7 @@ public class CharactersInfoPanel extends JPanel {
 
             useItem=new JButton("Use item");
             useItem.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-50,(int)(GUISettings.PANEL_SIZE*0.05)));
-            useItem.addActionListener(e->GameCollection.getEquipment().useChosenItem());
+            useItem.addActionListener(e-> Game.getEquipment().useChosenItem());
 
             itemSlot=new ItemSlot(null, BAG_SLOT_ICON,0, CharacterEquipment.USE_SLOT);
 
@@ -188,7 +189,7 @@ public class CharactersInfoPanel extends JPanel {
         }
 
         void refresh(){
-            itemSlot.setItem(GameCollection.getEquipment().getUseItem());
+            itemSlot.setItem(Game.getEquipment().getUseItem());
         }
 
     }

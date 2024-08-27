@@ -10,7 +10,7 @@ import Fight.Statuses.BonusDiceStatus;
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusException;
 import GUI.FightGUI.FightGUIState;
-import Game.GameCollection;
+import Game.PlayerInfo;
 import Game.Tags;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class FightModule {
     }
 
     public GameCharacter getCharacter(){
-        return playerTurn?GameCollection.getParty().getCharacters().get(characterTurn) : enemies.get(characterTurn);
+        return playerTurn? PlayerInfo.getParty().getCharacters().get(characterTurn) : enemies.get(characterTurn);
     }
 
     public ArrayList<EnemyCharacter> getEnemies() {
@@ -86,7 +86,7 @@ public class FightModule {
         if(noRoll){
             master.setResult(action.getActionFactories());
         }else{
-            PlayerCharacter character = GameCollection.getParty().getCharacters().get(characterTurn);
+            PlayerCharacter character = PlayerInfo.getParty().getCharacters().get(characterTurn);
             master.setDicePool(action.getDice(),action.getDiceNumber(character),character.getCharacterRerolls());
             ArrayList<GameStatus> bonuses=character.getStatusWithTag(Tags.BONUS_DICE);
             for(GameStatus bonus:bonuses){
@@ -125,7 +125,7 @@ public class FightModule {
     }
 
     public void clear(){
-        for(PlayerCharacter p:GameCollection.getParty().getCharacters())
+        for(PlayerCharacter p: PlayerInfo.getParty().getCharacters())
             p.resetStatus();
         for(EnemyCharacter e: enemies)
             e.resetStatus();
@@ -139,7 +139,7 @@ public class FightModule {
             throw new RuntimeException(e);
         }
         //Check statuses
-        GameCharacter character = playerTurn?GameCollection.getParty().getCharacters().get(characterTurn):enemies.get(characterTurn);
+        GameCharacter character = playerTurn? PlayerInfo.getParty().getCharacters().get(characterTurn):enemies.get(characterTurn);
         character.resetMod();
 
         ArrayList<GameStatus> statusOnStart = character.getStatusWithTag(Tags.ON_TURN_START);
@@ -175,7 +175,7 @@ public class FightModule {
             master.sumUpResults();
         else if(!playerTurn){
             EnemyCharacter enemy=enemies.get(characterTurn);
-            EnemyAction enemyAction=enemy.action(enemies,GameCollection.getParty().getCharacters());
+            EnemyAction enemyAction=enemy.action(enemies, PlayerInfo.getParty().getCharacters());
             targetType=enemyAction.getTarget();
             targetId=enemy.getTargetId();
             master.setResult(enemyAction.getConstActions(enemy));
@@ -197,13 +197,13 @@ public class FightModule {
         ArrayList<DiceAction> actions = master.getSumUpResults();
         ArrayList<GameCharacter> characters;
         //Set Attacker
-        GameCharacter attacker = playerTurn?GameCollection.getParty().getCharacters().get(characterTurn):enemies.get(characterTurn);
+        GameCharacter attacker = playerTurn? PlayerInfo.getParty().getCharacters().get(characterTurn):enemies.get(characterTurn);
         //Set Defender
         switch (targetType){
-            case PLAYER_CHARACTER -> characters=new ArrayList<>(List.of(new GameCharacter[]{GameCollection.getParty().getCharacters().get(targetId)}));
+            case PLAYER_CHARACTER -> characters=new ArrayList<>(List.of(new GameCharacter[]{PlayerInfo.getParty().getCharacters().get(targetId)}));
             case ENEMY_CHARACTER -> characters=new ArrayList<>(List.of(new GameCharacter[]{enemies.get(targetId)}));
             case ALL_ENEMIES -> characters=new ArrayList<>(enemies);
-            case PLAYER_PARTY -> characters=new ArrayList<>(GameCollection.getParty().getCharacters());
+            case PLAYER_PARTY -> characters=new ArrayList<>(PlayerInfo.getParty().getCharacters());
             default -> characters=null;
         }
         for (DiceAction diceAction : actions){
@@ -234,9 +234,9 @@ public class FightModule {
 
     private void setNextCharacterTurn(){
         characterTurn++;
-        if((playerTurn && characterTurn>=GameCollection.getParty().getCharacters().size()) || (!playerTurn && characterTurn>=enemies.size())) {
+        if((playerTurn && characterTurn>= PlayerInfo.getParty().getCharacters().size()) || (!playerTurn && characterTurn>=enemies.size())) {
             if(!playerTurn)
-                GameCollection.getParty().onTurnStart();
+                PlayerInfo.getParty().onTurnStart();
             characterTurn=0;
             playerTurn=!playerTurn;
         }
