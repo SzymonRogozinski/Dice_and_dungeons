@@ -25,7 +25,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class FightingTest {
     private static final JFrame mainFrame=new MainFrame();
     private static FightView fightView;
     private static FightGUIState state;

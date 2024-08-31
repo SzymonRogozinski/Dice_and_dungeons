@@ -21,7 +21,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Test {
+public class EquipmentTest {
 
     private static final JFrame mainFrame=new MainFrame();
     private static EquipmentView view;
