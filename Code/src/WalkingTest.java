@@ -1,14 +1,38 @@
-import Walking.MapCreator;
-import dg.generator.Generator;
+
+import GUI.MainFrame;
+import GUI.WalkingGUI.WalkingGUIState;
+import GUI.WalkingGUI.WalkingKeyListener;
+import GUI.WalkingGUI.WalkingView;
+import Game.Game;
+import Walking.WalkingModule;
+
+import javax.swing.*;
 
 public class WalkingTest {
 
+    private static WalkingView walkingView;
+    private static final JFrame mainFrame=new MainFrame();
+
     public static void main(String[] args) {
-        MapCreator mc=new MapCreator();
-        boolean success=mc.createMap(Generator.CAVE_ALGORITHM,100,100,1000,30,20,2);
-        System.out.println("Success? "+success);
+        mainFrame.addKeyListener(new WalkingKeyListener());
+        walkingView = new WalkingView();
+        WalkingGUIState state = new WalkingGUIState(walkingView);
+
         try {
-            mc.writeMap("test_save.txt", "test_saving");
-        }catch(Exception ignore){}
+            WalkingModule manager=new WalkingModule("config.txt", state);
+            Game.setWalkingManager(manager);
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+            return;
+        }
+
+        mainFrame.add(walkingView);
+
+        mainFrame.pack();
+        mainFrame.setVisible(true);
+
+
+        //Start
+       Game.getWalkingManager().getWalking().walkingStart();
     }
 }
