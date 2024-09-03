@@ -12,6 +12,8 @@ public class GUISettings {
     public final static int PANEL_SIZE = heightAndWidth*3/4;
     public final static int SMALL_PANEL_SIZE =PANEL_SIZE/3;
     public static final int ITEM_ICON_SIZE = GUISettings.heightAndWidth/10;
+    public final static int CHARACTER_HEIGHT = GUISettings.PANEL_SIZE/4;
+    public final static int CHARACTER_WIDTH =GUISettings.PANEL_SIZE/6;
 
 }
 

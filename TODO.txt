@@ -3,3 +3,5 @@
 > Podmienić placeholdery
 > Loot popup
 > Poprawić GUI
+
+>Wydzielić resizeIcon

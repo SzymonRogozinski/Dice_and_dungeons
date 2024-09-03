@@ -18,9 +18,7 @@ import java.util.ArrayList;
 
 public class FightPanel extends JPanel {
 
-    private final static int enemyHeight =GUISettings.PANEL_SIZE/4;
-    private final static int enemyWidth =GUISettings.PANEL_SIZE/6;
-    private static final int statusIconSize = Math.min((int)(enemyHeight*0.15)-1, (int)( (enemyWidth-2) /3) );
+    private static final int statusIconSize = Math.min((int)(GUISettings.CHARACTER_HEIGHT*0.15)-1, (int)( (GUISettings.CHARACTER_WIDTH-2) /3) );
     private final Border labelBorder=BorderFactory.createLineBorder(Color.BLACK,1);
     private Color selectedColor= new Color(255,0,0);
     private final Border selectedLabelBorder=new LineBorder(selectedColor, 1) {
@@ -97,17 +95,17 @@ public class FightPanel extends JPanel {
     }
 
     private void setLabels(){
-        int yOffSet= enemyHeight /2;
-        int playerYOffSet=GUISettings.PANEL_SIZE-3* enemyHeight /2;
+        int yOffSet= GUISettings.CHARACTER_HEIGHT /2;
+        int playerYOffSet=GUISettings.PANEL_SIZE-3* GUISettings.CHARACTER_HEIGHT /2;
         //Set enemies labels. Max 3!
-        int xSpace=(GUISettings.PANEL_SIZE- enemyWidth *enemyPanelList.size())/(enemyPanelList.size()+1);
+        int xSpace=(GUISettings.PANEL_SIZE- GUISettings.CHARACTER_WIDTH *enemyPanelList.size())/(enemyPanelList.size()+1);
         for(int i=0; i<enemyPanelList.size();i++){
-            enemyPanelList.get(i).setLocation((xSpace+ enemyWidth)*i+xSpace,yOffSet);
+            enemyPanelList.get(i).setLocation((xSpace+ GUISettings.CHARACTER_WIDTH)*i+xSpace,yOffSet);
         }
         //Set player labels. Max 3!
-        xSpace=(GUISettings.PANEL_SIZE- enemyWidth * playerPanelList.size())/(playerPanelList.size()+1);
+        xSpace=(GUISettings.PANEL_SIZE- GUISettings.CHARACTER_WIDTH * playerPanelList.size())/(playerPanelList.size()+1);
         for(int i = 0; i< playerPanelList.size(); i++){
-            playerPanelList.get(i).setLocation((xSpace+ enemyWidth)*i+xSpace,playerYOffSet);
+            playerPanelList.get(i).setLocation((xSpace+ GUISettings.CHARACTER_WIDTH)*i+xSpace,playerYOffSet);
         }
     }
 
@@ -130,14 +128,14 @@ public class FightPanel extends JPanel {
             this.setLayout(layout);
             enemy= Game.getFight().getEnemies().get(i);
 
-            enemyLabel = new JLabel(resizeIcon(enemy.getImage(), enemyWidth-2, (int)(enemyHeight*0.85)-2));
+            enemyLabel = new JLabel(resizeIcon(enemy.getImage(), GUISettings.CHARACTER_WIDTH-2, (int)(GUISettings.CHARACTER_HEIGHT*0.85)-2));
             healthBar=new JProgressBar(0,enemy.getMaxHealth());
-            healthBar.setPreferredSize(new Dimension(enemyWidth-2, (int)(enemyHeight*0.15)-1));
+            healthBar.setPreferredSize(new Dimension(GUISettings.CHARACTER_WIDTH-2, (int)(GUISettings.CHARACTER_HEIGHT*0.15)-1));
             healthBar.setForeground(Color.RED);
             healthBar.setStringPainted(true);
 
             statusLabel = new JLabel();
-            statusLabel.setPreferredSize(new Dimension(enemyWidth-2,(int)(enemyHeight*0.15)-1));
+            statusLabel.setPreferredSize(new Dimension(GUISettings.CHARACTER_WIDTH-2,(int)(GUISettings.CHARACTER_HEIGHT*0.15)-1));
             statusLabel.setBackground(Color.BLACK);
             layout=new FlowLayout();
             layout.setHgap(1);
@@ -148,7 +146,7 @@ public class FightPanel extends JPanel {
             this.add(healthBar);
             this.add(statusLabel);
 
-            this.setSize(enemyWidth, (int)(enemyHeight*1.15));
+            this.setSize(GUISettings.CHARACTER_WIDTH, (int)(GUISettings.CHARACTER_HEIGHT*1.15));
             this.setBackground(Color.BLACK);
             this.setBorder(labelBorder);
             this.addMouseListener(new EnemyMouseListener(i,true));
@@ -187,10 +185,10 @@ public class FightPanel extends JPanel {
             this.setLayout(layout);
             playerCharacter= PlayerInfo.getParty().getCharacters().get(i);
 
-            playerLabel = new JLabel(resizeIcon(playerCharacter.getImage(), enemyWidth-2, (int)(enemyHeight*0.85)-2));
+            playerLabel = new JLabel(resizeIcon(playerCharacter.getImage(), GUISettings.CHARACTER_WIDTH-2, (int)(GUISettings.CHARACTER_HEIGHT*0.85)-2));
 
             statusLabel = new JLabel();
-            statusLabel.setPreferredSize(new Dimension(enemyWidth-2,(int)(enemyHeight*0.15)-1));
+            statusLabel.setPreferredSize(new Dimension(GUISettings.CHARACTER_WIDTH-2,(int)(GUISettings.CHARACTER_HEIGHT*0.15)-1));
             statusLabel.setBackground(Color.BLACK);
             layout=new FlowLayout();
             layout.setHgap(1);
@@ -200,7 +198,7 @@ public class FightPanel extends JPanel {
             this.add(playerLabel);
             this.add(statusLabel);
 
-            this.setSize(enemyWidth, enemyHeight);
+            this.setSize(GUISettings.CHARACTER_WIDTH, GUISettings.CHARACTER_HEIGHT);
             this.setBackground(Color.BLACK);
             this.setBorder(labelBorder);
             this.addMouseListener(new EnemyMouseListener(i,false));
