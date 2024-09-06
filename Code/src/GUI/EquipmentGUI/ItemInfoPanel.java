@@ -255,10 +255,6 @@ public class ItemInfoPanel extends JPanel {
                 diceSides[i].setIcon(sides[i].getIcon());
             }
         }
-
-        private static ImageIcon resizeIcon(String path,int size){
-            return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(size,size,java.awt.Image.SCALE_SMOOTH));
-        }
     }
 
 }

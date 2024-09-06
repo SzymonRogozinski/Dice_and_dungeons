@@ -4,6 +4,7 @@ import Dice.DiceAction.*;
 import GUI.GUISettings;
 import Game.GameBalance;
 import Generators.ItemGenerators.DiceItemBase;
+import Game.GameUtils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -148,7 +149,7 @@ public class DiceFactory {
             NullAction action = new NullAction();
             ArrayList<DiceAction> actions = new ArrayList<>();
             actions.add(action);
-            return new DiceSide(actions,resizeIcon(SYMBOL_PATH+"N.png",size));
+            return new DiceSide(actions,GameUtils.resizeIcon(new ImageIcon(SYMBOL_PATH+"N.png"),size,size));
         }
         ArrayList<DiceAction> actions = new ArrayList<>();
         ArrayList<String> imageCode=new ArrayList<>();
@@ -204,10 +205,6 @@ public class DiceFactory {
             }
         }
         return new DiceSide(actions,buildIcon(imageCode));
-    }
-
-    private static ImageIcon resizeIcon(String path,int size){
-        return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(size,size,java.awt.Image.SCALE_SMOOTH));
     }
 
     private static ImageIcon buildIcon(ArrayList<String> iconCode) {

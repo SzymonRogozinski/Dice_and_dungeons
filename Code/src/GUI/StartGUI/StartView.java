@@ -26,9 +26,6 @@ public class StartView extends JPanel {
         this.add("Start",menuPanel);
         this.add("Choose",choosePartyPanel);
 
-        //TODO remove
-        layout.show(this,"Choose");
-
     }
 
     public void changeState(int newState){

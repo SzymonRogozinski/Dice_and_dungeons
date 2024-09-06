@@ -4,4 +4,4 @@
 > Loot popup
 > Poprawić GUI
 
->Wydzielić resizeIcon
+>Podmienić zwijalny text na textArea

@@ -7,6 +7,7 @@ import Fight.Statuses.GameStatus;
 import GUI.GUISettings;
 import Game.Game;
 import Game.PlayerInfo;
+import Game.GameUtils;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -90,10 +91,6 @@ public class FightPanel extends JPanel {
         this.selectableFlag=selectableFlag;
     }
 
-    private static ImageIcon resizeIcon(ImageIcon image,int width,int height){
-        return new ImageIcon(image.getImage().getScaledInstance(width,height,java.awt.Image.SCALE_SMOOTH));
-    }
-
     private void setLabels(){
         int yOffSet= GUISettings.CHARACTER_HEIGHT /2;
         int playerYOffSet=GUISettings.PANEL_SIZE-3* GUISettings.CHARACTER_HEIGHT /2;
@@ -128,7 +125,7 @@ public class FightPanel extends JPanel {
             this.setLayout(layout);
             enemy= Game.getFight().getEnemies().get(i);
 
-            enemyLabel = new JLabel(resizeIcon(enemy.getImage(), GUISettings.CHARACTER_WIDTH-2, (int)(GUISettings.CHARACTER_HEIGHT*0.85)-2));
+            enemyLabel = new JLabel(GameUtils.resizeIcon(enemy.getImage(), GUISettings.CHARACTER_WIDTH-2, (int)(GUISettings.CHARACTER_HEIGHT*0.85)-2));
             healthBar=new JProgressBar(0,enemy.getMaxHealth());
             healthBar.setPreferredSize(new Dimension(GUISettings.CHARACTER_WIDTH-2, (int)(GUISettings.CHARACTER_HEIGHT*0.15)-1));
             healthBar.setForeground(Color.RED);
@@ -166,7 +163,7 @@ public class FightPanel extends JPanel {
                 //Set statuses
                 statusLabel.removeAll();
                 for(GameStatus status:enemy.getStatuses()){
-                    JLabel statLabel=new JLabel(resizeIcon(status.getIcon(),statusIconSize,statusIconSize));
+                    JLabel statLabel=new JLabel(GameUtils.resizeIcon(status.getIcon(),statusIconSize,statusIconSize));
                     statLabel.addMouseListener(new StatusMouseListener(status));
                     statusLabel.add(statLabel);
                 }
@@ -185,7 +182,7 @@ public class FightPanel extends JPanel {
             this.setLayout(layout);
             playerCharacter= PlayerInfo.getParty().getCharacters().get(i);
 
-            playerLabel = new JLabel(resizeIcon(playerCharacter.getImage(), GUISettings.CHARACTER_WIDTH-2, (int)(GUISettings.CHARACTER_HEIGHT*0.85)-2));
+            playerLabel = new JLabel(GameUtils.resizeIcon(playerCharacter.getImage(), GUISettings.CHARACTER_WIDTH-2, (int)(GUISettings.CHARACTER_HEIGHT*0.85)-2));
 
             statusLabel = new JLabel();
             statusLabel.setPreferredSize(new Dimension(GUISettings.CHARACTER_WIDTH-2,(int)(GUISettings.CHARACTER_HEIGHT*0.15)-1));
@@ -209,7 +206,7 @@ public class FightPanel extends JPanel {
             //Set statuses
             statusLabel.removeAll();
             for(GameStatus status:playerCharacter.getStatuses()){
-                JLabel statLabel=new JLabel(resizeIcon(status.getIcon(),statusIconSize,statusIconSize));
+                JLabel statLabel=new JLabel(GameUtils.resizeIcon(status.getIcon(),statusIconSize,statusIconSize));
                 statLabel.addMouseListener(new StatusMouseListener(status));
                 statusLabel.add(statLabel);
             }

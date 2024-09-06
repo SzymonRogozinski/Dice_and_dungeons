@@ -34,6 +34,7 @@ public class MenuModule {
 
     public void setSelectedCharacter(PlayerCharacter selectedCharacter) {
         this.selectedCharacter = selectedCharacter;
+        state.refresh();
     }
 
     public void changeToStart(){
