@@ -12,8 +12,8 @@ import Fight.GameActions.SpellAction;
 import Fight.GameActions.UsableItemAction;
 import GUI.EquipmentGUI.EquipmentGUIState;
 import GUI.EquipmentGUI.EquipmentView;
-import GUI.MainFrame;
-import Game.Game;
+import GUI.TestFrame;
+import Game.GameManager;
 import Game.Tags;
 import Game.PlayerInfo;
 
@@ -23,7 +23,7 @@ import java.util.List;
 
 public class EquipmentTest {
 
-    private static final JFrame mainFrame=new MainFrame();
+    private static final JFrame mainFrame=new TestFrame();
     private static EquipmentView view;
 
     public static void main(String[] args) {
@@ -153,8 +153,8 @@ public class EquipmentTest {
         EquipmentModule module = new EquipmentModule(state);
         FightModule fModule = new FightModule(null,null);
 
-        Game.setEquipment(module);
-        Game.setFight(fModule);
+        GameManager.setEquipment(module);
+        GameManager.setFight(fModule);
         state.refresh();
 
         mainFrame.add(view);

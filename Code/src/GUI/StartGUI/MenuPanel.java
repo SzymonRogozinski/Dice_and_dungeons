@@ -1,7 +1,7 @@
 package GUI.StartGUI;
 
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +32,7 @@ public class MenuPanel extends JPanel {
         JButton newGame = new JButton("New game");
         newGame.setFont(GUISettings.BUTTON_FONT);
         newGame.setPreferredSize(new Dimension(menuSize/2,menuSize/8));
-        newGame.addActionListener(e->Game.getMenuModule().changeToChoose());
+        newGame.addActionListener(e-> GameManager.getMenuModule().changeToChoose());
 
         JButton loadGame = new JButton("Load game");
         loadGame.setFont(GUISettings.BUTTON_FONT);

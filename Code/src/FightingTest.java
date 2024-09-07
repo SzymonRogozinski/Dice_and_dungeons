@@ -16,8 +16,8 @@ import Fight.GameActions.SpellAction;
 import Fight.GameActions.UsableItemAction;
 import GUI.FightGUI.FightGUIState;
 import GUI.FightGUI.FightView;
-import GUI.MainFrame;
-import Game.Game;
+import GUI.TestFrame;
+import Game.GameManager;
 import Game.Tags;
 import Game.PlayerInfo;
 
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FightingTest {
-    private static final JFrame mainFrame=new MainFrame();
+    private static final JFrame mainFrame=new TestFrame();
     private static FightView fightView;
     private static FightGUIState state;
 
@@ -82,7 +82,7 @@ public class FightingTest {
         EnemyCharacter enemy2 = new EnemyCharacter(12,12,12,12,12,EnemyCategory.Minion,"Skeleton2",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai2);
 
         FightModule fight = new FightModule(state,new ArrayList<>(List.of(new EnemyCharacter[]{enemy,enemy2})));
-        Game.setFight(fight);
+        GameManager.setFight(fight);
         state.refresh();
 
         fight.initFight();

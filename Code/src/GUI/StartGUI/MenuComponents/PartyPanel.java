@@ -2,7 +2,7 @@ package GUI.StartGUI.MenuComponents;
 
 import GUI.GUISettings;
 
-import Game.Game;
+import Game.GameManager;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -54,14 +54,14 @@ public class PartyPanel extends JPanel {
         // Set go back button
         JButton goBack = new JButton("Go back");
         goBack.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE*2/3,GUISettings.SMALL_PANEL_SIZE/5));
-        goBack.addActionListener(e->Game.getMenuModule().changeToStart());
+        goBack.addActionListener(e-> GameManager.getMenuModule().changeToStart());
         this.add(goBack);
     }
 
     public void refresh(){
         for(int i=0;i<3;i++){
             try {
-                characterLabels[i].setText(Game.getMenuModule().getParty().get(i).getName());
+                characterLabels[i].setText(GameManager.getMenuModule().getParty().get(i).getName());
             }catch (IndexOutOfBoundsException e){
                 characterLabels[i].setText("-");
             }

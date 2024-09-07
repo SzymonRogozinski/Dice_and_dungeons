@@ -5,7 +5,7 @@ import Equipment.Items.ActionItem;
 import Equipment.Items.SpellItem;
 import Equipment.Items.UsableItem;
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
 import Game.PlayerInfo;
 
 import javax.swing.*;
@@ -59,7 +59,7 @@ public class ActionListPanel extends JPanel {
     }
 
     public void loadAction(){
-        if(!(Game.getFight().getCharacter() instanceof PlayerCharacter character))
+        if(!(GameManager.getFight().getCharacter() instanceof PlayerCharacter character))
             throw new RuntimeException("Illegal state, enemy and player character were mixed!");
         //items
         ArrayList<ActionItem> items = character.getEquipment().getNotNullActionItems();
@@ -68,7 +68,7 @@ public class ActionListPanel extends JPanel {
             JButton button=new JButton(item.name);
             button.setSize(buttonWidth,buttonHeight);
             button.addActionListener(e-> {
-                Game.getFight().choosedAction(item.getAction());
+                GameManager.getFight().choosedAction(item.getAction());
                 changePage("Start");
             });
             buttons.add(button);
@@ -111,7 +111,7 @@ public class ActionListPanel extends JPanel {
                 }
                 else {
                     PlayerInfo.getParty().spendMana(spell.getAction().getManaCost());
-                    Game.getFight().choosedAction(spell.getAction());
+                    GameManager.getFight().choosedAction(spell.getAction());
                     changePage("Start");
                 }
             });
@@ -215,7 +215,7 @@ public class ActionListPanel extends JPanel {
                 JButton button=new JButton(item.name);
                 button.setSize(buttonWidth,buttonHeight);
                 button.addActionListener(e-> {
-                    Game.getFight().choosedAction(item.getAction());
+                    GameManager.getFight().choosedAction(item.getAction());
                     PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
                     changePage("Start");
                 });
@@ -245,7 +245,7 @@ public class ActionListPanel extends JPanel {
                 JButton button=new JButton(item.name);
                 button.setSize(buttonWidth,buttonHeight);
                 button.addActionListener(e-> {
-                    Game.getFight().choosedAction(item.getAction());
+                    GameManager.getFight().choosedAction(item.getAction());
                     PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
                     changePage("Start");
                 });
@@ -276,7 +276,7 @@ public class ActionListPanel extends JPanel {
                 JButton button=new JButton(item.name);
                 button.setSize(buttonWidth,buttonHeight);
                 button.addActionListener(e-> {
-                    Game.getFight().choosedAction(item.getAction());
+                    GameManager.getFight().choosedAction(item.getAction());
                     PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
                     changePage("Start");
                 });

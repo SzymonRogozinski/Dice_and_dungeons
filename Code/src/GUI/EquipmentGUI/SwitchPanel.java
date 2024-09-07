@@ -1,7 +1,7 @@
 package GUI.EquipmentGUI;
 
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -22,11 +22,11 @@ public class SwitchPanel extends JPanel {
 
         JButton eqButton=new JButton("Equipment");
         eqButton.setPreferredSize(new Dimension((int)(GUISettings.SMALL_PANEL_SIZE*0.8),(int)(GUISettings.SMALL_PANEL_SIZE*0.20)));
-        eqButton.addActionListener(e-> Game.getEquipment().changeViewToEquipment());
+        eqButton.addActionListener(e-> GameManager.getEquipment().changeViewToEquipment());
 
         JButton backButton=new JButton("Backpack");
         backButton.setPreferredSize(new Dimension((int)(GUISettings.SMALL_PANEL_SIZE*0.8),(int)(GUISettings.SMALL_PANEL_SIZE*0.20)));
-        backButton.addActionListener(e-> Game.getEquipment().changeViewToBackpack());
+        backButton.addActionListener(e-> GameManager.getEquipment().changeViewToBackpack());
 
         JButton returnButton=new JButton("Close");
         returnButton.setPreferredSize(new Dimension((int)(GUISettings.SMALL_PANEL_SIZE*0.8),(int)(GUISettings.SMALL_PANEL_SIZE*0.20)));

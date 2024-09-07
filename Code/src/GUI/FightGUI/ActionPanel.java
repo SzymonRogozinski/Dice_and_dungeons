@@ -1,7 +1,7 @@
 package GUI.FightGUI;
 
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -43,16 +43,16 @@ public class ActionPanel extends JPanel {
     }
 
     private void roll(){
-        if(Game.getFight().isNoRoll()){
-            Game.getFight().endAction();
+        if(GameManager.getFight().isNoRoll()){
+            GameManager.getFight().endAction();
             return;
         }
         changePage("Dice");
-        Game.getFight().rollDices();
+        GameManager.getFight().rollDices();
     }
 
     private void enemy(){
-        Game.getFight().endAction();
+        GameManager.getFight().endAction();
     }
 
     private class StopPanel extends JPanel{

@@ -19,7 +19,7 @@ import java.util.List;
 public class FightModule {
     private final DiceMaster master;
     private final FightGUIState state;
-    private final ArrayList<EnemyCharacter> enemies;
+    private ArrayList<EnemyCharacter> enemies;
     private boolean playerTurn;
     private int characterTurn;
     private int targetId;
@@ -38,6 +38,15 @@ public class FightModule {
         this.enemies=enemies;
     }
 
+    public FightModule(FightGUIState state) {
+        this.combatLogInfo="";
+        this.noRoll=false;
+        this.playerTurn=true;
+        this.characterTurn=0;
+        this.state=state;
+        this.master = new DiceMaster();
+    }
+
     public ActionTarget getTargetType() {
         return targetType;
     }
@@ -48,6 +57,10 @@ public class FightModule {
 
     public ArrayList<EnemyCharacter> getEnemies() {
         return enemies;
+    }
+
+    public void setEnemies(ArrayList<EnemyCharacter> enemies) {
+        this.enemies = enemies;
     }
 
     public String getCombatLogInfo() {

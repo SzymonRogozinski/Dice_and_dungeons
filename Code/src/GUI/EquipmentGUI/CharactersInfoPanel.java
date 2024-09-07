@@ -3,7 +3,7 @@ package GUI.EquipmentGUI;
 import Character.PlayerCharacter;
 import Equipment.CharacterEquipment;
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
 import Game.PlayerInfo;
 
 import javax.swing.*;
@@ -36,9 +36,9 @@ public class CharactersInfoPanel extends JPanel {
 
         charactersInfoPanel=new CharacterInfoPanel();
         partyInfoPanel=new PartyInfoPanel();
-        changeCharacterPanel=new ChangePanel("Next character","Previous character",e-> Game.getEquipment().changeCharacter(true), e-> Game.getEquipment().changeCharacter(false));
+        changeCharacterPanel=new ChangePanel("Next character","Previous character",e-> GameManager.getEquipment().changeCharacter(true), e-> GameManager.getEquipment().changeCharacter(false));
         useItemPanel=new UseItemPanel();
-        changeBackpackPagePanel=new ChangePanel("Next page","Previous page",e-> Game.getEquipment().changeBackpackPage(true), e-> Game.getEquipment().changeBackpackPage(false));
+        changeBackpackPagePanel=new ChangePanel("Next page","Previous page",e-> GameManager.getEquipment().changeBackpackPage(true), e-> GameManager.getEquipment().changeBackpackPage(false));
 
         setEquipmentVisibility(true);
 
@@ -97,7 +97,7 @@ public class CharactersInfoPanel extends JPanel {
         }
 
         public void refresh(){
-            PlayerCharacter player= Game.getEquipment().getCurrentCharacter();
+            PlayerCharacter player= GameManager.getEquipment().getCurrentCharacter();
             statisticLabels[0].setText(player.getName());
             statisticLabels[1].setText("Strength: "+player.getStrength());
             statisticLabels[2].setText("Endurance: "+player.getEndurance());
@@ -180,7 +180,7 @@ public class CharactersInfoPanel extends JPanel {
 
             useItem=new JButton("Use item");
             useItem.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-50,(int)(GUISettings.PANEL_SIZE*0.05)));
-            useItem.addActionListener(e-> Game.getEquipment().useChosenItem());
+            useItem.addActionListener(e-> GameManager.getEquipment().useChosenItem());
 
             itemSlot=new ItemSlot(null, BAG_SLOT_ICON,0, CharacterEquipment.USE_SLOT);
 
@@ -189,7 +189,7 @@ public class CharactersInfoPanel extends JPanel {
         }
 
         void refresh(){
-            itemSlot.setItem(Game.getEquipment().getUseItem());
+            itemSlot.setItem(GameManager.getEquipment().getUseItem());
         }
 
     }

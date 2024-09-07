@@ -6,12 +6,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MainPanel extends JLayeredPane {
+public abstract class ViewPanel extends JLayeredPane {
 
     private final JPanel smallPanel,bigPanel,bottomPanel,sidePanel;
     private ArrayList<JPanel> childPanels;
 
-    public MainPanel(JPanel bigPanelContent,JPanel smallPanelContent,JPanel bottomPanelContent,JPanel sidePanelContent){
+    public ViewPanel(JPanel bigPanelContent, JPanel smallPanelContent, JPanel bottomPanelContent, JPanel sidePanelContent){
         //Setting panel
         this.setLayout(null);
         this.setPreferredSize(new Dimension(GUISettings.heightAndWidth,GUISettings.heightAndWidth));

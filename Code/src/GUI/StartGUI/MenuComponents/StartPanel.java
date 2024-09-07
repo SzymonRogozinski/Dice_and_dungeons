@@ -1,7 +1,7 @@
 package GUI.StartGUI.MenuComponents;
 
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -33,7 +33,7 @@ public class StartPanel extends JPanel {
     }
 
     public void refresh(){
-        if(Game.getMenuModule().getParty().size()==3) {
+        if(GameManager.getMenuModule().getParty().size()==3) {
             start.setEnabled(true);
             status.setVisible(false);
         }else{

@@ -5,7 +5,7 @@ import Character.PlayerCharacter;
 import Fight.ActionTarget;
 import Fight.Statuses.GameStatus;
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
 import Game.PlayerInfo;
 import Game.GameUtils;
 
@@ -57,7 +57,7 @@ public class FightPanel extends JPanel {
         if(enemyPanelList.isEmpty() && playerPanelList.isEmpty()) {
 
             //Draw enemies
-            for (int i = 0; i < Game.getFight().getEnemyCount(); i++) {
+            for (int i = 0; i < GameManager.getFight().getEnemyCount(); i++) {
                 EnemyPanel enemy = new EnemyPanel(i);
                 enemyPanelList.add(enemy);
             }
@@ -123,7 +123,7 @@ public class FightPanel extends JPanel {
             FlowLayout layout=new FlowLayout();
             layout.setVgap(1);
             this.setLayout(layout);
-            enemy= Game.getFight().getEnemies().get(i);
+            enemy= GameManager.getFight().getEnemies().get(i);
 
             enemyLabel = new JLabel(GameUtils.resizeIcon(enemy.getImage(), GUISettings.CHARACTER_WIDTH-2, (int)(GUISettings.CHARACTER_HEIGHT*0.85)-2));
             healthBar=new JProgressBar(0,enemy.getMaxHealth());
@@ -228,7 +228,7 @@ public class FightPanel extends JPanel {
             if(!selectableFlag || !setBorderFlashing(false))
                 return;
             borderFlash.makeStop();
-            Game.getFight().targetSelected(selectedEnemy);
+            GameManager.getFight().targetSelected(selectedEnemy);
             selectedEnemy = -1;
         }
 
@@ -241,7 +241,7 @@ public class FightPanel extends JPanel {
         @Override
         public void mouseEntered(MouseEvent e) {
             if(isEnemy)
-                Game.getFight().showNextMove(enemyPanelList.get(characterId).enemy.getNextAction());
+                GameManager.getFight().showNextMove(enemyPanelList.get(characterId).enemy.getNextAction());
             if(!selectableFlag)
                 return;
             setBorderFlashing(true);
@@ -252,7 +252,7 @@ public class FightPanel extends JPanel {
         @Override
         public void mouseExited(MouseEvent e) {
             if(isEnemy)
-                Game.getFight().hideNextMove();
+                GameManager.getFight().hideNextMove();
             if(!selectableFlag)
                 return;
             setBorderFlashing(false);
@@ -261,17 +261,17 @@ public class FightPanel extends JPanel {
         }
 
         private boolean setBorderFlashing(boolean flashing){
-            if(isEnemy && Game.getFight().getTargetType() == ActionTarget.ENEMY_CHARACTER) {
+            if(isEnemy && GameManager.getFight().getTargetType() == ActionTarget.ENEMY_CHARACTER) {
                 enemyPanelList.get(characterId).setBorder(flashing ? selectedLabelBorder : labelBorder);
                 return true;
-            }else if (!isEnemy && Game.getFight().getTargetType() == ActionTarget.PLAYER_CHARACTER) {
+            }else if (!isEnemy && GameManager.getFight().getTargetType() == ActionTarget.PLAYER_CHARACTER) {
                 playerPanelList.get(characterId).setBorder(flashing ? selectedLabelBorder : labelBorder);
                 return true;
-            }else if (isEnemy && Game.getFight().getTargetType() == ActionTarget.ALL_ENEMIES){
+            }else if (isEnemy && GameManager.getFight().getTargetType() == ActionTarget.ALL_ENEMIES){
                 for(EnemyPanel label:enemyPanelList)
                     label.setBorder(flashing?selectedLabelBorder:labelBorder);
                 return true;
-            }else if (!isEnemy && Game.getFight().getTargetType() == ActionTarget.PLAYER_PARTY){
+            }else if (!isEnemy && GameManager.getFight().getTargetType() == ActionTarget.PLAYER_PARTY){
                 for(PlayerPanel label: playerPanelList)
                     label.setBorder(flashing?selectedLabelBorder:labelBorder);
                 return true;
@@ -299,12 +299,12 @@ public class FightPanel extends JPanel {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            Game.getFight().showStatusInfo(status.info());
+            GameManager.getFight().showStatusInfo(status.info());
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            Game.getFight().hideStatusInfo();
+            GameManager.getFight().hideStatusInfo();
         }
 
     }

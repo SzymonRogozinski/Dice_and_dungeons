@@ -5,7 +5,7 @@ import Equipment.Items.ItemQuality;
 import Equipment.Items.UsableItem;
 import Fight.ActionTarget;
 import Fight.GameActions.UsableItemAction;
-import Game.Game;
+import Game.GameManager;
 import Game.Tags;
 
 import javax.swing.*;
@@ -43,12 +43,12 @@ public class UsableItemGenerator {
     };
 
     public static UsableItem generate(ItemQuality quality){
-        int count = Game.random.nextInt(MIN_ITEMS_NUMBER,MAX_ITEMS_NUMBER+1);
+        int count = GameManager.random.nextInt(MIN_ITEMS_NUMBER,MAX_ITEMS_NUMBER+1);
         UsableItem uItem;
         switch (quality){
-            case COMMON -> uItem = COMMONS[Game.random.nextInt(COMMONS.length)];
-            case RARE -> uItem = RARES[Game.random.nextInt(RARES.length)];
-            case LEGENDARY -> uItem = LEGENDS[Game.random.nextInt(LEGENDS.length)];
+            case COMMON -> uItem = COMMONS[GameManager.random.nextInt(COMMONS.length)];
+            case RARE -> uItem = RARES[GameManager.random.nextInt(RARES.length)];
+            case LEGENDARY -> uItem = LEGENDS[GameManager.random.nextInt(LEGENDS.length)];
             default -> throw new RuntimeException("Quality not implemented!");
         }
         return multiple(uItem,count);

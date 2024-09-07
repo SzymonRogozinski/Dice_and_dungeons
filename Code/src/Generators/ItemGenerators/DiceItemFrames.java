@@ -3,7 +3,7 @@ package Generators.ItemGenerators;
 import Dice.ActionEnum;
 import Fight.ActionTarget;
 import Fight.GameActions.DiceLambda;
-import Game.Game;
+import Game.GameManager;
 
 import javax.swing.*;
 
@@ -19,12 +19,12 @@ public class DiceItemFrames {
     };
 
     public static DiceItemBase getRandomDiceItemBase(int points){
-        int i = Game.random.nextInt(DICE_ITEM_FRAMES.length);
+        int i = GameManager.random.nextInt(DICE_ITEM_FRAMES.length);
         return DICE_ITEM_FRAMES[i].getDiceItemBase(points);
     }
 
     public static DiceItemBase getRandomSpellItemBase(int points){
-        int i = Game.random.nextInt(SPELL_FRAMES.length);
+        int i = GameManager.random.nextInt(SPELL_FRAMES.length);
         return SPELL_FRAMES[i].getDiceItemBase(points);
     }
 

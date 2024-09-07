@@ -1,7 +1,7 @@
 package GUI.StartGUI.MenuComponents;
 
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -61,23 +61,23 @@ public class CharacterInfoPanel extends JPanel {
     }
 
     public void refresh(){
-        if(Game.getMenuModule().getSelectedCharacter()!=null){
-            name.setText(Game.getMenuModule().getSelectedCharacter().getName());
+        if(GameManager.getMenuModule().getSelectedCharacter()!=null){
+            name.setText(GameManager.getMenuModule().getSelectedCharacter().getName());
 
             StringBuilder statsString = new StringBuilder();
-            statsString.append("Stats: Strength ").append(Game.getMenuModule().getSelectedCharacter().getStrength())
-                    .append(" Endurance ").append(Game.getMenuModule().getSelectedCharacter().getStrength())
-                    .append(" Intelligence ").append(Game.getMenuModule().getSelectedCharacter().getEndurance());
+            statsString.append("Stats: Strength ").append(GameManager.getMenuModule().getSelectedCharacter().getStrength())
+                    .append(" Endurance ").append(GameManager.getMenuModule().getSelectedCharacter().getStrength())
+                    .append(" Intelligence ").append(GameManager.getMenuModule().getSelectedCharacter().getEndurance());
             stats1.setText(statsString.toString());
 
             statsString = new StringBuilder();
-            statsString.append("Charisma ").append(Game.getMenuModule().getSelectedCharacter().getCharisma())
-                    .append(" Cunning ").append(Game.getMenuModule().getSelectedCharacter().getCunning())
-                    .append(" Luck ").append(Game.getMenuModule().getSelectedCharacter().getLuck());
+            statsString.append("Charisma ").append(GameManager.getMenuModule().getSelectedCharacter().getCharisma())
+                    .append(" Cunning ").append(GameManager.getMenuModule().getSelectedCharacter().getCunning())
+                    .append(" Luck ").append(GameManager.getMenuModule().getSelectedCharacter().getLuck());
             stats2.setText(statsString.toString());
 
             StringBuilder itemString= new StringBuilder();
-            for(var item:Game.getMenuModule().getSelectedCharacter().getEquipment().getActionItems()) {
+            for(var item: GameManager.getMenuModule().getSelectedCharacter().getEquipment().getActionItems()) {
                 if(item==null)
                     break;
                 itemString.append(item.name).append(", ");
@@ -88,7 +88,7 @@ public class CharacterInfoPanel extends JPanel {
             items.setText(itemString.toString());
 
             StringBuilder spellString = new StringBuilder("");
-            for(var spell:Game.getMenuModule().getSelectedCharacter().getEquipment().getSpellItems()) {
+            for(var spell: GameManager.getMenuModule().getSelectedCharacter().getEquipment().getSpellItems()) {
                 if (spell == null)
                     break;
                 spellString.append(spell.name).append(", ");
@@ -99,7 +99,7 @@ public class CharacterInfoPanel extends JPanel {
             spells.setText(spellString.toString());
 
             StringBuilder classString = new StringBuilder();
-            for(var cl:Game.getMenuModule().getSelectedCharacter().tags)
+            for(var cl: GameManager.getMenuModule().getSelectedCharacter().tags)
                 classString.append(cl).append(", ");
             classString.insert(0,"Class: ");
             if (classString.length()!="Class: ".length())

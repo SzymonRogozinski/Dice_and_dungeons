@@ -1,9 +1,8 @@
 package GUI.StartGUI.MenuComponents;
 
-import Fight.ActionTarget;
-import GUI.FightGUI.FightPanel;
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
+import Game.GameConst;
 import Character.PlayerCharacter;
 
 import javax.swing.*;
@@ -33,10 +32,10 @@ public class ChoosePanel extends JPanel {
         this.setBorder(border);
 
         int i=0;
-        int characterInRow = Math.min(Game.START_CHARACTER.size(),MAX_CHARACTER_IN_ROW);
+        int characterInRow = Math.min(GameConst.START_CHARACTER.size(),MAX_CHARACTER_IN_ROW);
         int xSpace=(GUISettings.PANEL_SIZE- GUISettings.CHARACTER_WIDTH * characterInRow)/(characterInRow+1);
         int yOffSet = GUISettings.CHARACTER_HEIGHT /2;
-        for(PlayerCharacter p : Game.START_CHARACTER){
+        for(PlayerCharacter p : GameConst.START_CHARACTER){
             CharacterPanel panel = new CharacterPanel(p);
             panel.addMouseListener(new ChooseCharactersMouseListener(panel));
             panel.setLocation((xSpace+ GUISettings.CHARACTER_WIDTH)*(i%MAX_CHARACTER_IN_ROW)+xSpace, yOffSet);
@@ -72,12 +71,12 @@ public class ChoosePanel extends JPanel {
         @Override
         public void mouseClicked(MouseEvent e) {
             notifyBorder();
-            if(Game.getMenuModule().getParty().size()==3 && !reference.isSelected())
+            if(GameManager.getMenuModule().getParty().size()==3 && !reference.isSelected())
                 return;
             else if(reference.isSelected())
-                Game.getMenuModule().removeFromParty(reference.getPlayerCharacter());
+                GameManager.getMenuModule().removeFromParty(reference.getPlayerCharacter());
             else
-                Game.getMenuModule().addToParty(reference.getPlayerCharacter());
+                GameManager.getMenuModule().addToParty(reference.getPlayerCharacter());
             reference.setSelected(!reference.isSelected());
             setBorderFlashing(reference.isSelected());
         }
@@ -90,12 +89,12 @@ public class ChoosePanel extends JPanel {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            Game.getMenuModule().setSelectedCharacter(reference.getPlayerCharacter());
+            GameManager.getMenuModule().setSelectedCharacter(reference.getPlayerCharacter());
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            Game.getMenuModule().setSelectedCharacter(null);
+            GameManager.getMenuModule().setSelectedCharacter(null);
         }
 
         private void setBorderFlashing(boolean flashing){

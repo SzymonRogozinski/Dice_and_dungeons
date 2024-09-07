@@ -93,7 +93,7 @@ public class GameMap {
         }
     }
 
-    public GameMap(Map map,String path) throws Exception {
+    public GameMap(Map map,String path){
         this.PATH=path;
         this.width = map.getWidth();
         this.height = map.getHeight();
@@ -105,13 +105,12 @@ public class GameMap {
         for(int y=0;y<map.getHeight();y++){
             for(int x=0;x<map.getWidth();x++) {
                 switch (map.getTerrain(x, y)) {
-                    case null -> place = new SpaceGamePlace(PATH);
-                    case FLOOR, VOID, ENTRIES,ENEMY -> place = new SpaceGamePlace(PATH);
+                    case null, FLOOR, VOID, ENTRIES, ENEMY -> place = new SpaceGamePlace(PATH);
                     case DOOR -> place = new DoorGamePlace(PATH);
                     case TREASURE -> place = new TreasureGamePlace(PATH);
                     case KEY -> place = new KeyGamePlace(PATH);
                     case WALL -> place = new WallGamePlace('W', PATH);
-                    default -> throw new Exception("Something goes wrong while writing map!");
+                    default -> throw new RuntimeException("Something goes wrong while writing map!");
                 }
                 currentGamePlaces[y][x]=place;
                 originalGamePlaces[y][x]=place;

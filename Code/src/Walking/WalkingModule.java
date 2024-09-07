@@ -1,6 +1,7 @@
 package Walking;
 
 import GUI.WalkingGUI.WalkingGUIState;
+import Game.GameBalance;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,17 +13,11 @@ public class WalkingModule {
     private int levelPointer;
     private final WalkingGUIState state;
 
-    public WalkingModule(String filename, WalkingGUIState state) throws Exception {
+    public WalkingModule(WalkingGUIState state){
         this.state=state;
         settings=new ArrayList<>();
         levelPointer =1;
-        BufferedReader reader=new BufferedReader(new FileReader(filename));
-        int levels=Integer.parseInt(reader.readLine());
-        for(int i=0; i<levels;i++){
-            settings.add(new WalkingSettings(reader.readLine()));
-        }
-        WalkingSettings startSetting=settings.get(0);
-        walking = new WalkingLevel(this,startSetting.seed, startSetting.algGen,startSetting.width,startSetting.height,startSetting.size, startSetting.enemies, startSetting.treasures,startSetting.vaults,startSetting.path);
+        walking = new WalkingLevel(this,GameBalance.LEVELS.get(0).getWalkingSettings());
     }
 
     public WalkingLevel getWalking(){
@@ -38,28 +33,10 @@ public class WalkingModule {
             throw new Exception("Cannot load new map!");
         try {
             walking.killModule();
-            WalkingSettings startSetting = settings.get(levelPointer);
-            walking = new WalkingLevel(this, startSetting.seed, startSetting.algGen, startSetting.width, startSetting.height, startSetting.size, startSetting.enemies, startSetting.treasures, startSetting.vaults, startSetting.path);
+            WalkingSettings startSetting = GameBalance.LEVELS.get(levelPointer).getWalkingSettings();
+            walking = new WalkingLevel(this, startSetting);
             levelPointer++;
             walking.walkingStart();
         }catch (Exception ignore){}
-    }
-
-    private class WalkingSettings{
-        // 0-> No predefine
-        final int seed,algGen,width,height,size,enemies,treasures,vaults;
-        final String path;
-        WalkingSettings(String fileLine){
-            String[] settings=fileLine.split(",");
-            this.seed=Integer.parseInt(settings[0]);
-            this.algGen=Integer.parseInt(settings[1]);
-            this.width=Integer.parseInt(settings[2]);
-            this.height=Integer.parseInt(settings[3]);
-            this.size=Integer.parseInt(settings[4]);
-            this.enemies=Integer.parseInt(settings[5]);
-            this.treasures=Integer.parseInt(settings[6]);
-            this.vaults=Integer.parseInt(settings[7]);
-            this.path=settings[8];
-        }
     }
 }

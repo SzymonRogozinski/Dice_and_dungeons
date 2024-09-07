@@ -7,7 +7,7 @@ import Equipment.Items.UsableItem;
 import Equipment.Items.UsedAllOfItemsException;
 import GUI.EquipmentGUI.EquipmentGUIState;
 import GUI.EquipmentGUI.ItemSlot;
-import Game.Game;
+import Game.GameManager;
 import Game.PlayerInfo;
 import Game.Tags;
 
@@ -92,7 +92,7 @@ public class EquipmentModule {
         for(DiceAction action:item.getAction().getActionFactories()){
             action.doAction(PlayerInfo.getParty().getCharacters().get(currentCharacter));
         }
-        Game.getFight().clear();
+        GameManager.getFight().clear();
         try {
             item.useItem();
         } catch (UsedAllOfItemsException e) {

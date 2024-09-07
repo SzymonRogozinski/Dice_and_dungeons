@@ -3,5 +3,3 @@
 > Podmienić placeholdery
 > Loot popup
 > Poprawić GUI
-
->Podmienić zwijalny text na textArea

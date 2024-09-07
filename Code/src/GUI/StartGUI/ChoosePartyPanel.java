@@ -1,13 +1,12 @@
 package GUI.StartGUI;
 
-import GUI.GUISettings;
-import GUI.MainPanel;
+import GUI.ViewPanel;
 import GUI.StartGUI.MenuComponents.*;
 
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class ChoosePartyPanel extends MainPanel {
+public class ChoosePartyPanel extends ViewPanel {
 
     private final PartyPanel partyPanel;
     private final StartPanel startPanel;

@@ -2,7 +2,7 @@ package Loot;
 
 import Equipment.Items.Item;
 import Equipment.Items.ItemQuality;
-import Game.Game;
+import Game.GameManager;
 import Game.PlayerInfo;
 import Generators.ItemGenerators.ArmorGenerator;
 import Generators.ItemGenerators.DiceItemGenerator;
@@ -54,11 +54,11 @@ public class LootModule {
     }
 
     private Item generateLoot(ItemQuality quality){
-        double roll = Game.random.nextDouble();
+        double roll = GameManager.random.nextDouble();
         if(roll<=USABLE_PROB)
             return UsableItemGenerator.generate(quality);
         else{
-            roll = Game.random.nextDouble();
+            roll = GameManager.random.nextDouble();
             if(ARMOR_PROB>=roll)
                 return ArmorGenerator.generateArmor(quality);
             else if(DICE_PROB>=roll)

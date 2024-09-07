@@ -1,11 +1,11 @@
 package GUI.WalkingGUI;
 
-import GUI.MainPanel;
+import GUI.ViewPanel;
 
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class WalkingView extends MainPanel {
+public class WalkingView extends ViewPanel {
 
     public WalkingView(){
         super(new WalkingPanel(),new Arrows(getSharedBorder()),new JPanel(),new JPanel());

@@ -1,9 +1,9 @@
 
-import GUI.MainFrame;
+import GUI.TestFrame;
 import GUI.WalkingGUI.WalkingGUIState;
 import GUI.WalkingGUI.WalkingKeyListener;
 import GUI.WalkingGUI.WalkingView;
-import Game.Game;
+import Game.GameManager;
 import Walking.WalkingModule;
 
 import javax.swing.*;
@@ -11,7 +11,7 @@ import javax.swing.*;
 public class WalkingTest {
 
     private static WalkingView walkingView;
-    private static final JFrame mainFrame=new MainFrame();
+    private static final JFrame mainFrame=new TestFrame();
 
     public static void main(String[] args) {
         mainFrame.addKeyListener(new WalkingKeyListener());
@@ -20,7 +20,7 @@ public class WalkingTest {
 
         try {
             WalkingModule manager=new WalkingModule("config.txt", state);
-            Game.setWalkingManager(manager);
+            GameManager.setWalkingManager(manager);
         }catch(Exception e){
             System.err.println(e.getMessage());
             return;
@@ -33,6 +33,6 @@ public class WalkingTest {
 
 
         //Start
-       Game.getWalkingManager().getWalking().walkingStart();
+       GameManager.getWalkingManager().getWalking().walkingStart();
     }
 }

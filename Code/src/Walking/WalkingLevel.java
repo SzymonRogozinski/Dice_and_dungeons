@@ -39,6 +39,29 @@ public class WalkingLevel {
         this.manager=manager;
     }
 
+    public WalkingLevel(WalkingModule manager, WalkingSettings settings) {
+        MapCreator creator;
+        if(settings.seed==0)
+            creator=new MapCreator();
+        else
+            creator=new MapCreator(settings.seed);
+        if(!creator.createMap(settings.algGen,settings.width,settings.height,settings.size,settings.enemies,settings.treasures,settings.vaults))
+            throw new RuntimeException("Dungeon map was not generated!");
+        Map map=creator.getMap();
+        //Loading enemies
+        this.enemies=new Enemies(map,settings.path);
+        //Loading map
+        this.gameMap =new GameMap(map,settings.path);
+        setEnemy();
+        enemyThread=new EnemyThread();
+        //Add player
+        player=new PlayerDrone(gameMap.getStartX(), gameMap.getStartY(),new PlayerGamePlace(gameMap.getPATH()));
+        gameMap.addCharacterPlace(player.getIcon(), player.getPosX(), player.getPosY());
+        //Add fog
+        fogOfWar=new FogOfWar(player,gameMap);
+        this.manager=manager;
+    }
+
     public GameMap getMap() {
         return gameMap;
     }

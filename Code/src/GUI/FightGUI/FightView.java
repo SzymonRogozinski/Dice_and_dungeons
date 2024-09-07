@@ -1,11 +1,11 @@
 package GUI.FightGUI;
 
-import GUI.MainPanel;
+import GUI.ViewPanel;
 
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class FightView extends MainPanel {
+public class FightView extends ViewPanel {
 
     private RollPanel rollPanel;
     private FightPanel fightPanel;
