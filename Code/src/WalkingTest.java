@@ -19,7 +19,7 @@ public class WalkingTest {
         WalkingGUIState state = new WalkingGUIState(walkingView);
 
         try {
-            WalkingModule manager=new WalkingModule("config.txt", state);
+            WalkingModule manager=new WalkingModule(state);
             GameManager.setWalkingManager(manager);
         }catch(Exception e){
             System.err.println(e.getMessage());

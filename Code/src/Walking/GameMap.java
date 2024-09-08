@@ -105,7 +105,8 @@ public class GameMap {
         for(int y=0;y<map.getHeight();y++){
             for(int x=0;x<map.getWidth();x++) {
                 switch (map.getTerrain(x, y)) {
-                    case null, FLOOR, VOID, ENTRIES, ENEMY -> place = new SpaceGamePlace(PATH);
+                    case null -> place = new SpaceGamePlace(PATH);
+                    case FLOOR, VOID, ENTRIES, ENEMY -> place = new SpaceGamePlace(PATH);
                     case DOOR -> place = new DoorGamePlace(PATH);
                     case TREASURE -> place = new TreasureGamePlace(PATH);
                     case KEY -> place = new KeyGamePlace(PATH);

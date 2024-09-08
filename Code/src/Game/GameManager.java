@@ -3,10 +3,12 @@ package Game;
 import Character.PlayerParty;
 import Equipment.EquipmentModule;
 import Fight.FightModule;
-import GUI.StartGUI.MenuModule;
+import GUI.MainGUI.MainGUIState;
+import GUI.MenuGUI.MenuModule;
 import Loot.LootModule;
 import Walking.WalkingModule;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GameManager {
@@ -18,6 +20,10 @@ public class GameManager {
     private static LootModule lootModule;
     private static WalkingModule walkingModule;
     private static MenuModule menuModule;
+
+    //Game state
+    private static GameStates state = GameStates.START;
+    private static MainGUIState GUIState;
 
     public static void setFight(FightModule fightModule) {
         if(GameManager.fightModule==null)
@@ -42,6 +48,26 @@ public class GameManager {
     public static void setMenuModule(MenuModule menuModule) {
         if(GameManager.menuModule==null)
             GameManager.menuModule = menuModule;
+    }
+
+    public static void setGUIState(MainGUIState GUIState) {
+        if(GameManager.GUIState==null)
+            GameManager.GUIState = GUIState;
+    }
+
+    public static void changeState(GameStates newState){
+        //TODO Do something
+        //Load data
+        if (state==GameStates.START){
+            PlayerInfo.setParty(new PlayerParty(menuModule.getParty(),new ArrayList<>()));
+        }
+
+        state=newState;
+        GUIState.refresh(newState);
+
+        if (state==GameStates.WALKING){
+            walkingModule.getWalking().walkingStart();
+        }
     }
 
     public static FightModule getFight() { return fightModule; }
