@@ -7,13 +7,18 @@ import java.util.ArrayList;
 
 public class WalkingView extends ViewPanel {
 
+    private final WalkingPanel walkingPanel;
+    private final Arrows arrows;
+    private final PartyStatusPanel partyStatusPanel;
+
     public WalkingView(){
-        super(new WalkingPanel(),new Arrows(getSharedBorder()),new JPanel(),new JPanel());
+        super(new WalkingPanel(),new Arrows(getSharedBorder()),new JPanel(),new PartyStatusPanel(getSharedBorder()));
 
         //Get child component
         ArrayList<JPanel> panels = getChildPanels();
-        WalkingPanel walkingPanel = (WalkingPanel) panels.get(0);
-        Arrows arrows = (Arrows) panels.get(1);
+        walkingPanel = (WalkingPanel) panels.get(0);
+        arrows = (Arrows) panels.get(1);
+        partyStatusPanel = (PartyStatusPanel) panels.get(3);
 
         //Refresh
         this.revalidate();
@@ -21,6 +26,7 @@ public class WalkingView extends ViewPanel {
     }
 
     public void refresh(){
+        partyStatusPanel.refresh();
         this.repaint();
         this.revalidate();
     }

@@ -3,3 +3,4 @@
 > Podmienić placeholdery
 > Loot popup
 > Poprawić GUI
+> Usunąć niepotrzebne metody/ustawić na private

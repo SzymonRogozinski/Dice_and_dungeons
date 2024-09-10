@@ -10,8 +10,7 @@ import Fight.Statuses.BonusDiceStatus;
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusException;
 import GUI.FightGUI.FightGUIState;
-import Game.PlayerInfo;
-import Game.Tags;
+import Game.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,10 +58,6 @@ public class FightModule {
         return enemies;
     }
 
-    public void setEnemies(ArrayList<EnemyCharacter> enemies) {
-        this.enemies = enemies;
-    }
-
     public String getCombatLogInfo() {
         String respond = combatLogInfo;
         combatLogInfo="";
@@ -71,6 +66,42 @@ public class FightModule {
 
     public void initFight(){
         state.initState();
+    }
+
+    public void startFight(ArrayList<EnemyCharacter> enemies){
+        this.enemies = enemies;
+        state.initState();
+        state.refresh();
+    }
+
+    private void endFight(boolean playerWin){
+        clear();
+        this.combatLogInfo="";
+        this.noRoll=false;
+        this.playerTurn=true;
+        this.characterTurn=0;
+
+        if(playerWin){
+            GameManager.getLootModule().getLoot(GameBalance.LEVELS.get(GameManager.getLevelPointer()).getLootSettings());
+            GameManager.changeState(GameStates.WALKING);
+        }else{
+            GameManager.gameOver();
+        }
+    }
+
+    private boolean checkIfFightEnds(){
+        boolean enemiesDead=true;
+        for(EnemyCharacter enemy:enemies){
+            if(enemy.getCurrentHealth()>0){
+                enemiesDead=false;
+                break;
+            }
+        }
+        if(enemiesDead)
+            endFight(true);
+        if(PlayerInfo.getParty().getCurrentHealth()==0)
+            endFight(false);
+        return false;
     }
 
     public int getRerolls(){
@@ -145,6 +176,8 @@ public class FightModule {
     }
 
     private void startAction(){
+        if(checkIfFightEnds())
+            return;
         boolean skip=false;
         try {
             Thread.sleep(200);
@@ -166,6 +199,8 @@ public class FightModule {
             }
             combatLogInfo+=status.effectCommunicate(character.getName())+" ";
         }
+        if(checkIfFightEnds())
+            return;
         character.statusEvaporate();
 
         ArrayList<GameStatus> statusAfterStart = character.getStatusWithTag(Tags.AFTER_TURN_START);

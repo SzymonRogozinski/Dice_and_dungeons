@@ -48,4 +48,8 @@ public class MenuModule {
     public void changeToLoad(){
         state.changeState(MenuState.LOADING_GAME);
     }
+
+    public void gameOver(){
+        //Todo
+    }
 }

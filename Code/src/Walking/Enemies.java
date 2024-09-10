@@ -1,5 +1,7 @@
 package Walking;
 
+import Character.Enemy.EnemyCharacter;
+import Generators.EnemyGenerator.EnemyGenerator;
 import Walking.Drones.Drone;
 import Walking.Drones.EnemyDrone;
 import Walking.Places.*;
@@ -32,7 +34,8 @@ public class Enemies implements Iterable<EnemyDrone> {
                 scanner = new Scanner(file.readLine());
                 x = scanner.nextInt();
                 y = scanner.nextInt();
-                enemies.add(new EnemyDrone(x, y, new EnemyGamePlace("enemy", iconPath),new EnemyGamePlace("enemy_pursuit", iconPath)));
+                //TODO ???
+                //enemies.add(new EnemyDrone(x, y, new EnemyGamePlace("enemy", iconPath),new EnemyGamePlace("enemy_pursuit", iconPath)));
             }
         }catch (FileNotFoundException e){
             System.err.println("File not found!");
@@ -44,12 +47,13 @@ public class Enemies implements Iterable<EnemyDrone> {
         counter=0;
     }
 
-    public Enemies(Map map,String path){
+    public Enemies(Map map,String path,int enemyCost){
         enemies=new ArrayList<>();
         for(int y=0;y<map.getHeight();y++){
             for(int x=0;x<map.getWidth();x++) {
                 if(map.getTerrain(x, y)== Place.ENEMY){
-                    EnemyDrone enemy=new EnemyDrone(x, y, new EnemyGamePlace("enemy", path),new EnemyGamePlace("enemy_pursuit", path));
+                    ArrayList<EnemyCharacter> enemyCharacters = EnemyGenerator.generateEnemyList(enemyCost);
+                    EnemyDrone enemy=new EnemyDrone(x, y, new EnemyGamePlace("enemy", path),new EnemyGamePlace("enemy_pursuit", path),enemyCharacters );
                     enemies.add(enemy);
                 }
             }

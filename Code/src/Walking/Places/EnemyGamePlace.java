@@ -1,6 +1,6 @@
 package Walking.Places;
 
-import Walking.Collision.EnemyKilledException;
+import Walking.Collision.EnemyFightException;
 import Walking.Drones.Drone;
 
 public class EnemyGamePlace extends GamePlace {
@@ -9,11 +9,11 @@ public class EnemyGamePlace extends GamePlace {
     }
 
     @Override
-    public boolean getCollision(Drone goingToCollideCharacter) throws EnemyKilledException {
+    public boolean getCollision(Drone goingToCollideCharacter) throws EnemyFightException {
         if(goingToCollideCharacter.getIcon() instanceof EnemyGamePlace){
             return true;
         }else if(goingToCollideCharacter.getIcon() instanceof PlayerGamePlace){
-            throw new EnemyKilledException(getReference());
+            throw new EnemyFightException(getReference());
         }else{
             return false;
         }

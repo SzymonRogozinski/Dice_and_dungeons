@@ -10,8 +10,7 @@ import java.awt.*;
 
 public class StatusPanel extends JPanel {
 
-    private JProgressBar healthBar;
-    private JProgressBar manaBar;
+    private JProgressBar healthBar, manaBar;
     private JLabel characterName,statusInfo;
     private JTextArea combatLog,nextMoveInfo;
     private String combatLogText;

@@ -2,7 +2,6 @@ package Walking;
 
 import Game.PlayerInfo;
 import Walking.Drones.Drone;
-import Walking.Drones.PlayerDrone;
 import Walking.Collision.*;
 import Walking.Places.*;
 
@@ -166,12 +165,12 @@ public class GameMap {
         }
     }
     //true means, that character was moved
-    public boolean changeCharacterPlace(Drone gc, int dx, int dy) throws EnemyKilledException, EnterExitException {
+    public boolean changeCharacterPlace(Drone gc, int dx, int dy) throws EnemyFightException, EnterExitException {
         boolean collisionDetected=false;
         //If collision
         try {
             collisionDetected= currentGamePlaces[gc.getPosY()+dy][gc.getPosX()+dx].getCollision(gc);
-        }catch(EnemyKilledException | EnterExitException e){
+        }catch(EnemyFightException | EnterExitException e){
             throw e;
         }catch(KeyCollectedException e){
             PlayerInfo.collectKey();

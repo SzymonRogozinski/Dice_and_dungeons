@@ -20,6 +20,8 @@ public class LootModule {
     private final static int RARE_COST=2;
     private final static int LEGENDARY_COST=3;
 
+    private String lootLogText = "";
+
     public void getLoot(LootSettings settings){
         int points = settings.getPoints();
         ArrayList<Item> loot=new ArrayList<>();
@@ -31,17 +33,26 @@ public class LootModule {
                 points-=q;
             }
         }
-        //popup
-
+        setLootLogText(loot);
         //Place in backpack
-        for(Item item:loot) {
+        for(Item item:loot)
             PlayerInfo.getParty().getBackpack().putToBackpack(item);
-//            System.out.println("Name: "+item.name);
-//            System.out.println("Quality: "+item.getQuality());
-//            if(item instanceof UsableItem usableItem)
-//                System.out.println("Uses: "+usableItem.getNumberOfItems());
-//            System.out.println();
-        }
+    }
+
+    public String getLootLogText(){
+        return lootLogText;
+    }
+
+    public void clearLootLogText(){
+        lootLogText="";
+    }
+
+    private void setLootLogText(ArrayList<Item> loot){
+        StringBuilder builder = new StringBuilder("You got: ");
+        for(Item item:loot)
+            builder.append(item.name).append(" ");
+        builder.setCharAt(builder.length()-1,'.');
+        lootLogText = builder.toString();
     }
 
     private ItemQuality getQuality(int quality){

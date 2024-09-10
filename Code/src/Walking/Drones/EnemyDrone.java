@@ -1,6 +1,7 @@
 package Walking.Drones;
 
-import Walking.Collision.EnemyKilledException;
+import Character.Enemy.EnemyCharacter;
+import Walking.Collision.EnemyFightException;
 import Walking.Collision.EnterExitException;
 import Walking.GameMap;
 import Walking.Places.GamePlace;
@@ -17,15 +18,22 @@ public class EnemyDrone extends Drone
     private final Random random;
     private ArrayList<NextMove> moves;
     private final GamePlace pursuitIcon;
+    private final ArrayList<EnemyCharacter> enemies;
 
-    public EnemyDrone(int posX, int posY, GamePlace icon, GamePlace pursuitIcon) {
+    public EnemyDrone(int posX, int posY, GamePlace icon, GamePlace pursuitIcon, ArrayList<EnemyCharacter> enemies) {
         super(posX, posY, icon);
         this.pursuitIcon=pursuitIcon;
         this.pursuitIcon.setReference(this);
         super.getIcon().setReference(this);
         random=new Random();
         moves=new ArrayList<>();
+        this.enemies=enemies;
     }
+
+    public ArrayList<EnemyCharacter> getEnemies() {
+        return enemies;
+    }
+
     public boolean ifMove(){
         return !moves.isEmpty() || random.nextDouble(0, 1) <= chanceToMove;
     }
@@ -71,14 +79,14 @@ public class EnemyDrone extends Drone
         }
     }
 
-    public void enemyMove(GameMap gameMap){
+    public void enemyMove(GameMap gameMap) throws EnemyFightException{
         //If some moves was saved
         if(!moves.isEmpty()){
             try {
                if(gameMap.changeCharacterPlace(this, moves.get(0).dx, moves.get(0).dy))
                     moves.remove(0);
                 return;
-            } catch (EnemyKilledException | EnterExitException ignored) {}
+            }catch (EnterExitException ignored) {}
         }
         //If not
         int count=3;
@@ -90,7 +98,7 @@ public class EnemyDrone extends Drone
                     break;
                 else
                     count--;
-            } catch (EnemyKilledException | EnterExitException ignored) {}
+            } catch (EnterExitException ignored) {}
         }
     }
 

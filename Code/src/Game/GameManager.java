@@ -24,6 +24,7 @@ public class GameManager {
     //Game state
     private static GameStates state = GameStates.START;
     private static MainGUIState GUIState;
+    private static int levelPointer=0;
 
     public static void setFight(FightModule fightModule) {
         if(GameManager.fightModule==null)
@@ -55,19 +56,33 @@ public class GameManager {
             GameManager.GUIState = GUIState;
     }
 
+    public static void setNextLevel() {
+        GameManager.levelPointer++;
+    }
+
     public static void changeState(GameStates newState){
+        if(state==newState)
+            return;
         //TODO Do something
         //Load data
+        //Old state
         if (state==GameStates.START){
             PlayerInfo.setParty(new PlayerParty(menuModule.getParty(),new ArrayList<>()));
+        } else if (state == GameStates.WALKING) {
+            walkingModule.stopWalking();
         }
-
+        //New state
+        if (newState==GameStates.WALKING){
+            walkingModule.startWalking();
+        }
+        //Set state
         state=newState;
         GUIState.refresh(newState);
+    }
 
-        if (state==GameStates.WALKING){
-            walkingModule.getWalking().walkingStart();
-        }
+    public static void gameOver(){
+        menuModule.gameOver();
+        changeState(GameStates.START);
     }
 
     public static FightModule getFight() { return fightModule; }
@@ -86,4 +101,7 @@ public class GameManager {
         return menuModule;
     }
 
+    public static int getLevelPointer() {
+        return levelPointer;
+    }
 }

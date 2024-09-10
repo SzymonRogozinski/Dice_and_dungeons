@@ -2,6 +2,7 @@ package Walking;
 
 import GUI.WalkingGUI.WalkingGUIState;
 import Game.GameBalance;
+import Game.GameManager;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,13 +10,11 @@ import java.util.ArrayList;
 
 public class WalkingModule {
     private WalkingLevel walking;
-    private int levelPointer;
     private final WalkingGUIState state;
 
     public WalkingModule(WalkingGUIState state){
         this.state=state;
-        levelPointer =1;
-        walking = new WalkingLevel(this,GameBalance.LEVELS.get(0).getWalkingSettings());
+        walking = new WalkingLevel(this,GameBalance.LEVELS.get(0));
     }
 
     public WalkingLevel getWalking(){
@@ -27,14 +26,26 @@ public class WalkingModule {
     }
 
     public void setNextMap() throws Exception {
-        if(levelPointer >=GameBalance.LEVELS.size())
+        if(GameManager.getLevelPointer()+1 >=GameBalance.LEVELS.size())
             throw new Exception("Cannot load new map!");
         try {
             walking.killModule();
-            WalkingSettings startSetting = GameBalance.LEVELS.get(levelPointer).getWalkingSettings();
-            walking = new WalkingLevel(this, startSetting);
-            levelPointer++;
+            GameManager.setNextLevel();
+            //Todo this???
+            walking = new WalkingLevel(this,GameBalance.LEVELS.get(GameManager.getLevelPointer()));
             walking.walkingStart();
         }catch (Exception ignore){}
+    }
+
+    public void startWalking(){
+        if(walking.walkingRunning()){
+            walking.walkingContinue();
+        }else{
+            walking.walkingStart();
+        }
+    }
+
+    public void stopWalking(){
+        walking.walkingStop();
     }
 }

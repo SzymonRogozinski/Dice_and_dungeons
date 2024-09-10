@@ -2,6 +2,7 @@ package GUI.EquipmentGUI;
 
 import GUI.GUISettings;
 import Game.GameManager;
+import Game.GameStates;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -30,6 +31,7 @@ public class SwitchPanel extends JPanel {
 
         JButton returnButton=new JButton("Close");
         returnButton.setPreferredSize(new Dimension((int)(GUISettings.SMALL_PANEL_SIZE*0.8),(int)(GUISettings.SMALL_PANEL_SIZE*0.20)));
+        returnButton.addActionListener(e-> GameManager.changeState(GameStates.WALKING));
 
         this.add(eqButton);
         this.add(backButton);
