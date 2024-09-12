@@ -17,8 +17,9 @@ public class GameBalance {
     public static final int DICE_BONUS_ADD_TO_STAT_MOD=5;
     public static final int DICE_BONUS_DIVIDE=12;
     public static final int MIN_DICE_BONUS_VALUE=2;
-    public static final int ENEMY_MINION_HP_MOD = 2;
-    public static final int ENEMY_STRONG_HP_MOD = 5;
+    //TODO return
+    public static final int ENEMY_MINION_HP_MOD = 1;    //2
+    public static final int ENEMY_STRONG_HP_MOD = 1;    //5
     public static final int ENEMY_BOSS_HP_MOD = 10;
     public static final int MAX_ENEMY_STAT=100;
     public static final int ENEMY_MIN_COST=1;

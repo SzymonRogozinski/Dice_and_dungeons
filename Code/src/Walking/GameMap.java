@@ -3,6 +3,7 @@ package Walking;
 import Game.PlayerInfo;
 import Walking.Drones.Drone;
 import Walking.Collision.*;
+import Walking.Drones.EnemyDrone;
 import Walking.Places.*;
 
 import java.io.*;
@@ -170,7 +171,13 @@ public class GameMap {
         //If collision
         try {
             collisionDetected= currentGamePlaces[gc.getPosY()+dy][gc.getPosX()+dx].getCollision(gc);
-        }catch(EnemyFightException | EnterExitException e){
+        }catch(EnterExitException e){
+            throw e;
+        }catch(EnemyFightException e){
+            if(gc instanceof EnemyDrone) {
+                collisionDetected = true;
+                currentGamePlaces[gc.getPosY()][gc.getPosX()] = originalGamePlaces[gc.getPosY()][gc.getPosX()];
+            }
             throw e;
         }catch(KeyCollectedException e){
             PlayerInfo.collectKey();

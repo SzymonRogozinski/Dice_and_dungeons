@@ -31,12 +31,12 @@ public class MenuPanel extends JPanel {
 
         JButton newGame = new JButton("New game");
         newGame.setFont(GUISettings.BUTTON_FONT);
-        newGame.setPreferredSize(new Dimension(menuSize/2,menuSize/8));
+        newGame.setPreferredSize(new Dimension(menuSize*3/5,menuSize/8));
         newGame.addActionListener(e-> GameManager.getMenuModule().changeToChoose());
 
         JButton loadGame = new JButton("Load game");
         loadGame.setFont(GUISettings.BUTTON_FONT);
-        loadGame.setPreferredSize(new Dimension(menuSize/2,menuSize/8));
+        loadGame.setPreferredSize(new Dimension(menuSize*3/5,menuSize/8));
 
         menu.add(newGame);
         menu.add(loadGame);

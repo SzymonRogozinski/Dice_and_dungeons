@@ -55,7 +55,6 @@ public class FightPanel extends JPanel {
 
     public void refresh(){
         if(enemyPanelList.isEmpty() && playerPanelList.isEmpty()) {
-
             //Draw enemies
             for (int i = 0; i < GameManager.getFight().getEnemyCount(); i++) {
                 EnemyPanel enemy = new EnemyPanel(i);
@@ -70,6 +69,27 @@ public class FightPanel extends JPanel {
                 playerPanelList.add(player);
             }
 
+            for (PlayerPanel player : playerPanelList) {
+                this.add(player);
+            }
+            setLabels();
+        }else if(enemyPanelList.getFirst().enemy!=GameManager.getFight().getEnemies().getFirst()){
+            this.removeAll();
+            enemyPanelList.clear();
+            playerPanelList.clear();
+            //Draw enemies
+            for (int i = 0; i < GameManager.getFight().getEnemyCount(); i++) {
+                EnemyPanel enemy = new EnemyPanel(i);
+                enemyPanelList.add(enemy);
+            }
+            for (EnemyPanel enemy : enemyPanelList) {
+                this.add(enemy);
+            }
+            //Draw player
+            for (int i = 0; i < PlayerInfo.getParty().getCharacters().size(); i++) {
+                PlayerPanel player = new PlayerPanel(i);
+                playerPanelList.add(player);
+            }
             for (PlayerPanel player : playerPanelList) {
                 this.add(player);
             }

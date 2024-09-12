@@ -74,6 +74,7 @@ public class GameManager {
         //New state
         if (newState==GameStates.WALKING){
             walkingModule.startWalking();
+            walkingModule.getState().refresh();
         }
         //Set state
         state=newState;

@@ -20,9 +20,12 @@ public class LootModule {
     private final static int RARE_COST=2;
     private final static int LEGENDARY_COST=3;
 
+    //Logger
+    private static final int TICKS_COUNT = 40;
     private String lootLogText = "";
+    private int logCounter=-1;
 
-    public void getLoot(LootSettings settings){
+    public void getLoot(LootSettings settings, boolean wasFight){
         int points = settings.getPoints();
         ArrayList<Item> loot=new ArrayList<>();
         while(points>0){
@@ -33,25 +36,27 @@ public class LootModule {
                 points-=q;
             }
         }
-        setLootLogText(loot);
+        setLootLogText(loot,wasFight);
         //Place in backpack
         for(Item item:loot)
             PlayerInfo.getParty().getBackpack().putToBackpack(item);
     }
 
     public String getLootLogText(){
+        logCounter--;
+        if(logCounter==0)
+            lootLogText="";
         return lootLogText;
     }
 
-    public void clearLootLogText(){
-        lootLogText="";
-    }
 
-    private void setLootLogText(ArrayList<Item> loot){
-        StringBuilder builder = new StringBuilder("You got: ");
+    private void setLootLogText(ArrayList<Item> loot, boolean wasFight){
+        logCounter=TICKS_COUNT*GameManager.getWalkingManager().getWalking().getEnemyCount();
+        StringBuilder builder = new StringBuilder(wasFight?"Enemies drop: ":"You found in chest: ");
         for(Item item:loot)
-            builder.append(item.name).append(" ");
-        builder.setCharAt(builder.length()-1,'.');
+            builder.append(item.name).append(", ");
+        builder.setLength(builder.length()-2);
+        builder.append('.');
         lootLogText = builder.toString();
     }
 

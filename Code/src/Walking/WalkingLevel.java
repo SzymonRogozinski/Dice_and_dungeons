@@ -73,6 +73,10 @@ public class WalkingLevel {
             gameMap.addCharacterPlace(enemy.getIcon(),enemy.getPosX(),enemy.getPosY());
     }
 
+    public int getEnemyCount(){
+        return enemies.countEnemy();
+    }
+
     public synchronized void playerMove(int dx,int dy) {
         if(isStopped)
             return;
@@ -110,7 +114,6 @@ public class WalkingLevel {
             try {
                 enemy.enemyMove(gameMap);
             }catch (EnemyFightException e){
-                //TODO bug, player disappear, while enemy not
                 enemies.removeEnemy(enemy);
                 GameManager.getFight().startFight(enemy.getEnemies());
                 GameManager.changeState(GameStates.FIGHTING);

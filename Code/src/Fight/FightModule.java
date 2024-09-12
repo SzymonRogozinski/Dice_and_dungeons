@@ -82,7 +82,7 @@ public class FightModule {
         this.characterTurn=0;
 
         if(playerWin){
-            GameManager.getLootModule().getLoot(GameBalance.LEVELS.get(GameManager.getLevelPointer()).getLootSettings());
+            GameManager.getLootModule().getLoot(GameBalance.LEVELS.get(GameManager.getLevelPointer()).getLootSettings(),true);
             GameManager.changeState(GameStates.WALKING);
         }else{
             GameManager.gameOver();
