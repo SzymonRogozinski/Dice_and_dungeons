@@ -1,6 +1,5 @@
 package Walking;
 
-import Character.Enemy.EnemyCharacter;
 import Game.GameLevel;
 import Game.GameManager;
 import Game.GameStates;
@@ -17,11 +16,10 @@ public class WalkingLevel {
     private final Enemies enemies;
     private final EnemyThread enemyThread;
     private final PlayerDrone player;
-    private final WalkingModule manager;
     public final FogOfWar fogOfWar;
     private boolean isStopped;
 
-    public WalkingLevel(WalkingModule manager, GameLevel levelSetting) {
+    public WalkingLevel(GameLevel levelSetting) {
         MapCreator creator;
         WalkingSettings settings = levelSetting.getWalkingSettings();
         if(settings.seed==0)
@@ -42,7 +40,6 @@ public class WalkingLevel {
         gameMap.addCharacterPlace(player.getIcon(), player.getPosX(), player.getPosY());
         //Add fog
         fogOfWar=new FogOfWar(player,gameMap);
-        this.manager=manager;
     }
 
     public GameMap getMap() {
@@ -89,14 +86,14 @@ public class WalkingLevel {
             GameManager.changeState(GameStates.FIGHTING);
         }catch (EnterExitException e){
             try {
-                manager.setNextMap();
+                GameManager.getWalkingManager().setNextMap();
             }catch (Exception ex){
                 //TODO BOSS!
                 System.out.println("Boss will someday appear!");
             }
         }finally {
             fogOfWar.refreshFog();
-            manager.getState().refresh();
+            GameManager.getWalkingManager().getState().refresh();
         }
     }
 
@@ -119,7 +116,7 @@ public class WalkingLevel {
                 GameManager.changeState(GameStates.FIGHTING);
             }
         }
-        manager.getState().refresh();
+        GameManager.getWalkingManager().getState().refresh();
     }
 
     private class EnemyThread extends Thread{

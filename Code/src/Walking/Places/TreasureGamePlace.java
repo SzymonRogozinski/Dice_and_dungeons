@@ -2,6 +2,7 @@ package Walking.Places;
 
 import Game.GameBalance;
 import Game.GameManager;
+import Walking.Collision.ChestOpenException;
 import Walking.Drones.Drone;
 
 import javax.swing.*;
@@ -19,11 +20,10 @@ public class TreasureGamePlace extends GamePlace {
     }
 
     @Override
-    public boolean getCollision(Drone goingToCollideCharacter){
+    public boolean getCollision(Drone goingToCollideCharacter) throws ChestOpenException{
         if(!isOpen && goingToCollideCharacter.getIcon() instanceof PlayerGamePlace){
-            System.out.println("You open a chest!");
-            GameManager.getLootModule().getLoot(GameBalance.LEVELS.get(GameManager.getLevelPointer()).getLootSettings(),false);
             isOpen=true;
+            throw new ChestOpenException();
         }
         return true;
     }

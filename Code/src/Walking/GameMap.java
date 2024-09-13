@@ -1,5 +1,7 @@
 package Walking;
 
+import Game.GameBalance;
+import Game.GameManager;
 import Game.PlayerInfo;
 import Walking.Drones.Drone;
 import Walking.Collision.*;
@@ -184,7 +186,11 @@ public class GameMap {
             originalGamePlaces[gc.getPosY() + dy][gc.getPosX() + dx] = new SpaceGamePlace(PATH);
         }catch(DoorOpenException e){
             originalGamePlaces[gc.getPosY() + dy][gc.getPosX() + dx] = new SpaceGamePlace(PATH);
-        } catch(CollisionException e) {
+        }catch(ChestOpenException e){
+            System.out.println("You open a chest!");
+            GameManager.getLootModule().getLoot(GameBalance.LEVELS.get(GameManager.getLevelPointer()).getLootSettings(),false);
+            collisionDetected=true;
+        }catch(CollisionException e) {
             //Should not happens!
             throw new RuntimeException(e);
         }finally {

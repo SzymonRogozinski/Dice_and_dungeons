@@ -63,7 +63,6 @@ public class GameManager {
     public static void changeState(GameStates newState){
         if(state==newState)
             return;
-        //TODO Do something
         //Load data
         //Old state
         if (state==GameStates.START){

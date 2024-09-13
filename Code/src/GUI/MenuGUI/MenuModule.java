@@ -50,6 +50,10 @@ public class MenuModule {
     }
 
     public void gameOver(){
-        //Todo
+        state.changeState(MenuState.GAME_OVER);
+    }
+
+    public void playerWin(){
+        state.changeState(MenuState.PLAYER_WIN);
     }
 }

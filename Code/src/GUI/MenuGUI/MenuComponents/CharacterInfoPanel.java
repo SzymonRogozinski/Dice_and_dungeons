@@ -66,8 +66,8 @@ public class CharacterInfoPanel extends JPanel {
 
             StringBuilder statsString = new StringBuilder();
             statsString.append("Stats: Strength ").append(GameManager.getMenuModule().getSelectedCharacter().getStrength())
-                    .append(" Endurance ").append(GameManager.getMenuModule().getSelectedCharacter().getStrength())
-                    .append(" Intelligence ").append(GameManager.getMenuModule().getSelectedCharacter().getEndurance());
+                    .append(" Endurance ").append(GameManager.getMenuModule().getSelectedCharacter().getEndurance())
+                    .append(" Intelligence ").append(GameManager.getMenuModule().getSelectedCharacter().getIntelligence());
             stats1.setText(statsString.toString());
 
             statsString = new StringBuilder();

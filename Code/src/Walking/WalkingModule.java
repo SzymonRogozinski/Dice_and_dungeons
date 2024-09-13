@@ -14,7 +14,7 @@ public class WalkingModule {
 
     public WalkingModule(WalkingGUIState state){
         this.state=state;
-        walking = new WalkingLevel(this,GameBalance.LEVELS.get(0));
+        walking = new WalkingLevel(GameBalance.LEVELS.get(0));
     }
 
     public WalkingLevel getWalking(){
@@ -31,8 +31,7 @@ public class WalkingModule {
         try {
             walking.killModule();
             GameManager.setNextLevel();
-            //Todo this???
-            walking = new WalkingLevel(this,GameBalance.LEVELS.get(GameManager.getLevelPointer()));
+            walking = new WalkingLevel(GameBalance.LEVELS.get(GameManager.getLevelPointer()));
             walking.walkingStart();
         }catch (Exception ignore){}
     }

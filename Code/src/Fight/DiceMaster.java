@@ -15,11 +15,6 @@ public class DiceMaster {
 
     public DiceMaster() {}
 
-    public DiceMaster(Dice dice, int diceNumber, int reroll) {
-        pool=new DicePool(dice,diceNumber);
-        this.reroll=reroll;
-    }
-
     public void setDicePool(Dice dice, int diceNumber, int reroll){
         pool=new DicePool(dice,diceNumber);
         this.reroll=reroll;
