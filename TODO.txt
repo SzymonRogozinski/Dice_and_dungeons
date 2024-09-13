@@ -2,4 +2,5 @@
 > To samo, ale do przeciwników
 > Podmienić placeholdery
 > Poprawić GUI
-> Usunąć niepotrzebne metody/ustawić na private
+> Ogólny refactor
+> Dodać bossa
