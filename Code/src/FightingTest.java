@@ -76,12 +76,9 @@ public class FightingTest {
         EnemyAction enemyAction1 = new EnemyAction(ActionTarget.PLAYER_CHARACTER,new Tags[]{Tags.ATTACK},new ArrayList<>(List.of(new EnemyActionFactory[]{factory1})));
         EnemyAction enemyAction2 = new EnemyAction(ActionTarget.PLAYER_CHARACTER,new Tags[]{},new ArrayList<>(List.of(new EnemyActionFactory[]{factory2})));
         EnemyAI ai1=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{enemyAction1,enemyAction2})));
-        EnemyAI ai2=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{enemyAction1,enemyAction2})));
 
-        EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12, EnemyCategory.Minion,"Skeleton1",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai1);
-        EnemyCharacter enemy2 = new EnemyCharacter(12,12,12,12,12,EnemyCategory.Minion,"Skeleton2",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai2);
-
-        FightModule fight = new FightModule(state,new ArrayList<>(List.of(new EnemyCharacter[]{enemy,enemy2})));
+        EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12, EnemyCategory.Boss,"Skeleton1",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai1);
+        FightModule fight = new FightModule(state,new ArrayList<>(List.of(new EnemyCharacter[]{enemy})));
         GameManager.setFight(fight);
         state.refresh();
 

@@ -20,6 +20,7 @@ public class GameManager {
     private static LootModule lootModule;
     private static WalkingModule walkingModule;
     private static MenuModule menuModule;
+    private static boolean bossFight;
 
     //Game state
     private static GameStates state = GameStates.START;
@@ -60,18 +61,22 @@ public class GameManager {
         GameManager.levelPointer++;
     }
 
+    public static void startBossBattle(){
+        bossFight=true;
+    }
+
     public static void changeState(GameStates newState){
         if(state==newState)
             return;
         //Load data
         //Old state
-        if (state==GameStates.START){
+        if (state==GameStates.START)
             PlayerInfo.setParty(new PlayerParty(menuModule.getParty(),new ArrayList<>()));
-        } else if (state == GameStates.WALKING) {
+        else if (state == GameStates.WALKING)
             walkingModule.stopWalking();
-        }
+
         //New state
-        if (newState==GameStates.WALKING){
+        if (newState==GameStates.WALKING && !bossFight){
             walkingModule.startWalking();
             walkingModule.getState().refresh();
         }
@@ -82,6 +87,11 @@ public class GameManager {
 
     public static void gameOver(){
         menuModule.gameOver();
+        changeState(GameStates.START);
+    }
+
+    public static void gameWin(){
+        menuModule.playerWin();
         changeState(GameStates.START);
     }
 
@@ -103,5 +113,9 @@ public class GameManager {
 
     public static int getLevelPointer() {
         return levelPointer;
+    }
+
+    public static boolean isBossFight() {
+        return bossFight;
     }
 }

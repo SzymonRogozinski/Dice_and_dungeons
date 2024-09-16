@@ -1,5 +1,6 @@
 package GUI.FightGUI;
 
+import Character.Enemy.EnemyCategory;
 import Character.Enemy.EnemyCharacter;
 import Character.PlayerCharacter;
 import Fight.ActionTarget;
@@ -73,7 +74,7 @@ public class FightPanel extends JPanel {
                 this.add(player);
             }
             setLabels();
-        }else if(enemyPanelList.getFirst().enemy!=GameManager.getFight().getEnemies().getFirst()){
+        }else if(enemyPanelList.get(0).enemy!=GameManager.getFight().getEnemies().get(0)){
             this.removeAll();
             enemyPanelList.clear();
             playerPanelList.clear();
@@ -114,13 +115,20 @@ public class FightPanel extends JPanel {
     private void setLabels(){
         int yOffSet= GUISettings.CHARACTER_HEIGHT /2;
         int playerYOffSet=GUISettings.PANEL_SIZE-3* GUISettings.CHARACTER_HEIGHT /2;
-        //Set enemies labels. Max 3!
-        int xSpace=(GUISettings.PANEL_SIZE- GUISettings.CHARACTER_WIDTH *enemyPanelList.size())/(enemyPanelList.size()+1);
-        for(int i=0; i<enemyPanelList.size();i++){
-            enemyPanelList.get(i).setLocation((xSpace+ GUISettings.CHARACTER_WIDTH)*i+xSpace,yOffSet);
+        //Set boss
+        if(enemyPanelList.size()==1 && enemyPanelList.get(0).enemy.getCategory()== EnemyCategory.Boss){
+            EnemyPanel bossPanel = enemyPanelList.get(0);
+            bossPanel.setUpBoss();
+            int bossX = (playerYOffSet=GUISettings.PANEL_SIZE-GUISettings.CHARACTER_WIDTH*2)/2;
+            bossPanel.setLocation(bossX,yOffSet/2);
+        }else { //Set enemies labels. Max 3!
+            int xSpace = (GUISettings.PANEL_SIZE - GUISettings.CHARACTER_WIDTH * enemyPanelList.size()) / (enemyPanelList.size() + 1);
+            for (int i = 0; i < enemyPanelList.size(); i++) {
+                enemyPanelList.get(i).setLocation((xSpace + GUISettings.CHARACTER_WIDTH) * i + xSpace, yOffSet);
+            }
         }
         //Set player labels. Max 3!
-        xSpace=(GUISettings.PANEL_SIZE- GUISettings.CHARACTER_WIDTH * playerPanelList.size())/(playerPanelList.size()+1);
+        int xSpace=(GUISettings.PANEL_SIZE- GUISettings.CHARACTER_WIDTH * playerPanelList.size())/(playerPanelList.size()+1);
         for(int i = 0; i< playerPanelList.size(); i++){
             playerPanelList.get(i).setLocation((xSpace+ GUISettings.CHARACTER_WIDTH)*i+xSpace,playerYOffSet);
         }
@@ -188,6 +196,13 @@ public class FightPanel extends JPanel {
                     statusLabel.add(statLabel);
                 }
             }
+        }
+
+        void setUpBoss(){
+            this.setSize(GUISettings.CHARACTER_WIDTH*2, (int)(GUISettings.CHARACTER_HEIGHT*1.15*2));
+            healthBar.setPreferredSize(new Dimension((GUISettings.CHARACTER_WIDTH-2)*2, (int)((GUISettings.CHARACTER_HEIGHT*0.15)-1)*2));
+            statusLabel.setPreferredSize(new Dimension((GUISettings.CHARACTER_WIDTH-2)*2,(int)((GUISettings.CHARACTER_HEIGHT*0.15)-1)));
+            enemyLabel.setIcon(GameUtils.resizeIcon(enemy.getImage(), (GUISettings.CHARACTER_WIDTH-2)*2, (int)((GUISettings.CHARACTER_HEIGHT*0.925)-2)*2));
         }
     }
 

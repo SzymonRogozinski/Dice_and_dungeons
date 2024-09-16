@@ -20,82 +20,7 @@ public class GameMap {
     private int startX, startY;
     private String PATH;
 
-    public GameMap(File inputFile){
-        try{
-            //Load data
-            BufferedReader file=new BufferedReader(new FileReader(inputFile));
-            String entrypoint;
-            //Find entry point for map data
-            do{
-                entrypoint=file.readLine();
-            }while(!entrypoint.contains("Map:"));
-
-            this.PATH =file.readLine();
-            Scanner scanner=new Scanner(file.readLine());
-
-            this.width = scanner.nextInt();
-            this.height = scanner.nextInt();
-            this.currentGamePlaces = new GamePlace[height][width];
-            this.originalGamePlaces = new GamePlace[height][width];
-
-            char[] line;
-            GamePlace p;
-            for(int i=0;i<height;i++){
-                line=file.readLine().toCharArray();
-                for(int j=0;j< line.length;j++) {
-                    switch (line[j]) {
-                        case ' ' -> p = new SpaceGamePlace(PATH);
-                        case 'T' -> p = new TreasureGamePlace(PATH);
-                        case 'K' -> p=new KeyGamePlace(PATH);
-                        case 'D' -> p=new DoorGamePlace(PATH);
-                        default -> {
-                            if(Character.isLetter(line[j])){
-                                p=new WallGamePlace(line[j], PATH);
-                            }else{
-                                throw new InputMismatchException("Map file is corrupted!");
-                            }
-                        }
-                    }
-                    currentGamePlaces[i][j]=p;
-                    originalGamePlaces[i][j]=p;
-                }
-            }
-
-            //Read entries
-            //Find entry point for entries data
-            do{
-                entrypoint=file.readLine();
-            }while(!entrypoint.contains("Entries:"));
-
-            int x,y;
-            EntryGamePlace entry;
-            //Start entry
-            scanner=new Scanner(file.readLine());
-            x = scanner.nextInt();
-            y = scanner.nextInt();
-            entry=new EntryGamePlace(PATH,true);
-            currentGamePlaces[y][x]=entry;
-            originalGamePlaces[y][x]=entry;
-            //Save coordinates
-            startX =x;
-            startY =y;
-            //End entry
-            scanner=new Scanner(file.readLine());
-            x = scanner.nextInt();
-            y = scanner.nextInt();
-            entry=new EntryGamePlace(PATH,false);
-            currentGamePlaces[y][x]=entry;
-            originalGamePlaces[y][x]=entry;
-        }catch (FileNotFoundException e){
-            System.err.println("File not found!");
-            System.exit(1);
-        }catch(NoSuchElementException | IOException | NullPointerException e){
-            System.out.println("Illegal file format");
-            System.exit(2);
-        }
-    }
-
-    public GameMap(Map map,String path){
+    public GameMap(Map map,String path, boolean bossLevel){
         this.PATH=path;
         this.width = map.getWidth();
         this.height = map.getHeight();
@@ -120,7 +45,7 @@ public class GameMap {
             }
         }
         //Entry
-        place=new EntryGamePlace(PATH,true);
+        place=new EntryGamePlace(PATH,true, false);
         int x,y;
         x=map.getEntries()[0].x;
         y=map.getEntries()[0].y;
@@ -129,7 +54,7 @@ public class GameMap {
         startX=x;
         startY=y;
         //Exit
-        place=new EntryGamePlace(PATH,false);
+        place=new EntryGamePlace(PATH,false,bossLevel);
         x=map.getEntries()[1].x;
         y=map.getEntries()[1].y;
         currentGamePlaces[y][x]=place;

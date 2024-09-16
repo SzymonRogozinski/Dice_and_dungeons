@@ -9,6 +9,7 @@ public class GameLevel {
     private final int enemyStrength;
     private final WalkingSettings walkingSettings;
 
+
     public GameLevel(LootSettings lootSettings, int enemyStrength,WalkingSettings walkingSettings) {
         this.lootSettings = lootSettings;
         this.enemyStrength = enemyStrength;

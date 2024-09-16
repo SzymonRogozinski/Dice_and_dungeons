@@ -21,7 +21,9 @@ public class EnemyBase implements Cloneable{
             EnemyCategory.Strong, new EnemyBase[]{
                     new EnemyBase(new int[]{20,20,10,10,20},EnemyCategory.Strong,"monster",new ImageIcon("Texture/Enemy/monster.png"),new ArrayList<>(List.of(ConstantEnemyActions.attack)),1)
             },
-            EnemyCategory.Boss, new EnemyBase[]{}
+            EnemyCategory.Boss, new EnemyBase[]{
+                    new EnemyBase(new int[]{30,30,20,20,20},EnemyCategory.Boss,"minotaur",new ImageIcon("Texture/Enemy/minotaur.png"),new ArrayList<>(List.of(ConstantEnemyActions.attack)),1)
+            }
     );
 
     public static EnemyBase getBase(EnemyCategory category, int cost){

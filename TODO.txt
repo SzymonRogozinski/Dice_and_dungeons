@@ -3,4 +3,5 @@
 > Podmienić placeholdery
 > Poprawić GUI
 > Ogólny refactor
-> Dodać bossa
+> Poprawić napisy na guzikach (pełne nazwy w logu)
+> Usunąć stałe ziarno

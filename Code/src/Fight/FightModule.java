@@ -81,7 +81,9 @@ public class FightModule {
         this.playerTurn=true;
         this.characterTurn=0;
 
-        if(playerWin){
+        if(playerWin && GameManager.isBossFight()){
+            GameManager.gameWin();
+        }else if(playerWin){
             GameManager.getLootModule().getLoot(GameBalance.LEVELS.get(GameManager.getLevelPointer()).getLootSettings(),true);
             GameManager.changeState(GameStates.WALKING);
         }else{
@@ -97,10 +99,13 @@ public class FightModule {
                 break;
             }
         }
-        if(enemiesDead)
+        if(enemiesDead) {
             endFight(true);
-        if(PlayerInfo.getParty().getCurrentHealth()==0)
+            return true;
+        }else if(PlayerInfo.getParty().getCurrentHealth()==0) {
             endFight(false);
+            return true;
+        }
         return false;
     }
 

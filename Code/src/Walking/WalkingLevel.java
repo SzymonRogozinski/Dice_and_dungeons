@@ -1,8 +1,11 @@
 package Walking;
 
+import Character.Enemy.EnemyCategory;
+import Character.Enemy.EnemyCharacter;
 import Game.GameLevel;
 import Game.GameManager;
 import Game.GameStates;
+import Generators.EnemyGenerator.EnemyGenerator;
 import Walking.Drones.Drone;
 import Walking.Drones.EnemyDrone;
 import Walking.Drones.PlayerDrone;
@@ -11,6 +14,9 @@ import Walking.Collision.EnterExitException;
 import Walking.Places.PlayerGamePlace;
 import dg.generator.dungeon.Map;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WalkingLevel {
     private final GameMap gameMap;
     private final Enemies enemies;
@@ -18,6 +24,7 @@ public class WalkingLevel {
     private final PlayerDrone player;
     public final FogOfWar fogOfWar;
     private boolean isStopped;
+    private final EnemyCharacter boss;
 
     public WalkingLevel(GameLevel levelSetting) {
         MapCreator creator;
@@ -32,7 +39,8 @@ public class WalkingLevel {
         //Loading enemies
         this.enemies=new Enemies(map,settings.path, levelSetting.getEnemyStrength());
         //Loading map
-        this.gameMap =new GameMap(map,settings.path);
+        this.gameMap =new GameMap(map,settings.path,settings.bossLevel);
+        boss=settings.bossLevel?EnemyGenerator.generate(EnemyCategory.Boss,levelSetting.getEnemyStrength()):null;
         setEnemy();
         enemyThread=new EnemyThread();
         //Add player
@@ -88,8 +96,11 @@ public class WalkingLevel {
             try {
                 GameManager.getWalkingManager().setNextMap();
             }catch (Exception ex){
-                //TODO BOSS!
-                System.out.println("Boss will someday appear!");
+                if(boss==null)
+                    throw new RuntimeException("Boss do not exist!");
+                GameManager.getFight().startFight(new ArrayList<>(List.of(boss)));
+                GameManager.startBossBattle();
+                GameManager.changeState(GameStates.FIGHTING);
             }
         }finally {
             fogOfWar.refreshFog();
