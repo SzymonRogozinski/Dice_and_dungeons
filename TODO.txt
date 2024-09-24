@@ -5,4 +5,3 @@
 > Ogólny refactor
 > Poprawić napisy na guzikach (pełne nazwy w logu)
 > Usunąć stałe ziarno
-> Złe nazwy przedmiotów

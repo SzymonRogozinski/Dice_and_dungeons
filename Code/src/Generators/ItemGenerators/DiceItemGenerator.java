@@ -57,20 +57,22 @@ public class DiceItemGenerator extends Generator {
             basePoints = GeneratorConst.MEDIUM_POINTS*GeneratorConst.COMMON_MOD;
         points-=basePoints;
         DiceItemBase base = DiceItemFrames.getRandomDiceItemBase(basePoints);
-
+        boolean generationLocked=false;
         while (points>0){
             //Too little points to other action
-            if(points<(int)(startPoints*EQUALITY_EDGE)){
+            if(generationLocked || points<(int)(startPoints*EQUALITY_EDGE)){
                 redistributePointsEqual(base,points);
                 points=0;
             }else if(base.haveEmptySide && GameManager.random.nextDouble()<REPLACE_EMPTY_SIDE_PROP){
                 points-=replaceEmptySide(base,points);
-            }else{
+            }else if (base.secondaryActionList.length>0){
                 base.secondActionValues=new int[6];
                 getRandomAction(base);
                 addActionRandomly(base,points);
                 points=0;
             }
+            if (!base.haveEmptySide && base.secondaryActionList.length==0)
+                generationLocked=true;
         }
         Tags [] tags = tag==null ? new Tags[]{}:new Tags[]{tag};
         base.tags=new ArrayList<>(List.of(tags));
@@ -173,8 +175,10 @@ public class DiceItemGenerator extends Generator {
 
     private static int replaceEmptySide(DiceItemBase base,int points){
         int index = findFirstEmptySide(base.firstActionValues);
-        if(index==-1)
+        if(index==-1) {
+            base.haveEmptySide=false;
             return 0;
+        }
         int put = Math.min(points, base.firstActionValues[index+1]);
         base.firstActionValues[index]=put;
         return put;

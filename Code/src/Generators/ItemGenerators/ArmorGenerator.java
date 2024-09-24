@@ -14,6 +14,7 @@ public class ArmorGenerator extends Generator {
     private static final int STATS_COUNT=6;
     private static final int ARMOR_PARTS_COUNT=4;
     private static final double MAX_STAT_VALUE_PROP=0.4;
+    private static final double POINTS_MOD = 0.5;
 
     public static ArmorItem generateArmor(ItemQuality quality){
         if (quality==null)
@@ -43,12 +44,12 @@ public class ArmorGenerator extends Generator {
                 tag = getRandomTag();
                 name = ArmorDictionary.getNameFromTag(tag)+" "+name;
             }
-            default -> {
-                throw new RuntimeException("Quality not implemented");
-            }
+            default -> throw new RuntimeException("Quality not implemented");
+
         }
+        points= (int)(POINTS_MOD*points);
         maxStatValue = (int) (points*MAX_STAT_VALUE_PROP);
-        int[] highStatIndex = new int[]{-1,-1};
+        int[] highStatIndex = new int[]{-1,-1,-1};
         int highStatCount=0;
         while(points>0){
             int statIndex = GameManager.random.nextInt(STATS_COUNT);
@@ -75,7 +76,7 @@ public class ArmorGenerator extends Generator {
             return name;
         else if(len==1){
             return name +" of "+ ArmorDictionary.getAdjectiveName(stats[0]);
-        } else if (len == 2) {
+        } else if (len == 2 || len == 3) {
             return name +" of "+ ArmorDictionary.getAdjectiveName(stats[0])+" and "+ArmorDictionary.getAdjectiveName(stats[1]);
         }else{
             throw new RuntimeException("To many high stats");

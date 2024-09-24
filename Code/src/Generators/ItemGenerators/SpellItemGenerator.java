@@ -19,11 +19,11 @@ import java.util.List;
 
 public class SpellItemGenerator extends Generator {
 
-    private final static double CONCENTRATED_PROP = 0.9;
+    private final static double CONCENTRATED_PROP = 0.1;
     private final static double REPLACE_EMPTY_SIDE_PROP = 0.5;
     private final static double RAISE_RANGE_PROP = 0.33;
     private final static double EQUALITY_EDGE = 0.15;
-    private final static double MANA_COST_MOD=0.8;
+    private final static double MANA_COST_MOD=0.6;
     private final static double SPELL_ACTION_MOD = 0.33;
 
     public static SpellItem generateItem(ItemQuality quality){
@@ -58,7 +58,7 @@ public class SpellItemGenerator extends Generator {
         // Item Concentrated
         if(quality == ItemQuality.COMMON)
             basePoints=points;
-        else if(GameManager.random.nextDouble()>=CONCENTRATED_PROP) {
+        else if(GameManager.random.nextDouble()<=CONCENTRATED_PROP) {
             basePoints = points;
         }else
             basePoints = GeneratorConst.MEDIUM_POINTS*GeneratorConst.COMMON_MOD;
@@ -73,10 +73,10 @@ public class SpellItemGenerator extends Generator {
                 base.target=ActionTarget.ALL_ENEMIES;
             points/=2;
         }
-
+        boolean generationLocked=false;
         while (points>0){
             //Too little points to other action
-            if(points<(int)(startPoints*EQUALITY_EDGE)){
+            if(generationLocked || points<(int)(startPoints*EQUALITY_EDGE)){
                 redistributePointsEqual(base,points);
                 points=0;
             }else if(base.haveEmptySide && GameManager.random.nextDouble()<REPLACE_EMPTY_SIDE_PROP){
@@ -87,6 +87,8 @@ public class SpellItemGenerator extends Generator {
                 addActionRandomly(base,points);
                 points=0;
             }
+            if (!base.haveEmptySide && base.secondaryActionList.length==0)
+                generationLocked=true;
         }
         Tags [] tags = tag==null ? new Tags[]{}:new Tags[]{tag};
         base.tags=new ArrayList<>(List.of(tags));
@@ -191,8 +193,10 @@ public class SpellItemGenerator extends Generator {
 
     private static int replaceEmptySide(DiceItemBase base,int points){
         int index = findFirstEmptySide(base.firstActionValues);
-        if(index==-1)
+        if(index==-1) {
+            base.haveEmptySide=false;
             return 0;
+        }
         int put = Math.min(points, base.firstActionValues[index+1]);
         base.firstActionValues[index]=put;
         return put;

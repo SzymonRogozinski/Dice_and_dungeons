@@ -1,29 +1,96 @@
 import Character.Enemy.EnemyCategory;
 import Character.Enemy.EnemyCharacter;
+import Equipment.Items.ItemQuality;
 import Game.GameBalance;
+import Game.GameConst;
 import Game.GameLevel;
 import Generators.EnemyGenerator.EnemyGenerator;
+import Generators.ItemGenerators.ArmorGenerator;
+import Generators.ItemGenerators.DiceItemGenerator;
+import Generators.ItemGenerators.SpellItemGenerator;
+import Generators.ItemGenerators.UsableItemGenerator;
 
 import java.io.IOException;
 
 public class GeneratorTest {
 
     public static void main(String[] args) throws IOException {
-        int count =5;
-        GameLevel level=GameBalance.DUNGEON;
-        EnemyCategory category = EnemyCategory.Strong;
-        var t = EnemyGenerator.generateMore(level.getEnemyStrength());
-        for(int i=1;i<=t.size();i++){
-            EnemyCharacter enemy = t.get(i-1);
-            System.out.println("Trial: "+i);
-            System.out.println(enemy.getName());
-            System.out.println("HP: "+enemy.getMaxHealth());
-            System.out.println("Strength: "+enemy.getStrength());
-            System.out.println("Endurance: "+enemy.getEndurance());
-            System.out.println("Intelligence: "+enemy.getIntelligence());
-            System.out.println("Charisma: "+enemy.getCharisma());
-            System.out.println("Cunning: "+enemy.getCunning());
-            System.out.println();
+        int count =1000;
+        int cost = 4;
+
+        //Armor test
+        System.out.println("Armor tests");
+        for(ItemQuality q:ItemQuality.values()){
+            int i=1;
+            try {
+                for (; i <= count; i++) {
+                    ArmorGenerator.generateArmor(q);
+                }
+            }catch (Exception e){
+                System.err.println(i);
+                System.err.printf("Armor test. Quality %s\n",q);
+                System.err.printf("Exception: %s\n",e.getMessage());
+            }
+        }
+
+        //Dice item test
+        System.out.println("Dice item tests");
+        for(ItemQuality q:ItemQuality.values()){
+            int i=1;
+            try {
+                for (; i <= count; i++) {
+                    DiceItemGenerator.generateItem(q);
+                }
+            }catch (Exception e){
+                System.err.println(i);
+                System.err.printf("Dice item test. Quality %s\n",q);
+                System.err.printf("Exception: %s\n",e.getMessage());
+            }
+        }
+
+        //Usable item test
+        System.out.println("Usable item tests");
+        for(ItemQuality q:ItemQuality.values()){
+            int i=1;
+            try {
+                for (; i <= count; i++) {
+                    UsableItemGenerator.generate(q);
+                }
+            }catch (Exception e){
+                System.err.println(i);
+                System.err.printf("Usable item test. Quality %s\n",q);
+                System.err.printf("Exception: %s\n",e.getMessage());
+            }
+        }
+
+        //Spell test
+        System.out.println("Spell tests");
+        for(ItemQuality q:ItemQuality.values()){
+            int i=1;
+            try {
+                for (; i <= count; i++) {
+                    SpellItemGenerator.generateItem(q);
+                }
+            }catch (Exception e){
+                System.err.println(i);
+                System.err.printf("Spell item test. Quality %s\n",q);
+                System.err.printf("Exception: %s\n",e.getMessage());
+            }
+        }
+
+        //Enemy test
+        System.out.println("Enemy tests");
+        for(EnemyCategory category: EnemyCategory.values()){
+            int i=1;
+            try {
+                for (; i <= count; i++) {
+                    EnemyGenerator.generate(category,cost);
+                }
+            }catch (Exception e){
+                System.err.println(i);
+                System.err.printf("Enemy test. Category %s\n",category);
+                System.err.printf("Exception: %s\n",e.getMessage());
+            }
         }
     }
 }

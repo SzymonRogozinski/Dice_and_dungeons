@@ -115,6 +115,10 @@ public class GameManager {
         return levelPointer;
     }
 
+    public static GameLevel getCurrentLevel(){
+        return GameConst.LEVELS.get(levelPointer);
+    }
+
     public static boolean isBossFight() {
         return bossFight;
     }

@@ -73,7 +73,7 @@ public class DiceFactory {
                     action1CostRest = 0;
                 }
                 i--;
-                if(action1[i]==0)
+                if(i<0 || action1[i]==0)
                     i=5;
             }
         }
@@ -100,8 +100,15 @@ public class DiceFactory {
                     action2CostRest = 0;
                 }
                 i--;
-                if(action2[2]==0)
-                    i=returnPoint;
+                try {
+                    if (action2[i] == 0)
+                        i = returnPoint;
+                }catch (IndexOutOfBoundsException e){
+                    if(returnPoint==5)
+                        break;
+                    returnPoint++;
+                    i = returnPoint;
+                }
             }
         }
         int [][] ins = new int[6][];

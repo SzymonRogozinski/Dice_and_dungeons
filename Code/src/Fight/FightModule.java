@@ -84,7 +84,7 @@ public class FightModule {
         if(playerWin && GameManager.isBossFight()){
             GameManager.gameWin();
         }else if(playerWin){
-            GameManager.getLootModule().getLoot(GameBalance.LEVELS.get(GameManager.getLevelPointer()).getLootSettings(),true);
+            GameManager.getLootModule().getLoot(GameManager.getCurrentLevel().getLootSettings(),true);
             GameManager.changeState(GameStates.WALKING);
         }else{
             GameManager.gameOver();

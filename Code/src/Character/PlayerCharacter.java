@@ -39,7 +39,7 @@ public class PlayerCharacter extends GameCharacter{
     }
 
     public int getCharacterRerolls(){
-        return getLuck()/GameBalance.REROLLS_DIVIDE + GameBalance.MIN_REROLLS;
+        return (getLuck()-GameBalance.MIN_STAT_VALUE)/GameBalance.REROLLS_DIVIDE + GameBalance.MIN_REROLLS;
     }
 
     public void recalculateStats(){

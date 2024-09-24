@@ -15,10 +15,10 @@ public class ArmorDictionary extends ItemDictionary {
     );
 
     private static final Map<Integer, ImageIcon[]> ARMOR_PART_ICONS = Map.of(
-            CharacterEquipment.HEAD_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/helm-pl.png")},
-            CharacterEquipment.ARM_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/gauntlet-pl.png")},
-            CharacterEquipment.CHEST_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/chest-pl.png")},
-            CharacterEquipment.LEG_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/leg-pl.png")}
+            CharacterEquipment.HEAD_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/armors/helm-pl.png")},
+            CharacterEquipment.ARM_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/armors/gauntlet-pl.png")},
+            CharacterEquipment.CHEST_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/armors/chest-pl.png")},
+            CharacterEquipment.LEG_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/armors/leg-pl.png")}
     );
 
     private static final String[] STATS_NAMES=new String[]{"strength","endurance","intelligence","charisma","cunning","luck"};
