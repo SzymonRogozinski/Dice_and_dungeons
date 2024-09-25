@@ -276,7 +276,7 @@ public class FightPanel extends JPanel {
         @Override
         public void mouseEntered(MouseEvent e) {
             if(isEnemy)
-                GameManager.getFight().showNextMove(enemyPanelList.get(characterId).enemy.getNextAction());
+                GameManager.getFight().showCombatInfo(enemyPanelList.get(characterId).enemy.getNextAction());
             if(!selectableFlag)
                 return;
             setBorderFlashing(true);
@@ -287,7 +287,7 @@ public class FightPanel extends JPanel {
         @Override
         public void mouseExited(MouseEvent e) {
             if(isEnemy)
-                GameManager.getFight().hideNextMove();
+                GameManager.getFight().hideCombatInfo();
             if(!selectableFlag)
                 return;
             setBorderFlashing(false);

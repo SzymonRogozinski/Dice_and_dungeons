@@ -165,12 +165,12 @@ public class FightModule {
         state.hideStatusInfo();
     }
 
-    public void showNextMove(String info){
-        state.showNextMove(info);
+    public void showCombatInfo(String info){
+        state.showCombatInfo(info);
     }
 
-    public void hideNextMove(){
-        state.hideNextMove();
+    public void hideCombatInfo(){
+        state.hideCombatInfo();
     }
 
     public void clear(){

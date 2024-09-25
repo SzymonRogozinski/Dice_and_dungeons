@@ -76,13 +76,14 @@ public class DiceItemGenerator extends Generator {
         }
         Tags [] tags = tag==null ? new Tags[]{}:new Tags[]{tag};
         base.tags=new ArrayList<>(List.of(tags));
-        String name = ItemDictionary.getItemNameFromItemBase(base);
+        String shortName = base.names[GameManager.random.nextInt(base.names.length)];
+        String name = ItemDictionary.getItemNameFromItemBase(base,shortName);
         Dice dice = DiceFactory.buildDice(base);
         Tags[] actionTags= ItemDictionary.getTagsFromAction(base.firstAction,base.secondAction);
 
         ItemAction action=new ItemAction(dice,base.target,base.diceLambda,actionTags);
         ImageIcon icon = base.icon;
-        return new ActionItem(action,tags,icon,name,quality);
+        return new ActionItem(action,tags,icon,name,shortName,quality);
     }
 
     private static void addActionRandomly(DiceItemBase base, int points){

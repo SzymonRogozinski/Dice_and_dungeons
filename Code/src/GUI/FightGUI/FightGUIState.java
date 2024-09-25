@@ -44,12 +44,12 @@ public class FightGUIState {
         panel.getStatusPanel().refreshCombatLog();
     }
 
-    public void showNextMove(String info){
-        panel.getStatusPanel().showNextMove(info);
+    public void showCombatInfo(String info){
+        panel.getStatusPanel().showCombatInfo(info);
     }
 
-    public void hideNextMove(){
-        panel.getStatusPanel().hideNextMove();
+    public void hideCombatInfo(){
+        panel.getStatusPanel().hideCombatInfo();
     }
 
     public void refresh(){

@@ -10,8 +10,8 @@ public class UsableItem extends Item {
     private final UsableItemAction action;
     private int numberOfItems;
 
-    public UsableItem(UsableItemAction action,int numberOfItems,Tags[] tags, ImageIcon icon,String name,ItemQuality quality) {
-        super(tags,icon,name,quality);
+    public UsableItem(UsableItemAction action,int numberOfItems,Tags[] tags, ImageIcon icon,String name,String shortName,ItemQuality quality) {
+        super(tags,icon,name,shortName,quality);
         this.action=action;
         this.numberOfItems=numberOfItems;
         if(numberOfItems<1){

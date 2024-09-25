@@ -1,7 +1,5 @@
-> Dodać więcej typów przedmiotów, wagi akcji i nazw
-> To samo, ale do przeciwników
+> Dodać więcej typów przeciwników i ich nazw
 > Podmienić placeholdery
 > Poprawić GUI
 > Ogólny refactor
-> Poprawić napisy na guzikach (pełne nazwy w logu)
 > Usunąć stałe ziarno

@@ -34,25 +34,24 @@ public class ItemDictionary {
     );
 
     private static final Map<Integer,String[]> ADJECTIVES = Map.of(
-            ActionEnum.DAMAGE_ACTION,new String[]{"%s of sharpness"},
-            ActionEnum.SHIELD_ACTION,new String[]{"guardian %s"},
-            ActionEnum.HEAL_ACTION,new String[]{"%s of restorement"},
-            ActionEnum.MANA_ACTION,new String[]{"%s of enlightenment"},
-            ActionEnum.POISON_ACTION,new String[]{"poison %s"},
-            ActionEnum.BLEEDING_ACTION,new String[]{"serrate %s"},
-            ActionEnum.WEAKNESS_ACTION,new String[]{"cursed %s"},
-            ActionEnum.COUNTER_ACTION,new String[]{"%s of payback"}
+            ActionEnum.DAMAGE_ACTION,new String[]{"%s of sharpness","painfull %s"},
+            ActionEnum.SHIELD_ACTION,new String[]{"guardian %s", "%s of defence"},
+            ActionEnum.HEAL_ACTION,new String[]{"%s of restorement", "helpfull %s"},
+            ActionEnum.MANA_ACTION,new String[]{"%s of enlightenment","%s mystic", "energizing %s"},
+            ActionEnum.POISON_ACTION,new String[]{"poison %s", "toxic %s", "venomous %s"},
+            ActionEnum.BLEEDING_ACTION,new String[]{"serrate %s","bloody %s"},
+            ActionEnum.WEAKNESS_ACTION,new String[]{"cursed %s", "%s of frailty"},
+            ActionEnum.COUNTER_ACTION,new String[]{"%s of payback", "counter %s"}
     );
 
     private static final Map<Integer,String[]> ADJECTIVES_FOR_SPELLS = Map.of(
-            ActionEnum.DAMAGE_ACTION,new String[]{"%s of destruction"},
-            ActionEnum.SHIELD_ACTION,new String[]{"guardian %s"},
-            ActionEnum.HEAL_ACTION,new String[]{"%s of restorement"},
-            ActionEnum.MANA_ACTION,new String[]{"%s of enlightenment"},
-            ActionEnum.POISON_ACTION,new String[]{"poison %s"},
-            ActionEnum.BLEEDING_ACTION,new String[]{"serrate %s"},
-            ActionEnum.WEAKNESS_ACTION,new String[]{"cursed %s"},
-            ActionEnum.COUNTER_ACTION,new String[]{"%s of payback"}
+            ActionEnum.DAMAGE_ACTION,new String[]{"%s of destruction","painfull %s"},
+            ActionEnum.SHIELD_ACTION,new String[]{"guardian %s", "rescue %s"},
+            ActionEnum.HEAL_ACTION,new String[]{"%s of restorement","%s of regeneration"},
+            ActionEnum.POISON_ACTION,new String[]{"poison %s","venomous %s"},
+            ActionEnum.BLEEDING_ACTION,new String[]{"serrate %s","bloody %s"},
+            ActionEnum.WEAKNESS_ACTION,new String[]{"cursed %s", "%s of frailty"},
+            ActionEnum.COUNTER_ACTION,new String[]{"%s of payback", "return %s"}
     );
 
     public static String getNameFromTag(Tags tag){
@@ -79,10 +78,10 @@ public class ItemDictionary {
         return result;
     }
 
-    public static String getItemNameFromItemBase(DiceItemBase base){
-        String name="";
+    public static String getItemNameFromItemBase(DiceItemBase base,String shortName){
+        String name;
         //Base name
-        name = base.names[GameManager.random.nextInt(base.names.length)];
+        name = shortName;
         //Class-Tag name
         if(!base.tags.isEmpty())
             name = getNameFromTag(base.tags.get(0))+" "+name;
@@ -100,10 +99,8 @@ public class ItemDictionary {
         return name;
     }
 
-    public static String getSpellNameFromItemBase(DiceItemBase base){
-        String name="";
-        //Base name
-        name = base.names[GameManager.random.nextInt(base.names.length)];
+    public static String getSpellNameFromItemBase(DiceItemBase base,String shortName){
+        String name=shortName;
         //Range name
         if(base.target== ActionTarget.PLAYER_PARTY || base.target==ActionTarget.ALL_ENEMIES)
             name = WIDE_RANGE[GameManager.random.nextInt(WIDE_RANGE.length)]+" "+name;

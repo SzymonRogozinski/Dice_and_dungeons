@@ -12,7 +12,7 @@ public class StatusPanel extends JPanel {
 
     private JProgressBar healthBar, manaBar;
     private JLabel characterName,statusInfo;
-    private JTextArea combatLog,nextMoveInfo;
+    private JTextArea combatLog, combatInfo;
     private String combatLogText;
 
     public StatusPanel(Border border){
@@ -57,15 +57,15 @@ public class StatusPanel extends JPanel {
         this.add(statusInfo);
 
         //Set next move
-        nextMoveInfo=new JTextArea();
-        nextMoveInfo.setForeground(Color.WHITE);
-        nextMoveInfo.setBackground(Color.BLACK);
-        nextMoveInfo.setWrapStyleWord(true);
-        nextMoveInfo.setLineWrap(true);
-        nextMoveInfo.setEditable(false);
-        nextMoveInfo.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-4,GUISettings.PANEL_SIZE/3));
+        combatInfo =new JTextArea();
+        combatInfo.setForeground(Color.WHITE);
+        combatInfo.setBackground(Color.BLACK);
+        combatInfo.setWrapStyleWord(true);
+        combatInfo.setLineWrap(true);
+        combatInfo.setEditable(false);
+        combatInfo.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-4,GUISettings.PANEL_SIZE/3));
 
-        this.add(nextMoveInfo);
+        this.add(combatInfo);
 
         //Set combat log
         combatLogText = "";
@@ -92,14 +92,14 @@ public class StatusPanel extends JPanel {
         this.repaint();
     }
 
-    public void showNextMove(String info){
-        nextMoveInfo.setText(info);
+    public void showCombatInfo(String info){
+        combatInfo.setText(info);
         this.revalidate();
         this.repaint();
     }
 
-    public void hideNextMove(){
-        nextMoveInfo.setText("");
+    public void hideCombatInfo(){
+        combatInfo.setText("");
         this.revalidate();
         this.repaint();
     }

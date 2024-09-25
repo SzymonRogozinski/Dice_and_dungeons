@@ -68,7 +68,7 @@ public class ArmorGenerator extends Generator {
 
         ImageIcon icon = ArmorDictionary.getArmorPartIcon(armor_part);
         Tags [] tags = tag==null ? new Tags[]{}:new Tags[]{tag};
-        return new ArmorItem(stats[0],stats[1],stats[2],stats[3],stats[4],stats[5],armor_part,tags,icon,name,quality);
+        return new ArmorItem(stats[0],stats[1],stats[2],stats[3],stats[4],stats[5],armor_part,tags,icon,name,name,quality);
     }
 
     private static String getArmorAdjective(String name, int[] stats, int len){

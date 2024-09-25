@@ -92,7 +92,8 @@ public class SpellItemGenerator extends Generator {
         }
         Tags [] tags = tag==null ? new Tags[]{}:new Tags[]{tag};
         base.tags=new ArrayList<>(List.of(tags));
-        String name = ItemDictionary.getSpellNameFromItemBase(base);
+        String shortName = base.names[GameManager.random.nextInt(base.names.length)];
+        String name = ItemDictionary.getSpellNameFromItemBase(base,shortName);
         Dice dice = DiceFactory.buildDice(base);
         Tags[] actionTags= ItemDictionary.getTagsFromActionSpellAction(base.firstAction,base.secondAction);
 
@@ -100,7 +101,7 @@ public class SpellItemGenerator extends Generator {
 
         SpellAction action=new SpellAction(dice,base.target,base.diceLambda,mana,actionTags);
         ImageIcon icon = base.icon;
-        return new SpellItem(action,tags,icon,name,quality);
+        return new SpellItem(action,tags,icon,name,shortName,quality);
     }
 
     private static void addActionRandomly(DiceItemBase base, int points){
