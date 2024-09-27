@@ -24,15 +24,15 @@ public class GameConst {
     private static final ActionItem magic_sphere = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{4,4},{4,4},{4,4},{4,4},{4,4}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()), new Tags[]{}),new Tags[]{},new ImageIcon("Texture/Items/attack_item/magic_sphere.png"),"magic sphere","magic sphere",ItemQuality.COMMON);
     private static final SpellItem ghost_sword = new SpellItem(new SpellAction(DiceFactory.buildDice(new int[][]{{0},{8,2,1},{8,2,1},{8,2,1},{8,4,1},{8,4,1}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),17,new Tags[]{Tags.MAGIC}), new Tags[]{},new ImageIcon("Texture/Items/spells/ghost_sword.png"),"ghost sword","ghost sword",ItemQuality.COMMON);
     private static final SpellItem thunder_ball = new SpellItem(new SpellAction(DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,5},{1,11},{1,11}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),16,new Tags[]{Tags.MAGIC}), new Tags[]{},new ImageIcon("Texture/Items/spells/thunder_ball.png"),"thunder ball","thunder ball",ItemQuality.COMMON);
-    private static final SpellItem toxic_flower = new SpellItem(new SpellAction(DiceFactory.buildDice(new int[][]{{0},{0},{0},{5,3},{5,3},{5,3}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),16,new Tags[]{Tags.MAGIC}), new Tags[]{},new ImageIcon("Texture/Items/spells/toxic_flower.png"),"toxic flower","toxic flower",ItemQuality.COMMON);
+    private static final SpellItem toxic_flower = new SpellItem(new SpellAction(DiceFactory.buildDice(new int[][]{{0},{0},{0},{5,3},{5,3},{5,3}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),16,new Tags[]{Tags.MAGIC}), new Tags[]{},new ImageIcon("Texture/Items/spells/toxic_flower.png"),"toxic flower","toxic flower",ItemQuality.COMMON);
 
 
     //Levels
-    public static final GameLevel DUNGEON = new GameLevel(new LootSettings(5,new double[]{0.7,0.3}),3,
+    public static final GameLevel DUNGEON = new GameLevel(new LootSettings(5,new double[]{0.7,0.3}),4,
             new WalkingSettings(1234,2,100,100,1000,25,20,2,"Texture/MapTextures/dungeon/",false));
-    public static final GameLevel MINE = new GameLevel(new LootSettings(8,new double[]{0.4,0.5,0.1}),6,
+    public static final GameLevel MINE = new GameLevel(new LootSettings(8,new double[]{0.4,0.5,0.1}),8,
             new WalkingSettings(1234,1,100,100,1000,25,20,2,"Texture/MapTextures/mine/",false));
-    public static final GameLevel CAVE = new GameLevel(new LootSettings(8,new double[]{0.1,0.5,0.4}),9,
+    public static final GameLevel CAVE = new GameLevel(new LootSettings(8,new double[]{0.1,0.5,0.4}),12,
             new WalkingSettings(1234,0,100,100,1000,25,20,2,"Texture/MapTextures/cave/",true));
 
     public static final ArrayList<GameLevel> LEVELS = new ArrayList<>(List.of(DUNGEON,MINE, CAVE));

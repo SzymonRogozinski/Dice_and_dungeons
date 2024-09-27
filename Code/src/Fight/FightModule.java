@@ -80,6 +80,7 @@ public class FightModule {
         this.noRoll=false;
         this.playerTurn=true;
         this.characterTurn=0;
+        this.targetId=0;
 
         if(playerWin && GameManager.isBossFight()){
             GameManager.gameWin();

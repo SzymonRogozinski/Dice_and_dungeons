@@ -18,6 +18,7 @@ public class FightGUIState {
     }
 
     public void initState(){
+        setState(PLAYER_CHOOSING_ACTION);
         panel.init();
     }
 

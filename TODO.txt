@@ -1,5 +1,5 @@
-> Dodać więcej typów przeciwników i ich nazw
 > Podmienić placeholdery
 > Poprawić GUI
 > Ogólny refactor
 > Usunąć stałe ziarno
+> Wyższe poziomy, więcej hp
