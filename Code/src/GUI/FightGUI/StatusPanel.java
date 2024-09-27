@@ -1,7 +1,7 @@
 package GUI.FightGUI;
 
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
 import Game.PlayerInfo;
 
 import javax.swing.*;
@@ -10,11 +10,9 @@ import java.awt.*;
 
 public class StatusPanel extends JPanel {
 
-    private JProgressBar healthBar;
-    private JProgressBar manaBar;
-    private JLabel characterName,statusInfo,nextMoveInfo,combatLog;
-
-    private JPanel combatLogPanel, nextMovePanel;
+    private JProgressBar healthBar, manaBar;
+    private JLabel characterName,statusInfo;
+    private JTextArea combatLog, combatInfo;
     private String combatLogText;
 
     public StatusPanel(Border border){
@@ -59,33 +57,27 @@ public class StatusPanel extends JPanel {
         this.add(statusInfo);
 
         //Set next move
-        nextMovePanel = new JPanel();
-        nextMovePanel.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-4,GUISettings.PANEL_SIZE/5));
-        nextMovePanel.setLayout(new BoxLayout(nextMovePanel , BoxLayout.X_AXIS));
-        nextMovePanel.setBackground(Color.BLACK);
+        combatInfo =new JTextArea();
+        combatInfo.setForeground(Color.WHITE);
+        combatInfo.setBackground(Color.BLACK);
+        combatInfo.setWrapStyleWord(true);
+        combatInfo.setLineWrap(true);
+        combatInfo.setEditable(false);
+        combatInfo.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-4,GUISettings.PANEL_SIZE/3));
 
-        nextMoveInfo=new JLabel();
-        nextMoveInfo.setForeground(Color.WHITE);
-        nextMoveInfo.setVerticalAlignment(SwingConstants.TOP);
-        nextMoveInfo.setVerticalTextPosition(SwingConstants.TOP);
-        nextMovePanel.add(nextMoveInfo);
-        this.add(nextMovePanel);
+        this.add(combatInfo);
 
         //Set combat log
-
         combatLogText = "";
 
-        combatLogPanel = new JPanel();
-        combatLogPanel.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-4,GUISettings.PANEL_SIZE/3));
-        combatLogPanel.setLayout(new BoxLayout(combatLogPanel, BoxLayout.X_AXIS));
-        combatLogPanel.setBackground(Color.BLACK);
-
-        combatLog=new JLabel();
+        combatLog=new JTextArea();
         combatLog.setForeground(Color.WHITE);
-        combatLog.setVerticalAlignment(SwingConstants.TOP);
-        combatLog.setVerticalTextPosition(SwingConstants.TOP);
-        combatLogPanel.add(combatLog);
-        this.add(combatLogPanel);
+        combatLog.setBackground(Color.BLACK);
+        combatLog.setWrapStyleWord(true);
+        combatLog.setLineWrap(true);
+        combatLog.setEditable(false);
+        combatLog.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-4,GUISettings.PANEL_SIZE/3));
+        this.add(combatLog);
     }
 
     public void showStatusInfo(String info){
@@ -100,26 +92,26 @@ public class StatusPanel extends JPanel {
         this.repaint();
     }
 
-    public void showNextMove(String info){
-        nextMoveInfo.setText("<html>"+info+"</html>");
+    public void showCombatInfo(String info){
+        combatInfo.setText(info);
         this.revalidate();
         this.repaint();
     }
 
-    public void hideNextMove(){
-        nextMoveInfo.setText("");
+    public void hideCombatInfo(){
+        combatInfo.setText("");
         this.revalidate();
         this.repaint();
     }
 
     public void refreshCombatLog(){
-        String combatText = Game.getFight().getCombatLogInfo();
+        String combatText = GameManager.getFight().getCombatLogInfo();
         if(combatLogText.equals(combatText)) {
             combatLogText = "";
         }else {
             combatLogText = combatText;
         }
-        combatLog.setText("<html>"+combatLogText+"</html>");
+        combatLog.setText(combatLogText);
         this.revalidate();
         this.repaint();
     }
@@ -134,7 +126,7 @@ public class StatusPanel extends JPanel {
         healthBar.setString(healthString);
         manaBar.setValue(PlayerInfo.getParty().getCurrentMana());
         manaBar.setString(PlayerInfo.getParty().getCurrentMana()+"/"+ PlayerInfo.getParty().getMaxMana());
-        characterName.setText(Game.getFight().getCharacter().getName());
+        characterName.setText(GameManager.getFight().getCharacter().getName());
         this.revalidate();
         this.repaint();
     }

@@ -1,51 +1,44 @@
 package Game;
 
-import Character.PlayerParty;
 import Equipment.EquipmentModule;
 import Fight.FightModule;
+import GUI.EquipmentGUI.EquipmentGUIState;
+import GUI.EquipmentGUI.EquipmentView;
+import GUI.FightGUI.FightGUIState;
+import GUI.FightGUI.FightView;
+import GUI.MainGUI.MainFrame;
+import GUI.MainGUI.MainGUIState;
+import GUI.MenuGUI.MenuModule;
+import GUI.MenuGUI.MenuState;
+import GUI.MenuGUI.MenuView;
+import GUI.WalkingGUI.WalkingGUIState;
+import GUI.WalkingGUI.WalkingKeyListener;
+import GUI.WalkingGUI.WalkingView;
 import Loot.LootModule;
 import Walking.WalkingModule;
 
-import java.util.Random;
-
 public class Game {
 
-    public static final Random random = new Random();
-    private static FightModule fightModule;
-    private static EquipmentModule equipmentModule;
-    private static PlayerParty party;
-    private static LootModule lootModule;
-    private static WalkingModule walkingModule;
+    public Game() {
+        //Set views and panels
+        MenuView menuView = new MenuView();
+        WalkingView walkingView = new WalkingView();
+        FightView fightView = new FightView();
+        EquipmentView equipmentView = new EquipmentView();
 
-    public static void setFight(FightModule fightModule) {
-        if(Game.fightModule==null)
-            Game.fightModule = fightModule;
-    }
+        MainFrame mainFrame = new MainFrame(menuView,walkingView,fightView,equipmentView);
 
-    public static void setEquipment(EquipmentModule equipmentModule) {
-        if(Game.equipmentModule==null)
-            Game.equipmentModule = equipmentModule;
-    }
+        //Set modules and states
+        GameManager.setMenuModule(new MenuModule(new MenuState(menuView)));
+        GameManager.setWalkingManager(new WalkingModule(new WalkingGUIState(walkingView)));
+        GameManager.setFight(new FightModule(new FightGUIState(fightView)));
+        GameManager.setEquipment(new EquipmentModule(new EquipmentGUIState(equipmentView)));
+        GameManager.setLoot(new LootModule());
+        GameManager.setGUIState(new MainGUIState(mainFrame));
 
-    public static void setLoot(LootModule lootModule){
-        if(Game.lootModule==null)
-            Game.lootModule=lootModule;
-    }
+        mainFrame.pack();
+        mainFrame.setVisible(true);
+        mainFrame.setFocusable(true);
 
-    public static void setWalkingManager(WalkingModule walkingModule) {
-        if(Game.walkingModule ==null)
-            Game.walkingModule = walkingModule;
-    }
-
-    public static FightModule getFight() { return fightModule; }
-
-    public static EquipmentModule getEquipment() {
-        return equipmentModule;
-    }
-
-    public static LootModule getLootModule() { return lootModule; }
-
-    public static WalkingModule getWalkingManager() {
-        return walkingModule;
     }
 }

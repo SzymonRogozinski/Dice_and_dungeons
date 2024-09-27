@@ -10,8 +10,7 @@ import Fight.Statuses.BonusDiceStatus;
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusException;
 import GUI.FightGUI.FightGUIState;
-import Game.PlayerInfo;
-import Game.Tags;
+import Game.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.List;
 public class FightModule {
     private final DiceMaster master;
     private final FightGUIState state;
-    private final ArrayList<EnemyCharacter> enemies;
+    private ArrayList<EnemyCharacter> enemies;
     private boolean playerTurn;
     private int characterTurn;
     private int targetId;
@@ -36,6 +35,15 @@ public class FightModule {
         this.state=state;
         this.master = new DiceMaster();
         this.enemies=enemies;
+    }
+
+    public FightModule(FightGUIState state) {
+        this.combatLogInfo="";
+        this.noRoll=false;
+        this.playerTurn=true;
+        this.characterTurn=0;
+        this.state=state;
+        this.master = new DiceMaster();
     }
 
     public ActionTarget getTargetType() {
@@ -58,6 +66,48 @@ public class FightModule {
 
     public void initFight(){
         state.initState();
+    }
+
+    public void startFight(ArrayList<EnemyCharacter> enemies){
+        this.enemies = enemies;
+        state.initState();
+        state.refresh();
+    }
+
+    private void endFight(boolean playerWin){
+        clear();
+        this.combatLogInfo="";
+        this.noRoll=false;
+        this.playerTurn=true;
+        this.characterTurn=0;
+        this.targetId=0;
+
+        if(playerWin && GameManager.isBossFight()){
+            GameManager.gameWin();
+        }else if(playerWin){
+            GameManager.getLootModule().getLoot(GameManager.getCurrentLevel().getLootSettings(),true);
+            GameManager.changeState(GameStates.WALKING);
+        }else{
+            GameManager.gameOver();
+        }
+    }
+
+    private boolean checkIfFightEnds(){
+        boolean enemiesDead=true;
+        for(EnemyCharacter enemy:enemies){
+            if(enemy.getCurrentHealth()>0){
+                enemiesDead=false;
+                break;
+            }
+        }
+        if(enemiesDead) {
+            endFight(true);
+            return true;
+        }else if(PlayerInfo.getParty().getCurrentHealth()==0) {
+            endFight(false);
+            return true;
+        }
+        return false;
     }
 
     public int getRerolls(){
@@ -116,12 +166,12 @@ public class FightModule {
         state.hideStatusInfo();
     }
 
-    public void showNextMove(String info){
-        state.showNextMove(info);
+    public void showCombatInfo(String info){
+        state.showCombatInfo(info);
     }
 
-    public void hideNextMove(){
-        state.hideNextMove();
+    public void hideCombatInfo(){
+        state.hideCombatInfo();
     }
 
     public void clear(){
@@ -132,6 +182,8 @@ public class FightModule {
     }
 
     private void startAction(){
+        if(checkIfFightEnds())
+            return;
         boolean skip=false;
         try {
             Thread.sleep(200);
@@ -153,6 +205,8 @@ public class FightModule {
             }
             combatLogInfo+=status.effectCommunicate(character.getName())+" ";
         }
+        if(checkIfFightEnds())
+            return;
         character.statusEvaporate();
 
         ArrayList<GameStatus> statusAfterStart = character.getStatusWithTag(Tags.AFTER_TURN_START);

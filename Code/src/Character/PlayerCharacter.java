@@ -1,12 +1,14 @@
 package Character;
 
 import Equipment.CharacterEquipment;
+import Equipment.Items.ActionItem;
+import Equipment.Items.SpellItem;
 import Game.GameBalance;
-import Game.Game;
 import Game.PlayerInfo;
 import Game.Tags;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class PlayerCharacter extends GameCharacter{
     private final CharacterEquipment equipment;
@@ -14,6 +16,16 @@ public class PlayerCharacter extends GameCharacter{
     public PlayerCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image, Tags[] tags) {
         super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image,tags);
         equipment=new CharacterEquipment(this);
+    }
+
+    public PlayerCharacter(int startStrength, int startEndurance, int startIntelligence, int startCharisma, int startCunning, int startLuck, String name, ImageIcon image, Tags[] tags, ArrayList<ActionItem> items, ArrayList<SpellItem> spells) {
+        super(startStrength, startEndurance, startIntelligence, startCharisma, startCunning, startLuck,name,image,tags);
+        equipment=new CharacterEquipment(this);
+        for(int i=0;i< items.size();i++)
+            equipment.equip(items.get(i),i,CharacterEquipment.ACTION_SLOT);
+
+        for(int i=0;i< spells.size();i++)
+            equipment.equip(spells.get(i),i,CharacterEquipment.SPELL_SLOT);
     }
 
     public CharacterEquipment getEquipment() {
@@ -27,7 +39,7 @@ public class PlayerCharacter extends GameCharacter{
     }
 
     public int getCharacterRerolls(){
-        return getLuck()/GameBalance.REROLLS_DIVIDE + GameBalance.MIN_REROLLS;
+        return (getLuck()-GameBalance.MIN_STAT_VALUE)/GameBalance.REROLLS_DIVIDE + GameBalance.MIN_REROLLS;
     }
 
     public void recalculateStats(){

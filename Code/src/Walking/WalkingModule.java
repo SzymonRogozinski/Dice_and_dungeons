@@ -1,6 +1,9 @@
 package Walking;
 
 import GUI.WalkingGUI.WalkingGUIState;
+import Game.GameBalance;
+import Game.GameConst;
+import Game.GameManager;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,21 +11,11 @@ import java.util.ArrayList;
 
 public class WalkingModule {
     private WalkingLevel walking;
-    private final ArrayList<WalkingSettings> settings;
-    private int levelPointer;
     private final WalkingGUIState state;
 
-    public WalkingModule(String filename, WalkingGUIState state) throws Exception {
+    public WalkingModule(WalkingGUIState state){
         this.state=state;
-        settings=new ArrayList<>();
-        levelPointer =1;
-        BufferedReader reader=new BufferedReader(new FileReader(filename));
-        int levels=Integer.parseInt(reader.readLine());
-        for(int i=0; i<levels;i++){
-            settings.add(new WalkingSettings(reader.readLine()));
-        }
-        WalkingSettings startSetting=settings.get(0);
-        walking = new WalkingLevel(this,startSetting.seed, startSetting.algGen,startSetting.width,startSetting.height,startSetting.size, startSetting.enemies, startSetting.treasures,startSetting.vaults,startSetting.path);
+        walking = new WalkingLevel(GameManager.getCurrentLevel());
     }
 
     public WalkingLevel getWalking(){
@@ -34,32 +27,25 @@ public class WalkingModule {
     }
 
     public void setNextMap() throws Exception {
-        if(levelPointer >=settings.size())
+        if(GameManager.getLevelPointer()+1 >= GameConst.LEVELS.size())
             throw new Exception("Cannot load new map!");
         try {
             walking.killModule();
-            WalkingSettings startSetting = settings.get(levelPointer);
-            walking = new WalkingLevel(this, startSetting.seed, startSetting.algGen, startSetting.width, startSetting.height, startSetting.size, startSetting.enemies, startSetting.treasures, startSetting.vaults, startSetting.path);
-            levelPointer++;
+            GameManager.setNextLevel();
+            walking = new WalkingLevel(GameManager.getCurrentLevel());
             walking.walkingStart();
         }catch (Exception ignore){}
     }
 
-    private class WalkingSettings{
-        // 0-> No predefine
-        final int seed,algGen,width,height,size,enemies,treasures,vaults;
-        final String path;
-        WalkingSettings(String fileLine){
-            String[] settings=fileLine.split(",");
-            this.seed=Integer.parseInt(settings[0]);
-            this.algGen=Integer.parseInt(settings[1]);
-            this.width=Integer.parseInt(settings[2]);
-            this.height=Integer.parseInt(settings[3]);
-            this.size=Integer.parseInt(settings[4]);
-            this.enemies=Integer.parseInt(settings[5]);
-            this.treasures=Integer.parseInt(settings[6]);
-            this.vaults=Integer.parseInt(settings[7]);
-            this.path=settings[8];
+    public void startWalking(){
+        if(walking.walkingRunning()){
+            walking.walkingContinue();
+        }else{
+            walking.walkingStart();
         }
+    }
+
+    public void stopWalking(){
+        walking.walkingStop();
     }
 }

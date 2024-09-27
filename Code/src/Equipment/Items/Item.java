@@ -10,11 +10,13 @@ public abstract class Item extends Tagable {
     private final ImageIcon icon;
     private final ItemQuality quality;
     public final String name;
+    public final String shortName;
 
-    public Item(Tags[] tags, ImageIcon icon,String name, ItemQuality quality) {
+    public Item(Tags[] tags, ImageIcon icon,String name,String shortName, ItemQuality quality) {
         super(tags);
         this.icon=icon;
         this.name=name;
+        this.shortName=shortName;
         this.quality=quality;
     }
 

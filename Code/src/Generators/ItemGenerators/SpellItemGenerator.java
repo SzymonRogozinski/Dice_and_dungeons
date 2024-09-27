@@ -7,7 +7,7 @@ import Equipment.Items.ItemQuality;
 import Equipment.Items.SpellItem;
 import Fight.ActionTarget;
 import Fight.GameActions.SpellAction;
-import Game.Game;
+import Game.GameManager;
 import Game.Tags;
 import Generators.Generator;
 import Generators.GeneratorConst;
@@ -19,11 +19,11 @@ import java.util.List;
 
 public class SpellItemGenerator extends Generator {
 
-    private final static double CONCENTRATED_PROP = 0.9;
+    private final static double CONCENTRATED_PROP = 0.1;
     private final static double REPLACE_EMPTY_SIDE_PROP = 0.5;
     private final static double RAISE_RANGE_PROP = 0.33;
     private final static double EQUALITY_EDGE = 0.15;
-    private final static double MANA_COST_MOD=0.8;
+    private final static double MANA_COST_MOD=0.6;
     private final static double SPELL_ACTION_MOD = 0.33;
 
     public static SpellItem generateItem(ItemQuality quality){
@@ -38,7 +38,7 @@ public class SpellItemGenerator extends Generator {
             case RARE -> {
                 points = getPoints(GeneratorConst.MEDIUM_POINTS*GeneratorConst.RARE_MOD);
                 //Add tag
-                if (Game.random.nextBoolean()) {
+                if (GameManager.random.nextBoolean()) {
                     tag = getRandomTag();
                     points += GeneratorConst.TAG_BONUS*GeneratorConst.RARE_MOD;
                 }
@@ -58,7 +58,7 @@ public class SpellItemGenerator extends Generator {
         // Item Concentrated
         if(quality == ItemQuality.COMMON)
             basePoints=points;
-        else if(Game.random.nextDouble()>=CONCENTRATED_PROP) {
+        else if(GameManager.random.nextDouble()<=CONCENTRATED_PROP) {
             basePoints = points;
         }else
             basePoints = GeneratorConst.MEDIUM_POINTS*GeneratorConst.COMMON_MOD;
@@ -66,20 +66,20 @@ public class SpellItemGenerator extends Generator {
         DiceItemBase base = DiceItemFrames.getRandomSpellItemBase(basePoints);
 
         //Raise range
-        if(quality != ItemQuality.COMMON && (base.target== ActionTarget.PLAYER_CHARACTER || base.target==ActionTarget.ENEMY_CHARACTER) && points>0 && Game.random.nextDouble()<=RAISE_RANGE_PROP){
+        if(quality != ItemQuality.COMMON && (base.target== ActionTarget.PLAYER_CHARACTER || base.target==ActionTarget.ENEMY_CHARACTER) && points>0 && GameManager.random.nextDouble()<=RAISE_RANGE_PROP){
             if(base.target== ActionTarget.PLAYER_CHARACTER)
                 base.target=ActionTarget.PLAYER_PARTY;
             else if (base.target==ActionTarget.ENEMY_CHARACTER)
                 base.target=ActionTarget.ALL_ENEMIES;
             points/=2;
         }
-
+        boolean generationLocked=false;
         while (points>0){
             //Too little points to other action
-            if(points<(int)(startPoints*EQUALITY_EDGE)){
+            if(generationLocked || points<(int)(startPoints*EQUALITY_EDGE)){
                 redistributePointsEqual(base,points);
                 points=0;
-            }else if(base.haveEmptySide && Game.random.nextDouble()<REPLACE_EMPTY_SIDE_PROP){
+            }else if(base.haveEmptySide && GameManager.random.nextDouble()<REPLACE_EMPTY_SIDE_PROP){
                 points-=replaceEmptySide(base,points);
             }else{
                 base.secondActionValues=new int[6];
@@ -87,10 +87,13 @@ public class SpellItemGenerator extends Generator {
                 addActionRandomly(base,points);
                 points=0;
             }
+            if (!base.haveEmptySide && base.secondaryActionList.length==0)
+                generationLocked=true;
         }
         Tags [] tags = tag==null ? new Tags[]{}:new Tags[]{tag};
         base.tags=new ArrayList<>(List.of(tags));
-        String name = ItemDictionary.getSpellNameFromItemBase(base);
+        String shortName = base.names[GameManager.random.nextInt(base.names.length)];
+        String name = ItemDictionary.getSpellNameFromItemBase(base,shortName);
         Dice dice = DiceFactory.buildDice(base);
         Tags[] actionTags= ItemDictionary.getTagsFromActionSpellAction(base.firstAction,base.secondAction);
 
@@ -98,12 +101,12 @@ public class SpellItemGenerator extends Generator {
 
         SpellAction action=new SpellAction(dice,base.target,base.diceLambda,mana,actionTags);
         ImageIcon icon = base.icon;
-        return new SpellItem(action,tags,icon,name,quality);
+        return new SpellItem(action,tags,icon,name,shortName,quality);
     }
 
     private static void addActionRandomly(DiceItemBase base, int points){
         int bound = base.firstActionValues[0]==0?5:4;
-        int roll= Game.random.nextInt(bound);
+        int roll= GameManager.random.nextInt(bound);
         switch (roll){
             case 0 -> addEffectEqualAll(base,points);
             case 1 -> addEffectEqualFullSides(base,points);
@@ -191,8 +194,10 @@ public class SpellItemGenerator extends Generator {
 
     private static int replaceEmptySide(DiceItemBase base,int points){
         int index = findFirstEmptySide(base.firstActionValues);
-        if(index==-1)
+        if(index==-1) {
+            base.haveEmptySide=false;
             return 0;
+        }
         int put = Math.min(points, base.firstActionValues[index+1]);
         base.firstActionValues[index]=put;
         return put;
@@ -201,7 +206,7 @@ public class SpellItemGenerator extends Generator {
     private static void getRandomAction(DiceItemBase base){
         if (base.secondaryActionList.length==0)
             return;
-        base.secondAction = base.secondaryActionList[Game.random.nextInt(base.secondaryActionList.length)];
+        base.secondAction = base.secondaryActionList[GameManager.random.nextInt(base.secondaryActionList.length)];
         if(base.secondAction == base.firstAction)
             getRandomAction(base);
     }

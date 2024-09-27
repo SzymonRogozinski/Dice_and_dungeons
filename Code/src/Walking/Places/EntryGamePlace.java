@@ -6,8 +6,8 @@ import Walking.Drones.Drone;
 public class EntryGamePlace extends GamePlace {
     private boolean isStart;
 
-    public EntryGamePlace(String path, boolean isStart) {
-        super(isStart?"Entry":"Exit", path);
+    public EntryGamePlace(String path, boolean isStart, boolean isBoss) {
+        super(isBoss?"Boss":isStart?"Entry":"Exit", path);
         this.isStart=isStart;
     }
 

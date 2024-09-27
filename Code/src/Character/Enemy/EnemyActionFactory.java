@@ -17,7 +17,8 @@ public class EnemyActionFactory {
     }
 
     public DiceAction makeAction(EnemyCharacter enemy){
-        int value = (int)(enemy.getStatisticMod()*mod*lambda.myMethod(enemy));
+        int value = (int)(enemy.getStatisticMod()*mod*lambda.myMethod(enemy)/ActionEnum.actionCost(actionType));
+        value = Math.max(value,1);
         DiceAction action;
         switch (actionType){
             case ActionEnum.NULL_ACTION-> action=new NullAction();

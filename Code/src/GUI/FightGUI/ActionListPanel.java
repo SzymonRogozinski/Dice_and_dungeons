@@ -4,21 +4,24 @@ import Character.PlayerCharacter;
 import Equipment.Items.ActionItem;
 import Equipment.Items.SpellItem;
 import Equipment.Items.UsableItem;
+import Fight.ActionTarget;
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
 import Game.PlayerInfo;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class ActionListPanel extends JPanel {
 
     //Sizes and placement of button
-    private final static int buttonWidth=GUISettings.SMALL_PANEL_SIZE*2/3;
+    private final static int buttonWidth=GUISettings.SMALL_PANEL_SIZE*3/5;
     private final static int buttonHeight=GUISettings.SMALL_PANEL_SIZE/3;
-    private final static int buttonHGap =GUISettings.PANEL_SIZE/5-buttonWidth*2/3;
+    private final static int buttonHGap =GUISettings.PANEL_SIZE/6-buttonWidth/2;
     private final static int buttonVGap =(GUISettings.SMALL_PANEL_SIZE-buttonHeight)/2;
     private final static int backpackButtonHGap =buttonHGap/2;
     private final static int backpackButtonVGap =buttonVGap/3;
@@ -59,18 +62,19 @@ public class ActionListPanel extends JPanel {
     }
 
     public void loadAction(){
-        if(!(Game.getFight().getCharacter() instanceof PlayerCharacter character))
+        if(!(GameManager.getFight().getCharacter() instanceof PlayerCharacter character))
             throw new RuntimeException("Illegal state, enemy and player character were mixed!");
         //items
         ArrayList<ActionItem> items = character.getEquipment().getNotNullActionItems();
         ArrayList<JButton> buttons=new ArrayList<>();
         for(ActionItem item:items){
-            JButton button=new JButton(item.name);
+            JButton button=new JButton(item.shortName);
             button.setSize(buttonWidth,buttonHeight);
             button.addActionListener(e-> {
-                Game.getFight().choosedAction(item.getAction());
+                GameManager.getFight().choosedAction(item.getAction());
                 changePage("Start");
             });
+            button.addMouseListener(new ButtonItemMouseListener(item.name));
             buttons.add(button);
         }
         fightPanel.loadNewAction(buttons);
@@ -80,7 +84,6 @@ public class ActionListPanel extends JPanel {
         itemPanel.reset(usableItems);
 
         //spells
-        //ArrayList<SpellAction> spellActions = character.getSpells();
         ArrayList<SpellItem> spells = character.getEquipment().getNotNullSpellItems();
         buttons=new ArrayList<>();
         //Mana
@@ -88,8 +91,7 @@ public class ActionListPanel extends JPanel {
         flowLayout.setHgap(0);
         flowLayout.setVgap(0);
         for(SpellItem spell:spells){
-            //TextAreas
-            JLabel t = new JLabel(spell.name);
+            JLabel t = new JLabel(spell.shortName);
             t.setFont(GUISettings.BUTTON_FONT);
             t.setBackground(new Color(0,0,0,0));
 
@@ -111,7 +113,7 @@ public class ActionListPanel extends JPanel {
                 }
                 else {
                     PlayerInfo.getParty().spendMana(spell.getAction().getManaCost());
-                    Game.getFight().choosedAction(spell.getAction());
+                    GameManager.getFight().choosedAction(spell.getAction());
                     changePage("Start");
                 }
             });
@@ -212,13 +214,14 @@ public class ActionListPanel extends JPanel {
             //Loading action
             for(int i=0;i<itemCount;i++){
                 UsableItem item = items.get(i);
-                JButton button=new JButton(item.name);
+                JButton button=new JButton(item.shortName);
                 button.setSize(buttonWidth,buttonHeight);
                 button.addActionListener(e-> {
-                    Game.getFight().choosedAction(item.getAction());
+                    GameManager.getFight().choosedAction(item.getAction());
                     PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
                     changePage("Start");
                 });
+                button.addMouseListener(new ButtonItemMouseListener(item.name));
                 buttons.add(button);
             }
             if(items.size()>pageSize)
@@ -242,13 +245,14 @@ public class ActionListPanel extends JPanel {
             //Loading action
             for(int i=startIndex;i<startIndex+itemCount;i++){
                 UsableItem item = items.get(i);
-                JButton button=new JButton(item.name);
+                JButton button=new JButton(item.shortName);
                 button.setSize(buttonWidth,buttonHeight);
                 button.addActionListener(e-> {
-                    Game.getFight().choosedAction(item.getAction());
+                    GameManager.getFight().choosedAction(item.getAction());
                     PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
                     changePage("Start");
                 });
+                button.addMouseListener(new ButtonItemMouseListener(item.name));
                 buttons.add(button);
             }
             buttons.add(prev);
@@ -273,13 +277,14 @@ public class ActionListPanel extends JPanel {
             //Loading action
             for(int i=startIndex;i<startIndex+itemCount;i++){
                 UsableItem item = items.get(i);
-                JButton button=new JButton(item.name);
+                JButton button=new JButton(item.shortName);
                 button.setSize(buttonWidth,buttonHeight);
                 button.addActionListener(e-> {
-                    Game.getFight().choosedAction(item.getAction());
+                    GameManager.getFight().choosedAction(item.getAction());
                     PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
                     changePage("Start");
                 });
+                button.addMouseListener(new ButtonItemMouseListener(item.name));
                 buttons.add(button);
             }
             if(pageNumber>0)
@@ -290,4 +295,31 @@ public class ActionListPanel extends JPanel {
         }
     }
 
+    private class ButtonItemMouseListener implements MouseListener {
+
+        private final String itemName;
+
+        public ButtonItemMouseListener(String itemName) {
+            this.itemName = itemName;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {}
+
+        @Override
+        public void mousePressed(MouseEvent e) {}
+
+        @Override
+        public void mouseReleased(MouseEvent e) {}
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            GameManager.getFight().showCombatInfo("Pointed item: "+itemName);
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            GameManager.getFight().hideCombatInfo();
+        }
+    }
 }

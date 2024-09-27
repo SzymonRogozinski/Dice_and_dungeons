@@ -19,11 +19,11 @@ public class ActionEnum {
             ActionEnum.DAMAGE_ACTION,1,
             ActionEnum.SHIELD_ACTION,1,
             ActionEnum.HEAL_ACTION,2,
-            ActionEnum.MANA_ACTION,1,
-            ActionEnum.POISON_ACTION,1,
-            ActionEnum.BLEEDING_ACTION,1,
-            ActionEnum.WEAKNESS_ACTION,1,
-            ActionEnum.COUNTER_ACTION,1
+            ActionEnum.MANA_ACTION,2,
+            ActionEnum.POISON_ACTION,3,
+            ActionEnum.BLEEDING_ACTION,5,
+            ActionEnum.WEAKNESS_ACTION,4,
+            ActionEnum.COUNTER_ACTION,2
     );
 
     public static int actionCost(int action){

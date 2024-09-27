@@ -2,7 +2,7 @@ package GUI.FightGUI;
 
 import Dice.DiceSide;
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -40,7 +40,7 @@ public class DicePanel extends JPanel {
 
         public DiceButton(int index,ImageIcon icon) {
             super(icon);
-            this.addActionListener(e-> Game.getFight().rerollDice(index));
+            this.addActionListener(e-> GameManager.getFight().rerollDice(index));
         }
     }
 }

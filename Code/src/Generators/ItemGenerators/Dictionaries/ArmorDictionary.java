@@ -1,7 +1,7 @@
 package Generators.ItemGenerators.Dictionaries;
 
 import Equipment.CharacterEquipment;
-import Game.Game;
+import Game.GameManager;
 
 import javax.swing.*;
 import java.util.Map;
@@ -15,17 +15,17 @@ public class ArmorDictionary extends ItemDictionary {
     );
 
     private static final Map<Integer, ImageIcon[]> ARMOR_PART_ICONS = Map.of(
-            CharacterEquipment.HEAD_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/helm-pl.png")},
-            CharacterEquipment.ARM_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/gauntlet-pl.png")},
-            CharacterEquipment.CHEST_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/chest-pl.png")},
-            CharacterEquipment.LEG_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/leg-pl.png")}
+            CharacterEquipment.HEAD_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/armors/helm-pl.png")},
+            CharacterEquipment.ARM_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/armors/gauntlet-pl.png")},
+            CharacterEquipment.CHEST_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/armors/chest-pl.png")},
+            CharacterEquipment.LEG_ARMOR,new ImageIcon[]{new ImageIcon("Texture/Items/armors/leg-pl.png")}
     );
 
     private static final String[] STATS_NAMES=new String[]{"strength","endurance","intelligence","charisma","cunning","luck"};
 
     public static String getArmorPartName(int armorPart){
         String[] names = ARMOR_PART_NAMES.get(armorPart);
-        return names[Game.random.nextInt(names.length)];
+        return names[GameManager.random.nextInt(names.length)];
     }
 
     public static String getAdjectiveName(int statIndex){
@@ -34,6 +34,6 @@ public class ArmorDictionary extends ItemDictionary {
 
     public static ImageIcon getArmorPartIcon(int armorPart){
         ImageIcon[] icons = ARMOR_PART_ICONS.get(armorPart);
-        return icons[Game.random.nextInt(icons.length)];
+        return icons[GameManager.random.nextInt(icons.length)];
     }
 }

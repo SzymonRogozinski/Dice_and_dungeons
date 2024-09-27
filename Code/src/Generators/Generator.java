@@ -1,6 +1,6 @@
 package Generators;
 
-import Game.Game;
+import Game.GameManager;
 import Game.Tags;
 
 public class Generator {
@@ -8,12 +8,12 @@ public class Generator {
     private static final Tags[] classTags = new Tags[]{Tags.WARRIOR, Tags.THIEF, Tags.MAGE};
 
     protected static Tags getRandomTag(){
-        return classTags[Game.random.nextInt(classTags.length)];
+        return classTags[GameManager.random.nextInt(classTags.length)];
     }
 
     protected static int getPoints(int medium){
         int variance = (int) (medium* GeneratorConst.VARIANCE);
-        return Game.random.nextInt(medium-variance,medium+variance+1);
+        return GameManager.random.nextInt(medium-variance,medium+variance+1);
 
     }
 }

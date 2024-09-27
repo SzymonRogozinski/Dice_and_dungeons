@@ -10,8 +10,8 @@ public class SpellItem extends Item  implements EquipableItem{
 
     private final SpellAction action;
 
-    public SpellItem(SpellAction action,Tags[] tags, ImageIcon icon,String name,ItemQuality quality) {
-        super(tags,icon,name,quality);
+    public SpellItem(SpellAction action,Tags[] tags, ImageIcon icon,String name,String shortName,ItemQuality quality) {
+        super(tags,icon,name,shortName,quality);
         this.action=action;
     }
 

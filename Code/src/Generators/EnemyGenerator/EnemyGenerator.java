@@ -4,10 +4,12 @@ import Character.Enemy.EnemyAI;
 import Character.Enemy.EnemyCategory;
 import Character.Enemy.EnemyCharacter;
 import Game.GameBalance;
+import Game.GameManager;
 import Generators.Generator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class EnemyGenerator extends Generator {
 
@@ -37,6 +39,14 @@ public class EnemyGenerator extends Generator {
         for (int i = 0; i < ENEMY_GROUP_COUNT; i++)
             enemies.add(generate((EnemyBase) base.clone(), cost));
         return enemies;
+    }
+
+    public static ArrayList<EnemyCharacter> generateEnemyList(int cost){
+        int roll = GameManager.random.nextInt(3);
+        if(roll==2)
+            return new ArrayList<>(List.of(EnemyGenerator.generate(EnemyCategory.Strong,cost)));
+        else
+            return generateMore(cost);
     }
 
     // If base have adjectives, get one with the highest value

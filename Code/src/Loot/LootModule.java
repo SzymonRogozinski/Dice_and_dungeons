@@ -2,7 +2,7 @@ package Loot;
 
 import Equipment.Items.Item;
 import Equipment.Items.ItemQuality;
-import Game.Game;
+import Game.GameManager;
 import Game.PlayerInfo;
 import Generators.ItemGenerators.ArmorGenerator;
 import Generators.ItemGenerators.DiceItemGenerator;
@@ -20,7 +20,12 @@ public class LootModule {
     private final static int RARE_COST=2;
     private final static int LEGENDARY_COST=3;
 
-    public void getLoot(LootSettings settings){
+    //Logger
+    private static final int TICKS_COUNT = 40;
+    private String lootLogText = "";
+    private int logCounter=-1;
+
+    public void getLoot(LootSettings settings, boolean wasFight){
         int points = settings.getPoints();
         ArrayList<Item> loot=new ArrayList<>();
         while(points>0){
@@ -31,17 +36,28 @@ public class LootModule {
                 points-=q;
             }
         }
-        //popup
-
+        setLootLogText(loot,wasFight);
         //Place in backpack
-        for(Item item:loot) {
+        for(Item item:loot)
             PlayerInfo.getParty().getBackpack().putToBackpack(item);
-//            System.out.println("Name: "+item.name);
-//            System.out.println("Quality: "+item.getQuality());
-//            if(item instanceof UsableItem usableItem)
-//                System.out.println("Uses: "+usableItem.getNumberOfItems());
-//            System.out.println();
-        }
+    }
+
+    public String getLootLogText(){
+        logCounter--;
+        if(logCounter==0)
+            lootLogText="";
+        return lootLogText;
+    }
+
+
+    private void setLootLogText(ArrayList<Item> loot, boolean wasFight){
+        logCounter=TICKS_COUNT*GameManager.getWalkingManager().getWalking().getEnemyCount();
+        StringBuilder builder = new StringBuilder(wasFight?"Enemies drop: ":"You found in chest: ");
+        for(Item item:loot)
+            builder.append(item.name).append(", ");
+        builder.setLength(builder.length()-2);
+        builder.append('.');
+        lootLogText = builder.toString();
     }
 
     private ItemQuality getQuality(int quality){
@@ -54,11 +70,11 @@ public class LootModule {
     }
 
     private Item generateLoot(ItemQuality quality){
-        double roll = Game.random.nextDouble();
+        double roll = GameManager.random.nextDouble();
         if(roll<=USABLE_PROB)
             return UsableItemGenerator.generate(quality);
         else{
-            roll = Game.random.nextDouble();
+            roll = GameManager.random.nextDouble();
             if(ARMOR_PROB>=roll)
                 return ArmorGenerator.generateArmor(quality);
             else if(DICE_PROB>=roll)

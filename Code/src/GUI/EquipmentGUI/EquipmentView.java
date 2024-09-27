@@ -1,8 +1,8 @@
 package GUI.EquipmentGUI;
 
 import GUI.GUISettings;
-import GUI.MainPanel;
-import Game.Game;
+import GUI.ViewPanel;
+import Game.GameManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 
-public class EquipmentView extends MainPanel {
+public class EquipmentView extends ViewPanel {
 
     private static MouseMotionAdapter mouseMotionAdp;
     private SwitchPanel switchPanel;
@@ -56,7 +56,7 @@ public class EquipmentView extends MainPanel {
     }
 
     public void refresh(){
-        if(Game.getEquipment()==null)
+        if(GameManager.getEquipment()==null)
             return;
         charactersInfoPanel.refresh();
         itemManagementPanel.refresh();
@@ -70,7 +70,7 @@ public class EquipmentView extends MainPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
-        ItemSlot it = Game.getEquipment().getClickedSlot();
+        ItemSlot it = GameManager.getEquipment().getClickedSlot();
         if(it!=null && it.getItem()!=null) {
             position=MouseInfo.getPointerInfo().getLocation();
             it.getItem().getIcon().paintIcon(this, g, (int) position.getX() - GUISettings.ITEM_ICON_SIZE/2 - this.getLocationOnScreen().x, (int) position.getY() - GUISettings.ITEM_ICON_SIZE/2- this.getLocationOnScreen().y);

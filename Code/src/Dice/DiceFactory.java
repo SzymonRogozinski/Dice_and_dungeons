@@ -4,6 +4,7 @@ import Dice.DiceAction.*;
 import GUI.GUISettings;
 import Game.GameBalance;
 import Generators.ItemGenerators.DiceItemBase;
+import Game.GameUtils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -72,7 +73,7 @@ public class DiceFactory {
                     action1CostRest = 0;
                 }
                 i--;
-                if(action1[i]==0)
+                if(i<0 || action1[i]==0)
                     i=5;
             }
         }
@@ -99,8 +100,15 @@ public class DiceFactory {
                     action2CostRest = 0;
                 }
                 i--;
-                if(action2[2]==0)
-                    i=returnPoint;
+                try {
+                    if (action2[i] == 0)
+                        i = returnPoint;
+                }catch (IndexOutOfBoundsException e){
+                    if(returnPoint==5)
+                        break;
+                    returnPoint++;
+                    i = returnPoint;
+                }
             }
         }
         int [][] ins = new int[6][];
@@ -148,7 +156,7 @@ public class DiceFactory {
             NullAction action = new NullAction();
             ArrayList<DiceAction> actions = new ArrayList<>();
             actions.add(action);
-            return new DiceSide(actions,resizeIcon(SYMBOL_PATH+"N.png",size));
+            return new DiceSide(actions,GameUtils.resizeIcon(new ImageIcon(SYMBOL_PATH+"N.png"),size,size));
         }
         ArrayList<DiceAction> actions = new ArrayList<>();
         ArrayList<String> imageCode=new ArrayList<>();
@@ -204,10 +212,6 @@ public class DiceFactory {
             }
         }
         return new DiceSide(actions,buildIcon(imageCode));
-    }
-
-    private static ImageIcon resizeIcon(String path,int size){
-        return new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(size,size,java.awt.Image.SCALE_SMOOTH));
     }
 
     private static ImageIcon buildIcon(ArrayList<String> iconCode) {

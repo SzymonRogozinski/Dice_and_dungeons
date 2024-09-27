@@ -2,7 +2,7 @@ package Generators.ItemGenerators.Dictionaries;
 
 import Dice.ActionEnum;
 import Fight.ActionTarget;
-import Game.Game;
+import Game.GameManager;
 import Game.Tags;
 import Generators.ItemGenerators.DiceItemBase;
 
@@ -34,32 +34,31 @@ public class ItemDictionary {
     );
 
     private static final Map<Integer,String[]> ADJECTIVES = Map.of(
-            ActionEnum.DAMAGE_ACTION,new String[]{"%s of sharpness"},
-            ActionEnum.SHIELD_ACTION,new String[]{"guardian %s"},
-            ActionEnum.HEAL_ACTION,new String[]{"%s of restorement"},
-            ActionEnum.MANA_ACTION,new String[]{"%s of enlightenment"},
-            ActionEnum.POISON_ACTION,new String[]{"poison %s"},
-            ActionEnum.BLEEDING_ACTION,new String[]{"serrate %s"},
-            ActionEnum.WEAKNESS_ACTION,new String[]{"cursed %s"},
-            ActionEnum.COUNTER_ACTION,new String[]{"%s of payback"}
+            ActionEnum.DAMAGE_ACTION,new String[]{"%s of sharpness","painfull %s"},
+            ActionEnum.SHIELD_ACTION,new String[]{"guardian %s", "%s of defence"},
+            ActionEnum.HEAL_ACTION,new String[]{"%s of restorement", "helpfull %s"},
+            ActionEnum.MANA_ACTION,new String[]{"%s of enlightenment","%s mystic", "energizing %s"},
+            ActionEnum.POISON_ACTION,new String[]{"poison %s", "toxic %s", "venomous %s"},
+            ActionEnum.BLEEDING_ACTION,new String[]{"serrate %s","bloody %s"},
+            ActionEnum.WEAKNESS_ACTION,new String[]{"cursed %s", "%s of frailty"},
+            ActionEnum.COUNTER_ACTION,new String[]{"%s of payback", "counter %s"}
     );
 
     private static final Map<Integer,String[]> ADJECTIVES_FOR_SPELLS = Map.of(
-            ActionEnum.DAMAGE_ACTION,new String[]{"%s of destruction"},
-            ActionEnum.SHIELD_ACTION,new String[]{"guardian %s"},
-            ActionEnum.HEAL_ACTION,new String[]{"%s of restorement"},
-            ActionEnum.MANA_ACTION,new String[]{"%s of enlightenment"},
-            ActionEnum.POISON_ACTION,new String[]{"poison %s"},
-            ActionEnum.BLEEDING_ACTION,new String[]{"serrate %s"},
-            ActionEnum.WEAKNESS_ACTION,new String[]{"cursed %s"},
-            ActionEnum.COUNTER_ACTION,new String[]{"%s of payback"}
+            ActionEnum.DAMAGE_ACTION,new String[]{"%s of destruction","painfull %s"},
+            ActionEnum.SHIELD_ACTION,new String[]{"guardian %s", "rescue %s"},
+            ActionEnum.HEAL_ACTION,new String[]{"%s of restorement","%s of regeneration"},
+            ActionEnum.POISON_ACTION,new String[]{"poison %s","venomous %s"},
+            ActionEnum.BLEEDING_ACTION,new String[]{"serrate %s","bloody %s"},
+            ActionEnum.WEAKNESS_ACTION,new String[]{"cursed %s", "%s of frailty"},
+            ActionEnum.COUNTER_ACTION,new String[]{"%s of payback", "return %s"}
     );
 
     public static String getNameFromTag(Tags tag){
         String[] names = CLASS_TAGS.get(tag);
         if(names==null)
             throw new RuntimeException("Tag "+tag+" has no name!");
-        return names[Game.random.nextInt(names.length)];
+        return names[GameManager.random.nextInt(names.length)];
     }
 
     public static Tags[] getTagsFromAction(int action1,int action2){
@@ -79,46 +78,44 @@ public class ItemDictionary {
         return result;
     }
 
-    public static String getItemNameFromItemBase(DiceItemBase base){
-        String name="";
+    public static String getItemNameFromItemBase(DiceItemBase base,String shortName){
+        String name;
         //Base name
-        name = base.names[Game.random.nextInt(base.names.length)];
+        name = shortName;
         //Class-Tag name
         if(!base.tags.isEmpty())
             name = getNameFromTag(base.tags.get(0))+" "+name;
         //ADJECTIVES names
-        if(Game.random.nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
+        if(GameManager.random.nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
             String[] adjNames = ADJECTIVES.get(base.firstAction);
-            String adj = adjNames[Game.random.nextInt(adjNames.length)];
+            String adj = adjNames[GameManager.random.nextInt(adjNames.length)];
             name = String.format(adj,name);
         }
         if(base.secondAction!=ActionEnum.NULL_ACTION){
             String[] adjNames = ADJECTIVES.get(base.secondAction);
-            String adj = adjNames[Game.random.nextInt(adjNames.length)];
+            String adj = adjNames[GameManager.random.nextInt(adjNames.length)];
             name = String.format(adj,name);
         }
         return name;
     }
 
-    public static String getSpellNameFromItemBase(DiceItemBase base){
-        String name="";
-        //Base name
-        name = base.names[Game.random.nextInt(base.names.length)];
+    public static String getSpellNameFromItemBase(DiceItemBase base,String shortName){
+        String name=shortName;
         //Range name
         if(base.target== ActionTarget.PLAYER_PARTY || base.target==ActionTarget.ALL_ENEMIES)
-            name = WIDE_RANGE[Game.random.nextInt(WIDE_RANGE.length)]+" "+name;
+            name = WIDE_RANGE[GameManager.random.nextInt(WIDE_RANGE.length)]+" "+name;
         //Class-Tag name
         if(!base.tags.isEmpty())
             name = getNameFromTag(base.tags.get(0))+" "+name;
         //ADJECTIVES_FOR_SPELLS names
-        if(Game.random.nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
+        if(GameManager.random.nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
             String[] adjNames = ADJECTIVES_FOR_SPELLS.get(base.firstAction);
-            String adj = adjNames[Game.random.nextInt(adjNames.length)];
+            String adj = adjNames[GameManager.random.nextInt(adjNames.length)];
             name = String.format(adj,name);
         }
         if(base.secondAction!=ActionEnum.NULL_ACTION){
             String[] adjNames = ADJECTIVES_FOR_SPELLS.get(base.secondAction);
-            String adj = adjNames[Game.random.nextInt(adjNames.length)];
+            String adj = adjNames[GameManager.random.nextInt(adjNames.length)];
             name = String.format(adj,name);
         }
         return name;

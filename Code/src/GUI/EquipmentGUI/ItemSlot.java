@@ -3,7 +3,7 @@ package GUI.EquipmentGUI;
 import Equipment.Items.Item;
 import Equipment.Items.ItemQuality;
 import GUI.GUISettings;
-import Game.Game;
+import Game.GameManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,23 +81,23 @@ public class ItemSlot extends JPanel {
         public void mousePressed(MouseEvent e) {
             //Select item
             System.out.println("Clicked "+item.name);
-            Game.getEquipment().setClickedItem(reference);
+            GameManager.getEquipment().setClickedItem(reference);
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
             //Send info
             System.out.println("Drop on "+item.name);
-            Game.getEquipment().equipItem();
+            GameManager.getEquipment().equipItem();
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            Game.getEquipment().setPointedItem(reference);}
+            GameManager.getEquipment().setPointedItem(reference);}
 
         @Override
         public void mouseExited(MouseEvent e) {
-            Game.getEquipment().setPointedItem(null);
+            GameManager.getEquipment().setPointedItem(null);
         }
     }
 
