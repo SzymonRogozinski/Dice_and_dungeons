@@ -28,11 +28,11 @@ public class GameConst {
 
 
     //Levels
-    public static final GameLevel DUNGEON = new GameLevel(new LootSettings(5,new double[]{0.7,0.3}),4,
+    public static final GameLevel DUNGEON = new GameLevel(new LootSettings(5,new double[]{0.7,0.3}),4,10,
             new WalkingSettings(1234,2,100,100,1000,25,20,2,"Texture/MapTextures/dungeon/",false));
-    public static final GameLevel MINE = new GameLevel(new LootSettings(8,new double[]{0.4,0.5,0.1}),8,
+    public static final GameLevel MINE = new GameLevel(new LootSettings(8,new double[]{0.4,0.5,0.1}),8,20,
             new WalkingSettings(1234,1,100,100,1000,25,20,2,"Texture/MapTextures/mine/",false));
-    public static final GameLevel CAVE = new GameLevel(new LootSettings(8,new double[]{0.1,0.5,0.4}),12,
+    public static final GameLevel CAVE = new GameLevel(new LootSettings(8,new double[]{0.1,0.5,0.4}),12,30,
             new WalkingSettings(1234,0,100,100,1000,25,20,2,"Texture/MapTextures/cave/",true));
 
     public static final ArrayList<GameLevel> LEVELS = new ArrayList<>(List.of(DUNGEON,MINE, CAVE));

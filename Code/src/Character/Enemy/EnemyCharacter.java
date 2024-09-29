@@ -90,6 +90,6 @@ public class EnemyCharacter extends GameCharacter {
     public int getShield(){return shield;}
 
     public String getNextAction(){
-        return ai.getNextAction(this);
+        return getName()+"\n"+ai.getNextAction(this);
     }
 }

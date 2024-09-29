@@ -84,7 +84,7 @@ public class GeneratorTest {
             int i=1;
             try {
                 for (; i <= count; i++) {
-                    EnemyGenerator.generate(category,cost);
+                    EnemyGenerator.generate(category,cost,10);
                 }
             }catch (Exception e){
                 System.err.println(i);

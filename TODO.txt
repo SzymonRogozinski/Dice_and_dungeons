@@ -2,4 +2,3 @@
 > Poprawić GUI
 > Ogólny refactor
 > Usunąć stałe ziarno
-> Wyższe poziomy, więcej hp
