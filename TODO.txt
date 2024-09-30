@@ -2,6 +2,5 @@
 > Poprawić GUI
 > Ogólny refactor
 > Usunąć stałe ziarno
-> Cofanie akcji, zasięg, powiązana kość
-> Rysowanie border
+> zasięg, powiązana kość
 > Dodać zapisywanie gry
