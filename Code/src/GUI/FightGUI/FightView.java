@@ -62,7 +62,8 @@ public class FightView extends ViewPanel {
             case FightGUIState.PLAYER_CHOOSING_TARGET -> {
                 rollPanel.setVisible(false);
                 rollPanel.rerollsChange();
-                actionPanel.setVisible(false);
+                actionPanel.setVisible(true);
+                actionPanel.changePage("GoBack");
                 fightPanel.enemySelectable(true);
             }
             case FightGUIState.PLAYER_PERFORMING_ACTION -> {

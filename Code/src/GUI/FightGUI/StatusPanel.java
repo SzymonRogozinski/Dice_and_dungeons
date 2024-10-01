@@ -63,7 +63,7 @@ public class StatusPanel extends JPanel {
         combatInfo.setWrapStyleWord(true);
         combatInfo.setLineWrap(true);
         combatInfo.setEditable(false);
-        combatInfo.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-4,GUISettings.PANEL_SIZE/3));
+        combatInfo.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.PANEL_SIZE/3));
 
         this.add(combatInfo);
 
@@ -127,6 +127,7 @@ public class StatusPanel extends JPanel {
         manaBar.setValue(PlayerInfo.getParty().getCurrentMana());
         manaBar.setString(PlayerInfo.getParty().getCurrentMana()+"/"+ PlayerInfo.getParty().getMaxMana());
         characterName.setText(GameManager.getFight().getCharacter().getName());
+
         this.revalidate();
         this.repaint();
     }

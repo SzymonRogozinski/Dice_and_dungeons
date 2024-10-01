@@ -15,13 +15,19 @@ public class EnemyGenerator extends Generator {
 
     private static final int ENEMY_GROUP_COUNT = 3;
 
-    public static EnemyCharacter generate(EnemyCategory category, int cost) {
+    public static EnemyCharacter generate(EnemyCategory category, int cost, int minHP) {
         EnemyBase base = EnemyBase.getBase(category, cost);
-        return generate((EnemyBase)base.clone(), cost);
+        return generate((EnemyBase)base.clone(), cost,minHP);
     }
 
-    public static EnemyCharacter generate(EnemyBase base, int cost) {
+    public static EnemyCharacter generate(EnemyBase base, int cost, int minHP) {
         cost-= base.cost;
+        if(base.stats[1]<minHP){
+            int diff = minHP-base.stats[1];
+            int hpCost = diff/10 + diff%10==0?0:1;
+            base.stats[1]+=(hpCost*10);
+            cost-=hpCost;
+        }
         while (cost>= GameBalance.ENEMY_MIN_COST) {
             EnemyAdjective adjective = EnemyAdjective.getAdjective(cost);
             adjective.modifyEnemy(base);
@@ -33,20 +39,20 @@ public class EnemyGenerator extends Generator {
         return new EnemyCharacter(base.stats[0],base.stats[1],base.stats[2],base.stats[3],base.stats[4],base.category,name,base.image,ai);
     }
 
-    public static ArrayList<EnemyCharacter> generateMore(int cost) {
+    public static ArrayList<EnemyCharacter> generateMore(int cost, int minHP) {
         ArrayList<EnemyCharacter> enemies = new ArrayList<>();
         EnemyBase base = EnemyBase.getBase(EnemyCategory.Minion, cost);
         for (int i = 0; i < ENEMY_GROUP_COUNT; i++)
-            enemies.add(generate((EnemyBase) base.clone(), cost));
+            enemies.add(generate((EnemyBase) base.clone(), cost,minHP));
         return enemies;
     }
 
-    public static ArrayList<EnemyCharacter> generateEnemyList(int cost){
+    public static ArrayList<EnemyCharacter> generateEnemyList(int cost, int minHP){
         int roll = GameManager.random.nextInt(3);
         if(roll==2)
-            return new ArrayList<>(List.of(EnemyGenerator.generate(EnemyCategory.Strong,cost)));
+            return new ArrayList<>(List.of(EnemyGenerator.generate(EnemyCategory.Strong,cost,minHP)));
         else
-            return generateMore(cost);
+            return generateMore(cost,minHP);
     }
 
     // If base have adjectives, get one with the highest value

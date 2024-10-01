@@ -1,5 +1,5 @@
 > Podmienić placeholdery
 > Poprawić GUI
 > Ogólny refactor
-> Usunąć stałe ziarno
-> Wyższe poziomy, więcej hp
+> zasięg, powiązana kość
+> Dodać zapisywanie gry

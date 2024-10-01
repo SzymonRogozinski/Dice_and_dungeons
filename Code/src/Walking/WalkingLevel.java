@@ -37,10 +37,10 @@ public class WalkingLevel {
             throw new RuntimeException("Dungeon map was not generated!");
         Map map=creator.getMap();
         //Loading enemies
-        this.enemies=new Enemies(map,settings.path, levelSetting.getEnemyStrength());
+        this.enemies=new Enemies(map,settings.path, levelSetting.getEnemyStrength(), levelSetting.getMinHP());
         //Loading map
         this.gameMap =new GameMap(map,settings.path,settings.bossLevel);
-        boss=settings.bossLevel?EnemyGenerator.generate(EnemyCategory.Boss,levelSetting.getEnemyStrength()):null;
+        boss=settings.bossLevel?EnemyGenerator.generate(EnemyCategory.Boss,levelSetting.getEnemyStrength(), levelSetting.getMinHP()):null;
         setEnemy();
         enemyThread=new EnemyThread();
         //Add player

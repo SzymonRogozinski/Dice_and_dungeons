@@ -19,9 +19,9 @@ import java.util.ArrayList;
 public class ActionListPanel extends JPanel {
 
     //Sizes and placement of button
-    private final static int buttonWidth=GUISettings.SMALL_PANEL_SIZE*3/5;
+    private final static int buttonWidth=GUISettings.SMALL_PANEL_SIZE*7/10;
     private final static int buttonHeight=GUISettings.SMALL_PANEL_SIZE/3;
-    private final static int buttonHGap =GUISettings.PANEL_SIZE/6-buttonWidth/2;
+    private final static int buttonHGap =GUISettings.PANEL_SIZE/8-buttonWidth/2;
     private final static int buttonVGap =(GUISettings.SMALL_PANEL_SIZE-buttonHeight)/2;
     private final static int backpackButtonHGap =buttonHGap/2;
     private final static int backpackButtonVGap =buttonVGap/3;
@@ -42,7 +42,7 @@ public class ActionListPanel extends JPanel {
         String[] names={"Attack","Items","Spells"};
         for(int i=0;i<3;i++){
             JButton action=new JButton(names[i]);
-            action.setSize(buttonWidth,buttonHeight);
+            action.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
             actionButtons1.add(action);
         }
 
@@ -69,7 +69,8 @@ public class ActionListPanel extends JPanel {
         ArrayList<JButton> buttons=new ArrayList<>();
         for(ActionItem item:items){
             JButton button=new JButton(item.shortName);
-            button.setSize(buttonWidth,buttonHeight);
+            button.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+            button.setMargin(new Insets(0, 0, 0, 0));
             button.addActionListener(e-> {
                 GameManager.getFight().choosedAction(item.getAction());
                 changePage("Start");
@@ -87,26 +88,30 @@ public class ActionListPanel extends JPanel {
         ArrayList<SpellItem> spells = character.getEquipment().getNotNullSpellItems();
         buttons=new ArrayList<>();
         //Mana
-        FlowLayout flowLayout=new FlowLayout();
-        flowLayout.setHgap(0);
-        flowLayout.setVgap(0);
+        FlowLayout flowLayout=new FlowLayout(FlowLayout.CENTER);
         for(SpellItem spell:spells){
-            JLabel t = new JLabel(spell.shortName);
-            t.setFont(GUISettings.BUTTON_FONT);
-            t.setBackground(new Color(0,0,0,0));
+            JLabel spellName = new JLabel(spell.shortName);
+            spellName.setFont(GUISettings.BUTTON_FONT);
+            spellName.setBackground(new Color(0,0,0,0));
 
-            JLabel tt = new JLabel(" "+spell.getAction().getManaCost());
-            tt.setFont(GUISettings.BUTTON_FONT);
-            tt.setBackground(new Color(0,0,0,0));
-            tt.setForeground(Color.BLUE);
+            JLabel spellCost = new JLabel(" "+spell.getAction().getManaCost());
+            spellCost.setFont(GUISettings.BUTTON_FONT);
+            spellCost.setBackground(new Color(0,0,0,0));
+            spellCost.setForeground(Color.BLUE);
 
             //Button setup
             JButton button=new JButton();
-            button.setLayout(flowLayout);
-            button.add(t);
-            button.add(tt);
 
-            button.setSize(buttonWidth,buttonHeight);
+            JPanel buttonTextPanel = new JPanel();
+            buttonTextPanel.setLayout(flowLayout);
+            buttonTextPanel.setBackground(new Color(0,0,0,0));
+            buttonTextPanel.add(spellName);
+            buttonTextPanel.add(spellCost);
+
+            button.add(buttonTextPanel);
+
+            button.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
+            button.setMargin(new Insets(0, 0, 0, 0));
             button.addActionListener(e-> {
                 if(PlayerInfo.getParty().getCurrentMana()<spell.getAction().getManaCost()){
                     System.out.println("You don't have enough mana!");
@@ -162,8 +167,8 @@ public class ActionListPanel extends JPanel {
                 this.add(button);
             }
 
-            JButton goBackButton=new JButton("Go back");
-            goBackButton.setSize(buttonWidth,buttonHeight);
+            JButton goBackButton=new JButton("go back");
+            goBackButton.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
             goBackButton.addActionListener(e->changePage(goBackName));
             this.goBackButton = goBackButton;
             this.add(goBackButton);
@@ -183,25 +188,36 @@ public class ActionListPanel extends JPanel {
         FlowLayout getFlowLayout(){
             return layout;
         }
+
+        JButton getGoBackButton(){
+            return goBackButton;
+        }
     }
 
     private class BackpackCardPanel extends CardPanel{
 
         private int pageNumber;
         private final int pageSize = 8; //Plus goBackButton
+        private final int itemButtonHeight=buttonHeight/2;
         private ArrayList<UsableItem> items;
         private JButton next,prev;
 
         BackpackCardPanel(Border border, ArrayList<JButton> buttons,String goBackName){
             super(border,buttons,goBackName);
+            getGoBackButton().setPreferredSize(new Dimension(buttonWidth,itemButtonHeight));
+            getGoBackButton().setMargin(new Insets(0, 0, 0, 0));
+
             getFlowLayout().setHgap(backpackButtonHGap);
-            getFlowLayout().setVgap(backpackButtonVGap);
+            getFlowLayout().setVgap(backpackButtonVGap/3);
+
             next=new JButton("Next");
-            next.setSize(buttonWidth,buttonHeight);
+            next.setPreferredSize(new Dimension(buttonWidth,itemButtonHeight));
+            next.setMargin(new Insets(0, 0, 0, 0));
             next.addActionListener(e->next());
 
             prev=new JButton("Prev");
-            prev.setSize(buttonWidth,buttonHeight);
+            prev.setPreferredSize(new Dimension(buttonWidth,itemButtonHeight));
+            prev.setMargin(new Insets(0, 0, 0, 0));
             prev.addActionListener(e->prev());
         }
 
@@ -215,7 +231,8 @@ public class ActionListPanel extends JPanel {
             for(int i=0;i<itemCount;i++){
                 UsableItem item = items.get(i);
                 JButton button=new JButton(item.shortName);
-                button.setSize(buttonWidth,buttonHeight);
+                button.setPreferredSize(new Dimension(buttonWidth,itemButtonHeight));
+                button.setMargin(new Insets(0, 0, 0, 0));
                 button.addActionListener(e-> {
                     GameManager.getFight().choosedAction(item.getAction());
                     PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
@@ -246,7 +263,8 @@ public class ActionListPanel extends JPanel {
             for(int i=startIndex;i<startIndex+itemCount;i++){
                 UsableItem item = items.get(i);
                 JButton button=new JButton(item.shortName);
-                button.setSize(buttonWidth,buttonHeight);
+                button.setPreferredSize(new Dimension(buttonWidth,itemButtonHeight));
+                button.setMargin(new Insets(0, 0, 0, 0));
                 button.addActionListener(e-> {
                     GameManager.getFight().choosedAction(item.getAction());
                     PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
@@ -278,7 +296,8 @@ public class ActionListPanel extends JPanel {
             for(int i=startIndex;i<startIndex+itemCount;i++){
                 UsableItem item = items.get(i);
                 JButton button=new JButton(item.shortName);
-                button.setSize(buttonWidth,buttonHeight);
+                button.setPreferredSize(new Dimension(buttonWidth,itemButtonHeight));
+                button.setMargin(new Insets(0, 0, 0, 0));
                 button.addActionListener(e-> {
                     GameManager.getFight().choosedAction(item.getAction());
                     PlayerInfo.getParty().getBackpack().removeFromBackpack(item);

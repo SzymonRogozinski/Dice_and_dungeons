@@ -16,12 +16,12 @@ public class Enemies implements Iterable<EnemyDrone> {
     private ArrayList<EnemyDrone> enemies;
     private int counter;
 
-    public Enemies(Map map,String path,int enemyCost){
+    public Enemies(Map map,String path,int enemyCost, int minHP){
         enemies=new ArrayList<>();
         for(int y=0;y<map.getHeight();y++){
             for(int x=0;x<map.getWidth();x++) {
                 if(map.getTerrain(x, y)== Place.ENEMY){
-                    ArrayList<EnemyCharacter> enemyCharacters = EnemyGenerator.generateEnemyList(enemyCost);
+                    ArrayList<EnemyCharacter> enemyCharacters = EnemyGenerator.generateEnemyList(enemyCost, minHP);
                     EnemyDrone enemy=new EnemyDrone(x, y, new EnemyGamePlace("enemy", path),new EnemyGamePlace("enemy_pursuit", path),enemyCharacters );
                     enemies.add(enemy);
                 }

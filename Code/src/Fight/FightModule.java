@@ -224,6 +224,10 @@ public class FightModule {
         }
     }
 
+    public void goBackToChoose(){
+        state.setState(FightGUIState.PLAYER_CHOOSING_ACTION);
+    }
+
     public void endAction(){
         if(playerTurn && !noRoll)
             master.sumUpResults();

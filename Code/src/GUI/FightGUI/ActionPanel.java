@@ -12,7 +12,7 @@ public class ActionPanel extends JPanel {
     private CardLayout layout;
     private ActionListPanel actions;
     private DicePanel dice;
-    private JPanel pauseScreen,enemyScreen;
+    private JPanel pauseScreen,enemyScreen, goBackScreen;
 
     public ActionPanel(Border border){
         //Set display
@@ -26,12 +26,14 @@ public class ActionPanel extends JPanel {
         dice =new DicePanel(border);
         //Pause Screen
         pauseScreen=new StopPanel(e->roll(),"roll");
-        enemyScreen=new StopPanel(e->enemy(),"Enemy attack");
+        enemyScreen=new StopPanel(e->enemy(),"enemy attack");
+        goBackScreen=new StopPanel(e->goBack(),"go back");
 
         this.add("Actions",actions);
         this.add("Pause",pauseScreen);
         this.add("Enemy",enemyScreen);
         this.add("Dice", dice);
+        this.add("GoBack",goBackScreen);
     }
 
     public DicePanel getDicePanel(){return dice;}
@@ -49,6 +51,10 @@ public class ActionPanel extends JPanel {
         }
         changePage("Dice");
         GameManager.getFight().rollDices();
+    }
+
+    private void goBack(){
+        GameManager.getFight().goBackToChoose();
     }
 
     private void enemy(){
