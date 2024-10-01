@@ -1,6 +1,5 @@
 > Podmienić placeholdery
 > Poprawić GUI
 > Ogólny refactor
-> Usunąć stałe ziarno
 > zasięg, powiązana kość
 > Dodać zapisywanie gry
