@@ -1,3 +1,4 @@
+package Tests;
 
 import GUI.TestFrame;
 import GUI.WalkingGUI.WalkingGUIState;

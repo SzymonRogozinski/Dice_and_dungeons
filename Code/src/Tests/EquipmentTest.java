@@ -1,3 +1,5 @@
+package Tests;
+
 import Character.PlayerCharacter;
 import Character.PlayerParty;
 import Dice.DiceAction.*;
