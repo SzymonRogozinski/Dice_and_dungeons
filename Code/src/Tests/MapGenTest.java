@@ -1,3 +1,5 @@
+package Tests;
+
 import Walking.MapCreator;
 import dg.generator.Generator;
 

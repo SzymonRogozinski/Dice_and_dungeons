@@ -1,3 +1,5 @@
+package Tests;
+
 import Character.Enemy.EnemyAI;
 import Character.Enemy.EnemyActionFactory;
 import Character.Enemy.EnemyCategory;

@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class DiceFactory {
@@ -239,7 +240,7 @@ public class DiceFactory {
                 throw new RuntimeException("iconCode has illegal number of elements: "+iconCode.size());
             }
         }catch (IOException e){
-            throw new RuntimeException("Cannot find/open texture!");
+            throw new RuntimeException(Path.of("").toAbsolutePath().toString()+"Cannot find/open texture!");
         }
         g.setColor(Color.BLACK);
         g.draw(new Rectangle(39,39));

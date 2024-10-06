@@ -1,9 +1,7 @@
+package Tests;
+
 import Character.Enemy.EnemyCategory;
-import Character.Enemy.EnemyCharacter;
 import Equipment.Items.ItemQuality;
-import Game.GameBalance;
-import Game.GameConst;
-import Game.GameLevel;
 import Generators.EnemyGenerator.EnemyGenerator;
 import Generators.ItemGenerators.ArmorGenerator;
 import Generators.ItemGenerators.DiceItemGenerator;
