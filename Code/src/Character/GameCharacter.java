@@ -75,6 +75,15 @@ public class GameCharacter extends Tagable {
         this.shield+=shield;
     }
 
+    public void onTurnStart(){
+        this.shield=0;
+    }
+    public void setShield(int newShield){
+        shield=newShield;
+    }
+
+    public int getShield(){return shield;}
+
     public void addStatus(GameStatus newStatus){
         for(GameStatus status:statuses){
             if(status.getClass().equals(newStatus.getClass())){

@@ -30,6 +30,7 @@ public class StatusPanel extends JPanel {
         healthBar=new JProgressBar();
         healthBar.setForeground(Color.RED);
         healthBar.setStringPainted(true);
+        healthBar.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/8));
         this.add(healthBar);
 
         //Set mana
@@ -40,19 +41,23 @@ public class StatusPanel extends JPanel {
         manaBar=new JProgressBar();
         manaBar.setForeground(Color.BLUE);
         manaBar.setStringPainted(true);
+        manaBar.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/8));
         this.add(manaBar);
 
         //Set character
         JLabel character=new JLabel("Character turn:");
+        character.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/10));
         character.setForeground(Color.WHITE);
         this.add(character);
 
         characterName=new JLabel();
+        characterName.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/10));
         characterName.setForeground(Color.WHITE);
         this.add(characterName);
 
         //Set status
         statusInfo=new JLabel();
+        statusInfo.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/10));
         statusInfo.setForeground(Color.WHITE);
         this.add(statusInfo);
 
@@ -76,7 +81,7 @@ public class StatusPanel extends JPanel {
         combatLog.setWrapStyleWord(true);
         combatLog.setLineWrap(true);
         combatLog.setEditable(false);
-        combatLog.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-4,GUISettings.PANEL_SIZE/3));
+        combatLog.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.PANEL_SIZE/3));
         this.add(combatLog);
     }
 

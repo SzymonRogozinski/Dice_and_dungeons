@@ -25,9 +25,9 @@ public class ActionPanel extends JPanel {
         actions=new ActionListPanel(border);
         dice =new DicePanel(border);
         //Pause Screen
-        pauseScreen=new StopPanel(e->roll(),"roll");
-        enemyScreen=new StopPanel(e->enemy(),"enemy attack");
-        goBackScreen=new StopPanel(e->goBack(),"go back");
+        pauseScreen=new StopPanel(e->roll(),"roll",border,false);
+        enemyScreen=new StopPanel(e->enemy(),"enemy attack",border,false);
+        goBackScreen=new StopPanel(e->goBack(),"go back",border,true);
 
         this.add("Actions",actions);
         this.add("Pause",pauseScreen);
@@ -63,14 +63,27 @@ public class ActionPanel extends JPanel {
 
     private class StopPanel extends JPanel{
 
-        StopPanel(ActionListener l,String buttonName){
+        StopPanel(ActionListener l,String buttonName,Border border, boolean isSmall){
             this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
             this.setLayout(new GridLayout(3,1));
             this.setBackground(Color.BLACK);
+            this.setBorder(border);
+
             JButton pauseButton = new JButton(buttonName);
             pauseButton.addActionListener(l);
             this.add(new JLabel());
-            this.add(pauseButton);
+            if(isSmall){
+                pauseButton.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE/3,GUISettings.SMALL_PANEL_SIZE/6));
+
+                JPanel reducer = new JPanel();
+                reducer.setLayout(new FlowLayout(FlowLayout.CENTER));
+                reducer.setBackground(Color.BLACK);
+                reducer.add(pauseButton);
+                this.add(reducer);
+            }else{
+                this.add(pauseButton);
+            }
+
         }
     }
 }

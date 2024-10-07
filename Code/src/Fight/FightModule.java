@@ -77,6 +77,8 @@ public class FightModule {
     private void endFight(boolean playerWin){
         clear();
         this.combatLogInfo="";
+        hideCombatInfo();
+        state.refreshCombatLog();
         this.noRoll=false;
         this.playerTurn=true;
         this.characterTurn=0;

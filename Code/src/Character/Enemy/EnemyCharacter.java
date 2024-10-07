@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class EnemyCharacter extends GameCharacter {
 
     private final int maxHealth;
-    private int currentHealth,shield;
+    private int currentHealth;
     private final EnemyAI ai;
     private final EnemyCategory category;
 
@@ -48,6 +48,7 @@ public class EnemyCharacter extends GameCharacter {
     @Override
     public void dealDamage(int damage) throws CharacterDieException {
         damage= (int) (damage * getDamageReceivingMod());
+        int shield = getShield();
         shield-=damage;
         if(shield<0){
             currentHealth+=shield;
@@ -55,6 +56,7 @@ public class EnemyCharacter extends GameCharacter {
             if(currentHealth<0)
                 currentHealth=0;
         }
+        setShield(shield);
         if(currentHealth==0)
             throw new CharacterDieException();
     }
@@ -82,12 +84,6 @@ public class EnemyCharacter extends GameCharacter {
     public int getTargetId(){
         return ai.getTargetId();
     }
-
-    public void onTurnStart(){
-        this.shield=0;
-    }
-
-    public int getShield(){return shield;}
 
     public String getNextAction(){
         return getName()+"\n"+ai.getNextAction(this);

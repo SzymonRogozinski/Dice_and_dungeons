@@ -30,6 +30,7 @@ public class PartyStatusPanel extends JPanel {
         healthBar=new JProgressBar();
         healthBar.setForeground(Color.RED);
         healthBar.setStringPainted(true);
+        healthBar.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/8));
         this.add(healthBar);
 
         //Set mana
@@ -40,6 +41,7 @@ public class PartyStatusPanel extends JPanel {
         manaBar=new JProgressBar();
         manaBar.setForeground(Color.BLUE);
         manaBar.setStringPainted(true);
+        manaBar.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/8));
         this.add(manaBar);
 
         //Set keys

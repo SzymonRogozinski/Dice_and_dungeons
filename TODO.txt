@@ -1,5 +1,4 @@
 > Podmienić placeholdery
-> Poprawić GUI
 > Ogólny refactor
 > zasięg, powiązana kość
 > Dodać zapisywanie gry

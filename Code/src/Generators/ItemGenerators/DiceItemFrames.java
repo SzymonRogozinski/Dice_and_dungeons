@@ -27,7 +27,7 @@ public class DiceItemFrames {
             new DiceItemFrame(new double[]{0,0,0,0.2,0.4,0.4}, ActionEnum.MANA_ACTION,new String[]{"shaman charm"},ActionTarget.PLAYER_CHARACTER,new int[]{ActionEnum.SHIELD_ACTION},p->p.getDiceNumber(p.getIntelligence()),true, new ImageIcon("Texture/Items/attack_item/shaman_charm.png")),
             new DiceItemFrame(new double[]{0,0,0,0.2,0.4,0.4}, ActionEnum.HEAL_ACTION,new String[]{"fairy"},ActionTarget.PLAYER_CHARACTER,new int[]{ActionEnum.MANA_ACTION},p->p.getDiceNumber(p.getCharisma()),false, new ImageIcon("Texture/Items/attack_item/fairy.png")),
             new DiceItemFrame(new double[]{0,0.2,0.2,0.2,0.2,0.2}, ActionEnum.BLEEDING_ACTION,new String[]{"pocket piranha"},ActionTarget.ENEMY_CHARACTER,new int[]{ActionEnum.POISON_ACTION},p->p.getDiceNumber(p.getCunning()),false, new ImageIcon("Texture/Items/attack_item/pocket_piranha.png")),
-            new DiceItemFrame(new double[]{0,0.2,0.2,0.2,0.2,0.2}, ActionEnum.MANA_ACTION,new String[]{"smoke bomb"},ActionTarget.ENEMY_CHARACTER,new int[]{},p->p.getDiceNumber(p.getCunning()),false, new ImageIcon("Texture/Items/attack_item/smoke_bomb.png"))
+            new DiceItemFrame(new double[]{0,0.2,0.2,0.2,0.2,0.2}, ActionEnum.WEAKNESS_ACTION,new String[]{"smoke bomb"},ActionTarget.ENEMY_CHARACTER,new int[]{},p->p.getDiceNumber(p.getCunning()),false, new ImageIcon("Texture/Items/attack_item/smoke_bomb.png"))
     };
 
     private final static DiceItemFrame[] SPELL_FRAMES =new DiceItemFrame[]{

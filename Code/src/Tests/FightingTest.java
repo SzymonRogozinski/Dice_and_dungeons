@@ -74,10 +74,12 @@ public class FightingTest {
 
         EnemyActionFactory factory1 = new EnemyActionFactory(e->e.getStrength(),0.25,false,1);
         EnemyActionFactory factory2 = new EnemyActionFactory(e->e.getCunning(),0.20,false,6);
+        EnemyActionFactory factory3 = new EnemyActionFactory(e->e.getEndurance(),0.20,true,2);
 
         EnemyAction enemyAction1 = new EnemyAction(ActionTarget.PLAYER_CHARACTER,new Tags[]{Tags.ATTACK},new ArrayList<>(List.of(new EnemyActionFactory[]{factory1})));
+        EnemyAction defence = new EnemyAction(ActionTarget.ENEMY_CHARACTER,new Tags[]{Tags.DEFENCE},new ArrayList<>(List.of(new EnemyActionFactory[]{factory3})));
         EnemyAction enemyAction2 = new EnemyAction(ActionTarget.PLAYER_CHARACTER,new Tags[]{},new ArrayList<>(List.of(new EnemyActionFactory[]{factory2})));
-        EnemyAI ai1=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{enemyAction1,enemyAction2})));
+        EnemyAI ai1=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{defence})));
 
         EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12, EnemyCategory.Minion,"Skeleton1",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai1);
         FightModule fight = new FightModule(state,new ArrayList<>(List.of(new EnemyCharacter[]{enemy})));

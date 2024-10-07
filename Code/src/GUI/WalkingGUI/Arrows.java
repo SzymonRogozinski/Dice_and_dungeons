@@ -14,35 +14,32 @@ public class Arrows extends JPanel {
         this.setBackground(Color.BLACK);
         this.setBorder(border);
 
-        this.setLayout(null);
+        this.setLayout(new GridLayout(3,3));
 
         JButton up = new JButton(new ImageIcon("Texture/Buttons/up_arrow.png"));
-        up.setFont(GUISettings.SMALL_FONT);
         up.setFocusable(false);
-        up.setBounds(GUISettings.SMALL_PANEL_SIZE / 3 + 1, 2, GUISettings.SMALL_PANEL_SIZE / 3, GUISettings.SMALL_PANEL_SIZE / 3 - 1);
         up.addActionListener(e -> GameManager.getWalkingManager().getWalking().playerMove(0, -1));
 
         JButton left = new JButton(new ImageIcon("Texture/Buttons/left_arrow.png"));
-        left.setFont(GUISettings.SMALL_FONT);
         left.setFocusable(false);
-        left.setBounds(2, GUISettings.SMALL_PANEL_SIZE / 3, GUISettings.SMALL_PANEL_SIZE / 3, GUISettings.SMALL_PANEL_SIZE / 3);
         left.addActionListener(e -> GameManager.getWalkingManager().getWalking().playerMove(-1, 0));
 
         JButton right = new JButton(new ImageIcon("Texture/Buttons/right_arrow.png"));
-        right.setFont(GUISettings.SMALL_FONT);
         right.setFocusable(false);
-        right.setBounds(2 * GUISettings.SMALL_PANEL_SIZE / 3, GUISettings.SMALL_PANEL_SIZE / 3, GUISettings.SMALL_PANEL_SIZE / 3 - 1, GUISettings.SMALL_PANEL_SIZE / 3);
         right.addActionListener(e -> GameManager.getWalkingManager().getWalking().playerMove(1, 0));
 
         JButton down = new JButton(new ImageIcon("Texture/Buttons/down_arrow.png"));
-        down.setFont(GUISettings.SMALL_FONT);
         down.setFocusable(false);
-        down.setBounds(GUISettings.SMALL_PANEL_SIZE / 3 + 1, 2 * GUISettings.SMALL_PANEL_SIZE / 3 - 2, GUISettings.SMALL_PANEL_SIZE / 3, GUISettings.SMALL_PANEL_SIZE / 3);
         down.addActionListener(e -> GameManager.getWalkingManager().getWalking().playerMove(0, 1));
 
+        this.add(new JLabel());
         this.add(up);
+        this.add(new JLabel());
         this.add(left);
+        this.add(new JLabel());
         this.add(right);
+        this.add(new JLabel());
         this.add(down);
+        this.add(new JLabel());
     }
 }
