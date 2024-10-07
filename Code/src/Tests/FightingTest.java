@@ -79,7 +79,7 @@ public class FightingTest {
         EnemyAction enemyAction2 = new EnemyAction(ActionTarget.PLAYER_CHARACTER,new Tags[]{},new ArrayList<>(List.of(new EnemyActionFactory[]{factory2})));
         EnemyAI ai1=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{enemyAction1,enemyAction2})));
 
-        EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12, EnemyCategory.Boss,"Skeleton1",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai1);
+        EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12, EnemyCategory.Minion,"Skeleton1",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai1);
         FightModule fight = new FightModule(state,new ArrayList<>(List.of(new EnemyCharacter[]{enemy})));
         GameManager.setFight(fight);
         state.refresh();
