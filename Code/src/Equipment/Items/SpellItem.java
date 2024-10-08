@@ -19,6 +19,10 @@ public class SpellItem extends Item  implements EquipableItem{
         return action;
     }
 
+    public String getScaleAttribute() {
+        return "intelligence";
+    }
+
     @Override
     public void equip(PlayerCharacter character) {}
 

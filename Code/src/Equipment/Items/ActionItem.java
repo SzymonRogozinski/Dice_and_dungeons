@@ -9,14 +9,20 @@ import javax.swing.*;
 public class ActionItem extends Item implements EquipableItem{
 
     private final ItemAction action;
+    private final String scaleAttribute;
 
-    public ActionItem(ItemAction action,Tags[] tags, ImageIcon icon,String name,String shortName,ItemQuality quality) {
+    public ActionItem(ItemAction action,Tags[] tags, ImageIcon icon,String name,String shortName,ItemQuality quality,String scaleAttribute) {
         super(tags,icon,name,shortName,quality);
         this.action=action;
+        this.scaleAttribute=scaleAttribute;
     }
 
     public ItemAction getAction() {
         return action;
+    }
+
+    public String getScaleAttribute() {
+        return scaleAttribute;
     }
 
     @Override

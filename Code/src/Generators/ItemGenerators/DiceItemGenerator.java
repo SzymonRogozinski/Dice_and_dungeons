@@ -83,7 +83,9 @@ public class DiceItemGenerator extends Generator {
 
         ItemAction action=new ItemAction(dice,base.target,base.diceLambda,actionTags);
         ImageIcon icon = base.icon;
-        return new ActionItem(action,tags,icon,name,shortName,quality);
+        String attr = base.attribute;
+
+        return new ActionItem(action,tags,icon,name,shortName,quality,attr);
     }
 
     private static void addActionRandomly(DiceItemBase base, int points){
