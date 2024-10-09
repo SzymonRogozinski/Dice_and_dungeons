@@ -5,7 +5,6 @@ import Character.GameCharacter;
 public class ManaAction implements DiceAction{
     private static final String id="Mana";
     private final int value;
-    private boolean actionOnSelf=true;
 
     public ManaAction(int value){
         this.value=value;
@@ -41,7 +40,7 @@ public class ManaAction implements DiceAction{
 
     @Override
     public boolean onSelf() {
-        return actionOnSelf;
+        return true;
     }
 
     @Override

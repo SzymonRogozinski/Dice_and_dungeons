@@ -15,7 +15,7 @@ public class CounterStatus extends GameStatus{
     @Override
     public void effect(GameCharacter character){
         try {
-            character.dealDamage(getSumUpValue());
+            character.receiveDamage(getSumUpValue());
         }catch (CharacterDieException ignore){}
     }
 

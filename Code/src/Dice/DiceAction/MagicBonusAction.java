@@ -12,7 +12,7 @@ public class MagicBonusAction implements DiceAction{
     private static final String id="MagicBonus";
     private static final String imagePath="Texture/StatusIcons/SpellDice.png";
     private final int value;
-    private boolean actionOnSelf;
+    private final boolean actionOnSelf;
 
     public MagicBonusAction(int value,boolean actionOnSelf){
         this.actionOnSelf=actionOnSelf;

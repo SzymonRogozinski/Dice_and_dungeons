@@ -5,6 +5,7 @@ import Dice.DiceSide;
 import Equipment.Items.*;
 import GUI.GUISettings;
 import Game.GameManager;
+import Game.GameUtils;
 import Game.Tags;
 
 import javax.swing.*;
@@ -13,10 +14,10 @@ import java.awt.*;
 
 public class ItemInfoPanel extends JPanel {
 
-    private CardLayout layout;
-    private DiceItemInfoPanel diceItemInfoPanel;
-    private ArmorInfoPanel armorInfoPanel;
-    private DiceLessItemInfoPanel diceLessItemInfoPanel;
+    private final CardLayout layout;
+    private final DiceItemInfoPanel diceItemInfoPanel;
+    private final ArmorInfoPanel armorInfoPanel;
+    private final DiceLessItemInfoPanel diceLessItemInfoPanel;
 
     public ItemInfoPanel(Border border){
         this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
@@ -56,8 +57,8 @@ public class ItemInfoPanel extends JPanel {
 
     private class DiceItemInfoPanel extends JPanel{
         private final static double MANA_COST_TO_ALL_PROPORTION=0.5;
-        private JLabel nameLabel, requirements, manaCost, target,attribute;
-        private DiceSidesPanel diceSidesPanel;
+        private final JLabel nameLabel, requirements, manaCost, target,attribute;
+        private final DiceSidesPanel diceSidesPanel;
 
         public DiceItemInfoPanel() {
             this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
@@ -101,12 +102,12 @@ public class ItemInfoPanel extends JPanel {
             nameLabel.setText(item.name);
 
             if(item instanceof ActionItem aItem) {
-                diceSidesPanel.setDiceSides(aItem.getAction().getDice().getSides());
+                diceSidesPanel.setDiceSides(aItem.getAction().getDice().sides());
                 manaCost.setText("");
                 target.setText("Target: "+aItem.getAction().getTarget().toString());
                 attribute.setText("Amplify by: "+aItem.getScaleAttribute());
             } else if (item instanceof SpellItem sItem) {
-                diceSidesPanel.setDiceSides(sItem.getAction().getDice().getSides());
+                diceSidesPanel.setDiceSides(sItem.getAction().getDice().sides());
                 manaCost.setText("Mana: "+sItem.getAction().getManaCost());
                 target.setText("target: "+sItem.getAction().getTarget().toString());
                 attribute.setText("amplify by: "+sItem.getScaleAttribute());
@@ -132,7 +133,7 @@ public class ItemInfoPanel extends JPanel {
 
     private class ArmorInfoPanel extends JPanel{
 
-        private JLabel nameLabel, requirementsLabel, bonusLabel;
+        private final JLabel nameLabel, requirementsLabel, bonusLabel;
         private final static String[] statsName=new String[]{"Strength","Endurance","Intelligence","Charisma","Cunning","Luck"};
 
         public ArmorInfoPanel() {
@@ -197,7 +198,7 @@ public class ItemInfoPanel extends JPanel {
 
     private class DiceLessItemInfoPanel extends JPanel{
 
-        private JLabel nameLabel, effectLabel,quantityLabel, targetLabel;
+        private final JLabel nameLabel, effectLabel,quantityLabel, targetLabel;
 
         public DiceLessItemInfoPanel() {
             this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
@@ -251,10 +252,11 @@ public class ItemInfoPanel extends JPanel {
 
     private class DiceSidesPanel extends JPanel{
 
-        private JLabel[] diceSides;
+        private final JLabel[] diceSides;
+        private final int diceSize;
 
         public DiceSidesPanel() {
-            int diceSize= Math.min((GUISettings.PANEL_SIZE-10)/6,GUISettings.SMALL_PANEL_SIZE/2);
+            diceSize= Math.min((GUISettings.PANEL_SIZE-10)/6,GUISettings.SMALL_PANEL_SIZE/2);
             this.setPreferredSize(new Dimension(diceSize*6+6,diceSize));
             this.setBackground(Color.BLACK);
             FlowLayout diceLayout = new FlowLayout(FlowLayout.CENTER);
@@ -272,9 +274,8 @@ public class ItemInfoPanel extends JPanel {
         }
 
         void setDiceSides(DiceSide[] sides){
-            for(int i=0;i<6;i++){
+            for(int i=0;i<6;i++)
                 diceSides[i].setIcon(sides[i].getIcon());
-            }
         }
     }
 

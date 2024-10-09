@@ -14,7 +14,7 @@ public class PoisonStatus extends GameStatus{
     @Override
     public void effect(GameCharacter character) throws StatusException{
         try {
-            character.dealDamage(getSumUpValue());
+            character.receiveDamage(getSumUpValue());
         }catch (CharacterDieException e){
             throw new StatusException(StatusException.DEATH);
         }

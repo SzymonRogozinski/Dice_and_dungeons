@@ -12,7 +12,7 @@ public class DefenseBonusAction implements DiceAction {
     private static final String id="DefenseBonus";
     private static final String imagePath="Texture/StatusIcons/DefendDice.png";
     private final int value;
-    private boolean actionOnSelf;
+    private final boolean actionOnSelf;
 
     public DefenseBonusAction(int value,boolean actionOnSelf){
         this.actionOnSelf=actionOnSelf;

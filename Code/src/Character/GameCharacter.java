@@ -63,7 +63,7 @@ public class GameCharacter extends Tagable {
         return luck;
     }
 
-    public void dealDamage(int damage) throws CharacterDieException {
+    public void receiveDamage(int damage) throws CharacterDieException {
         throw new RuntimeException("Method not implemented");
     }
 
@@ -75,9 +75,10 @@ public class GameCharacter extends Tagable {
         this.shield+=shield;
     }
 
-    public void onTurnStart(){
+    public void clearShield(){
         this.shield=0;
     }
+
     public void setShield(int newShield){
         shield=newShield;
     }

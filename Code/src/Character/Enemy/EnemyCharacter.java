@@ -46,7 +46,7 @@ public class EnemyCharacter extends GameCharacter {
     }
 
     @Override
-    public void dealDamage(int damage) throws CharacterDieException {
+    public void receiveDamage(int damage) throws CharacterDieException {
         damage= (int) (damage * getDamageReceivingMod());
         int shield = getShield();
         shield-=damage;

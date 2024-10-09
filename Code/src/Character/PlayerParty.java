@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class PlayerParty {
 
-    private ArrayList<PlayerCharacter> characters;
+    private final ArrayList<PlayerCharacter> characters;
     private int maxHealth,currentHealth,maxMana,currentMana,shield;
     private final PartyBackpack backpack;
 
@@ -54,7 +54,7 @@ public class PlayerParty {
         return currentHealth;
     }
 
-    public void dealDamage(int damage) {
+    public void receiveDamage(int damage) {
         shield-=damage;
         if(shield<0){
             currentHealth+=shield;
@@ -95,6 +95,7 @@ public class PlayerParty {
     }
 
     public int getShield(){return shield;}
+
     public void onTurnStart(){
         this.shield=0;
     }

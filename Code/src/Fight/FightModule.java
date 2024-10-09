@@ -44,6 +44,7 @@ public class FightModule {
         this.characterTurn=0;
         this.state=state;
         this.master = new DiceMaster();
+        this.enemies=new ArrayList<>();
     }
 
     public ActionTarget getTargetType() {
@@ -303,7 +304,7 @@ public class FightModule {
         if(!playerTurn && enemies.get(characterTurn).getCurrentHealth()==0)
             setNextCharacterTurn();
         if(!playerTurn)
-            enemies.get(characterTurn).onTurnStart();
+            enemies.get(characterTurn).clearShield();
     }
 
     public int getEnemyCount(){
