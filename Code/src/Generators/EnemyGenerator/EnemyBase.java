@@ -64,7 +64,9 @@ public class EnemyBase implements Cloneable{
     }
 
     @Override
-    protected Object clone() {
-        return new EnemyBase(stats.clone(),category,name,image, (ArrayList<EnemyAction>) actions.clone(),cost);
+    protected Object clone() throws CloneNotSupportedException {
+        ArrayList<EnemyAction> arrayCopy = new ArrayList<>(actions);
+
+        return new EnemyBase(stats.clone(),category,name,image, arrayCopy,cost);
     }
 }

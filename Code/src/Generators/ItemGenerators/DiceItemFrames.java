@@ -51,48 +51,29 @@ public class DiceItemFrames {
         return SPELL_FRAMES[i].getDiceItemBase(points);
     }
 
-    private static class DiceItemFrame {
-        final double[] values;
-        final int diceAction;
-        final String[] names;
-        final ActionTarget target;
-        final int[] secondaryActionType;
-        final DiceLambda diceLambda;
-        final boolean actionOnSelf;
-        final ImageIcon icon;
-        final String attribute;
+    private record DiceItemFrame(double[] values, int diceAction, String[] names, ActionTarget target,
+                                 int[] secondaryActionType, DiceLambda diceLambda, boolean actionOnSelf, ImageIcon icon,
+                                 String attribute) {
 
-        DiceItemFrame(double[] values, int diceAction, String[] names, ActionTarget target,int[] secondaryActionType,DiceLambda diceLambda,boolean actionOnSelf,ImageIcon icon,String attribute) {
-            this.values = values;
-            this.diceAction = diceAction;
-            this.names = names;
-            this.target = target;
-            this.secondaryActionType=secondaryActionType;
-            this.diceLambda=diceLambda;
-            this.actionOnSelf=actionOnSelf;
-            this.icon=icon;
-            this.attribute=attribute;
-        }
+        DiceItemBase getDiceItemBase(int points) {
+                //Count points
+                int[] stats = new int[6];
+                int count = 0;
+                for (int i = 0; i < 6; i++) {
+                    int s = (int) (values[i] * points);
+                    stats[i] = s;
+                    count += s;
+                }
+                //Add rest
+                int i = 5;
+                while (count < points) {
+                    if (i < 0 || stats[i] == 0)
+                        i = 5;
+                    stats[i--] += 1;
+                    count++;
+                }
 
-        DiceItemBase getDiceItemBase(int points){
-            //Count points
-            int [] stats = new int[6];
-            int count=0;
-            for(int i=0;i<6;i++) {
-                int s = (int) (values[i] * points);
-                stats[i] = s;
-                count+=s;
+                return new DiceItemBase(stats, diceAction, names, target, secondaryActionType, diceLambda, actionOnSelf, icon, attribute);
             }
-            //Add rest
-            int i=5;
-            while(count<points){
-                if(i<0 || stats[i]==0)
-                    i=5;
-                stats[i--]+=1;
-                count++;
-            }
-
-            return new DiceItemBase(stats,diceAction,names,target,secondaryActionType,diceLambda,actionOnSelf,icon,attribute);
         }
-    }
 }

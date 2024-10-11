@@ -17,7 +17,11 @@ public class EnemyGenerator extends Generator {
 
     public static EnemyCharacter generate(EnemyCategory category, int cost, int minHP) {
         EnemyBase base = EnemyBase.getBase(category, cost);
-        return generate((EnemyBase)base.clone(), cost,minHP);
+        try {
+            return generate((EnemyBase) base.clone(), cost, minHP);
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException("Error while cloning enemy base!");
+        }
     }
 
     public static EnemyCharacter generate(EnemyBase base, int cost, int minHP) {
@@ -42,8 +46,14 @@ public class EnemyGenerator extends Generator {
     public static ArrayList<EnemyCharacter> generateMore(int cost, int minHP) {
         ArrayList<EnemyCharacter> enemies = new ArrayList<>();
         EnemyBase base = EnemyBase.getBase(EnemyCategory.Minion, cost);
-        for (int i = 0; i < ENEMY_GROUP_COUNT; i++)
-            enemies.add(generate((EnemyBase) base.clone(), cost,minHP));
+        for (int i = 0; i < ENEMY_GROUP_COUNT; i++) {
+            try {
+                enemies.add(generate((EnemyBase) base.clone(), cost,minHP));
+            }catch (CloneNotSupportedException e){
+                throw new RuntimeException("Error while cloning enemy base!");
+            }
+        }
+
         return enemies;
     }
 
@@ -58,7 +68,7 @@ public class EnemyGenerator extends Generator {
     // If base have adjectives, get one with the highest value
     private static String generateName(EnemyBase base){
         HashMap<String,Integer> map = new HashMap<>();
-        String adjName=base.adjectives.isEmpty()?null:base.adjectives.get(0).name;
+        String adjName=base.adjectives.isEmpty()?null:base.adjectives.getFirst().name;
         for(EnemyAdjective adj:base.adjectives){
             if(map.containsKey(adj.name)){
                 int oldCost = map.get(adj.name);

@@ -84,7 +84,7 @@ public class ItemDictionary {
         name = shortName;
         //Class-Tag name
         if(!base.tags.isEmpty())
-            name = getNameFromTag(base.tags.get(0))+" "+name;
+            name = getNameFromTag(base.tags.getFirst())+" "+name;
         //ADJECTIVES names
         if(GameManager.getRandom().nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
             String[] adjNames = ADJECTIVES.get(base.firstAction);
@@ -106,7 +106,7 @@ public class ItemDictionary {
             name = WIDE_RANGE[GameManager.getRandom().nextInt(WIDE_RANGE.length)]+" "+name;
         //Class-Tag name
         if(!base.tags.isEmpty())
-            name = getNameFromTag(base.tags.get(0))+" "+name;
+            name = getNameFromTag(base.tags.getFirst())+" "+name;
         //ADJECTIVES_FOR_SPELLS names
         if(GameManager.getRandom().nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
             String[] adjNames = ADJECTIVES_FOR_SPELLS.get(base.firstAction);
