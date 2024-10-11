@@ -1,7 +1,7 @@
 package Equipment;
 
 import Character.PlayerCharacter;
-import Equipment.Items.EquipableItem;
+import Equipment.Items.EquippableItem;
 import Equipment.Items.Item;
 import Equipment.Items.UsableItem;
 import Equipment.Items.UsedAllOfItemsException;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class PartyBackpack {
 
-    private ArrayList<Item> items;
+    private final ArrayList<Item> items;
     private int pageNumber;
     private int maxSmallPages;
     private boolean isEquipment;
@@ -19,10 +19,6 @@ public class PartyBackpack {
 
     public PartyBackpack(ArrayList<Item> items){
         this.items = items;
-    }
-
-    public ArrayList<Item> getAllItems() {
-        return items;
     }
 
     public ArrayList<Item> getPageOfItems() {
@@ -53,7 +49,7 @@ public class PartyBackpack {
     public ArrayList<Item> getPageOfItemsForCharacter(PlayerCharacter player) {
         ArrayList<Item> characterItems = new ArrayList<>();
         for (Item i:items){
-            if(i instanceof EquipableItem eItem && eItem.canEquip(player))
+            if(i instanceof EquippableItem eItem && eItem.canEquip(player))
                 characterItems.add(i);
         }
         maxSmallPages=characterItems.size()/smallPageSize;
@@ -76,7 +72,7 @@ public class PartyBackpack {
     public void putToBackpack(Item item){
         if(item==null)
             return;
-        int id=0;
+        int id;
         if(item instanceof UsableItem usableItem && (id=items.indexOf(item))!=-1){
             ((UsableItem) items.get(id)).addNewItems(usableItem.getNumberOfItems());
         }else{

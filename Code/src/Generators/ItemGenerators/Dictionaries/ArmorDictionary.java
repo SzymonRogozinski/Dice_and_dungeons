@@ -25,7 +25,7 @@ public class ArmorDictionary extends ItemDictionary {
 
     public static String getArmorPartName(int armorPart){
         String[] names = ARMOR_PART_NAMES.get(armorPart);
-        return names[GameManager.random.nextInt(names.length)];
+        return names[GameManager.getRandom().nextInt(names.length)];
     }
 
     public static String getAdjectiveName(int statIndex){
@@ -34,6 +34,6 @@ public class ArmorDictionary extends ItemDictionary {
 
     public static ImageIcon getArmorPartIcon(int armorPart){
         ImageIcon[] icons = ARMOR_PART_ICONS.get(armorPart);
-        return icons[GameManager.random.nextInt(icons.length)];
+        return icons[GameManager.getRandom().nextInt(icons.length)];
     }
 }

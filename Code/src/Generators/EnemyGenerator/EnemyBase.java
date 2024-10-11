@@ -40,7 +40,7 @@ public class EnemyBase implements Cloneable{
 
     public static EnemyBase getBase(EnemyCategory category, int cost){
         EnemyBase[] bases = BASES.get(category);
-        EnemyBase base = bases[GameManager.random.nextInt(bases.length)];
+        EnemyBase base = bases[GameManager.getRandom().nextInt(bases.length)];
         return base.cost>cost?getBase(category,cost):base;
     }
 

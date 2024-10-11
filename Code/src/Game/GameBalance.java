@@ -1,11 +1,5 @@
 package Game;
 
-import Loot.LootSettings;
-import Walking.WalkingSettings;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class GameBalance {
     public static final int REROLLS_DIVIDE=16;
     public static final int MIN_REROLLS=3;

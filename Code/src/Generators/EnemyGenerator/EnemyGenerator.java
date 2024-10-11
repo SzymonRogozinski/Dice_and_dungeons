@@ -48,7 +48,7 @@ public class EnemyGenerator extends Generator {
     }
 
     public static ArrayList<EnemyCharacter> generateEnemyList(int cost, int minHP){
-        int roll = GameManager.random.nextInt(3);
+        int roll = GameManager.getRandom().nextInt(3);
         if(roll==2)
             return new ArrayList<>(List.of(EnemyGenerator.generate(EnemyCategory.Strong,cost,minHP)));
         else

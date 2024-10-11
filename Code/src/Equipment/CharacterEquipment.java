@@ -17,9 +17,9 @@ public class CharacterEquipment {
     public final static int BAG_SLOT=13;
     public final static int USE_SLOT=14;
 
-    private ActionItem[] actionItems;
-    private SpellItem[] spellItems;
-    private ArmorItem[] armorItems;
+    private final ActionItem[] actionItems;
+    private final SpellItem[] spellItems;
+    private final ArmorItem[] armorItems;
 
     private final PlayerCharacter player;
 
@@ -59,7 +59,7 @@ public class CharacterEquipment {
     }
 
     public boolean equip(Item item, int slot, int slotType){
-        if(!(item instanceof EquipableItem eItem) || !eItem.canEquip(player))
+        if(!(item instanceof EquippableItem eItem) || !eItem.canEquip(player))
             return false;
 
         if(item instanceof ActionItem aItem && slotType==ACTION_SLOT){
@@ -86,10 +86,8 @@ public class CharacterEquipment {
             }
             armorItems[slot] = arItem;
             arItem.equip(player);
-        }else{
-            System.err.println("Error! Cannot equip item.");
+        }else
             return false;
-        }
         return true;
     }
 
@@ -106,8 +104,6 @@ public class CharacterEquipment {
             ArmorItem arItem = armorItems[slot];
             arItem.deEquip(player);
             armorItems[slot]=null;
-        }else{
-            System.err.println("Error! Cannot de equip item.");
         }
     }
 }

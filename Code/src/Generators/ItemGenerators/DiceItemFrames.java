@@ -42,12 +42,12 @@ public class DiceItemFrames {
     };
 
     public static DiceItemBase getRandomDiceItemBase(int points){
-        int i = GameManager.random.nextInt(DICE_ITEM_FRAMES.length);
+        int i = GameManager.getRandom().nextInt(DICE_ITEM_FRAMES.length);
         return DICE_ITEM_FRAMES[i].getDiceItemBase(points);
     }
 
     public static DiceItemBase getRandomSpellItemBase(int points){
-        int i = GameManager.random.nextInt(SPELL_FRAMES.length);
+        int i = GameManager.getRandom().nextInt(SPELL_FRAMES.length);
         return SPELL_FRAMES[i].getDiceItemBase(points);
     }
 

@@ -28,7 +28,7 @@ public class WalkingLevel {
 
     public WalkingLevel(GameLevel levelSetting) {
         MapCreator creator;
-        WalkingSettings settings = levelSetting.getWalkingSettings();
+        WalkingSettings settings = levelSetting.walkingSettings();
         if(settings.seed==0)
             creator=new MapCreator();
         else
@@ -37,10 +37,10 @@ public class WalkingLevel {
             throw new RuntimeException("Dungeon map was not generated!");
         Map map=creator.getMap();
         //Loading enemies
-        this.enemies=new Enemies(map,settings.path, levelSetting.getEnemyStrength(), levelSetting.getMinHP());
+        this.enemies=new Enemies(map,settings.path, levelSetting.enemyStrength(), levelSetting.minHP());
         //Loading map
         this.gameMap =new GameMap(map,settings.path,settings.bossLevel);
-        boss=settings.bossLevel?EnemyGenerator.generate(EnemyCategory.Boss,levelSetting.getEnemyStrength(), levelSetting.getMinHP()):null;
+        boss=settings.bossLevel?EnemyGenerator.generate(EnemyCategory.Boss,levelSetting.enemyStrength(), levelSetting.minHP()):null;
         setEnemy();
         enemyThread=new EnemyThread();
         //Add player

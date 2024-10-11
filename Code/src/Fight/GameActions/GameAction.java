@@ -4,12 +4,12 @@ import Character.PlayerCharacter;
 import Dice.Dice;
 import Dice.DiceAction.DiceAction;
 import Fight.ActionTarget;
-import Game.Tagable;
+import Game.Taggable;
 import Game.Tags;
 
 import java.util.ArrayList;
 
-public abstract class GameAction extends Tagable {
+public abstract class GameAction extends Taggable {
 
     private final Dice dice;
     private final ActionTarget target;

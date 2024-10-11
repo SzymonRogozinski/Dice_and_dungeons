@@ -56,7 +56,7 @@ public class EnemyAdjective {
     ));
 
     public static EnemyAdjective getAdjective(int cost){
-        EnemyAdjective adjective = ADJECTIVES.get(GameManager.random.nextInt(ADJECTIVES.size()));
+        EnemyAdjective adjective = ADJECTIVES.get(GameManager.getRandom().nextInt(ADJECTIVES.size()));
         return adjective.cost>cost?getAdjective(cost):adjective;
     }
 

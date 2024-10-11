@@ -12,7 +12,6 @@ import GUI.MenuGUI.MenuModule;
 import GUI.MenuGUI.MenuState;
 import GUI.MenuGUI.MenuView;
 import GUI.WalkingGUI.WalkingGUIState;
-import GUI.WalkingGUI.WalkingKeyListener;
 import GUI.WalkingGUI.WalkingView;
 import Loot.LootModule;
 import Walking.WalkingModule;

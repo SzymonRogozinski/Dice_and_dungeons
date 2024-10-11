@@ -1,11 +1,11 @@
 package Equipment.Items;
 
-import Game.Tagable;
+import Game.Taggable;
 import Game.Tags;
 
 import javax.swing.*;
 
-public abstract class Item extends Tagable {
+public abstract class Item extends Taggable {
 
     private final ImageIcon icon;
     private final ItemQuality quality;

@@ -1,9 +1,9 @@
 package Game;
 
-public abstract class Tagable {
+public abstract class Taggable {
     public final Tags[] tags;
 
-    public Tagable(Tags[] tags) {
+    public Taggable(Tags[] tags) {
         this.tags = tags;
     }
 

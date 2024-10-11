@@ -5,7 +5,7 @@ import Game.Tags;
 
 import javax.swing.*;
 
-public class ArmorItem extends Item implements EquipableItem{
+public class ArmorItem extends Item implements EquippableItem {
 
     private final int strength,endurance,intelligence,charisma,cunning,luck,bodyPart;
 

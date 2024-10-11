@@ -12,7 +12,7 @@ import Game.PlayerInfo;
 import Game.Tags;
 
 public class EquipmentModule {
-    private EquipmentGUIState state;
+    private final EquipmentGUIState state;
     private int currentCharacter=0;
     private ItemSlot pointedItem;
     private ItemSlot clickedSlot;
@@ -65,8 +65,7 @@ public class EquipmentModule {
     }
 
     public void equipItem(){
-        if(clickedSlot==null || pointedItem==null || clickedSlot.getItem()==null)
-            ;
+        if(clickedSlot==null || pointedItem==null || clickedSlot.getItem()==null);
         else if(clickedSlot.getSlotType()==pointedItem.getSlotType())
             swapItems();
         else if (clickedSlot.getSlotType()==CharacterEquipment.BAG_SLOT && pointedItem.getSlotType()==CharacterEquipment.USE_SLOT)

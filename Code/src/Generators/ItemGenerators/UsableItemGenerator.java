@@ -43,12 +43,12 @@ public class UsableItemGenerator {
     };
 
     public static UsableItem generate(ItemQuality quality){
-        int count = GameManager.random.nextInt(MIN_ITEMS_NUMBER,MAX_ITEMS_NUMBER+1);
+        int count = GameManager.getRandom().nextInt(MIN_ITEMS_NUMBER,MAX_ITEMS_NUMBER+1);
         UsableItem uItem;
         switch (quality){
-            case COMMON -> uItem = COMMONS[GameManager.random.nextInt(COMMONS.length)];
-            case RARE -> uItem = RARES[GameManager.random.nextInt(RARES.length)];
-            case LEGENDARY -> uItem = LEGENDS[GameManager.random.nextInt(LEGENDS.length)];
+            case COMMON -> uItem = COMMONS[GameManager.getRandom().nextInt(COMMONS.length)];
+            case RARE -> uItem = RARES[GameManager.getRandom().nextInt(RARES.length)];
+            case LEGENDARY -> uItem = LEGENDS[GameManager.getRandom().nextInt(LEGENDS.length)];
             default -> throw new RuntimeException("Quality not implemented!");
         }
         return multiple(uItem,count);

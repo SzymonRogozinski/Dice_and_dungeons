@@ -6,7 +6,7 @@ import Game.Tags;
 
 import javax.swing.*;
 
-public class SpellItem extends Item  implements EquipableItem{
+public class SpellItem extends Item  implements EquippableItem {
 
     private final SpellAction action;
 

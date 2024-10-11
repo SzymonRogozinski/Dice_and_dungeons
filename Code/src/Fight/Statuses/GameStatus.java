@@ -1,14 +1,14 @@
 package Fight.Statuses;
 
 import Character.GameCharacter;
-import Game.Tagable;
+import Game.Taggable;
 import Game.Tags;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class GameStatus extends Tagable {
+public abstract class GameStatus extends Taggable {
 
     private final ArrayList<Integer> values;
     private int sumUpValue;

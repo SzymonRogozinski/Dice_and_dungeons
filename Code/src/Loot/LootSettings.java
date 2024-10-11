@@ -22,7 +22,7 @@ public class LootSettings {
     }
 
     public int getQualityId(){
-        double randomValue = GameManager.random.nextDouble();
+        double randomValue = GameManager.getRandom().nextDouble();
         double probability = 0;
         int i=0;
         for(;i<probabilities.length;i++){

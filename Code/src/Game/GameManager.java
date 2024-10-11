@@ -13,10 +13,9 @@ import java.util.Random;
 
 public class GameManager {
 
-    public static final Random random = new Random();
+    private static final Random random = new Random();
     private static FightModule fightModule;
     private static EquipmentModule equipmentModule;
-    private static PlayerParty party;
     private static LootModule lootModule;
     private static WalkingModule walkingModule;
     private static MenuModule menuModule;
@@ -121,5 +120,9 @@ public class GameManager {
 
     public static boolean isBossFight() {
         return bossFight;
+    }
+
+    public static Random getRandom(){
+        return random;
     }
 }

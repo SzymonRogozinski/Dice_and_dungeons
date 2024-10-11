@@ -58,7 +58,7 @@ public class ItemDictionary {
         String[] names = CLASS_TAGS.get(tag);
         if(names==null)
             throw new RuntimeException("Tag "+tag+" has no name!");
-        return names[GameManager.random.nextInt(names.length)];
+        return names[GameManager.getRandom().nextInt(names.length)];
     }
 
     public static Tags[] getTagsFromAction(int action1,int action2){
@@ -86,14 +86,14 @@ public class ItemDictionary {
         if(!base.tags.isEmpty())
             name = getNameFromTag(base.tags.get(0))+" "+name;
         //ADJECTIVES names
-        if(GameManager.random.nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
+        if(GameManager.getRandom().nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
             String[] adjNames = ADJECTIVES.get(base.firstAction);
-            String adj = adjNames[GameManager.random.nextInt(adjNames.length)];
+            String adj = adjNames[GameManager.getRandom().nextInt(adjNames.length)];
             name = String.format(adj,name);
         }
         if(base.secondAction!=ActionEnum.NULL_ACTION){
             String[] adjNames = ADJECTIVES.get(base.secondAction);
-            String adj = adjNames[GameManager.random.nextInt(adjNames.length)];
+            String adj = adjNames[GameManager.getRandom().nextInt(adjNames.length)];
             name = String.format(adj,name);
         }
         return name;
@@ -103,19 +103,19 @@ public class ItemDictionary {
         String name=shortName;
         //Range name
         if(base.target== ActionTarget.PLAYER_PARTY || base.target==ActionTarget.ALL_ENEMIES)
-            name = WIDE_RANGE[GameManager.random.nextInt(WIDE_RANGE.length)]+" "+name;
+            name = WIDE_RANGE[GameManager.getRandom().nextInt(WIDE_RANGE.length)]+" "+name;
         //Class-Tag name
         if(!base.tags.isEmpty())
             name = getNameFromTag(base.tags.get(0))+" "+name;
         //ADJECTIVES_FOR_SPELLS names
-        if(GameManager.random.nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
+        if(GameManager.getRandom().nextDouble()<=CHANCE_FOR_FIRST_ACTION_NAME) {
             String[] adjNames = ADJECTIVES_FOR_SPELLS.get(base.firstAction);
-            String adj = adjNames[GameManager.random.nextInt(adjNames.length)];
+            String adj = adjNames[GameManager.getRandom().nextInt(adjNames.length)];
             name = String.format(adj,name);
         }
         if(base.secondAction!=ActionEnum.NULL_ACTION){
             String[] adjNames = ADJECTIVES_FOR_SPELLS.get(base.secondAction);
-            String adj = adjNames[GameManager.random.nextInt(adjNames.length)];
+            String adj = adjNames[GameManager.getRandom().nextInt(adjNames.length)];
             name = String.format(adj,name);
         }
         return name;

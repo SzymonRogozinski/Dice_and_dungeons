@@ -34,7 +34,7 @@ public class DiceItemGenerator extends Generator {
             case RARE -> {
                 points = getPoints(GeneratorConst.MEDIUM_POINTS*GeneratorConst.RARE_MOD);
                 //Add tag
-                if (GameManager.random.nextBoolean()) {
+                if (GameManager.getRandom().nextBoolean()) {
                     tag = getRandomTag();
                     points += GeneratorConst.TAG_BONUS*GeneratorConst.RARE_MOD;
                 }
@@ -51,7 +51,7 @@ public class DiceItemGenerator extends Generator {
         // Item Concentrated
         if(quality == ItemQuality.COMMON)
             basePoints=points;
-        else if(GameManager.random.nextDouble()>=CONCENTRATED_PROP) {
+        else if(GameManager.getRandom().nextDouble()>=CONCENTRATED_PROP) {
             basePoints = points;
         }else
             basePoints = GeneratorConst.MEDIUM_POINTS*GeneratorConst.COMMON_MOD;
@@ -63,7 +63,7 @@ public class DiceItemGenerator extends Generator {
             if(generationLocked || points<(int)(startPoints*EQUALITY_EDGE)){
                 redistributePointsEqual(base,points);
                 points=0;
-            }else if(base.haveEmptySide && GameManager.random.nextDouble()<REPLACE_EMPTY_SIDE_PROP){
+            }else if(base.haveEmptySide && GameManager.getRandom().nextDouble()<REPLACE_EMPTY_SIDE_PROP){
                 points-=replaceEmptySide(base,points);
             }else if (base.secondaryActionList.length>0){
                 base.secondActionValues=new int[6];
@@ -76,7 +76,7 @@ public class DiceItemGenerator extends Generator {
         }
         Tags [] tags = tag==null ? new Tags[]{}:new Tags[]{tag};
         base.tags=new ArrayList<>(List.of(tags));
-        String shortName = base.names[GameManager.random.nextInt(base.names.length)];
+        String shortName = base.names[GameManager.getRandom().nextInt(base.names.length)];
         String name = ItemDictionary.getItemNameFromItemBase(base,shortName);
         Dice dice = DiceFactory.buildDice(base);
         Tags[] actionTags= ItemDictionary.getTagsFromAction(base.firstAction,base.secondAction);
@@ -88,7 +88,7 @@ public class DiceItemGenerator extends Generator {
 
     private static void addActionRandomly(DiceItemBase base, int points){
         int bound = base.firstActionValues[0]==0?5:4;
-        int roll= GameManager.random.nextInt(bound);
+        int roll= GameManager.getRandom().nextInt(bound);
         switch (roll){
             case 0 -> addEffectEqualAll(base,points);
             case 1 -> addEffectEqualFullSides(base,points);
@@ -188,7 +188,7 @@ public class DiceItemGenerator extends Generator {
     private static void getRandomAction(DiceItemBase base){
         if (base.secondaryActionList.length==0)
             return;
-        base.secondAction = base.secondaryActionList[GameManager.random.nextInt(base.secondaryActionList.length)];
+        base.secondAction = base.secondaryActionList[GameManager.getRandom().nextInt(base.secondaryActionList.length)];
         if(base.secondAction == base.firstAction)
             getRandomAction(base);
     }

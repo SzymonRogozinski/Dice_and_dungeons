@@ -6,7 +6,7 @@ import Game.Tags;
 
 import javax.swing.*;
 
-public class ActionItem extends Item implements EquipableItem{
+public class ActionItem extends Item implements EquippableItem {
 
     private final ItemAction action;
 

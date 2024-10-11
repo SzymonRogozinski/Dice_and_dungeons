@@ -1,15 +1,11 @@
 package Walking;
 
-import Game.GameBalance;
 import Game.GameManager;
 import Game.PlayerInfo;
 import Walking.Drones.Drone;
 import Walking.Collision.*;
 import Walking.Drones.EnemyDrone;
 import Walking.Places.*;
-
-import java.io.*;
-import java.util.*;
 
 import dg.generator.dungeon.Map;
 
@@ -113,7 +109,7 @@ public class GameMap {
             originalGamePlaces[gc.getPosY() + dy][gc.getPosX() + dx] = new SpaceGamePlace(PATH);
         }catch(ChestOpenException e){
             System.out.println("You open a chest!");
-            GameManager.getLootModule().getLoot(GameManager.getCurrentLevel().getLootSettings(),false);
+            GameManager.getLootModule().getLoot(GameManager.getCurrentLevel().lootSettings(),false);
             collisionDetected=true;
         }catch(CollisionException e) {
             //Should not happens!

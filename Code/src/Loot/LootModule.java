@@ -70,11 +70,11 @@ public class LootModule {
     }
 
     private Item generateLoot(ItemQuality quality){
-        double roll = GameManager.random.nextDouble();
+        double roll = GameManager.getRandom().nextDouble();
         if(roll<=USABLE_PROB)
             return UsableItemGenerator.generate(quality);
         else{
-            roll = GameManager.random.nextDouble();
+            roll = GameManager.getRandom().nextDouble();
             if(ARMOR_PROB>=roll)
                 return ArmorGenerator.generateArmor(quality);
             else if(DICE_PROB>=roll)

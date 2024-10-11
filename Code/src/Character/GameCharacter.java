@@ -2,13 +2,13 @@ package Character;
 
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusEvaporatedException;
-import Game.Tagable;
+import Game.Taggable;
 import Game.Tags;
 
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class GameCharacter extends Tagable {
+public class GameCharacter extends Taggable {
     private int strength,endurance,intelligence,charisma,cunning,luck,shield;
     private double statisticMod,damageReceivingMod;
     private final ArrayList<GameStatus> statuses;
