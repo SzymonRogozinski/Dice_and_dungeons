@@ -33,7 +33,7 @@ public class PlayerCharacter extends GameCharacter{
     }
 
     public int getDiceNumber(int attribute){
-        attribute*=getStatisticMod();
+        attribute=(int)(attribute*getStatisticMod());
         int diceNumber=(attribute-GameBalance.MIN_STAT_VALUE)/GameBalance.DICES_DIVIDE + GameBalance.MIN_DICES;
         return Math.min(Math.max(diceNumber, 1),GameBalance.MAX_DICE);
     }
@@ -47,9 +47,9 @@ public class PlayerCharacter extends GameCharacter{
     }
 
     @Override
-    public void dealDamage(int damage) throws CharacterDieException {
-        damage*=getDamageReceivingMod();
-        PlayerInfo.getParty().dealDamage(damage);
+    public void receiveDamage(int damage) throws CharacterDieException {
+        damage=(int)(damage*getDamageReceivingMod());
+        PlayerInfo.getParty().receiveDamage(damage);
         if(PlayerInfo.getParty().getCurrentHealth()==0)
             throw new CharacterDieException();
     }

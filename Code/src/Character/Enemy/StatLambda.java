@@ -1,5 +1,5 @@
 package Character.Enemy;
 
 public interface StatLambda {
-    int myMethod(EnemyCharacter e);
+    int calcPower(EnemyCharacter e);
 }

@@ -34,7 +34,6 @@ public class ActionListPanel extends JPanel {
         this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
         this.layout=new CardLayout();
         this.setLayout(layout);
-        this.setBorder(border);
         this.setBackground(Color.BLACK);
 
         ArrayList<JButton> actionButtons1=new ArrayList<>();

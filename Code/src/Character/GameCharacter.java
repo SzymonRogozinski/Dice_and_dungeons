@@ -63,7 +63,7 @@ public class GameCharacter extends Taggable {
         return luck;
     }
 
-    public void dealDamage(int damage) throws CharacterDieException {
+    public void receiveDamage(int damage) throws CharacterDieException {
         throw new RuntimeException("Method not implemented");
     }
 
@@ -74,6 +74,16 @@ public class GameCharacter extends Taggable {
     public void addShield(int shield){
         this.shield+=shield;
     }
+
+    public void clearShield(){
+        this.shield=0;
+    }
+
+    public void setShield(int newShield){
+        shield=newShield;
+    }
+
+    public int getShield(){return shield;}
 
     public void addStatus(GameStatus newStatus){
         for(GameStatus status:statuses){

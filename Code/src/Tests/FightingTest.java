@@ -37,13 +37,13 @@ public class FightingTest {
         fightView =new FightView();
         state=new FightGUIState(fightView);
 
-        ActionItem item1 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getStrength()),new Tags[]{Tags.ATTACK}), new Tags[]{},null,"Sword","Sword", ItemQuality.COMMON);
-        ActionItem item2 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{2,3,0},{2,3,0},{2,3,0},{2,3,0},{2,3,0}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getCharisma()),new Tags[]{Tags.DEFENCE}), new Tags[]{},null,"Shield","Shield",ItemQuality.COMMON);
-        ActionItem item3 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{0},{0},{6,1},{6,1},{6,1}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getCunning()), new Tags[]{}),new Tags[]{},null,"Trap","Trap",ItemQuality.COMMON);
-        ActionItem item4 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{8,3,0},{8,3,0},{8,3,0},{8,3,0},{8,3,0}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getCharisma()),new Tags[]{Tags.DEFENCE}), new Tags[]{},null,"Sword breaker","Sword breaker",ItemQuality.COMMON);
-        ActionItem item5 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getStrength()),new Tags[]{Tags.ATTACK}), new Tags[]{},null,"Mace","Mace",ItemQuality.COMMON);
-        ActionItem item6 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{0},{4,3},{4,3},{4,3},{4,3}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),new Tags[]{Tags.MAGIC}), new Tags[]{},null,"Magic sphere","Magic sphere",ItemQuality.COMMON);
-        ActionItem item7 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{0},{5,3},{5,3},{5,3},{5,3}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getCunning()),new Tags[]{}), new Tags[]{},null,"Snake","Snake",ItemQuality.COMMON);
+        ActionItem item1 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getStrength()),new Tags[]{Tags.ATTACK}), new Tags[]{},null,"Sword","Sword", ItemQuality.COMMON,"");
+        ActionItem item2 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{2,3,0},{2,3,0},{2,3,0},{2,3,0},{2,3,0}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getCharisma()),new Tags[]{Tags.DEFENCE}), new Tags[]{},null,"Shield","Shield",ItemQuality.COMMON,"");
+        ActionItem item3 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{0},{0},{6,1},{6,1},{6,1}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getCunning()), new Tags[]{}),new Tags[]{},null,"Trap","Trap",ItemQuality.COMMON,"");
+        ActionItem item4 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{8,3,0},{8,3,0},{8,3,0},{8,3,0},{8,3,0}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getCharisma()),new Tags[]{Tags.DEFENCE}), new Tags[]{},null,"Sword breaker","Sword breaker",ItemQuality.COMMON,"");
+        ActionItem item5 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{0},{0},{1,4},{1,4},{1,6}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getStrength()),new Tags[]{Tags.ATTACK}), new Tags[]{},null,"Mace","Mace",ItemQuality.COMMON,"");
+        ActionItem item6 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{0},{4,3},{4,3},{4,3},{4,3}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),new Tags[]{Tags.MAGIC}), new Tags[]{},null,"Magic sphere","Magic sphere",ItemQuality.COMMON,"");
+        ActionItem item7 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0},{0},{5,3},{5,3},{5,3},{5,3}}), ActionTarget.ENEMY_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getCunning()),new Tags[]{}), new Tags[]{},null,"Snake","Snake",ItemQuality.COMMON,"");
 
         SpellItem spell1 = new SpellItem(new SpellAction(DiceFactory.buildDice(new int[][]{{0},{3,3,1},{3,3,1},{3,3,1},{3,3,1},{3,3,1}}), ActionTarget.PLAYER_CHARACTER,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),4,new Tags[]{Tags.MAGIC}), new Tags[]{},null,"Heal","Heal",ItemQuality.COMMON);
         SpellItem spell2 = new SpellItem(new SpellAction(DiceFactory.buildDice(new int[][]{{0},{1,4},{1,4},{1,4},{1,4},{1,4}}), ActionTarget.ALL_ENEMIES,(PlayerCharacter p)->p.getDiceNumber(p.getIntelligence()),8,new Tags[]{Tags.MAGIC}), new Tags[]{},null,"Fire Vortex","Fire Vortex",ItemQuality.COMMON);
@@ -74,12 +74,14 @@ public class FightingTest {
 
         EnemyActionFactory factory1 = new EnemyActionFactory(e->e.getStrength(),0.25,false,1);
         EnemyActionFactory factory2 = new EnemyActionFactory(e->e.getCunning(),0.20,false,6);
+        EnemyActionFactory factory3 = new EnemyActionFactory(e->e.getEndurance(),0.20,true,2);
 
         EnemyAction enemyAction1 = new EnemyAction(ActionTarget.PLAYER_CHARACTER,new Tags[]{Tags.ATTACK},new ArrayList<>(List.of(new EnemyActionFactory[]{factory1})));
+        EnemyAction defence = new EnemyAction(ActionTarget.ENEMY_CHARACTER,new Tags[]{Tags.DEFENCE},new ArrayList<>(List.of(new EnemyActionFactory[]{factory3})));
         EnemyAction enemyAction2 = new EnemyAction(ActionTarget.PLAYER_CHARACTER,new Tags[]{},new ArrayList<>(List.of(new EnemyActionFactory[]{factory2})));
-        EnemyAI ai1=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{enemyAction1,enemyAction2})));
+        EnemyAI ai1=new EnemyAI(new ArrayList<>(List.of(new EnemyAction[]{defence})));
 
-        EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12, EnemyCategory.Boss,"Skeleton1",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai1);
+        EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12, EnemyCategory.Minion,"Skeleton1",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai1);
         FightModule fight = new FightModule(state,new ArrayList<>(List.of(new EnemyCharacter[]{enemy})));
         GameManager.setFight(fight);
         state.refresh();

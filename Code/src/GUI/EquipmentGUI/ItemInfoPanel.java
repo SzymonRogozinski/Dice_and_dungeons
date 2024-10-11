@@ -5,6 +5,7 @@ import Dice.DiceSide;
 import Equipment.Items.*;
 import GUI.GUISettings;
 import Game.GameManager;
+import Game.GameUtils;
 import Game.Tags;
 
 import javax.swing.*;
@@ -13,10 +14,10 @@ import java.awt.*;
 
 public class ItemInfoPanel extends JPanel {
 
-    private CardLayout layout;
-    private DiceItemInfoPanel diceItemInfoPanel;
-    private ArmorInfoPanel armorInfoPanel;
-    private DiceLessItemInfoPanel diceLessItemInfoPanel;
+    private final CardLayout layout;
+    private final DiceItemInfoPanel diceItemInfoPanel;
+    private final ArmorInfoPanel armorInfoPanel;
+    private final DiceLessItemInfoPanel diceLessItemInfoPanel;
 
     public ItemInfoPanel(Border border){
         this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
@@ -55,9 +56,9 @@ public class ItemInfoPanel extends JPanel {
     }
 
     private class DiceItemInfoPanel extends JPanel{
-        private final static double MANA_COST_TO_ALL_PROPORTION=0.3;
-        private JLabel nameLabel, requirements, manaCost;
-        private DiceSidesPanel diceSidesPanel;
+        private final static double MANA_COST_TO_ALL_PROPORTION=0.5;
+        private final JLabel nameLabel, requirements, manaCost, target,attribute;
+        private final DiceSidesPanel diceSidesPanel;
 
         public DiceItemInfoPanel() {
             this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
@@ -66,36 +67,50 @@ public class ItemInfoPanel extends JPanel {
             nameLabel = new JLabel("", SwingConstants.CENTER);
             nameLabel.setFont(GUISettings.BIG_FONT);
             nameLabel.setForeground(Color.WHITE);
-            nameLabel.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE-10,GUISettings.SMALL_PANEL_SIZE/5));
+            nameLabel.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE-10,GUISettings.SMALL_PANEL_SIZE/7));
             nameLabel.setVerticalAlignment(SwingConstants.CENTER);
 
             diceSidesPanel=new DiceSidesPanel();
 
             requirements = new JLabel();
             requirements.setForeground(Color.WHITE);
-            requirements.setPreferredSize(new Dimension((int)((GUISettings.PANEL_SIZE)*(1-MANA_COST_TO_ALL_PROPORTION)-20),GUISettings.SMALL_PANEL_SIZE/10));
+            requirements.setPreferredSize(new Dimension((int)((GUISettings.PANEL_SIZE)*MANA_COST_TO_ALL_PROPORTION-20),GUISettings.SMALL_PANEL_SIZE/10));
+
+            target = new JLabel();
+            target.setForeground(Color.WHITE);
+            target.setPreferredSize(new Dimension((int)((GUISettings.PANEL_SIZE)*MANA_COST_TO_ALL_PROPORTION-20),GUISettings.SMALL_PANEL_SIZE/10));
+
+            attribute = new JLabel();
+            attribute.setForeground(Color.WHITE);
+            attribute.setPreferredSize(new Dimension((int)((GUISettings.PANEL_SIZE)*MANA_COST_TO_ALL_PROPORTION-20),GUISettings.SMALL_PANEL_SIZE/10));
 
             manaCost = new JLabel();
             manaCost.setForeground(Color.WHITE);
-            manaCost.setPreferredSize(new Dimension((int)((GUISettings.PANEL_SIZE-10)*MANA_COST_TO_ALL_PROPORTION),GUISettings.SMALL_PANEL_SIZE/10));
+            manaCost.setPreferredSize(new Dimension((int)((GUISettings.PANEL_SIZE)*MANA_COST_TO_ALL_PROPORTION-20),GUISettings.SMALL_PANEL_SIZE/10));
 
             this.add(nameLabel);
             this.add(diceSidesPanel);
             this.add(requirements);
+            this.add(target);
+            this.add(attribute);
             this.add(manaCost);
         }
 
         public void refresh(){
             Item item = GameManager.getEquipment().getPointedItem();
 
+            nameLabel.setText(item.name);
+
             if(item instanceof ActionItem aItem) {
-                nameLabel.setText(aItem.name);
-                diceSidesPanel.setDiceSides(aItem.getAction().getDice().getSides());
+                diceSidesPanel.setDiceSides(aItem.getAction().getDice().sides());
                 manaCost.setText("");
+                target.setText("Target: "+aItem.getAction().getTarget().toString());
+                attribute.setText("Amplify by: "+aItem.getScaleAttribute());
             } else if (item instanceof SpellItem sItem) {
-                nameLabel.setText(sItem.name);
-                diceSidesPanel.setDiceSides(sItem.getAction().getDice().getSides());
+                diceSidesPanel.setDiceSides(sItem.getAction().getDice().sides());
                 manaCost.setText("Mana: "+sItem.getAction().getManaCost());
+                target.setText("target: "+sItem.getAction().getTarget().toString());
+                attribute.setText("amplify by: "+sItem.getScaleAttribute());
             }
 
             StringBuilder requirementsBuilder=new StringBuilder("Requirements:");
@@ -118,7 +133,7 @@ public class ItemInfoPanel extends JPanel {
 
     private class ArmorInfoPanel extends JPanel{
 
-        private JLabel nameLabel, requirementsLabel, bonusLabel;
+        private final JLabel nameLabel, requirementsLabel, bonusLabel;
         private final static String[] statsName=new String[]{"Strength","Endurance","Intelligence","Charisma","Cunning","Luck"};
 
         public ArmorInfoPanel() {
@@ -183,7 +198,7 @@ public class ItemInfoPanel extends JPanel {
 
     private class DiceLessItemInfoPanel extends JPanel{
 
-        private JLabel nameLabel, effectLabel,quantityLabel;
+        private final JLabel nameLabel, effectLabel,quantityLabel, targetLabel;
 
         public DiceLessItemInfoPanel() {
             this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
@@ -199,17 +214,23 @@ public class ItemInfoPanel extends JPanel {
             effectLabel.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE-20,GUISettings.SMALL_PANEL_SIZE/7));
             effectLabel.setForeground(Color.WHITE);
 
+            targetLabel = new JLabel("", SwingConstants.LEFT);
+            targetLabel.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE-20,GUISettings.SMALL_PANEL_SIZE/7));
+            targetLabel.setForeground(Color.WHITE);
+
             quantityLabel = new JLabel("",SwingConstants.LEFT);
             quantityLabel.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE-20,GUISettings.SMALL_PANEL_SIZE/7));
             quantityLabel.setForeground(Color.WHITE);
 
             this.add(nameLabel);
             this.add(effectLabel);
+            this.add(targetLabel);
             this.add(quantityLabel);
         }
 
         void refresh(){
             UsableItem item = (UsableItem) GameManager.getEquipment().getPointedItem();
+            targetLabel.setText("Target: "+item.getAction().getTarget().toString());
             StringBuilder builder=new StringBuilder("Effects:");
 
             var x = item.getAction().getActionFactories();
@@ -231,15 +252,17 @@ public class ItemInfoPanel extends JPanel {
 
     private class DiceSidesPanel extends JPanel{
 
-        private JLabel[] diceSides;
+        private final JLabel[] diceSides;
+        private final int diceSize;
 
         public DiceSidesPanel() {
-            this.setSize(GUISettings.PANEL_SIZE-10,GUISettings.SMALL_PANEL_SIZE/2);
+            diceSize= Math.min((GUISettings.PANEL_SIZE-10)/6,GUISettings.SMALL_PANEL_SIZE/2);
+            this.setPreferredSize(new Dimension(diceSize*6+6,diceSize));
             this.setBackground(Color.BLACK);
             FlowLayout diceLayout = new FlowLayout(FlowLayout.CENTER);
             diceLayout.setHgap(1);
             this.setLayout(diceLayout);
-            int diceSize= Math.min((GUISettings.PANEL_SIZE-10)/6,GUISettings.SMALL_PANEL_SIZE/2);
+
             this.diceSides = new JLabel[6];
 
             for(int i=0;i<6;i++){
@@ -251,9 +274,8 @@ public class ItemInfoPanel extends JPanel {
         }
 
         void setDiceSides(DiceSide[] sides){
-            for(int i=0;i<6;i++){
+            for(int i=0;i<6;i++)
                 diceSides[i].setIcon(sides[i].getIcon());
-            }
         }
     }
 

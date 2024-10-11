@@ -110,7 +110,7 @@ public class CharactersInfoPanel extends JPanel {
 
     public class PartyInfoPanel extends JPanel{
 
-        private JLabel[] statisticLabels;
+        private JProgressBar healthBar, manaBar;
 
         public PartyInfoPanel() {
             this.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-20,GUISettings.PANEL_SIZE/4));
@@ -119,24 +119,38 @@ public class CharactersInfoPanel extends JPanel {
             this.setLayout(layout);
             this.setBackground(Color.BLACK);
 
-            statisticLabels=new JLabel[3];
-            for(int i=0;i<3;i++){
-                statisticLabels[i]=new JLabel("",SwingConstants.LEFT);
-                statisticLabels[i].setForeground(Color.WHITE);
-                statisticLabels[i].setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-20,GUISettings.SMALL_PANEL_SIZE/10));
-            }
-            statisticLabels[0].setText("Party");
-            statisticLabels[1].setText("0/0");
-            statisticLabels[2].setText("0/0");
+            JLabel health=new JLabel("Party health");
+            health.setForeground(Color.WHITE);
+            this.add(health);
 
-            for(int i=0;i<3;i++){
-                this.add(statisticLabels[i]);
-            }
+            healthBar=new JProgressBar();
+            healthBar.setForeground(Color.RED);
+            healthBar.setStringPainted(true);
+            healthBar.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/8));
+            this.add(healthBar);
+
+            JLabel mana=new JLabel("Party mana");
+            mana.setForeground(Color.WHITE);
+            this.add(mana);
+
+            manaBar=new JProgressBar();
+            manaBar.setForeground(Color.BLUE);
+            manaBar.setStringPainted(true);
+            manaBar.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/8));
+            this.add(manaBar);
+
         }
 
         public void refresh(){
-            statisticLabels[1].setText("Health: "+ PlayerInfo.getParty().getCurrentHealth()+"/"+ PlayerInfo.getParty().getMaxHealth());
-            statisticLabels[2].setText("Mana: "+ PlayerInfo.getParty().getCurrentMana()+"/"+ PlayerInfo.getParty().getMaxMana());
+            healthBar.setMaximum(PlayerInfo.getParty().getMaxHealth());
+            manaBar.setMaximum(PlayerInfo.getParty().getMaxMana());
+            healthBar.setValue(PlayerInfo.getParty().getCurrentHealth());
+            String healthString = PlayerInfo.getParty().getCurrentHealth()+"/"+ PlayerInfo.getParty().getMaxHealth();
+            if(PlayerInfo.getParty().getShield()>0)
+                healthString+=" +"+ PlayerInfo.getParty().getShield();
+            healthBar.setString(healthString);
+            manaBar.setValue(PlayerInfo.getParty().getCurrentMana());
+            manaBar.setString(PlayerInfo.getParty().getCurrentMana()+"/"+ PlayerInfo.getParty().getMaxMana());
         }
     }
 

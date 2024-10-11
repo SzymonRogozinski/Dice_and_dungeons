@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class DiceItemBase {
     final int[] secondaryActionList;
+    final String attribute;
     public int[] firstActionValues;
     public int firstAction;
     public int[] secondActionValues;
@@ -22,7 +23,7 @@ public class DiceItemBase {
     public boolean actionOnSelf;
     public ImageIcon icon;
 
-    public DiceItemBase(int[] firstActionValues, int firstAction, String[] names, ActionTarget target, int[] secondaryActionList, DiceLambda diceLambda, boolean actionOnSelf, ImageIcon icon) {
+    public DiceItemBase(int[] firstActionValues, int firstAction, String[] names, ActionTarget target, int[] secondaryActionList, DiceLambda diceLambda, boolean actionOnSelf, ImageIcon icon,String attribute) {
         this.firstActionValues = firstActionValues;
         this.firstAction = firstAction;
         this.names = names;
@@ -34,5 +35,6 @@ public class DiceItemBase {
         this.actionOnSelf=actionOnSelf;
         this.secondAction= ActionEnum.NULL_ACTION;
         this.icon=icon;
+        this.attribute=attribute;
     }
 }

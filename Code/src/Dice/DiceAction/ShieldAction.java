@@ -6,7 +6,7 @@ public class ShieldAction implements DiceAction{
 
     private static final String id="Shield";
     private final int value;
-    private boolean actionOnSelf;
+    private final boolean actionOnSelf;
 
     public ShieldAction(int value,boolean actionOnSelf){
         this.actionOnSelf=actionOnSelf;

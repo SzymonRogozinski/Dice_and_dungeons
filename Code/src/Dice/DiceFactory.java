@@ -207,9 +207,7 @@ public class DiceFactory {
                     imageCode.add(""+instruction[i+1]);
                     i++;
                 }
-                default -> {
-                    throw new RuntimeException("Illegal actionType: "+actionType);
-                }
+                default -> throw new RuntimeException("Illegal actionType: "+actionType);
             }
         }
         return new DiceSide(actions,buildIcon(imageCode));
@@ -221,7 +219,7 @@ public class DiceFactory {
         g.setBackground(Color.WHITE);
         g.clearRect(0,0,ICON_SIZE,ICON_SIZE);
         try {
-            if (iconCode.size() == 2) {         //One symbol
+            if (iconCode.size() == 2) { //One symbol
                 BufferedImage symbol = ImageIO.read(new File(SYMBOL_PATH+iconCode.get(0)+".png"));
                 BufferedImage value = ImageIO.read(new File(NUMBER_PATH+iconCode.get(1)+".png"));
                 g.drawImage(value,1,1,null);
@@ -236,14 +234,14 @@ public class DiceFactory {
                 g.drawImage(value2,20,20,null);
                 g.drawImage(symbol2,1,20,null);
 
-            } else {                            //Error
+            } else //Error
                 throw new RuntimeException("iconCode has illegal number of elements: "+iconCode.size());
-            }
+
         }catch (IOException e){
-            throw new RuntimeException(Path.of("").toAbsolutePath().toString()+"Cannot find/open texture!");
+            throw new RuntimeException(Path.of("").toAbsolutePath()+"Cannot find/open texture!");
         }
         g.setColor(Color.BLACK);
-        g.draw(new Rectangle(39,39));
+        g.draw(new Rectangle(ICON_SIZE-1,ICON_SIZE-1));
         g.dispose();
         return new ImageIcon(completeImage.getScaledInstance(size,size,java.awt.Image.SCALE_SMOOTH));
     }

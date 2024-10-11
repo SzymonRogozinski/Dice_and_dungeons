@@ -5,7 +5,7 @@ import Character.GameCharacter;
 public class HealAction implements DiceAction{
     private static final String id="Heal";
     private final int value;
-    private boolean actionOnSelf;
+    private final boolean actionOnSelf;
 
     public HealAction(int value,boolean actionOnSelf){
         this.actionOnSelf=actionOnSelf;

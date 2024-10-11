@@ -40,7 +40,7 @@ public class DamageAction implements DiceAction{
     @Override
     public void doAction(GameCharacter character) {
         try{
-            character.dealDamage(value);
+            character.receiveDamage(value);
         }catch (CharacterDieException ignore){}
     }
     @Override

@@ -6,8 +6,8 @@ import Dice.DiceAction.NullAction;
 import java.util.ArrayList;
 
 public class DicePool {
-    private Dice dice;
-    private int size;
+    private final Dice dice;
+    private final int size;
     private ArrayList<DiceSide> rollResult;
 
     public DicePool(Dice dice,int size){
@@ -18,15 +18,12 @@ public class DicePool {
 
     public void roll(){
         rollResult=new ArrayList<>();
-        for(int i =0;i<size;i++){
+        for(int i =0;i<size;i++)
             rollResult.add(dice.roll());
-        }
     }
 
-    public DiceSide reroll(int i){
-        DiceSide side=dice.roll();
-        rollResult.set(i,side);
-        return side;
+    public void reroll(int i){
+        rollResult.set(i,dice.roll());
     }
 
     public int getDiceNumber(){return size;}
@@ -49,7 +46,6 @@ public class DicePool {
             else{
                 SumOfActions.set(SumOfActions.indexOf(foundAction),foundAction.sumAction(action));
             }
-
         }
         return SumOfActions;
     }
