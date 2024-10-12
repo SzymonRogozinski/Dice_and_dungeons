@@ -8,11 +8,9 @@ import Generators.ItemGenerators.DiceItemGenerator;
 import Generators.ItemGenerators.SpellItemGenerator;
 import Generators.ItemGenerators.UsableItemGenerator;
 
-import java.io.IOException;
-
 public class GeneratorTest {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         int count =1000;
         int cost = 4;
 

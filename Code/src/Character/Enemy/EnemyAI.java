@@ -35,9 +35,9 @@ public class EnemyAI {
         targetId=-1;
         if(action.getTarget() == ActionTarget.ENEMY_CHARACTER || action.getTarget() ==ActionTarget.ALL_ENEMIES){
             while(targetId==-1 || enemies.get(targetId).getCurrentHealth()<=0)
-                targetId= GameManager.random.nextInt(enemies.size());
+                targetId= GameManager.getRandom().nextInt(enemies.size());
         }else{
-            targetId=GameManager.random.nextInt(characters.size());
+            targetId=GameManager.getRandom().nextInt(characters.size());
         }
     }
 

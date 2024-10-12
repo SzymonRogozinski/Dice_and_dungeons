@@ -26,7 +26,6 @@ import java.util.List;
 public class EquipmentTest {
 
     private static final JFrame mainFrame=new TestFrame();
-    private static EquipmentView view;
 
     public static void main(String[] args) {
         //Test Data
@@ -47,8 +46,8 @@ public class EquipmentTest {
         UsableItem usItem4 = new UsableItem(new UsableItemAction(ActionTarget.PLAYER_CHARACTER,new ArrayList<>(List.of(new DiceAction[]{new DefenseBonusAction(2,true)})),new Tags[]{Tags.NO_ROLL,Tags.FREE_ACTION}),3,new Tags[]{},new ImageIcon("Texture/Items/bag-pl.png"),"Defense potion","Defense potion",ItemQuality.COMMON);
         UsableItem usItem5 = new UsableItem(new UsableItemAction(ActionTarget.PLAYER_CHARACTER,new ArrayList<>(List.of(new DiceAction[]{new HealAction(5,true)})),new Tags[]{Tags.NO_ROLL,Tags.FREE_ACTION}),3,new Tags[]{Tags.USABLE_OUT_OF_FIGHT},new ImageIcon("Texture/Items/bag-pl.png"),"Health potion","Health potion",ItemQuality.COMMON);
 
-        ArmorItem arItem1=new ArmorItem(5,0,0,2,2,1,CharacterEquipment.HEAD_ARMOR,new Tags[]{Tags.WARRIOR},new ImageIcon("Texture/Items/helm-pl.png"),"Gold helmet","Gold helmet",ItemQuality.COMMON);
-        ArmorItem arItem2=new ArmorItem(1,2,4,2,4,3,CharacterEquipment.CHEST_ARMOR,new Tags[]{Tags.THIEF},new ImageIcon("Texture/Items/chest-pl.png"),"Rogue cloak","Rogue cloak",ItemQuality.COMMON);
+        ArmorItem arItem1=new ArmorItem(5,0,0,2,2,1,CharacterEquipment.HEAD_ARMOR,new Tags[]{Tags.WARRIOR},new ImageIcon("Texture/Items/armors/helm-pl.png"),"Gold helmet","Gold helmet",ItemQuality.COMMON);
+        ArmorItem arItem2=new ArmorItem(1,2,4,2,4,3,CharacterEquipment.CHEST_ARMOR,new Tags[]{Tags.THIEF},new ImageIcon("Texture/Items/armors/chest-pl.png"),"Rogue cloak","Rogue cloak",ItemQuality.COMMON);
 
         PlayerCharacter player=new PlayerCharacter(24,12,12,12,12,12,"Warrior",new ImageIcon("CharacterTexture/player.png"),new Tags[]{Tags.WARRIOR});
         PlayerCharacter player2=new PlayerCharacter(12,18,12,12,12,12,"Bandit",new ImageIcon("CharacterTexture/player.png"),new Tags[]{Tags.THIEF});
@@ -150,7 +149,7 @@ public class EquipmentTest {
         party.getBackpack().putToBackpack(item6);
         //Code
 
-        view = new EquipmentView();
+        EquipmentView view = new EquipmentView();
         EquipmentGUIState state=new EquipmentGUIState(view);
         EquipmentModule module = new EquipmentModule(state);
         FightModule fModule = new FightModule(null,null);
