@@ -31,7 +31,7 @@ public abstract class GameAction extends Taggable {
     }
 
     public int getDiceNumber(PlayerCharacter p){
-        return Math.min(countDice.myMethod(p),12);
+        return Math.min(countDice.calcDice(p),12);
     }
 
     public ArrayList<DiceAction> getActionFactories(){throw new RuntimeException("Method not implemented!");}

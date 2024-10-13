@@ -1,4 +1,3 @@
 package Fight.Statuses;
 
-public class StatusEvaporatedException extends Exception{
-}
+public class StatusEvaporatedException extends Exception{ }

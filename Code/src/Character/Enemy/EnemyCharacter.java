@@ -69,15 +69,10 @@ public class EnemyCharacter extends GameCharacter {
     }
 
     @Override
-    public void gainMana(int mana){
-        System.out.println("Enemy cannot gain mana!");
-    }
+    //Enemy cannot gain mana!
+    public void gainMana(int mana){}
 
     public EnemyAction action(ArrayList<EnemyCharacter> enemies, ArrayList<PlayerCharacter> characters){
-        System.out.println("Enemy attack!");
-        System.out.println(currentHealth+"/"+maxHealth);
-
-        //Choose action
         return ai.getAction(enemies, characters);
     }
 

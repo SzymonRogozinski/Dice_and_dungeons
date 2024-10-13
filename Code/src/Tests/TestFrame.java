@@ -1,4 +1,4 @@
-package GUI;
+package Tests;
 
 import javax.swing.*;
 

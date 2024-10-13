@@ -1,7 +1,5 @@
 package Walking.Places;
 
-import Game.GameBalance;
-import Game.GameManager;
 import Walking.Collision.ChestOpenException;
 import Walking.Drones.Drone;
 
@@ -11,7 +9,7 @@ import java.awt.*;
 public class TreasureGamePlace extends GamePlace {
 
     private boolean isOpen;
-    private Image openChestIcon;
+    private final Image openChestIcon;
 
     public TreasureGamePlace(String path) {
         super("T", path);

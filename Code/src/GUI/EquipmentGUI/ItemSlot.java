@@ -80,14 +80,12 @@ public class ItemSlot extends JPanel {
         @Override
         public void mousePressed(MouseEvent e) {
             //Select item
-            System.out.println("Clicked "+item.name);
             GameManager.getEquipment().setClickedItem(reference);
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
             //Send info
-            System.out.println("Drop on "+item.name);
             GameManager.getEquipment().equipItem();
         }
 

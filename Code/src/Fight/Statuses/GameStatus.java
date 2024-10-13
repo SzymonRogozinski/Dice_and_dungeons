@@ -32,10 +32,10 @@ public abstract class GameStatus extends Taggable {
     }
 
     public void evaporate() throws StatusEvaporatedException {
-        sumUpValue-=values.get(0);
+        sumUpValue-=values.getFirst();
         if (sumUpValue<=0)
             throw new StatusEvaporatedException();
-        values.remove(0);
+        values.removeFirst();
         values.add(0);
     }
 

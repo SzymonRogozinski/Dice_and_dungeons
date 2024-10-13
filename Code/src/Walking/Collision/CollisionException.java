@@ -1,4 +1,3 @@
 package Walking.Collision;
 
-public abstract class CollisionException extends Exception{
-}
+public abstract class CollisionException extends Exception{ }

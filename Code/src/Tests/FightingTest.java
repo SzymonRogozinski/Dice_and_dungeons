@@ -18,7 +18,6 @@ import Fight.GameActions.SpellAction;
 import Fight.GameActions.UsableItemAction;
 import GUI.FightGUI.FightGUIState;
 import GUI.FightGUI.FightView;
-import GUI.TestFrame;
 import Game.GameManager;
 import Game.Tags;
 import Game.PlayerInfo;
@@ -70,11 +69,10 @@ public class FightingTest {
         PlayerParty party = new PlayerParty(new ArrayList<>(List.of(new PlayerCharacter[]{player,player2})),usableItems);
         PlayerInfo.setParty(party);
 
-        FightModule fight = getFightModule(state);
+        FightModule fight = new FightModule(state);
         GameManager.setFight(fight);
+        fight.startFight(getEnemies());
         state.refresh();
-
-        fight.initFight();
 
         mainFrame.add(fightView);
 
@@ -83,12 +81,12 @@ public class FightingTest {
 
     }
 
-    private static FightModule getFightModule(FightGUIState state) {
+    private static ArrayList<EnemyCharacter> getEnemies() {
         EnemyActionFactory factory1 = new EnemyActionFactory(e->e.getStrength(),0.25,false,1);
         EnemyAI ai1 = getEnemyAI(factory1);
 
         EnemyCharacter enemy = new EnemyCharacter(12,12,12,12,12, EnemyCategory.Minion,"Skeleton1",new ImageIcon("Texture/CharacterTexture/skeleton.png"),ai1);
-        return new FightModule(state,new ArrayList<>(List.of(new EnemyCharacter[]{enemy})));
+        return new ArrayList<>(List.of(enemy));
     }
 
     private static EnemyAI getEnemyAI(EnemyActionFactory factory1) {

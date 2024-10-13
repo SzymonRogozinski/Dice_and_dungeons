@@ -4,12 +4,11 @@ public enum ActionTarget {
     ENEMY_CHARACTER ("enemy"),
     ALL_ENEMIES ("all enemy"),
     PLAYER_CHARACTER ("player"),
-    PLAYER_PARTY ("party"),
-    SELF ("self");
+    PLAYER_PARTY ("party");
 
     private final String name;
 
-    private ActionTarget(String name){
+    ActionTarget(String name){
         this.name=name;
     }
 

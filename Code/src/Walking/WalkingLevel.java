@@ -29,22 +29,22 @@ public class WalkingLevel {
     public WalkingLevel(GameLevel levelSetting) {
         MapCreator creator;
         WalkingSettings settings = levelSetting.walkingSettings();
-        if(settings.seed==0)
+        if(settings.seed()==0)
             creator=new MapCreator();
         else
-            creator=new MapCreator(settings.seed);
-        if(!creator.createMap(settings.algGen,settings.width,settings.height,settings.size,settings.enemies,settings.treasures,settings.vaults))
+            creator=new MapCreator(settings.seed());
+        if(!creator.createMap(settings.algGen(),settings.width(),settings.height(),settings.size(),settings.enemies(),settings.treasures(),settings.vaults()))
             throw new RuntimeException("Dungeon map was not generated!");
         Map map=creator.getMap();
         //Loading enemies
-        this.enemies=new Enemies(map,settings.path, levelSetting.enemyStrength(), levelSetting.minHP());
+        this.enemies=new Enemies(map,settings.path(), levelSetting.enemyStrength(), levelSetting.minHP());
         //Loading map
-        this.gameMap =new GameMap(map,settings.path,settings.bossLevel);
-        boss=settings.bossLevel?EnemyGenerator.generate(EnemyCategory.Boss,levelSetting.enemyStrength(), levelSetting.minHP()):null;
+        this.gameMap =new GameMap(map,settings.path(),settings.bossLevel());
+        boss=settings.bossLevel()?EnemyGenerator.generate(EnemyCategory.Boss,levelSetting.enemyStrength(), levelSetting.minHP()):null;
         setEnemy();
         enemyThread=new EnemyThread();
         //Add player
-        player=new PlayerDrone(gameMap.getStartX(), gameMap.getStartY(),new PlayerGamePlace(gameMap.getPATH()));
+        player=new PlayerDrone(gameMap.getStartX(), gameMap.getStartY(),new PlayerGamePlace(gameMap.getPath()));
         gameMap.addCharacterPlace(player.getIcon(), player.getPosX(), player.getPosY());
         //Add fog
         fogOfWar=new FogOfWar(player,gameMap);
@@ -134,7 +134,7 @@ public class WalkingLevel {
 
         private final static int oneRoundTime=500;
         private boolean endThread,stopThread;
-        private Object lock = new Object();
+        private final Object lock = new Object();
 
         @Override
         public void run(){
@@ -156,7 +156,6 @@ public class WalkingLevel {
                     e.printStackTrace();
                 }
             }
-            System.out.println("Thread end");
         }
 
         synchronized void endThread(){

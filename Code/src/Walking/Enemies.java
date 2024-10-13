@@ -6,14 +6,13 @@ import Walking.Drones.Drone;
 import Walking.Drones.EnemyDrone;
 import Walking.Places.*;
 
-import java.io.*;
 import java.util.*;
 
 import dg.generator.dungeon.Map;
 import dg.generator.dungeon.Place;
 
 public class Enemies implements Iterable<EnemyDrone> {
-    private ArrayList<EnemyDrone> enemies;
+    private final ArrayList<EnemyDrone> enemies;
     private int counter;
 
     public Enemies(Map map,String path,int enemyCost, int minHP){

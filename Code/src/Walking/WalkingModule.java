@@ -1,13 +1,8 @@
 package Walking;
 
 import GUI.WalkingGUI.WalkingGUIState;
-import Game.GameBalance;
 import Game.GameConst;
 import Game.GameManager;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.ArrayList;
 
 public class WalkingModule {
     private WalkingLevel walking;
@@ -38,11 +33,10 @@ public class WalkingModule {
     }
 
     public void startWalking(){
-        if(walking.walkingRunning()){
+        if(walking.walkingRunning())
             walking.walkingContinue();
-        }else{
+        else
             walking.walkingStart();
-        }
     }
 
     public void stopWalking(){

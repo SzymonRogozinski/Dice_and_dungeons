@@ -4,7 +4,6 @@ import Character.PlayerCharacter;
 import Equipment.Items.ActionItem;
 import Equipment.Items.SpellItem;
 import Equipment.Items.UsableItem;
-import Fight.ActionTarget;
 import GUI.GUISettings;
 import Game.GameManager;
 import Game.PlayerInfo;
@@ -71,7 +70,7 @@ public class ActionListPanel extends JPanel {
             button.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
             button.setMargin(new Insets(0, 0, 0, 0));
             button.addActionListener(e-> {
-                GameManager.getFight().choosedAction(item.getAction());
+                GameManager.getFight().chosenAction(item.getAction());
                 changePage("Start");
             });
             button.addMouseListener(new ButtonItemMouseListener(item.name));
@@ -112,12 +111,8 @@ public class ActionListPanel extends JPanel {
             button.setPreferredSize(new Dimension(buttonWidth,buttonHeight));
             button.setMargin(new Insets(0, 0, 0, 0));
             button.addActionListener(e-> {
-                if(PlayerInfo.getParty().getCurrentMana()<spell.getAction().getManaCost()){
-                    System.out.println("You don't have enough mana!");
-                }
-                else {
-                    PlayerInfo.getParty().spendMana(spell.getAction().getManaCost());
-                    GameManager.getFight().choosedAction(spell.getAction());
+                if(!(PlayerInfo.getParty().getCurrentMana()<spell.getAction().getManaCost())){
+                    GameManager.getFight().chosenAction(spell.getAction());
                     changePage("Start");
                 }
             });
@@ -233,7 +228,7 @@ public class ActionListPanel extends JPanel {
                 button.setPreferredSize(new Dimension(buttonWidth,itemButtonHeight));
                 button.setMargin(new Insets(0, 0, 0, 0));
                 button.addActionListener(e-> {
-                    GameManager.getFight().choosedAction(item.getAction());
+                    GameManager.getFight().chosenAction(item.getAction());
                     PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
                     changePage("Start");
                 });
@@ -265,7 +260,7 @@ public class ActionListPanel extends JPanel {
                 button.setPreferredSize(new Dimension(buttonWidth,itemButtonHeight));
                 button.setMargin(new Insets(0, 0, 0, 0));
                 button.addActionListener(e-> {
-                    GameManager.getFight().choosedAction(item.getAction());
+                    GameManager.getFight().chosenAction(item.getAction());
                     PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
                     changePage("Start");
                 });
@@ -298,7 +293,7 @@ public class ActionListPanel extends JPanel {
                 button.setPreferredSize(new Dimension(buttonWidth,itemButtonHeight));
                 button.setMargin(new Insets(0, 0, 0, 0));
                 button.addActionListener(e-> {
-                    GameManager.getFight().choosedAction(item.getAction());
+                    GameManager.getFight().chosenAction(item.getAction());
                     PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
                     changePage("Start");
                 });

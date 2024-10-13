@@ -19,18 +19,16 @@ public class EnemyAction extends GameAction{
 
     public ArrayList<DiceAction> getConstActions(EnemyCharacter enemy){
         ArrayList<DiceAction> result= new ArrayList<>();
-        for(EnemyActionFactory factory:actionFactories){
+        for(EnemyActionFactory factory:actionFactories)
             result.add(factory.makeAction(enemy));
-        }
         return result;
     }
 
 
     public String asString(EnemyCharacter enemy){
-        String action="";
-        for(EnemyActionFactory factory:actionFactories){
-            action+=factory.makeAction(enemy).actionDescription()+" ";
-        }
-        return action;
+        StringBuilder action= new StringBuilder();
+        for(EnemyActionFactory factory:actionFactories)
+            action.append(factory.makeAction(enemy).actionDescription()).append(" ");
+        return action.toString();
     }
 }

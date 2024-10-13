@@ -6,6 +6,7 @@ import Character.PlayerCharacter;
 import Dice.DiceAction.DiceAction;
 import Fight.GameActions.EnemyAction;
 import Fight.GameActions.GameAction;
+import Fight.GameActions.SpellAction;
 import Fight.Statuses.BonusDiceStatus;
 import Fight.Statuses.GameStatus;
 import Fight.Statuses.StatusException;
@@ -25,10 +26,10 @@ public class FightModule {
     private ActionTarget targetType;
     private boolean noRoll;
     private GameAction action;
-    private String combatLogInfo;
+    private StringBuilder combatLogInfo;
 
     public FightModule(FightGUIState state, ArrayList<EnemyCharacter> enemies) {
-        this.combatLogInfo="";
+        this.combatLogInfo=new StringBuilder();
         this.noRoll=false;
         this.playerTurn=true;
         this.characterTurn=0;
@@ -38,7 +39,7 @@ public class FightModule {
     }
 
     public FightModule(FightGUIState state) {
-        this.combatLogInfo="";
+        this.combatLogInfo=new StringBuilder();
         this.noRoll=false;
         this.playerTurn=true;
         this.characterTurn=0;
@@ -60,57 +61,15 @@ public class FightModule {
     }
 
     public String getCombatLogInfo() {
-        String respond = combatLogInfo;
-        combatLogInfo="";
+        String respond = combatLogInfo.toString();
+        combatLogInfo=new StringBuilder();
         return respond;
-    }
-
-    public void initFight(){
-        state.initState();
     }
 
     public void startFight(ArrayList<EnemyCharacter> enemies){
         this.enemies = enemies;
         state.initState();
         state.refresh();
-    }
-
-    private void endFight(boolean playerWin){
-        clear();
-        this.combatLogInfo="";
-        hideCombatInfo();
-        state.refreshCombatLog();
-        this.noRoll=false;
-        this.playerTurn=true;
-        this.characterTurn=0;
-        this.targetId=0;
-
-        if(playerWin && GameManager.isBossFight()){
-            GameManager.gameWin();
-        }else if(playerWin){
-            GameManager.getLootModule().getLoot(GameManager.getCurrentLevel().lootSettings(),true);
-            GameManager.changeState(GameStates.WALKING);
-        }else{
-            GameManager.gameOver();
-        }
-    }
-
-    private boolean checkIfFightEnds(){
-        boolean enemiesDead=true;
-        for(EnemyCharacter enemy:enemies){
-            if(enemy.getCurrentHealth()>0){
-                enemiesDead=false;
-                break;
-            }
-        }
-        if(enemiesDead) {
-            endFight(true);
-            return true;
-        }else if(PlayerInfo.getParty().getCurrentHealth()==0) {
-            endFight(false);
-            return true;
-        }
-        return false;
     }
 
     public int getRerolls(){
@@ -131,14 +90,14 @@ public class FightModule {
         return master.getResults()==null;
     }
 
-    public void choosedAction(GameAction action){
+    public void chosenAction(GameAction action){
         this.targetType=action.getTarget();
         this.action=action;
         noRoll=action.haveTag(Tags.NO_ROLL);
 
-        if(noRoll){
+        if(noRoll)
             master.setResult(action.getActionFactories());
-        }else{
+        else{
             PlayerCharacter character = PlayerInfo.getParty().getCharacters().get(characterTurn);
             master.setDicePool(action.getDice(),action.getDiceNumber(character),character.getCharacterRerolls());
             ArrayList<GameStatus> bonuses=character.getStatusWithTag(Tags.BONUS_DICE);
@@ -153,6 +112,9 @@ public class FightModule {
 
     public void targetSelected(int targetId){
         this.targetId=targetId;
+        //If action is spell, then spend mana. Mana check was in action listener.
+        if(action instanceof SpellAction spellAction)
+            PlayerInfo.getParty().spendMana(spellAction.getManaCost());
         state.setState(FightGUIState.PLAYER_PERFORMING_ACTION);
     }
 
@@ -184,6 +146,126 @@ public class FightModule {
             e.resetStatus();
     }
 
+    public void goBackToChoose(){
+        state.setState(FightGUIState.PLAYER_CHOOSING_ACTION);
+    }
+
+    public void endAction(){
+        if(playerTurn && !noRoll)
+            master.sumUpResults();
+        else if(!playerTurn){
+            EnemyCharacter enemy=enemies.get(characterTurn);
+            EnemyAction enemyAction=enemy.action(enemies, PlayerInfo.getParty().getCharacters());
+            targetType=enemyAction.getTarget();
+            targetId=enemy.getTargetId();
+            master.setResult(enemyAction.getConstActions(enemy));
+            action=enemyAction;
+        }
+        performAction();
+        state.refreshCombatLog();
+        if(action==null || !action.haveTag(Tags.FREE_ACTION)){
+            setNextCharacterTurn();
+            state.setState(playerTurn? FightGUIState.PLAYER_CHOOSING_ACTION: FightGUIState.ENEMY_PERFORMING_ACTION);
+            //Substate. Do it before next state.
+            startAction();
+        }else
+            state.setState(playerTurn? FightGUIState.PLAYER_CHOOSING_ACTION: FightGUIState.ENEMY_PERFORMING_ACTION);
+    }
+
+    public int getEnemyCount(){
+        return enemies.size();
+    }
+
+    private void performAction(){
+        ArrayList<DiceAction> actions = master.getSumUpResults();
+        ArrayList<GameCharacter> characters;
+        //Set Attacker
+        GameCharacter attacker = playerTurn? PlayerInfo.getParty().getCharacters().get(characterTurn):enemies.get(characterTurn);
+        //Set Defender
+        switch (targetType){
+            case PLAYER_CHARACTER -> characters=new ArrayList<>(List.of(new GameCharacter[]{PlayerInfo.getParty().getCharacters().get(targetId)}));
+            case ENEMY_CHARACTER -> characters=new ArrayList<>(List.of(new GameCharacter[]{enemies.get(targetId)}));
+            case ALL_ENEMIES -> characters=new ArrayList<>(enemies);
+            case PLAYER_PARTY -> characters=new ArrayList<>(PlayerInfo.getParty().getCharacters());
+            default -> characters=null;
+        }
+        for (DiceAction diceAction : actions){
+            if(diceAction.onSelf()){
+                diceAction.doAction(attacker);
+                combatLogInfo.append(diceAction.actionDescription(attacker.getName(),null)).append(" ");
+            }
+            else{
+                for(GameCharacter character:characters) {
+                    diceAction.doAction(character);
+                    combatLogInfo.append(diceAction.actionDescription(attacker.getName(), character.getName())).append(" ");
+                }
+            }
+        }
+        //Counter
+        for(GameCharacter character:characters) {
+            if(action.haveTag(Tags.ATTACK)){
+                ArrayList<GameStatus> defendingStatus = character.getStatusWithTag(Tags.ON_DEFEND);
+                for(GameStatus st:defendingStatus){
+                    try{
+                        st.effect(attacker);
+                    }catch (StatusException ignore){}
+                    combatLogInfo.append(st.effectCommunicate(character.getName())).append(" ");
+                }
+            }
+        }
+    }
+
+    private void setNextCharacterTurn(){
+        characterTurn++;
+        if((playerTurn && characterTurn>= PlayerInfo.getParty().getCharacters().size()) || (!playerTurn && characterTurn>=enemies.size())) {
+            if(!playerTurn)
+                PlayerInfo.getParty().onTurnStart();
+            characterTurn=0;
+            playerTurn=!playerTurn;
+        }
+        if(!playerTurn && enemies.get(characterTurn).getCurrentHealth()==0)
+            setNextCharacterTurn();
+        if(!playerTurn)
+            enemies.get(characterTurn).clearShield();
+    }
+
+    private void endFight(boolean playerWin){
+        clear();
+        this.combatLogInfo=new StringBuilder();
+        hideCombatInfo();
+        state.refreshCombatLog();
+        this.noRoll=false;
+        this.playerTurn=true;
+        this.characterTurn=0;
+        this.targetId=0;
+
+        if(playerWin && GameManager.isBossFight())
+            GameManager.gameWin();
+        else if(playerWin){
+            GameManager.getLootModule().getLoot(GameManager.getCurrentLevel().lootSettings(),true);
+            GameManager.changeState(GameStates.WALKING);
+        }else
+            GameManager.gameOver();
+    }
+
+    private boolean checkIfFightEnds(){
+        boolean enemiesDead=true;
+        for(EnemyCharacter enemy:enemies){
+            if(enemy.getCurrentHealth()>0){
+                enemiesDead=false;
+                break;
+            }
+        }
+        if(enemiesDead) {
+            endFight(true);
+            return true;
+        }else if(PlayerInfo.getParty().getCurrentHealth()==0) {
+            endFight(false);
+            return true;
+        }
+        return false;
+    }
+
     private void startAction(){
         if(checkIfFightEnds())
             return;
@@ -206,7 +288,7 @@ public class FightModule {
                 setNextCharacterTurn();
                 skip=true;
             }
-            combatLogInfo+=status.effectCommunicate(character.getName())+" ";
+            combatLogInfo.append(status.effectCommunicate(character.getName())).append(" ");
         }
         if(checkIfFightEnds())
             return;
@@ -220,95 +302,10 @@ public class FightModule {
             }catch (StatusException ignore){}
         }
         //Refresh
-        if(skip) {
+        if(skip)
             startAction();
-        }else {
+        else
             state.setState(playerTurn ? FightGUIState.PLAYER_CHOOSING_ACTION : FightGUIState.ENEMY_PERFORMING_ACTION);
-        }
-    }
-
-    public void goBackToChoose(){
-        state.setState(FightGUIState.PLAYER_CHOOSING_ACTION);
-    }
-
-    public void endAction(){
-        if(playerTurn && !noRoll)
-            master.sumUpResults();
-        else if(!playerTurn){
-            EnemyCharacter enemy=enemies.get(characterTurn);
-            EnemyAction enemyAction=enemy.action(enemies, PlayerInfo.getParty().getCharacters());
-            targetType=enemyAction.getTarget();
-            targetId=enemy.getTargetId();
-            master.setResult(enemyAction.getConstActions(enemy));
-            action=enemyAction;
-        }
-        performAction();
-        state.refreshCombatLog();
-        if(action==null || !action.haveTag(Tags.FREE_ACTION)){
-            setNextCharacterTurn();
-            state.setState(playerTurn? FightGUIState.PLAYER_CHOOSING_ACTION: FightGUIState.ENEMY_PERFORMING_ACTION);
-            //Sub state. Do it before next state.
-            startAction();
-        }else{
-            state.setState(playerTurn? FightGUIState.PLAYER_CHOOSING_ACTION: FightGUIState.ENEMY_PERFORMING_ACTION);
-        }
-    }
-
-    private void performAction(){
-        ArrayList<DiceAction> actions = master.getSumUpResults();
-        ArrayList<GameCharacter> characters;
-        //Set Attacker
-        GameCharacter attacker = playerTurn? PlayerInfo.getParty().getCharacters().get(characterTurn):enemies.get(characterTurn);
-        //Set Defender
-        switch (targetType){
-            case PLAYER_CHARACTER -> characters=new ArrayList<>(List.of(new GameCharacter[]{PlayerInfo.getParty().getCharacters().get(targetId)}));
-            case ENEMY_CHARACTER -> characters=new ArrayList<>(List.of(new GameCharacter[]{enemies.get(targetId)}));
-            case ALL_ENEMIES -> characters=new ArrayList<>(enemies);
-            case PLAYER_PARTY -> characters=new ArrayList<>(PlayerInfo.getParty().getCharacters());
-            default -> characters=null;
-        }
-        for (DiceAction diceAction : actions){
-            if(diceAction.onSelf()){
-                diceAction.doAction(attacker);
-                combatLogInfo+=diceAction.actionDescription(attacker.getName(),null)+" ";
-            }
-            else{
-                for(GameCharacter character:characters) {
-                    diceAction.doAction(character);
-                    combatLogInfo+=diceAction.actionDescription(attacker.getName(), character.getName())+" ";
-                }
-            }
-        }
-        //Counter
-        for(GameCharacter character:characters) {
-            if(action.haveTag(Tags.ATTACK)){
-                ArrayList<GameStatus> defendingStatus = character.getStatusWithTag(Tags.ON_DEFEND);
-                for(GameStatus st:defendingStatus){
-                    try{
-                        st.effect(attacker);
-                    }catch (StatusException ignore){}
-                    combatLogInfo+=st.effectCommunicate(character.getName())+" ";
-                }
-            }
-        }
-    }
-
-    private void setNextCharacterTurn(){
-        characterTurn++;
-        if((playerTurn && characterTurn>= PlayerInfo.getParty().getCharacters().size()) || (!playerTurn && characterTurn>=enemies.size())) {
-            if(!playerTurn)
-                PlayerInfo.getParty().onTurnStart();
-            characterTurn=0;
-            playerTurn=!playerTurn;
-        }
-        if(!playerTurn && enemies.get(characterTurn).getCurrentHealth()==0)
-            setNextCharacterTurn();
-        if(!playerTurn)
-            enemies.get(characterTurn).clearShield();
-    }
-
-    public int getEnemyCount(){
-        return enemies.size();
     }
 
 }

@@ -1,6 +1,5 @@
 package Tests;
 
-import GUI.TestFrame;
 import GUI.MenuGUI.MenuModule;
 import GUI.MenuGUI.MenuState;
 import GUI.MenuGUI.MenuView;

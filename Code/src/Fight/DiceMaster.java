@@ -23,9 +23,8 @@ public class DiceMaster {
     }
 
     public void setBonusDicePool(Dice dice, int diceNumber){
-        if(pool.getDiceNumber()+diceNumber>12){
+        if(pool.getDiceNumber()+diceNumber>12)
             diceNumber=12-pool.getDiceNumber();
-        }
         bonusPool=new DicePool(dice,diceNumber);
     }
 
@@ -58,8 +57,7 @@ public class DiceMaster {
     }
 
     public void reroll(int i){
-        if(reroll<=0) {
-        }
+        if(reroll<=0);
         else if(i<pool.getDiceNumber()) {
             pool.reroll(i);
             reroll--;
@@ -72,9 +70,8 @@ public class DiceMaster {
 
     public void sumUpResults(){
         ArrayList<DiceAction> actions = pool.sumUp();
-        if(bonusPool!=null){
+        if(bonusPool!=null)
             actions.addAll(bonusPool.sumUp());
-        }
         sumUpActions=actions;
     }
 

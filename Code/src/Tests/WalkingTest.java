@@ -1,8 +1,6 @@
 package Tests;
 
-import GUI.TestFrame;
 import GUI.WalkingGUI.WalkingGUIState;
-import GUI.WalkingGUI.WalkingKeyListener;
 import GUI.WalkingGUI.WalkingView;
 import Game.GameManager;
 import Game.PlayerInfo;
