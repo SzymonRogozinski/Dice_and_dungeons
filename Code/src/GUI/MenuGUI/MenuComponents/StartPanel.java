@@ -1,5 +1,7 @@
 package GUI.MenuGUI.MenuComponents;
 
+import GUI.Compents.GameButton;
+import GUI.Compents.GameLabel;
 import GUI.GUISettings;
 import Game.GameManager;
 import Game.GameStates;
@@ -10,35 +12,39 @@ import java.awt.*;
 
 public class StartPanel extends JPanel {
 
-    private JButton start;
-    private JLabel status;
+    private final GameButton start;
+    private final GameLabel status;
 
     public StartPanel(Border border) {
         FlowLayout layout = new FlowLayout();
-        layout.setVgap(GUISettings.SMALL_PANEL_SIZE/5);
+        layout.setVgap(GUISettings.SMALL_PANEL_SIZE / 5);
         this.setLayout(layout);
-        this.setSize(GUISettings.SMALL_PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
+        this.setSize(GUISettings.SMALL_PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE);
         this.setBorder(border);
         this.setBackground(Color.BLACK);
 
-        start = new JButton("Start game");
-        start.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE*2/3,GUISettings.SMALL_PANEL_SIZE/4));
+        start = new GameButton(
+                "Start game",
+                GUISettings.SMALL_PANEL_SIZE * 2 / 3, GUISettings.SMALL_PANEL_SIZE / 4,
+                _ -> GameManager.changeState(GameStates.WALKING)
+        );
         start.setEnabled(false);
-        start.addActionListener(e->GameManager.changeState(GameStates.WALKING));
 
-        status = new JLabel("Your Party is too small!", SwingConstants.CENTER);
-        status.setForeground(Color.WHITE);
-        status.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE/4));
+        status = new GameLabel(
+                "Your Party is too small!", SwingConstants.CENTER,
+                GUISettings.SMALL_PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE / 4,
+                Color.WHITE
+        );
 
         this.add(start);
         this.add(status);
     }
 
-    public void refresh(){
-        if(GameManager.getMenuModule().getParty().size()==3) {
+    public void refresh() {
+        if (GameManager.getMenuModule().getParty().size() == 3) {
             start.setEnabled(true);
             status.setVisible(false);
-        }else{
+        } else {
             start.setEnabled(false);
             status.setVisible(true);
         }

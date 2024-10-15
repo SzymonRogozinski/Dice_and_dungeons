@@ -3,28 +3,28 @@ package Dice.DiceAction;
 import Character.GameCharacter;
 import Fight.Statuses.WeaknessStatus;
 
-public class WeaknessAction implements DiceAction{
-    private static final String id="Weakness";
+public class WeaknessAction implements DiceAction {
+    private static final String id = "Weakness";
     private final int value;
 
-    public WeaknessAction(int value){
-        this.value=value;
+    public WeaknessAction(int value) {
+        this.value = value;
     }
 
     @Override
     public DiceAction sumAction(DiceAction action) {
-        int newValue=value+ action.getValue();
+        int newValue = value + action.getValue();
         return new WeaknessAction(newValue);
     }
 
     @Override
     public String actionDescription(String characterName, String targetName) {
-        return characterName+" applied " +value + " of weakness to " + targetName+".";
+        return characterName + " applied " + value + " of weakness to " + targetName + ".";
     }
 
     @Override
     public String actionDescription() {
-        return "Apply " +value + " of weakness.";
+        return "Apply " + value + " of weakness.";
     }
 
     @Override
@@ -43,8 +43,9 @@ public class WeaknessAction implements DiceAction{
         character.addStatus(weak);
         weak.effect(character);
     }
+
     @Override
-    public boolean onSelf(){
+    public boolean onSelf() {
         return false;
     }
 }

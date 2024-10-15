@@ -15,28 +15,28 @@ public class MainPanel extends JPanel {
 
     public MainPanel(MenuView startView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView) {
         //Setting panel
-        layout=new CardLayout();
+        layout = new CardLayout();
         this.setLayout(layout);
-        this.setPreferredSize(new Dimension(GUISettings.heightAndWidth,GUISettings.heightAndWidth));
+        this.setPreferredSize(new Dimension(GUISettings.heightAndWidth, GUISettings.heightAndWidth));
         this.setBackground(Color.BLACK);
 
         //Set panels
-        this.add("Start",startView);
-        this.add("Walking",walkingView);
-        this.add("Fight",fightView);
-        this.add("Equipment",equipmentView);
+        this.add("Start", startView);
+        this.add("Walking", walkingView);
+        this.add("Fight", fightView);
+        this.add("Equipment", equipmentView);
 
         //Refresh
         this.revalidate();
         this.repaint();
     }
 
-    public void changeView(GameStates state){
-        switch(state){
-            case START -> layout.show(this,"Start");
-            case WALKING -> layout.show(this,"Walking");
-            case FIGHTING -> layout.show(this,"Fight");
-            case EQUIPMENT -> layout.show(this,"Equipment");
+    public void changeView(GameStates state) {
+        switch (state) {
+            case START -> layout.show(this, "Start");
+            case WALKING -> layout.show(this, "Walking");
+            case FIGHTING -> layout.show(this, "Fight");
+            case EQUIPMENT -> layout.show(this, "Equipment");
         }
         //Refresh
         this.revalidate();

@@ -9,43 +9,47 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ActionPanel extends JPanel {
-    private CardLayout layout;
-    private ActionListPanel actions;
-    private DicePanel dice;
-    private JPanel pauseScreen,enemyScreen, goBackScreen;
+    private final CardLayout layout;
+    private final ActionListPanel actions;
+    private final DicePanel dice;
 
-    public ActionPanel(Border border){
+    public ActionPanel(Border border) {
         //Set display
-        this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
-        this.layout=new CardLayout();
+        this.setSize(GUISettings.PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE);
+        this.layout = new CardLayout();
         this.setLayout(layout);
         this.setBackground(Color.BLACK);
 
         //Card components
-        actions=new ActionListPanel(border);
-        dice =new DicePanel(border);
-        //Pause Screen
-        pauseScreen=new StopPanel(e->roll(),"roll",border,false);
-        enemyScreen=new StopPanel(e->enemy(),"enemy attack",border,false);
-        goBackScreen=new StopPanel(e->goBack(),"go back",border,true);
+        actions = new ActionListPanel(border);
+        dice = new DicePanel(border);
 
-        this.add("Actions",actions);
-        this.add("Pause",pauseScreen);
-        this.add("Enemy",enemyScreen);
+        //Pause Screen
+        JPanel pauseScreen = new StopPanel(_ -> roll(), "roll", border, false);
+        JPanel enemyScreen = new StopPanel(_ -> enemy(), "enemy attack", border, false);
+        JPanel goBackScreen = new StopPanel(_ -> goBack(), "go back", border, true);
+
+        this.add("Actions", actions);
+        this.add("Pause", pauseScreen);
+        this.add("Enemy", enemyScreen);
         this.add("Dice", dice);
-        this.add("GoBack",goBackScreen);
+        this.add("GoBack", goBackScreen);
     }
 
-    public DicePanel getDicePanel(){return dice;}
+    public DicePanel getDicePanel() {
+        return dice;
+    }
 
-    public void changePage(String pageName){layout.show(this,pageName);}
+    public void changePage(String pageName) {
+        layout.show(this, pageName);
+    }
 
     public ActionListPanel getActions() {
         return actions;
     }
 
-    private void roll(){
-        if(GameManager.getFight().isNoRoll()){
+    private void roll() {
+        if (GameManager.getFight().isNoRoll()) {
             GameManager.getFight().endAction();
             return;
         }
@@ -53,34 +57,34 @@ public class ActionPanel extends JPanel {
         GameManager.getFight().rollDices();
     }
 
-    private void goBack(){
+    private void goBack() {
         GameManager.getFight().goBackToChoose();
     }
 
-    private void enemy(){
+    private void enemy() {
         GameManager.getFight().endAction();
     }
 
-    private class StopPanel extends JPanel{
+    private class StopPanel extends JPanel {
 
-        StopPanel(ActionListener l,String buttonName,Border border, boolean isSmall){
-            this.setSize(GUISettings.PANEL_SIZE,GUISettings.SMALL_PANEL_SIZE);
-            this.setLayout(new GridLayout(3,1));
+        StopPanel(ActionListener l, String buttonName, Border border, boolean isSmall) {
+            this.setSize(GUISettings.PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE);
+            this.setLayout(new GridLayout(3, 1));
             this.setBackground(Color.BLACK);
             this.setBorder(border);
 
             JButton pauseButton = new JButton(buttonName);
             pauseButton.addActionListener(l);
             this.add(new JLabel());
-            if(isSmall){
-                pauseButton.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE/3,GUISettings.SMALL_PANEL_SIZE/6));
+            if (isSmall) {
+                pauseButton.setPreferredSize(new Dimension(GUISettings.PANEL_SIZE / 3, GUISettings.SMALL_PANEL_SIZE / 6));
 
                 JPanel reducer = new JPanel();
                 reducer.setLayout(new FlowLayout(FlowLayout.CENTER));
                 reducer.setBackground(Color.BLACK);
                 reducer.add(pauseButton);
                 this.add(reducer);
-            }else{
+            } else {
                 this.add(pauseButton);
             }
 

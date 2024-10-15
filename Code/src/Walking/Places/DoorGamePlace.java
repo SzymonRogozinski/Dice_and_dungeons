@@ -11,14 +11,14 @@ public class DoorGamePlace extends GamePlace {
 
     @Override
     public boolean getCollision(Drone goingToCollideCharacter) throws DoorOpenException {
-        if(goingToCollideCharacter.getIcon() instanceof EnemyGamePlace)
+        if (goingToCollideCharacter.getIcon() instanceof EnemyGamePlace)
             return true;
-        else if(goingToCollideCharacter.getIcon() instanceof PlayerGamePlace){
-            if(PlayerInfo.useKey())
+        else if (goingToCollideCharacter.getIcon() instanceof PlayerGamePlace) {
+            if (PlayerInfo.useKey())
                 throw new DoorOpenException();
             else
                 return true;
-        }else
+        } else
             return false;
     }
 }

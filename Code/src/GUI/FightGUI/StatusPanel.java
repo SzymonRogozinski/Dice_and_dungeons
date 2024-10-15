@@ -1,5 +1,9 @@
 package GUI.FightGUI;
 
+import GUI.Compents.DimensionlessGameLabel;
+import GUI.Compents.GameLabel;
+import GUI.Compents.GameProgressBar;
+import GUI.Compents.GameTextArea;
 import GUI.GUISettings;
 import Game.GameManager;
 import Game.PlayerInfo;
@@ -10,128 +14,95 @@ import java.awt.*;
 
 public class StatusPanel extends JPanel {
 
-    private JProgressBar healthBar, manaBar;
-    private JLabel characterName,statusInfo;
-    private JTextArea combatLog, combatInfo;
-    private String combatLogText;
+    private final GameProgressBar healthBar, manaBar;
+    private final GameLabel characterName, statusInfo;
+    private final GameTextArea combatLog, combatInfo;
 
-    public StatusPanel(Border border){
+    public StatusPanel(Border border) {
         //Set display
-        this.setSize(GUISettings.SMALL_PANEL_SIZE,GUISettings.PANEL_SIZE);
+        this.setSize(GUISettings.SMALL_PANEL_SIZE, GUISettings.PANEL_SIZE);
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setBackground(Color.BLACK);
         this.setBorder(border);
 
         //Set health
-        JLabel health=new JLabel("Party health");
-        health.setForeground(Color.WHITE);
+        DimensionlessGameLabel health = new DimensionlessGameLabel("Party health", SwingConstants.CENTER, Color.WHITE);
         this.add(health);
 
-        healthBar=new JProgressBar();
-        healthBar.setForeground(Color.RED);
-        healthBar.setStringPainted(true);
-        healthBar.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/8));
+        healthBar = new GameProgressBar(
+                Color.RED,
+                GUISettings.SMALL_PANEL_SIZE - 6,
+                GUISettings.SMALL_PANEL_SIZE / 8
+        );
         this.add(healthBar);
 
         //Set mana
-        JLabel mana=new JLabel("Party mana");
-        mana.setForeground(Color.WHITE);
+        DimensionlessGameLabel mana = new DimensionlessGameLabel("Party mana", SwingConstants.CENTER, Color.WHITE);
         this.add(mana);
 
-        manaBar=new JProgressBar();
-        manaBar.setForeground(Color.BLUE);
-        manaBar.setStringPainted(true);
-        manaBar.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/8));
+        manaBar = new GameProgressBar(
+                Color.BLUE,
+                GUISettings.SMALL_PANEL_SIZE - 6,
+                GUISettings.SMALL_PANEL_SIZE / 8
+        );
         this.add(manaBar);
 
         //Set character
-        JLabel character=new JLabel("Character turn:");
-        character.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/10));
-        character.setForeground(Color.WHITE);
+        GameLabel character = new GameLabel(
+                "Character turn:",
+                SwingConstants.CENTER,
+                GUISettings.SMALL_PANEL_SIZE - 6,
+                GUISettings.SMALL_PANEL_SIZE / 10,
+                Color.WHITE
+        );
         this.add(character);
 
-        characterName=new JLabel();
-        characterName.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/10));
-        characterName.setForeground(Color.WHITE);
+        characterName = new GameLabel(
+                "",
+                SwingConstants.CENTER,
+                GUISettings.SMALL_PANEL_SIZE - 6,
+                GUISettings.SMALL_PANEL_SIZE / 10,
+                Color.WHITE
+        );
         this.add(characterName);
 
         //Set status
-        statusInfo=new JLabel();
-        statusInfo.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.SMALL_PANEL_SIZE/10));
-        statusInfo.setForeground(Color.WHITE);
+        statusInfo = new GameLabel(
+                "",
+                SwingConstants.CENTER,
+                GUISettings.SMALL_PANEL_SIZE - 6,
+                GUISettings.SMALL_PANEL_SIZE / 10,
+                Color.WHITE
+        );
         this.add(statusInfo);
 
         //Set next move
-        combatInfo =new JTextArea();
-        combatInfo.setForeground(Color.WHITE);
-        combatInfo.setBackground(Color.BLACK);
-        combatInfo.setWrapStyleWord(true);
-        combatInfo.setLineWrap(true);
+        combatInfo = new GameTextArea(GUISettings.SMALL_PANEL_SIZE - 6, GUISettings.PANEL_SIZE / 3);
         combatInfo.setEditable(false);
-        combatInfo.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.PANEL_SIZE/3));
-
         this.add(combatInfo);
 
-        //Set combat log
-        combatLogText = "";
-
-        combatLog=new JTextArea();
-        combatLog.setForeground(Color.WHITE);
-        combatLog.setBackground(Color.BLACK);
-        combatLog.setWrapStyleWord(true);
-        combatLog.setLineWrap(true);
+        combatLog = new GameTextArea(GUISettings.SMALL_PANEL_SIZE - 6, GUISettings.PANEL_SIZE / 3);
         combatLog.setEditable(false);
-        combatLog.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-6,GUISettings.PANEL_SIZE/3));
         this.add(combatLog);
     }
 
-    public void showStatusInfo(String info){
-        statusInfo.setText(info);
-        this.revalidate();
-        this.repaint();
-    }
-
-    public void hideStatusInfo(){
-        statusInfo.setText("");
-        this.revalidate();
-        this.repaint();
-    }
-
-    public void showCombatInfo(String info){
-        combatInfo.setText(info);
-        this.revalidate();
-        this.repaint();
-    }
-
-    public void hideCombatInfo(){
-        combatInfo.setText("");
-        this.revalidate();
-        this.repaint();
-    }
-
-    public void refreshCombatLog(){
-        String combatText = GameManager.getFight().getCombatLogInfo();
-        if(combatLogText.equals(combatText)) {
-            combatLogText = "";
-        }else {
-            combatLogText = combatText;
-        }
-        combatLog.setText(combatLogText);
-        this.revalidate();
-        this.repaint();
-    }
-
-    public void refresh(){
+    public void refresh() {
         healthBar.setMaximum(PlayerInfo.getParty().getMaxHealth());
         manaBar.setMaximum(PlayerInfo.getParty().getMaxMana());
         healthBar.setValue(PlayerInfo.getParty().getCurrentHealth());
-        String healthString = PlayerInfo.getParty().getCurrentHealth()+"/"+ PlayerInfo.getParty().getMaxHealth();
-        if(PlayerInfo.getParty().getShield()>0)
-            healthString+=" +"+ PlayerInfo.getParty().getShield();
+        String healthString = PlayerInfo.getParty().getCurrentHealth() + "/" + PlayerInfo.getParty().getMaxHealth();
+        if (PlayerInfo.getParty().getShield() > 0)
+            healthString += " +" + PlayerInfo.getParty().getShield();
         healthBar.setString(healthString);
         manaBar.setValue(PlayerInfo.getParty().getCurrentMana());
-        manaBar.setString(PlayerInfo.getParty().getCurrentMana()+"/"+ PlayerInfo.getParty().getMaxMana());
+        manaBar.setString(PlayerInfo.getParty().getCurrentMana() + "/" + PlayerInfo.getParty().getMaxMana());
         characterName.setText(GameManager.getFight().getCharacter().getName());
+
+        statusInfo.setText(GameManager.getFight().getStatusLog());
+
+        //Refresh combat logs
+        combatLog.setText(GameManager.getFight().getCombatLog());
+        combatInfo.setText(GameManager.getFight().getCombatInfo());
 
         this.revalidate();
         this.repaint();

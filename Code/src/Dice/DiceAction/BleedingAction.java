@@ -3,28 +3,28 @@ package Dice.DiceAction;
 import Character.GameCharacter;
 import Fight.Statuses.BleedingStatus;
 
-public class BleedingAction implements DiceAction{
-    private static final String id="Bleeding";
+public class BleedingAction implements DiceAction {
+    private static final String id = "Bleeding";
     private final int value;
 
-    public BleedingAction(int value){
-        this.value=value;
+    public BleedingAction(int value) {
+        this.value = value;
     }
 
     @Override
     public DiceAction sumAction(DiceAction action) {
-        int newValue=value+ action.getValue();
+        int newValue = value + action.getValue();
         return new BleedingAction(newValue);
     }
 
     @Override
     public String actionDescription(String characterName, String targetName) {
-        return characterName+" applied " +value + " of bleeding to " + targetName+".";
+        return characterName + " applied " + value + " of bleeding to " + targetName + ".";
     }
 
     @Override
     public String actionDescription() {
-        return "Apply " +value + " of bleeding.";
+        return "Apply " + value + " of bleeding.";
     }
 
     @Override
@@ -43,8 +43,9 @@ public class BleedingAction implements DiceAction{
         character.addStatus(bleed);
         bleed.effect(character);
     }
+
     @Override
-    public boolean onSelf(){
+    public boolean onSelf() {
         return false;
     }
 }

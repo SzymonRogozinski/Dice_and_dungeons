@@ -9,10 +9,10 @@ public class LootSettings {
 
     public LootSettings(int points, double[] probabilities) {
         this.points = points;
-        double sum=0;
-        for(double d:probabilities)
-            sum+=d;
-        if(sum!=1)
+        double sum = 0;
+        for (double d : probabilities)
+            sum += d;
+        if (sum != 1)
             throw new IllegalArgumentException("Probability does not sum up to 1!");
         this.probabilities = probabilities;
     }
@@ -21,16 +21,16 @@ public class LootSettings {
         return points;
     }
 
-    public int getQualityId(){
+    public int getQualityId() {
         double randomValue = GameManager.getRandom().nextDouble();
         double probability = 0;
-        int i=0;
-        for(;i<probabilities.length;i++){
-            probability+=probabilities[i];
-            if(randomValue<=probability)
+        int i = 0;
+        for (; i < probabilities.length; i++) {
+            probability += probabilities[i];
+            if (randomValue <= probability)
                 break;
         }
 
-        return i+1;
+        return i + 1;
     }
 }

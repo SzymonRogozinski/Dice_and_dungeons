@@ -11,10 +11,10 @@ public class ActionItem extends Item implements EquippableItem {
     private final ItemAction action;
     private final String scaleAttribute;
 
-    public ActionItem(ItemAction action,Tags[] tags, ImageIcon icon,String name,String shortName,ItemQuality quality,String scaleAttribute) {
-        super(tags,icon,name,shortName,quality);
-        this.action=action;
-        this.scaleAttribute=scaleAttribute;
+    public ActionItem(ItemAction action, Tags[] tags, ImageIcon icon, String name, String shortName, ItemQuality quality, String scaleAttribute) {
+        super(tags, icon, name, shortName, quality);
+        this.action = action;
+        this.scaleAttribute = scaleAttribute;
     }
 
     public ItemAction getAction() {
@@ -26,7 +26,8 @@ public class ActionItem extends Item implements EquippableItem {
     }
 
     @Override
-    public void equip(PlayerCharacter character) {}
+    public void equip(PlayerCharacter character) {
+    }
 
     @Override
     public void deEquip(PlayerCharacter character) {
@@ -34,8 +35,8 @@ public class ActionItem extends Item implements EquippableItem {
 
     @Override
     public boolean canEquip(PlayerCharacter character) {
-        for(Tags tag:tags){
-            if(!character.haveTag(tag))
+        for (Tags tag : tags) {
+            if (!character.haveTag(tag))
                 return false;
         }
         return true;

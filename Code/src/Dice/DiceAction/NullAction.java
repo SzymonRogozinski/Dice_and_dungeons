@@ -2,10 +2,11 @@ package Dice.DiceAction;
 
 import Character.GameCharacter;
 
-public class NullAction implements DiceAction{
-    private static final String id=null;
+public class NullAction implements DiceAction {
+    private static final String id = null;
 
-    public NullAction(){}
+    public NullAction() {
+    }
 
     @Override
     public DiceAction sumAction(DiceAction action) {
@@ -33,9 +34,11 @@ public class NullAction implements DiceAction{
     }
 
     @Override
-    public void doAction(GameCharacter character) {}
+    public void doAction(GameCharacter character) {
+    }
+
     @Override
-    public boolean onSelf(){
+    public boolean onSelf() {
         return true;
     }
 }

@@ -25,7 +25,7 @@ public class Game {
         FightView fightView = new FightView();
         EquipmentView equipmentView = new EquipmentView();
 
-        MainFrame mainFrame = new MainFrame(menuView,walkingView,fightView,equipmentView);
+        MainFrame mainFrame = new MainFrame(menuView, walkingView, fightView, equipmentView);
 
         //Set modules and states
         GameManager.setMenuModule(new MenuModule(new MenuState(menuView)));

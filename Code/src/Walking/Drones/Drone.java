@@ -3,9 +3,9 @@ package Walking.Drones;
 import Walking.Places.GamePlace;
 
 public class Drone {
+    private final GamePlace icon;
     private int posX;
     private int posY;
-    private final GamePlace icon;
 
 
     public Drone(int posX, int posY, GamePlace icon) {
@@ -26,8 +26,8 @@ public class Drone {
         return icon;
     }
 
-    public void setPos(int dx, int dy){
-        posX+=dx;
-        posY+=dy;
+    public void setPos(int dx, int dy) {
+        posX += dx;
+        posY += dy;
     }
 }

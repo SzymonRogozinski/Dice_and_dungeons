@@ -3,29 +3,29 @@ package Dice.DiceAction;
 import Character.GameCharacter;
 import Fight.Statuses.PoisonStatus;
 
-public class PoisonAction implements DiceAction{
+public class PoisonAction implements DiceAction {
 
-    private static final String id="Poison";
+    private static final String id = "Poison";
     private final int value;
 
-    public PoisonAction(int value){
-        this.value=value;
+    public PoisonAction(int value) {
+        this.value = value;
     }
 
     @Override
     public DiceAction sumAction(DiceAction action) {
-        int newValue=value+ action.getValue();
+        int newValue = value + action.getValue();
         return new PoisonAction(newValue);
     }
 
     @Override
     public String actionDescription(String characterName, String targetName) {
-        return characterName+" applied " +value + " of poison to " + targetName+".";
+        return characterName + " applied " + value + " of poison to " + targetName + ".";
     }
 
     @Override
     public String actionDescription() {
-        return "Apply " +value + " of poison.";
+        return "Apply " + value + " of poison.";
     }
 
     @Override
@@ -42,8 +42,9 @@ public class PoisonAction implements DiceAction{
     public void doAction(GameCharacter character) {
         character.addStatus(new PoisonStatus(value));
     }
+
     @Override
-    public boolean onSelf(){
+    public boolean onSelf() {
         return false;
     }
 }

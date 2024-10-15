@@ -1,3 +1,4 @@
 package Walking.Collision;
 
-public class KeyCollectedException extends CollisionException{ }
+public class KeyCollectedException extends CollisionException {
+}

@@ -12,11 +12,11 @@ public abstract class GamePlace {
     private Drone reference;
 
     public GamePlace(char pic, String path) {
-        image=new ImageIcon(path+pic+".png").getImage();
+        image = new ImageIcon(path + pic + ".png").getImage();
     }
 
-    public GamePlace(String name, String path){
-        image=new ImageIcon(path+name+".png").getImage();
+    public GamePlace(String name, String path) {
+        image = new ImageIcon(path + name + ".png").getImage();
     }
 
     public Image getImage() {
@@ -27,10 +27,11 @@ public abstract class GamePlace {
         return reference;
     }
 
+    public void setReference(Drone reference) {
+        this.reference = reference;
+    }
+
     public boolean getCollision(Drone goingToCollideCharacter) throws CollisionException {
         return false;
-    }
-    public void setReference(Drone reference){
-        this.reference=reference;
     }
 }

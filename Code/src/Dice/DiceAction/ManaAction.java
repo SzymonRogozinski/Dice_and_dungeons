@@ -2,25 +2,25 @@ package Dice.DiceAction;
 
 import Character.GameCharacter;
 
-public class ManaAction implements DiceAction{
-    private static final String id="Mana";
+public class ManaAction implements DiceAction {
+    private static final String id = "Mana";
     private final int value;
 
-    public ManaAction(int value){
-        this.value=value;
+    public ManaAction(int value) {
+        this.value = value;
     }
 
     @Override
     public DiceAction sumAction(DiceAction action) {
-        int newValue=value+ action.getValue();
+        int newValue = value + action.getValue();
         return new ManaAction(newValue);
     }
 
     @Override
     public String actionDescription(String characterName, String targetName) {
-        if(targetName==null)
-            return characterName+" give " +value + " mana to self.";
-        return characterName+" give " +value + " mana to " + targetName+".";
+        if (targetName == null)
+            return characterName + " give " + value + " mana to self.";
+        return characterName + " give " + value + " mana to " + targetName + ".";
     }
 
     @Override

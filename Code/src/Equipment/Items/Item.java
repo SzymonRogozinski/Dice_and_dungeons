@@ -7,17 +7,17 @@ import javax.swing.*;
 
 public abstract class Item extends Taggable {
 
-    private final ImageIcon icon;
-    private final ItemQuality quality;
     public final String name;
     public final String shortName;
+    private final ImageIcon icon;
+    private final ItemQuality quality;
 
-    public Item(Tags[] tags, ImageIcon icon,String name,String shortName, ItemQuality quality) {
+    public Item(Tags[] tags, ImageIcon icon, String name, String shortName, ItemQuality quality) {
         super(tags);
-        this.icon=icon;
-        this.name=name;
-        this.shortName=shortName;
-        this.quality=quality;
+        this.icon = icon;
+        this.name = name;
+        this.shortName = shortName;
+        this.quality = quality;
     }
 
     public ImageIcon getIcon() {
@@ -29,7 +29,7 @@ public abstract class Item extends Taggable {
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         return o.getClass().equals(this.getClass()) && ((Item) o).name.equals(name);
     }
 }

@@ -8,7 +8,7 @@ public class WalkingGUIState {
         this.view = view;
     }
 
-    public void refresh(){
+    public void refresh() {
         view.refresh();
     }
 }

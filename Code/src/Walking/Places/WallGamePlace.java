@@ -9,7 +9,7 @@ public class WallGamePlace extends GamePlace {
     }
 
     @Override
-    public boolean getCollision(Drone goingToCollideCharacter){
+    public boolean getCollision(Drone goingToCollideCharacter) {
         return true;
     }
 }

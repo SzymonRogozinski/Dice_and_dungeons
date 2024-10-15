@@ -2,15 +2,16 @@ package Walking.Collision;
 
 import Walking.Drones.Drone;
 
-public class EnemyFightException extends CollisionException{
+public class EnemyFightException extends CollisionException {
 
     private final Drone reference;
-    public EnemyFightException(Drone reference){
+
+    public EnemyFightException(Drone reference) {
         super();
-        this.reference=reference;
+        this.reference = reference;
     }
 
-    public Drone getReference(){
+    public Drone getReference() {
         return reference;
     }
 }

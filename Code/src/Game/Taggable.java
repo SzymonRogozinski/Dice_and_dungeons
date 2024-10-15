@@ -7,9 +7,9 @@ public abstract class Taggable {
         this.tags = tags;
     }
 
-    public boolean haveTag(Tags tag){
-        for(Tags t:tags){
-            if(t==tag)
+    public boolean haveTag(Tags tag) {
+        for (Tags t : tags) {
+            if (t == tag)
                 return true;
         }
         return false;

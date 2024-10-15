@@ -13,36 +13,32 @@ import java.util.ArrayList;
 public class EquipmentView extends ViewPanel {
 
     private static MouseMotionAdapter mouseMotionAdp;
-    private SwitchPanel switchPanel;
-    private ItemInfoPanel itemInfoPanel;
-    private CharactersInfoPanel charactersInfoPanel;
-    private ItemManagementPanel itemManagementPanel;
-    private ImageIcon dragableIcon;
+    private final ItemInfoPanel itemInfoPanel;
+    private final CharactersInfoPanel charactersInfoPanel;
+    private final ItemManagementPanel itemManagementPanel;
     private Point position;
 
     public EquipmentView() {
-        super(new ItemManagementPanel(getSharedBorder()),new SwitchPanel(getSharedBorder()),new ItemInfoPanel(getSharedBorder()),new CharactersInfoPanel(getSharedBorder()));
+        super(new ItemManagementPanel(getSharedBorder()), new SwitchPanel(getSharedBorder()), new ItemInfoPanel(getSharedBorder()), new CharactersInfoPanel(getSharedBorder()));
 
         //Get child component
         ArrayList<JPanel> panels = getChildPanels();
         itemManagementPanel = (ItemManagementPanel) panels.get(0);
-        switchPanel = (SwitchPanel) panels.get(1);
         itemInfoPanel = (ItemInfoPanel) panels.get(2);
         charactersInfoPanel = (CharactersInfoPanel) panels.get(3);
 
-        mouseMotionAdp=new DragListener();
+        mouseMotionAdp = new DragListener();
         this.addMouseMotionListener(mouseMotionAdp);
 
-        position=new Point(0,0);
-        dragableIcon=new ImageIcon("ItemsIcons/bag-pl.png");
+        position = new Point(0, 0);
     }
 
     public static MouseMotionAdapter getMouseMotionAdp() {
         return mouseMotionAdp;
     }
 
-    public void setState(int newState, int currentState){
-        switch (newState){
+    public void setState(int newState) {
+        switch (newState) {
             case EquipmentGUIState.EQUIPMENT -> {
                 charactersInfoPanel.setEquipmentVisibility(true);
                 itemManagementPanel.changeCard("Equipment");
@@ -55,8 +51,8 @@ public class EquipmentView extends ViewPanel {
         refresh();
     }
 
-    public void refresh(){
-        if(GameManager.getEquipment()==null)
+    public void refresh() {
+        if (GameManager.getEquipment() == null)
             return;
         charactersInfoPanel.refresh();
         itemManagementPanel.refresh();
@@ -71,9 +67,9 @@ public class EquipmentView extends ViewPanel {
         super.paint(g);
 
         ItemSlot it = GameManager.getEquipment().getClickedSlot();
-        if(it!=null && it.getItem()!=null) {
-            position=MouseInfo.getPointerInfo().getLocation();
-            it.getItem().getIcon().paintIcon(this, g, (int) position.getX() - GUISettings.ITEM_ICON_SIZE/2 - this.getLocationOnScreen().x, (int) position.getY() - GUISettings.ITEM_ICON_SIZE/2- this.getLocationOnScreen().y);
+        if (it != null && it.getItem() != null) {
+            position = MouseInfo.getPointerInfo().getLocation();
+            it.getItem().getIcon().paintIcon(this, g, (int) position.getX() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().x, (int) position.getY() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().y);
         }
     }
 
@@ -83,6 +79,5 @@ public class EquipmentView extends ViewPanel {
             repaint();
         }
     }
-
 
 }
