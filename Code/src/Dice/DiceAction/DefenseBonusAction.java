@@ -9,27 +9,27 @@ import Game.Tags;
 
 public class DefenseBonusAction implements DiceAction {
 
-    private static final String id="DefenseBonus";
-    private static final String imagePath="Texture/StatusIcons/DefendDice.png";
+    private static final String id = "DefenseBonus";
+    private static final String imagePath = "Texture/StatusIcons/DefendDice.png";
     private final int value;
-    private boolean actionOnSelf;
+    private final boolean actionOnSelf;
 
-    public DefenseBonusAction(int value,boolean actionOnSelf){
-        this.actionOnSelf=actionOnSelf;
-        this.value=value;
+    public DefenseBonusAction(int value, boolean actionOnSelf) {
+        this.actionOnSelf = actionOnSelf;
+        this.value = value;
     }
 
     @Override
     public DiceAction sumAction(DiceAction action) {
-        int newValue=value+ action.getValue();
-        return new DefenseBonusAction(newValue,actionOnSelf);
+        int newValue = value + action.getValue();
+        return new DefenseBonusAction(newValue, actionOnSelf);
     }
 
     @Override
     public String actionDescription(String characterName, String targetName) {
-        if(targetName==null)
-            return characterName+" applied " +value + " of shield bonus to self.";
-        return characterName+" applied " +value + " of shield bonus to " + targetName+".";
+        if (targetName == null)
+            return characterName + " applied " + value + " of shield bonus to self.";
+        return characterName + " applied " + value + " of shield bonus to " + targetName + ".";
     }
 
     @Override
@@ -49,14 +49,14 @@ public class DefenseBonusAction implements DiceAction {
 
     @Override
     public void doAction(GameCharacter character) {
-        int diceStrength = (character.getEndurance() + GameBalance.DICE_BONUS_ADD_TO_STAT_MOD)/GameBalance.DICE_BONUS_DIVIDE + GameBalance.MIN_DICE_BONUS_VALUE;
+        int diceStrength = (character.getEndurance() + GameBalance.DICE_BONUS_ADD_TO_STAT_MOD) / GameBalance.DICE_BONUS_DIVIDE + GameBalance.MIN_DICE_BONUS_VALUE;
         diceStrength = Math.min(diceStrength, GameBalance.MAX_DICE_VALUE);
-        Dice dice = DiceFactory.buildDice(new int[][]{{0},{0},{0},{2,diceStrength,1},{2,diceStrength,1},{2,diceStrength,1}});
-        character.addStatus(new BonusDiceStatus(value,imagePath,dice, Tags.DEFENCE));
+        Dice dice = DiceFactory.buildDice(new int[][]{{0}, {0}, {0}, {2, diceStrength, 1}, {2, diceStrength, 1}, {2, diceStrength, 1}});
+        character.addStatus(new BonusDiceStatus(value, imagePath, dice, Tags.DEFENCE));
     }
 
     @Override
-    public boolean onSelf(){
+    public boolean onSelf() {
         return actionOnSelf;
     }
 }

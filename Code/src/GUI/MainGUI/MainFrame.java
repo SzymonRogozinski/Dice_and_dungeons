@@ -19,11 +19,11 @@ public class MainFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.addKeyListener(new WalkingKeyListener());
 
-        mainPanel = new MainPanel(menuView,walkingView,fightView,equipmentView);
+        mainPanel = new MainPanel(menuView, walkingView, fightView, equipmentView);
         this.add(mainPanel);
     }
 
-    public void refresh(GameStates state){
+    public void refresh(GameStates state) {
         mainPanel.changeView(state);
     }
 }

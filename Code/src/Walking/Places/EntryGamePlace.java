@@ -4,21 +4,20 @@ import Walking.Collision.EnterExitException;
 import Walking.Drones.Drone;
 
 public class EntryGamePlace extends GamePlace {
-    private boolean isStart;
+    private final boolean isStart;
 
     public EntryGamePlace(String path, boolean isStart, boolean isBoss) {
-        super(isBoss?"Boss":isStart?"Entry":"Exit", path);
-        this.isStart=isStart;
+        super(isBoss ? "Boss" : isStart ? "Entry" : "Exit", path);
+        this.isStart = isStart;
     }
 
     @Override
     public boolean getCollision(Drone goingToCollideCharacter) throws EnterExitException {
-        if(goingToCollideCharacter.getIcon() instanceof EnemyGamePlace && !isStart)
+        if (goingToCollideCharacter.getIcon() instanceof EnemyGamePlace && !isStart)
             return true;
-        else if(!isStart)
+        else if (!isStart)
             throw new EnterExitException();
-        else if(goingToCollideCharacter.getIcon() instanceof PlayerGamePlace)
-            System.out.println("You returned to start");
+        else if (goingToCollideCharacter.getIcon() instanceof PlayerGamePlace) ;
         return false;
     }
 }

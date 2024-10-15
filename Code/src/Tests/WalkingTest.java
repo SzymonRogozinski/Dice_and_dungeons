@@ -1,39 +1,38 @@
 package Tests;
 
-import GUI.TestFrame;
+import Character.PlayerParty;
 import GUI.WalkingGUI.WalkingGUIState;
-import GUI.WalkingGUI.WalkingKeyListener;
 import GUI.WalkingGUI.WalkingView;
 import Game.GameManager;
+import Game.PlayerInfo;
+import Loot.LootModule;
 import Walking.WalkingModule;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class WalkingTest {
 
-    private static WalkingView walkingView;
-    private static final JFrame mainFrame=new TestFrame();
+    private static final JFrame mainFrame = new TestFrame();
 
     public static void main(String[] args) {
-        mainFrame.addKeyListener(new WalkingKeyListener());
-        walkingView = new WalkingView();
+        WalkingView walkingView = new WalkingView();
         WalkingGUIState state = new WalkingGUIState(walkingView);
 
         try {
-            WalkingModule manager=new WalkingModule(state);
-            GameManager.setWalkingManager(manager);
-        }catch(Exception e){
+            GameManager.setWalkingManager(new WalkingModule(state));
+            //Mocks
+            PlayerInfo.setParty(new PlayerParty(new ArrayList<>(), new ArrayList<>()));
+            GameManager.setLoot(new LootModule());
+        } catch (Exception e) {
             System.err.println(e.getMessage());
             return;
         }
-
         mainFrame.add(walkingView);
-
         mainFrame.pack();
         mainFrame.setVisible(true);
 
-
         //Start
-       GameManager.getWalkingManager().getWalking().walkingStart();
+        GameManager.getWalkingManager().getWalking().walkingStart();
     }
 }

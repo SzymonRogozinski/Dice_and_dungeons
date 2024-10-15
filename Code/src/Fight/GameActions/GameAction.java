@@ -4,12 +4,12 @@ import Character.PlayerCharacter;
 import Dice.Dice;
 import Dice.DiceAction.DiceAction;
 import Fight.ActionTarget;
-import Game.Tagable;
+import Game.Taggable;
 import Game.Tags;
 
 import java.util.ArrayList;
 
-public abstract class GameAction extends Tagable {
+public abstract class GameAction extends Taggable {
 
     private final Dice dice;
     private final ActionTarget target;
@@ -30,10 +30,12 @@ public abstract class GameAction extends Tagable {
         return target;
     }
 
-    public int getDiceNumber(PlayerCharacter p){
-        return Math.min(countDice.myMethod(p),12);
+    public int getDiceNumber(PlayerCharacter p) {
+        return Math.min(countDice.calcDice(p), 12);
     }
 
-    public ArrayList<DiceAction> getActionFactories(){throw new RuntimeException("Method not implemented!");}
+    public ArrayList<DiceAction> getActionFactories() {
+        throw new RuntimeException("Method not implemented!");
+    }
 
 }

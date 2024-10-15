@@ -2,33 +2,33 @@ package Dice.DiceAction;
 
 import Character.GameCharacter;
 
-public class ShieldAction implements DiceAction{
+public class ShieldAction implements DiceAction {
 
-    private static final String id="Shield";
+    private static final String id = "Shield";
     private final int value;
-    private boolean actionOnSelf;
+    private final boolean actionOnSelf;
 
-    public ShieldAction(int value,boolean actionOnSelf){
-        this.actionOnSelf=actionOnSelf;
-        this.value=value;
+    public ShieldAction(int value, boolean actionOnSelf) {
+        this.actionOnSelf = actionOnSelf;
+        this.value = value;
     }
 
     @Override
     public DiceAction sumAction(DiceAction action) {
-        int newValue=value+ action.getValue();
-        return new ShieldAction(newValue,actionOnSelf);
+        int newValue = value + action.getValue();
+        return new ShieldAction(newValue, actionOnSelf);
     }
 
     @Override
     public String actionDescription(String characterName, String targetName) {
-        if(targetName==null)
-            return characterName+" give " +value + " shield to self.";
-        return characterName+" give " +value + " shield to " + targetName+".";
+        if (targetName == null)
+            return characterName + " give " + value + " shield to self.";
+        return characterName + " give " + value + " shield to " + targetName + ".";
     }
 
     @Override
     public String actionDescription() {
-        return "Apply " +value + " shield.";
+        return "Apply " + value + " shield.";
     }
 
     @Override

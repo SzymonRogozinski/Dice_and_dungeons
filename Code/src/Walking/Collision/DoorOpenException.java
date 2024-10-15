@@ -1,4 +1,4 @@
 package Walking.Collision;
 
-public class DoorOpenException extends CollisionException{
+public class DoorOpenException extends CollisionException {
 }

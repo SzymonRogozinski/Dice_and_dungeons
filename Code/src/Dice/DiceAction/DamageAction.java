@@ -3,28 +3,28 @@ package Dice.DiceAction;
 import Character.CharacterDieException;
 import Character.GameCharacter;
 
-public class DamageAction implements DiceAction{
-    private static final String id="Damage";
+public class DamageAction implements DiceAction {
+    private static final String id = "Damage";
     private final int value;
 
-    public DamageAction(int value){
-        this.value=value;
+    public DamageAction(int value) {
+        this.value = value;
     }
 
     @Override
     public DiceAction sumAction(DiceAction action) {
-        int newValue=value+ action.getValue();
+        int newValue = value + action.getValue();
         return new DamageAction(newValue);
     }
 
     @Override
     public String actionDescription(String characterName, String targetName) {
-        return characterName + " hit " + targetName + " for " +value + " damage.";
+        return characterName + " hit " + targetName + " for " + value + " damage.";
     }
 
     @Override
     public String actionDescription() {
-        return "Hit for " +value + " damage.";
+        return "Hit for " + value + " damage.";
     }
 
     @Override
@@ -39,12 +39,14 @@ public class DamageAction implements DiceAction{
 
     @Override
     public void doAction(GameCharacter character) {
-        try{
-            character.dealDamage(value);
-        }catch (CharacterDieException ignore){}
+        try {
+            character.receiveDamage(value);
+        } catch (CharacterDieException ignore) {
+        }
     }
+
     @Override
-    public boolean onSelf(){
+    public boolean onSelf() {
         return false;
     }
 }

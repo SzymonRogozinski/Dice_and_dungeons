@@ -8,7 +8,6 @@ public enum Tags {
     ON_DEFEND,
     FREE_ACTION,
     ATTACK,
-    SUPPORT,
     MAGIC,
     DEFENCE,
     BONUS_DICE,

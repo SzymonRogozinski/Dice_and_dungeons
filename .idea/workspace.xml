@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a1dd60c5-7dfc-439c-9fc1-d7f760bd750c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Code/src/GUI/Compents/DimensionlessGameLabel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/GUI/Compents/GameButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/GUI/Compents/GameLabel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/GUI/Compents/GameProgressBar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/GUI/Compents/GameTextArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/Fight/FightModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/Fight/FightModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/CharactersInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/CharactersInfoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/EquipmentGUIState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/EquipmentGUIState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/EquipmentView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/EquipmentView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/ItemInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/ItemInfoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/ItemManagementPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/ItemManagementPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/ItemSlot.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/ItemSlot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/SwitchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/EquipmentGUI/SwitchPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/FightGUI/ActionListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/FightGUI/ActionListPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/FightGUI/FightGUIState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/FightGUI/FightGUIState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/FightGUI/FightPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/FightGUI/FightPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/FightGUI/StatusPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/FightGUI/StatusPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/ViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/ViewPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/WalkingGUI/Arrows.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/WalkingGUI/Arrows.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/WalkingGUI/LootLogPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/WalkingGUI/LootLogPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/WalkingGUI/PartyStatusPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/WalkingGUI/PartyStatusPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/WalkingGUI/WalkingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/WalkingGUI/WalkingView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/changelog.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "SzymonRogozinski"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/SzymonRogozinski/Game-Fight.git",
+    "accountId": "4088e298-259b-4ac2-b7e8-199ffff30068"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2nT1NyUJyzE0j2sZeQJZEVzj8Vf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "fixes",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/RetailAdmin/Desktop/Dice_and_dungeons/Code"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a1dd60c5-7dfc-439c-9fc1-d7f760bd750c" name="Changes" comment="" />
+      <created>1728982216603</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728982216603</updated>
+    </task>
+    <servers />
+  </component>
+</project>

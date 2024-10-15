@@ -10,19 +10,19 @@ import java.awt.*;
 //Panel for rendering map view
 public class WalkingPanel extends JPanel {
 
-    private final int margin=3;
+    private final int margin = 3;
     private final int scale;
     private final int viewSize;
 
     public WalkingPanel() {
         //set panel
-        this.setSize(GUISettings.PANEL_SIZE-margin*2,GUISettings.PANEL_SIZE-margin*2);
+        this.setSize(GUISettings.PANEL_SIZE - margin * 2, GUISettings.PANEL_SIZE - margin * 2);
         this.setLayout(null);
         //this.setBackground(Color.BLACK);
         this.setOpaque(true);
 
-        viewSize= FogOfWar.getSize();
-        scale= (GUISettings.PANEL_SIZE-margin*2) / FogOfWar.getSize();
+        viewSize = FogOfWar.getSize();
+        scale = (GUISettings.PANEL_SIZE - margin * 2) / FogOfWar.getSize();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class WalkingPanel extends JPanel {
 
         for (int i = 0; i < viewSize; i++) {
             for (int j = 0; j < viewSize; j++) {
-                g2D.drawImage(GameManager.getWalkingManager().getWalking().getMap().getPlace(j+ GameManager.getWalkingManager().getWalking().fogOfWar.getMinX(), i+ GameManager.getWalkingManager().getWalking().fogOfWar.getMinY()).getImage(), j * scale+margin, i * scale+margin, scale, scale, null);
+                g2D.drawImage(GameManager.getWalkingManager().getWalking().getMap().getPlace(j + GameManager.getWalkingManager().getWalking().fogOfWar.getMinX(), i + GameManager.getWalkingManager().getWalking().fogOfWar.getMinY()).getImage(), j * scale + margin, i * scale + margin, scale, scale, null);
             }
         }
     }

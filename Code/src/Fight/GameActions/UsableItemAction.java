@@ -6,17 +6,17 @@ import Game.Tags;
 
 import java.util.ArrayList;
 
-public class UsableItemAction extends GameAction{
+public class UsableItemAction extends GameAction {
 
     private final ArrayList<DiceAction> constActions;
 
-    public UsableItemAction(ActionTarget target,ArrayList<DiceAction> constActions, Tags[] tags) {
-        super(null, target, null,tags);
-        this.constActions=constActions;
+    public UsableItemAction(ActionTarget target, ArrayList<DiceAction> constActions, Tags[] tags) {
+        super(null, target, null, tags);
+        this.constActions = constActions;
     }
 
     @Override
-    public ArrayList<DiceAction> getActionFactories(){
+    public ArrayList<DiceAction> getActionFactories() {
         return constActions;
     }
 }

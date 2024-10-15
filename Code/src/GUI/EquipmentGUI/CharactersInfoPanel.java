@@ -2,6 +2,10 @@ package GUI.EquipmentGUI;
 
 import Character.PlayerCharacter;
 import Equipment.CharacterEquipment;
+import GUI.Compents.DimensionlessGameLabel;
+import GUI.Compents.GameButton;
+import GUI.Compents.GameLabel;
+import GUI.Compents.GameProgressBar;
 import GUI.GUISettings;
 import Game.GameManager;
 import Game.PlayerInfo;
@@ -13,32 +17,31 @@ import java.awt.event.ActionListener;
 
 public class CharactersInfoPanel extends JPanel {
 
-    private static ImageIcon BAG_SLOT_ICON =new ImageIcon("Texture/EmptySlots/slot-bag.png");
+    private static final ImageIcon BAG_SLOT_ICON = new ImageIcon("Texture/EmptySlots/slot-bag.png");
 
-    private JLabel headline;
-    private CharacterInfoPanel charactersInfoPanel;
-    private PartyInfoPanel partyInfoPanel;
-    private ChangePanel changeCharacterPanel;
-    private UseItemPanel useItemPanel;
-    private ChangePanel changeBackpackPagePanel;
+    private final CharacterInfoPanel charactersInfoPanel;
+    private final PartyInfoPanel partyInfoPanel;
+    private final ChangePanel changeCharacterPanel;
+    private final UseItemPanel useItemPanel;
+    private final ChangePanel changeBackpackPagePanel;
 
-    public CharactersInfoPanel(Border border){
-        this.setSize(GUISettings.SMALL_PANEL_SIZE,GUISettings.PANEL_SIZE);
-        FlowLayout layout=new FlowLayout(FlowLayout.CENTER);
+    public CharactersInfoPanel(Border border) {
+        this.setSize(GUISettings.SMALL_PANEL_SIZE, GUISettings.PANEL_SIZE);
+        FlowLayout layout = new FlowLayout(FlowLayout.CENTER);
         layout.setVgap(15);
         this.setLayout(layout);
         this.setBackground(Color.BLACK);
         this.setBorder(border);
 
-        headline = new JLabel("Info", SwingConstants.CENTER);
-        headline.setFont(GUISettings.BIG_FONT);
-        headline.setForeground(Color.WHITE);
+        DimensionlessGameLabel headline = new DimensionlessGameLabel(
+                "Info", SwingConstants.CENTER,
+                GUISettings.BIG_FONT, Color.WHITE);
 
-        charactersInfoPanel=new CharacterInfoPanel();
-        partyInfoPanel=new PartyInfoPanel();
-        changeCharacterPanel=new ChangePanel("Next character","Previous character",e-> GameManager.getEquipment().changeCharacter(true), e-> GameManager.getEquipment().changeCharacter(false));
-        useItemPanel=new UseItemPanel();
-        changeBackpackPagePanel=new ChangePanel("Next page","Previous page",e-> GameManager.getEquipment().changeBackpackPage(true), e-> GameManager.getEquipment().changeBackpackPage(false));
+        charactersInfoPanel = new CharacterInfoPanel();
+        partyInfoPanel = new PartyInfoPanel();
+        changeCharacterPanel = new ChangePanel("Next character", "Previous character", _ -> GameManager.getEquipment().changeCharacter(true), _ -> GameManager.getEquipment().changeCharacter(false));
+        useItemPanel = new UseItemPanel();
+        changeBackpackPagePanel = new ChangePanel("Next page", "Previous page", _ -> GameManager.getEquipment().changeBackpackPage(true), _ -> GameManager.getEquipment().changeBackpackPage(false));
 
         setEquipmentVisibility(true);
 
@@ -50,7 +53,7 @@ public class CharactersInfoPanel extends JPanel {
         this.add(changeBackpackPagePanel);
     }
 
-    public void setEquipmentVisibility(boolean isVisible){
+    public void setEquipmentVisibility(boolean isVisible) {
         charactersInfoPanel.setVisible(isVisible);
         changeCharacterPanel.setVisible(isVisible);
 
@@ -58,137 +61,140 @@ public class CharactersInfoPanel extends JPanel {
         changeBackpackPagePanel.setVisible(!isVisible);
     }
 
-    public void refresh(){
+    public void refresh() {
         partyInfoPanel.refresh();
         charactersInfoPanel.refresh();
         useItemPanel.refresh();
     }
 
-    public class CharacterInfoPanel extends JPanel{
+    public class CharacterInfoPanel extends JPanel {
 
         //name,strength,endurance,intelligence,charisma, cunning,luck
-        private JLabel[] statisticLabels;
+        private final GameLabel[] statisticLabels;
 
         public CharacterInfoPanel() {
-            this.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-20,(int)(GUISettings.PANEL_SIZE*0.25)));
-            FlowLayout layout=new FlowLayout(FlowLayout.CENTER);
+            this.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE - 20, (int) (GUISettings.PANEL_SIZE * 0.25)));
+            FlowLayout layout = new FlowLayout(FlowLayout.CENTER);
             layout.setVgap(1);
             this.setLayout(layout);
             this.setBackground(Color.BLACK);
 
-            statisticLabels=new JLabel[7];
-            for(int i=0;i<7;i++){
-                statisticLabels[i]=new JLabel("",SwingConstants.LEFT);
-                statisticLabels[i].setForeground(Color.WHITE);
-                statisticLabels[i].setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-20,GUISettings.SMALL_PANEL_SIZE/10));
-            }
-            //TEST DATA
-            statisticLabels[0].setText("");
-            statisticLabels[1].setText("");
-            statisticLabels[2].setText("");
-            statisticLabels[3].setText("");
-            statisticLabels[4].setText("");
-            statisticLabels[5].setText("");
-            statisticLabels[6].setText("");
-
-            for(int i=0;i<7;i++){
+            statisticLabels = new GameLabel[7];
+            for (int i = 0; i < 7; i++) {
+                statisticLabels[i] = new GameLabel(
+                        "",
+                        SwingConstants.LEFT,
+                        GUISettings.SMALL_PANEL_SIZE - 20,
+                        GUISettings.SMALL_PANEL_SIZE / 10,
+                        Color.WHITE
+                );
                 this.add(statisticLabels[i]);
             }
         }
 
-        public void refresh(){
-            PlayerCharacter player= GameManager.getEquipment().getCurrentCharacter();
+        public void refresh() {
+            PlayerCharacter player = GameManager.getEquipment().getCurrentCharacter();
             statisticLabels[0].setText(player.getName());
-            statisticLabels[1].setText("Strength: "+player.getStrength());
-            statisticLabels[2].setText("Endurance: "+player.getEndurance());
-            statisticLabels[3].setText("Intelligence: "+player.getIntelligence());
-            statisticLabels[4].setText("Charisma: "+player.getCharisma());
-            statisticLabels[5].setText("Cunning: "+player.getCunning());
-            statisticLabels[6].setText("Luck: "+player.getLuck());
+            statisticLabels[1].setText("Strength: " + player.getStrength());
+            statisticLabels[2].setText("Endurance: " + player.getEndurance());
+            statisticLabels[3].setText("Intelligence: " + player.getIntelligence());
+            statisticLabels[4].setText("Charisma: " + player.getCharisma());
+            statisticLabels[5].setText("Cunning: " + player.getCunning());
+            statisticLabels[6].setText("Luck: " + player.getLuck());
         }
     }
 
-    public class PartyInfoPanel extends JPanel{
+    public class PartyInfoPanel extends JPanel {
 
-        private JLabel[] statisticLabels;
+        private final GameProgressBar healthBar, manaBar;
 
         public PartyInfoPanel() {
-            this.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-20,GUISettings.PANEL_SIZE/4));
-            FlowLayout layout=new FlowLayout(FlowLayout.CENTER);
+            this.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE - 20, GUISettings.PANEL_SIZE / 4));
+            FlowLayout layout = new FlowLayout(FlowLayout.CENTER);
             layout.setVgap(1);
             this.setLayout(layout);
             this.setBackground(Color.BLACK);
 
-            statisticLabels=new JLabel[3];
-            for(int i=0;i<3;i++){
-                statisticLabels[i]=new JLabel("",SwingConstants.LEFT);
-                statisticLabels[i].setForeground(Color.WHITE);
-                statisticLabels[i].setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-20,GUISettings.SMALL_PANEL_SIZE/10));
-            }
-            statisticLabels[0].setText("Party");
-            statisticLabels[1].setText("0/0");
-            statisticLabels[2].setText("0/0");
+            DimensionlessGameLabel health = new DimensionlessGameLabel("Party health", SwingConstants.CENTER, Color.WHITE);
+            this.add(health);
 
-            for(int i=0;i<3;i++){
-                this.add(statisticLabels[i]);
-            }
+            healthBar = new GameProgressBar(Color.RED, GUISettings.SMALL_PANEL_SIZE - 6, GUISettings.SMALL_PANEL_SIZE / 8);
+            this.add(healthBar);
+
+            DimensionlessGameLabel mana = new DimensionlessGameLabel("Party mana", SwingConstants.CENTER, Color.WHITE);
+            this.add(mana);
+
+            manaBar = new GameProgressBar(Color.BLUE, GUISettings.SMALL_PANEL_SIZE - 6, GUISettings.SMALL_PANEL_SIZE / 8);
+            this.add(manaBar);
+
         }
 
-        public void refresh(){
-            statisticLabels[1].setText("Health: "+ PlayerInfo.getParty().getCurrentHealth()+"/"+ PlayerInfo.getParty().getMaxHealth());
-            statisticLabels[2].setText("Mana: "+ PlayerInfo.getParty().getCurrentMana()+"/"+ PlayerInfo.getParty().getMaxMana());
+        public void refresh() {
+            healthBar.setMaximum(PlayerInfo.getParty().getMaxHealth());
+            manaBar.setMaximum(PlayerInfo.getParty().getMaxMana());
+            healthBar.setValue(PlayerInfo.getParty().getCurrentHealth());
+            String healthString = PlayerInfo.getParty().getCurrentHealth() + "/" + PlayerInfo.getParty().getMaxHealth();
+            if (PlayerInfo.getParty().getShield() > 0)
+                healthString += " +" + PlayerInfo.getParty().getShield();
+            healthBar.setString(healthString);
+            manaBar.setValue(PlayerInfo.getParty().getCurrentMana());
+            manaBar.setString(PlayerInfo.getParty().getCurrentMana() + "/" + PlayerInfo.getParty().getMaxMana());
         }
     }
 
-    public class ChangePanel extends JPanel{
+    public class ChangePanel extends JPanel {
 
-        private JButton next,prev;
-
-        public ChangePanel(String nextButtonText, String prevButtonText, ActionListener nextButtonAction,ActionListener prevButtonAction) {
-            this.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-20,GUISettings.PANEL_SIZE/4));
-            FlowLayout layout=new FlowLayout(FlowLayout.CENTER);
+        public ChangePanel(String nextButtonText, String prevButtonText, ActionListener nextButtonAction, ActionListener prevButtonAction) {
+            this.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE - 20, GUISettings.PANEL_SIZE / 4));
+            FlowLayout layout = new FlowLayout(FlowLayout.CENTER);
             layout.setVgap(1);
             this.setLayout(layout);
             this.setBackground(Color.BLACK);
 
-            next=new JButton(nextButtonText);
-            next.addActionListener(nextButtonAction);
-            next.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-20,(int)(GUISettings.PANEL_SIZE*0.075)));
-            next.setMargin(new Insets(0,0,0,0));
+            GameButton next = new GameButton(nextButtonText,
+                    GUISettings.SMALL_PANEL_SIZE - 20,
+                    (int) (GUISettings.PANEL_SIZE * 0.075),
+                    nextButtonAction
+            );
+            next.setMargin(new Insets(0, 0, 0, 0));
 
-            prev=new JButton(prevButtonText);
-            prev.addActionListener(prevButtonAction);
-            prev.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-20,(int)(GUISettings.PANEL_SIZE*0.075)));
-            prev.setMargin(new Insets(0,0,0,0));
+            GameButton prev = new GameButton(prevButtonText,
+                    GUISettings.SMALL_PANEL_SIZE - 20,
+                    (int) (GUISettings.PANEL_SIZE * 0.075),
+                    prevButtonAction
+            );
+            prev.setMargin(new Insets(0, 0, 0, 0));
 
             this.add(next);
             this.add(prev);
         }
     }
 
-    public class UseItemPanel extends JPanel{
+    public class UseItemPanel extends JPanel {
 
-        private JButton useItem;
-        private ItemSlot itemSlot;
+        private final ItemSlot itemSlot;
 
         public UseItemPanel() {
-            this.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-20,(int)(GUISettings.PANEL_SIZE*0.25)));
-            FlowLayout layout=new FlowLayout(FlowLayout.CENTER);
+            this.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE - 20, (int) (GUISettings.PANEL_SIZE * 0.25)));
+            FlowLayout layout = new FlowLayout(FlowLayout.CENTER);
             layout.setVgap(10);
             this.setLayout(layout);
             this.setBackground(Color.BLACK);
 
-            useItem=new JButton("Use item");
-            useItem.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE-50,(int)(GUISettings.PANEL_SIZE*0.05)));
-            useItem.addActionListener(e-> GameManager.getEquipment().useChosenItem());
+            GameButton useItem = new GameButton(
+                    "Use item",
+                    GUISettings.SMALL_PANEL_SIZE - 50,
+                    (int) (GUISettings.PANEL_SIZE * 0.05),
+                    _ -> GameManager.getEquipment().useChosenItem()
+            );
 
-            itemSlot=new ItemSlot(null, BAG_SLOT_ICON,0, CharacterEquipment.USE_SLOT);
+            itemSlot = new ItemSlot(null, BAG_SLOT_ICON, 0, CharacterEquipment.USE_SLOT);
 
             this.add(itemSlot);
             this.add(useItem);
         }
 
-        void refresh(){
+        void refresh() {
             itemSlot.setItem(GameManager.getEquipment().getUseItem());
         }
 

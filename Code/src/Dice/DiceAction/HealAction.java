@@ -2,27 +2,27 @@ package Dice.DiceAction;
 
 import Character.GameCharacter;
 
-public class HealAction implements DiceAction{
-    private static final String id="Heal";
+public class HealAction implements DiceAction {
+    private static final String id = "Heal";
     private final int value;
-    private boolean actionOnSelf;
+    private final boolean actionOnSelf;
 
-    public HealAction(int value,boolean actionOnSelf){
-        this.actionOnSelf=actionOnSelf;
-        this.value=value;
+    public HealAction(int value, boolean actionOnSelf) {
+        this.actionOnSelf = actionOnSelf;
+        this.value = value;
     }
 
     @Override
     public DiceAction sumAction(DiceAction action) {
-        int newValue=value+ action.getValue();
-        return new HealAction(newValue,actionOnSelf);
+        int newValue = value + action.getValue();
+        return new HealAction(newValue, actionOnSelf);
     }
 
     @Override
     public String actionDescription(String characterName, String targetName) {
-        if(targetName==null)
-            return characterName+" heal " +value + " of health to self.";
-        return characterName+" heal " +value + " of health to " + targetName+".";
+        if (targetName == null)
+            return characterName + " heal " + value + " of health to self.";
+        return characterName + " heal " + value + " of health to " + targetName + ".";
     }
 
     @Override

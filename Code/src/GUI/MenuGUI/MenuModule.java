@@ -1,7 +1,8 @@
 package GUI.MenuGUI;
 
-import java.util.ArrayList;
 import Character.PlayerCharacter;
+
+import java.util.ArrayList;
 
 public class MenuModule {
 
@@ -18,12 +19,12 @@ public class MenuModule {
         return party;
     }
 
-    public void addToParty(PlayerCharacter character){
+    public void addToParty(PlayerCharacter character) {
         party.add(character);
         state.refresh();
     }
 
-    public void removeFromParty(PlayerCharacter character){
+    public void removeFromParty(PlayerCharacter character) {
         party.remove(character);
         state.refresh();
     }
@@ -37,23 +38,19 @@ public class MenuModule {
         state.refresh();
     }
 
-    public void changeToStart(){
+    public void changeToStart() {
         state.changeState(MenuState.START);
     }
 
-    public void changeToChoose(){
+    public void changeToChoose() {
         state.changeState(MenuState.CHOOSING_CHARACTER);
     }
 
-    public void changeToLoad(){
-        state.changeState(MenuState.LOADING_GAME);
-    }
-
-    public void gameOver(){
+    public void gameOver() {
         state.changeState(MenuState.GAME_OVER);
     }
 
-    public void playerWin(){
+    public void playerWin() {
         state.changeState(MenuState.PLAYER_WIN);
     }
 }

@@ -1,4 +1,4 @@
 package Equipment.Items;
 
-public class UsedAllOfItemsException extends Exception{
+public class UsedAllOfItemsException extends Exception {
 }

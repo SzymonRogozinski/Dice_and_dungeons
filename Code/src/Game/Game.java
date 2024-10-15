@@ -12,7 +12,6 @@ import GUI.MenuGUI.MenuModule;
 import GUI.MenuGUI.MenuState;
 import GUI.MenuGUI.MenuView;
 import GUI.WalkingGUI.WalkingGUIState;
-import GUI.WalkingGUI.WalkingKeyListener;
 import GUI.WalkingGUI.WalkingView;
 import Loot.LootModule;
 import Walking.WalkingModule;
@@ -26,7 +25,7 @@ public class Game {
         FightView fightView = new FightView();
         EquipmentView equipmentView = new EquipmentView();
 
-        MainFrame mainFrame = new MainFrame(menuView,walkingView,fightView,equipmentView);
+        MainFrame mainFrame = new MainFrame(menuView, walkingView, fightView, equipmentView);
 
         //Set modules and states
         GameManager.setMenuModule(new MenuModule(new MenuState(menuView)));

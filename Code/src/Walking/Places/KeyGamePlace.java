@@ -1,6 +1,5 @@
 package Walking.Places;
 
-import Walking.Collision.EnemyFightException;
 import Walking.Collision.KeyCollectedException;
 import Walking.Drones.Drone;
 
@@ -11,13 +10,12 @@ public class KeyGamePlace extends GamePlace {
     }
 
     @Override
-    public boolean getCollision(Drone goingToCollideCharacter) throws EnemyFightException, KeyCollectedException {
-        if(goingToCollideCharacter.getIcon() instanceof EnemyGamePlace){
+    public boolean getCollision(Drone goingToCollideCharacter) throws KeyCollectedException {
+        if (goingToCollideCharacter.getIcon() instanceof EnemyGamePlace) {
             return true;
-        }else if(goingToCollideCharacter.getIcon() instanceof PlayerGamePlace){
-            System.out.println("You collected a key!");
+        } else if (goingToCollideCharacter.getIcon() instanceof PlayerGamePlace) {
             throw new KeyCollectedException();
-        }else{
+        } else {
             return false;
         }
     }

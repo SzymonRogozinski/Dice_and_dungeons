@@ -3,10 +3,11 @@ package Dice.DiceAction;
 import Character.GameCharacter;
 import Fight.Statuses.StunStatus;
 
-public class StunAction implements DiceAction{
-    private static final String id="Stun";
+public class StunAction implements DiceAction {
+    private static final String id = "Stun";
 
-    public StunAction(){}
+    public StunAction() {
+    }
 
     @Override
     public DiceAction sumAction(DiceAction action) {
@@ -15,7 +16,7 @@ public class StunAction implements DiceAction{
 
     @Override
     public String actionDescription(String characterName, String targetName) {
-        return characterName+" applied stun to " + targetName+".";
+        return characterName + " applied stun to " + targetName + ".";
     }
 
     @Override
@@ -37,8 +38,9 @@ public class StunAction implements DiceAction{
     public void doAction(GameCharacter character) {
         character.addStatus(new StunStatus());
     }
+
     @Override
-    public boolean onSelf(){
+    public boolean onSelf() {
         return false;
     }
 }

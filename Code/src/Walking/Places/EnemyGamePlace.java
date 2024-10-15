@@ -10,12 +10,12 @@ public class EnemyGamePlace extends GamePlace {
 
     @Override
     public boolean getCollision(Drone goingToCollideCharacter) throws EnemyFightException {
-        if(goingToCollideCharacter.getIcon() instanceof EnemyGamePlace){
+        if (goingToCollideCharacter.getIcon() instanceof EnemyGamePlace) {
             return true;
-        }else if(goingToCollideCharacter.getIcon() instanceof PlayerGamePlace){
+        } else if (goingToCollideCharacter.getIcon() instanceof PlayerGamePlace) {
             throw new EnemyFightException(getReference());
-        }else{
+        } else {
             return false;
         }
-     }
+    }
 }
