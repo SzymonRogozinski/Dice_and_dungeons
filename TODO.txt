@@ -1,3 +1,2 @@
 > Podmienić placeholdery
-> Ogólny refactor
 > Dodać zapisywanie gry
