@@ -1,2 +1,4 @@
 > Podmienić placeholdery
 > Dodać zapisywanie gry
+
+> W trakcie rzutu, jak najedzie się na przeciwnika, to można ponowić wynik (bug)
