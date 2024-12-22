@@ -34,13 +34,13 @@ public class GameConst {
     private static final SpellItem thunder_ball = new SpellItem(new SpellAction(DiceFactory.buildDice(new int[][]{{0}, {0}, {0}, {1, 5}, {1, 11}, {1, 11}}), ActionTarget.ENEMY_CHARACTER, (PlayerCharacter p) -> p.getDiceNumber(p.getIntelligence()), 16, new Tags[]{Tags.MAGIC}), new Tags[]{}, new ImageIcon("Texture/Items/spells/thunder_ball.png"), "thunder ball", "thunder ball", ItemQuality.COMMON);
     private static final SpellItem toxic_flower = new SpellItem(new SpellAction(DiceFactory.buildDice(new int[][]{{0}, {0}, {0}, {5, 3}, {5, 3}, {5, 3}}), ActionTarget.ENEMY_CHARACTER, (PlayerCharacter p) -> p.getDiceNumber(p.getIntelligence()), 16, new Tags[]{Tags.MAGIC}), new Tags[]{}, new ImageIcon("Texture/Items/spells/toxic_flower.png"), "toxic flower", "toxic flower", ItemQuality.COMMON);
     public static final ArrayList<PlayerCharacter> START_CHARACTER = new ArrayList<>(List.of(
-            new PlayerCharacter(32, 23, 23, 23, 14, 14, "Warrior", new ImageIcon("Texture/CharacterTexture/player.png"), new Tags[]{Tags.WARRIOR},
+            new PlayerCharacter(32, 23, 23, 23, 14, 14, "Warrior", new ImageIcon("Texture/CharacterTexture/warrior.png"), new Tags[]{Tags.WARRIOR},
                     new ArrayList<>(List.of(sword, shield)),
                     new ArrayList<>(List.of(ghost_sword))),
-            new PlayerCharacter(23, 14, 14, 14, 32, 32, "Bandit", new ImageIcon("Texture/CharacterTexture/player.png"), new Tags[]{Tags.THIEF},
+            new PlayerCharacter(23, 14, 14, 14, 32, 32, "Bandit", new ImageIcon("Texture/CharacterTexture/bandit.png"), new Tags[]{Tags.THIEF},
                     new ArrayList<>(List.of(bow, trap, bolas)),
                     new ArrayList<>()),
-            new PlayerCharacter(14, 14, 32, 23, 23, 23, "Warlock", new ImageIcon("Texture/CharacterTexture/player.png"), new Tags[]{Tags.MAGE},
+            new PlayerCharacter(14, 14, 32, 23, 23, 23, "Warlock", new ImageIcon("Texture/CharacterTexture/warlock.png"), new Tags[]{Tags.MAGE},
                     new ArrayList<>(List.of(sword, magic_sphere)),
                     new ArrayList<>(List.of(thunder_ball, toxic_flower)))
     ));
