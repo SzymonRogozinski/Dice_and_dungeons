@@ -11,13 +11,13 @@ public class CharacterPanel extends JPanel {
     private final PlayerCharacter playerCharacter;
     private boolean isSelected;
 
-    public CharacterPanel(PlayerCharacter playerCharacter) {
+    public CharacterPanel(PlayerCharacter playerCharacter, ImageIcon frontIcon) {
         FlowLayout layout = new FlowLayout();
         layout.setVgap(1);
         this.setLayout(layout);
         this.playerCharacter = playerCharacter;
 
-        JLabel playerLabel = new JLabel(GameUtils.resizeIcon(playerCharacter.getImage(), GUISettings.CHARACTER_WIDTH - 2, (int) (GUISettings.CHARACTER_HEIGHT * 0.85) - 2));
+        JLabel playerLabel = new JLabel(GameUtils.resizeIcon(frontIcon, GUISettings.CHARACTER_WIDTH - 2, (int) (GUISettings.CHARACTER_HEIGHT * 0.85) - 2));
 
         JLabel nameLabel = new JLabel(playerCharacter.getName(), SwingConstants.CENTER);
         nameLabel.setForeground(Color.WHITE);

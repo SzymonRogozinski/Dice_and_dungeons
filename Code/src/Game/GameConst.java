@@ -44,4 +44,10 @@ public class GameConst {
                     new ArrayList<>(List.of(sword, magic_sphere)),
                     new ArrayList<>(List.of(thunder_ball, toxic_flower)))
     ));
+
+    public static final ArrayList<ImageIcon> START_CHARACTER_FRONTS = new ArrayList<>(List.of(
+            new ImageIcon("Texture/CharacterTexture/warrior_f.png"),
+            new ImageIcon("Texture/CharacterTexture/bandit_f.png"),
+            new ImageIcon("Texture/CharacterTexture/warlock_f.png")
+    ));
 }

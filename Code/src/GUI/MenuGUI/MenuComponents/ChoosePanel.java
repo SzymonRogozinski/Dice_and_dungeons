@@ -37,7 +37,7 @@ public class ChoosePanel extends JPanel {
         int xSpace = (GUISettings.PANEL_SIZE - GUISettings.CHARACTER_WIDTH * characterInRow) / (characterInRow + 1);
         int yOffSet = GUISettings.CHARACTER_HEIGHT / 2;
         for (PlayerCharacter p : GameConst.START_CHARACTER) {
-            CharacterPanel panel = new CharacterPanel(p);
+            CharacterPanel panel = new CharacterPanel(p, GameConst.START_CHARACTER_FRONTS.get(i));
             panel.addMouseListener(new ChooseCharactersMouseListener(panel));
             panel.setLocation((xSpace + GUISettings.CHARACTER_WIDTH) * (i % MAX_CHARACTER_IN_ROW) + xSpace, yOffSet);
             this.add(panel);
