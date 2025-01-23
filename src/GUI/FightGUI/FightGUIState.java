@@ -36,7 +36,7 @@ public class FightGUIState {
     }
 
     public void refresh() {
-        panel.refresh();
+        //panel.refresh();
         panel.setState(currentState, currentState);
     }
 }
