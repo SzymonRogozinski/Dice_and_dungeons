@@ -2,7 +2,7 @@
   <artifact type="jar" name="Dice_and_dungeons">
     <output-path>$PROJECT_DIR$/out/artifacts/Dice_and_dungeons</output-path>
     <root id="archive" name="Game fight.jar">
-      <element id="module-output" name="Game fight" />
+      <element id="module-output" name="Dice and dungeons" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/DungeonGenerator.jar" path-in-jar="/" />
     </root>
   </artifact>

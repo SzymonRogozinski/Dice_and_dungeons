@@ -11,5 +11,6 @@
 ## General
 - Change all fonts to Audiowide
 - Set window refresh to 60 fps
+- Change installer
 
 ## Bugs and Fixes
