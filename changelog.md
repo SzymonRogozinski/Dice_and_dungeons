@@ -3,6 +3,7 @@
 ### v0.3
 - Change remaining placeholders
 - Fix hen rolling, after you point on enemy, you resets results
+- Change exe file
 ### v0.2
 - Change status placeholders
 - Fix enemy shield bug
