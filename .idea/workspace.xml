@@ -9,9 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="update changelog">
+    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="q">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Game_fight.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dice_and_dungeons.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Dice_and_dungeons.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/Equipment/Items/EquipableItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/Equipment/Items/EquipableItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/GUI/TestFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/TestFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/changelog.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -445,7 +450,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738771877589</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="update readme">
+      <option name="closed" value="true" />
+      <created>1738772351717</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1738772351717</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -482,13 +495,14 @@
     <MESSAGE value="todo" />
     <MESSAGE value="change placeholders, add generators tests and other fixes" />
     <MESSAGE value="add names and fix item buttons" />
-    <MESSAGE value="q" />
     <MESSAGE value="refactor part 2" />
     <MESSAGE value="refactor part 3" />
     <MESSAGE value="bug fix" />
-    <MESSAGE value="update readme" />
     <MESSAGE value="update changelog" />
-    <option name="LAST_COMMIT_MESSAGE" value="update changelog" />
+    <MESSAGE value="update readme" />
+    <MESSAGE value="q" />
+    <option name="LAST_COMMIT_MESSAGE" value="q" />
+    <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
