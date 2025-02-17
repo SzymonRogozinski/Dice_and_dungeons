@@ -13,6 +13,8 @@ import GUI.MenuGUI.MenuState;
 import GUI.MenuGUI.MenuView;
 import GUI.WalkingGUI.WalkingGUIState;
 import GUI.WalkingGUI.WalkingView;
+import Game.Threads.GUIRefreshThread;
+import Game.Threads.GameMutex;
 import Loot.LootModule;
 import Walking.WalkingModule;
 
@@ -38,6 +40,9 @@ public class Game {
         mainFrame.pack();
         mainFrame.setVisible(true);
         mainFrame.setFocusable(true);
+
+        //Threads
+
 
     }
 }

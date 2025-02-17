@@ -42,4 +42,10 @@ public class MainPanel extends JPanel {
         this.revalidate();
         this.repaint();
     }
+
+    public void refresh(){
+        //Refresh
+        this.revalidate();
+        this.repaint();
+    }
 }

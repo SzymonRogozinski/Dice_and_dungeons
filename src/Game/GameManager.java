@@ -26,6 +26,10 @@ public class GameManager {
     private static MainGUIState GUIState;
     private static int levelPointer = 0;
 
+    public static void refresh(){
+        GUIState.refresh();
+    }
+
     public static void setLoot(LootModule lootModule) {
         if (GameManager.lootModule == null)
             GameManager.lootModule = lootModule;
@@ -61,7 +65,7 @@ public class GameManager {
         }
         //Set state
         state = newState;
-        GUIState.refresh(newState);
+        GUIState.changeState(newState);
     }
 
     public static void gameOver() {

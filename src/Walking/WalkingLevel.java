@@ -59,6 +59,10 @@ public class WalkingLevel {
         isStopped = false;
     }
 
+    public Enemies getEnemies() {
+        return enemies;
+    }
+
     public boolean walkingRunning() {
         return enemyThread.isAlive();
     }
@@ -116,7 +120,7 @@ public class WalkingLevel {
         }
     }
 
-    private synchronized void enemiesMove() {
+    public synchronized void enemiesMove() {
         EnemyDrone enemy = enemies.getNextEnemy();
         boolean playerSeen = enemy.playerSeen(player.getPosX(), player.getPosY());
         if (playerSeen || enemy.ifMove()) {

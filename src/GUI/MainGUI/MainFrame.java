@@ -23,7 +23,11 @@ public class MainFrame extends JFrame {
         this.add(mainPanel);
     }
 
-    public void refresh(GameStates state) {
+    public void changeState(GameStates state) {
         mainPanel.changeView(state);
+    }
+
+    public void refresh() {
+        mainPanel.refresh();
     }
 }

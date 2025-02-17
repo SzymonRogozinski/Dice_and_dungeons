@@ -10,13 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="q">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Game_fight.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dice_and_dungeons.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Dice_and_dungeons.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Game/Threads/EnemyThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Game/Threads/GUIRefreshThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Game/Threads/GameMutex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Game/Threads/ThreadManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/Equipment/Items/EquipableItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/Equipment/Items/EquipableItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/GUI/TestFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/GUI/TestFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/changelog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainGUIState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainGUIState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Walking/WalkingLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/WalkingLevel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +32,8 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -458,7 +462,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738772351717</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="q">
+      <option name="closed" value="true" />
+      <created>1738773128512</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1738773128512</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

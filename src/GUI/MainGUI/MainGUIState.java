@@ -10,7 +10,11 @@ public class MainGUIState {
         this.frame = frame;
     }
 
-    public void refresh(GameStates state) {
-        frame.refresh(state);
+    public void changeState(GameStates state) {
+        frame.changeState(state);
+    }
+
+    public void refresh() {
+        frame.refresh();
     }
 }
