@@ -25,6 +25,22 @@ public class GameMutex {
         }
     }
 
+    public void frameStop(){
+        pauseEnemyThread();
+        try {
+            synchronized (screenLock){
+                if(gameChanging)
+                   screenLock.wait();
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Thread interrupted!?");
+        }
+    }
+
+    public void frameUnstop(){
+        resumeEnemyThread();
+    }
+
     public synchronized boolean isEndEnemyThread() {
         return endEnemyThread;
     }

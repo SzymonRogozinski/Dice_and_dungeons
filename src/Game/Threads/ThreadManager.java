@@ -8,24 +8,8 @@ public class ThreadManager {
 
     public ThreadManager() {
         mutex = new GameMutex();
-        gft = new GUIRefreshThread(mutex,this);
+        gft = new GUIRefreshThread(mutex);
         et = new EnemyThread(mutex);
-    }
-
-    public void frameStop(){
-        mutex.pauseEnemyThread();
-        try {
-            synchronized (mutex){
-                if(mutex.gameChanging)
-                    mutex.screenLock.wait();
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException("Thread interrupted!?");
-        }
-    }
-
-    public void frameUnstop(){
-        et.resumeThread();
     }
 
     public void killEnemyThread(){
