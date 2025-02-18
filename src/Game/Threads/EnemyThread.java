@@ -33,10 +33,4 @@ public class EnemyThread extends Thread {
             }
         }
     }
-
-    void resumeThread() {
-        synchronized (mutex.enemyWalkingLock) {
-            mutex.enemyWalkingLock.notifyAll();
-        }
-    }
 }

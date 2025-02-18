@@ -5,6 +5,7 @@ import Equipment.EquipmentModule;
 import Fight.FightModule;
 import GUI.MainGUI.MainGUIState;
 import GUI.MenuGUI.MenuModule;
+import Game.Threads.ThreadManager;
 import Loot.LootModule;
 import Walking.WalkingModule;
 
@@ -19,15 +20,25 @@ public class GameManager {
     private static LootModule lootModule;
     private static WalkingModule walkingModule;
     private static MenuModule menuModule;
+    private static ThreadManager threadManager;
     private static boolean bossFight;
 
     //Game state
-    private static GameStates state = GameStates.START;
+    private static GameStates state = GameStates.MENU;
     private static MainGUIState GUIState;
     private static int levelPointer = 0;
 
     public static void refresh(){
         GUIState.refresh();
+    }
+
+    public static void setThreadManager(ThreadManager threadManager) {
+        if(GameManager.threadManager==null)
+            GameManager.threadManager = threadManager;
+    }
+
+    public static ThreadManager getThreadManager() {
+        return threadManager;
     }
 
     public static void setLoot(LootModule lootModule) {
@@ -53,7 +64,7 @@ public class GameManager {
             return;
         //Load data
         //Old state
-        if (state == GameStates.START)
+        if (state == GameStates.MENU)
             PlayerInfo.setParty(new PlayerParty(menuModule.getParty(), new ArrayList<>()));
         else if (state == GameStates.WALKING)
             walkingModule.stopWalking();
@@ -70,12 +81,12 @@ public class GameManager {
 
     public static void gameOver() {
         menuModule.gameOver();
-        changeState(GameStates.START);
+        changeState(GameStates.MENU);
     }
 
     public static void gameWin() {
         menuModule.playerWin();
-        changeState(GameStates.START);
+        changeState(GameStates.MENU);
     }
 
     public static FightModule getFight() {

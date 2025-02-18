@@ -17,20 +17,24 @@ public class GameMutex {
         this.gameChanging=true;
     }
 
-    public synchronized void gameChanged(){
+    public void gameChanged(){
         countChange--;
         if(countChange==0){
             this.gameChanging=false;
-            this.screenLock.notify();
+            synchronized (screenLock) {
+                this.screenLock.notify();
+            }
         }
     }
 
     public void frameStop(){
         pauseEnemyThread();
         try {
-            synchronized (screenLock){
-                if(gameChanging)
-                   screenLock.wait();
+            if(gameChanging) {
+                synchronized (screenLock) {
+
+                    screenLock.wait();
+                }
             }
         } catch (InterruptedException e) {
             throw new RuntimeException("Thread interrupted!?");
@@ -58,8 +62,10 @@ public class GameMutex {
     }
 
     public synchronized void resumeEnemyThread() {
-        this.stopEnemyThread =false;
-        this.enemyWalkingLock.notify();
+        stopEnemyThread =false;
+        synchronized (enemyWalkingLock) {
+            enemyWalkingLock.notify();
+        }
     }
 
 }

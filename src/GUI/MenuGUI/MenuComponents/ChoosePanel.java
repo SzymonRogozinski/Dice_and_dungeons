@@ -15,7 +15,6 @@ import java.awt.event.MouseListener;
 public class ChoosePanel extends JPanel {
     private static final int MAX_CHARACTER_IN_ROW = 4;
     private final Border labelBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
-    private final BorderFlashingThread borderFlash;
     private Color selectedColor = new Color(0, 0, 255);
     private final Border selectedLabelBorder = new LineBorder(selectedColor, 1) {
         @Override
@@ -24,6 +23,8 @@ public class ChoosePanel extends JPanel {
             super.paintBorder(c, g, x, y, width, height);
         }
     };
+    private boolean isRaising;
+    private int colorValue;
 
     public ChoosePanel(Border border) {
         //Set display
@@ -47,18 +48,17 @@ public class ChoosePanel extends JPanel {
             }
         }
         //Border changer
-        borderFlash = new BorderFlashingThread(this);
-        borderFlash.start();
-        borderFlash.makeStop();
-        //Refresh
-        this.revalidate();
-        this.repaint();
+        isRaising = false;
+        colorValue = 255;
+
     }
 
-    private void notifyBorder() {
-        synchronized (borderFlash) {
-            borderFlash.notify();
-        }
+    public void refresh(){
+        colorValue += isRaising ? 3 : -3;
+        if (colorValue >= 255 || colorValue <= 0)
+            isRaising = !isRaising;
+        selectedColor = new Color(0, 0, colorValue);
+        this.repaint();
     }
 
     private class ChooseCharactersMouseListener implements MouseListener {
@@ -71,7 +71,6 @@ public class ChoosePanel extends JPanel {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            notifyBorder();
             if (GameManager.getMenuModule().getParty().size() == 3 && !reference.isSelected())
                 return;
             else if (reference.isSelected())
@@ -102,53 +101,6 @@ public class ChoosePanel extends JPanel {
 
         private void setBorderFlashing(boolean flashing) {
             reference.setBorder(flashing ? selectedLabelBorder : labelBorder);
-        }
-    }
-
-
-    private class BorderFlashingThread extends Thread {
-        private final JPanel reference;
-        private boolean isRaising;
-        private int colorValue;
-        private boolean isStop;
-
-        BorderFlashingThread(JPanel reference) {
-            isRaising = false;
-            isStop = false;
-            colorValue = 255;
-            this.reference = reference;
-        }
-
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    synchronized (this) {
-                        if (isStop) {
-                            wait();
-                            isStop = false;
-                        }
-                    }
-                    makeRound();
-                    sleep(2);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-
-        private synchronized void makeRound() {
-            colorValue += isRaising ? 1 : -1;
-            if (colorValue >= 255 || colorValue <= 0)
-                isRaising = !isRaising;
-            selectedColor = new Color(0, 0, colorValue);
-            reference.repaint();
-        }
-
-        private synchronized void makeStop() {
-            isStop = true;
-            colorValue = 255;
-            isRaising = false;
         }
     }
 

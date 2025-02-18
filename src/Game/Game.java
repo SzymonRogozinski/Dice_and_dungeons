@@ -15,6 +15,7 @@ import GUI.WalkingGUI.WalkingGUIState;
 import GUI.WalkingGUI.WalkingView;
 import Game.Threads.GUIRefreshThread;
 import Game.Threads.GameMutex;
+import Game.Threads.ThreadManager;
 import Loot.LootModule;
 import Walking.WalkingModule;
 
@@ -42,7 +43,6 @@ public class Game {
         mainFrame.setFocusable(true);
 
         //Threads
-
-
+        GameManager.setThreadManager(new ThreadManager());
     }
 }

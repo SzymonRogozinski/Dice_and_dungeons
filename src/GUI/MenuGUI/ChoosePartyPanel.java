@@ -14,11 +14,13 @@ public class ChoosePartyPanel extends ViewPanel {
     private final PartyPanel partyPanel;
     private final StartPanel startPanel;
     private final CharacterInfoPanel characterInfoPanel;
+    private final ChoosePanel choosePanel;
 
     public ChoosePartyPanel() {
         super(new ChoosePanel(getSharedBorder()), new StartPanel(getSharedBorder()), new CharacterInfoPanel(getSharedBorder()), new PartyPanel(getSharedBorder()));
 
         ArrayList<JPanel> childPanels = getChildPanels();
+        choosePanel=(ChoosePanel) childPanels.get(0);
         partyPanel = (PartyPanel) childPanels.get(3);
         startPanel = (StartPanel) childPanels.get(1);
         characterInfoPanel = (CharacterInfoPanel) childPanels.get(2);
@@ -28,6 +30,7 @@ public class ChoosePartyPanel extends ViewPanel {
     }
 
     public void refresh() {
+        choosePanel.refresh();
         partyPanel.refresh();
         startPanel.refresh();
         characterInfoPanel.refresh();

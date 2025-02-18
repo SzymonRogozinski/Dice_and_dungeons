@@ -21,7 +21,6 @@ public class WalkingLevel {
     public final FogOfWar fogOfWar;
     private final GameMap gameMap;
     private final Enemies enemies;
-    private final EnemyThread enemyThread;
     private final PlayerDrone player;
     private final EnemyCharacter boss;
     private boolean isStopped;
@@ -42,7 +41,9 @@ public class WalkingLevel {
         this.gameMap = new GameMap(map, settings.path(), settings.bossLevel());
         boss = settings.bossLevel() ? EnemyGenerator.generate(EnemyCategory.Boss, levelSetting.enemyStrength(), levelSetting.minHP()) : null;
         setEnemy();
-        enemyThread = new EnemyThread();
+
+        GameManager.getThreadManager().makeNewEnemyThread();
+
         //Add player
         player = new PlayerDrone(gameMap.getStartX(), gameMap.getStartY(), new PlayerGamePlace(gameMap.getPath()));
         gameMap.addCharacterPlace(player.getIcon(), player.getPosX(), player.getPosY());
@@ -55,7 +56,7 @@ public class WalkingLevel {
     }
 
     public void walkingStart() {
-        enemyThread.start();
+        GameManager.getThreadManager().startEnemyThread();
         isStopped = false;
     }
 
@@ -64,17 +65,17 @@ public class WalkingLevel {
     }
 
     public boolean walkingRunning() {
-        return enemyThread.isAlive();
+        return GameManager.getThreadManager().getEnemyThread().isAlive();
     }
 
     public void walkingStop() {
         isStopped = true;
-        enemyThread.pauseThread();
+        GameManager.getThreadManager().stopEnemyThread();
     }
 
     public void walkingContinue() {
         isStopped = false;
-        enemyThread.resumeThread();
+        GameManager.getThreadManager().resumeEnemyThread();
     }
 
     private void setEnemy() {
@@ -114,8 +115,8 @@ public class WalkingLevel {
 
     public synchronized void killModule() {
         try {
-            enemyThread.endThread();
-            enemyThread.join();
+            GameManager.getThreadManager().killEnemyThread();
+            GameManager.getThreadManager().joinEnemyThread();
         } catch (InterruptedException ignored) {
         }
     }
@@ -137,46 +138,4 @@ public class WalkingLevel {
         GameManager.getWalkingManager().getState().refresh();
     }
 
-    private class EnemyThread extends Thread {
-
-        private final static int oneRoundTime = 500;
-        private final Object lock = new Object();
-        private boolean endThread, stopThread;
-
-        @Override
-        public void run() {
-            while (enemies.countEnemy() > 0 && !endThread) {
-                synchronized (lock) {
-                    if (stopThread) {
-                        stopThread = false;
-                        try {
-                            lock.wait();
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException("Thread interrupted!?");
-                        }
-                    }
-                }
-                enemiesMove();
-                try {
-                    Thread.sleep(oneRoundTime / enemies.countEnemy());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        synchronized void endThread() {
-            endThread = true;
-        }
-
-        synchronized void pauseThread() {
-            stopThread = true;
-        }
-
-        void resumeThread() {
-            synchronized (lock) {
-                lock.notifyAll();
-            }
-        }
-    }
 }

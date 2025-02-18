@@ -12,16 +12,28 @@ import java.awt.*;
 
 public class MainPanel extends JPanel {
     private final CardLayout layout;
+    private final MenuView menuView;
+    private final WalkingView walkingView;
+    private final FightView fightView;
+    private final EquipmentView equipmentView;
 
-    public MainPanel(MenuView startView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView) {
+    private GameStates state;
+
+    public MainPanel(MenuView menuView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView) {
         //Setting panel
         layout = new CardLayout();
+        state=GameStates.MENU;
         this.setLayout(layout);
         this.setPreferredSize(new Dimension(GUISettings.heightAndWidth, GUISettings.heightAndWidth));
         this.setBackground(Color.BLACK);
 
         //Set panels
-        this.add("Start", startView);
+        this.menuView =menuView;
+        this.walkingView=walkingView;
+        this.fightView=fightView;
+        this.equipmentView=equipmentView;
+
+        this.add("Start", menuView);
         this.add("Walking", walkingView);
         this.add("Fight", fightView);
         this.add("Equipment", equipmentView);
@@ -32,18 +44,23 @@ public class MainPanel extends JPanel {
     }
 
     public void changeView(GameStates state) {
+        this.state=state;
         switch (state) {
-            case START -> layout.show(this, "Start");
+            case MENU -> layout.show(this, "Start");
             case WALKING -> layout.show(this, "Walking");
             case FIGHTING -> layout.show(this, "Fight");
             case EQUIPMENT -> layout.show(this, "Equipment");
         }
-        //Refresh
-        this.revalidate();
-        this.repaint();
     }
 
     public void refresh(){
+        switch (state){
+            case MENU ->  menuView.refresh();
+            case WALKING -> walkingView.refresh();
+            //case FIGHTING -> fightView.refr TODO
+            case EQUIPMENT -> equipmentView.refresh();
+        }
+
         //Refresh
         this.revalidate();
         this.repaint();

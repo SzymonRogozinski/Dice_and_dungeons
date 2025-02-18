@@ -1,7 +1,7 @@
 package Game;
 
 public enum GameStates {
-    START,
+    MENU,
     WALKING,
     FIGHTING,
     EQUIPMENT

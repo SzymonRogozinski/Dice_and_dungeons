@@ -41,8 +41,5 @@ public class MenuView extends JPanel {
 
     public void refresh() {
         choosePartyPanel.refresh();
-
-        this.revalidate();
-        this.repaint();
     }
 }
