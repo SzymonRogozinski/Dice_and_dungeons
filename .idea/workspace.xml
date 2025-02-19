@@ -10,18 +10,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="ThreadManager and GameMutex fixes">
+      <change afterPath="$PROJECT_DIR$/src/Game/GameAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Game/GameActionQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/ChoosePartyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/ChoosePartyPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/ChoosePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/ChoosePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/LootLogPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/LootLogPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/PartyStatusPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/PartyStatusPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingKeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingKeyListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/GameStates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameStates.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/Threads/EnemyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Threads/EnemyThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/Threads/GUIRefreshThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Threads/GUIRefreshThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/Threads/GameMutex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Threads/GameMutex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/Threads/ThreadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Threads/ThreadManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/WalkingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/WalkingTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Walking/WalkingLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/WalkingLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Walking/WalkingModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/WalkingModule.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,10 +36,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
         <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -60,14 +65,12 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="d5639448-58a4-4357-9c9b-e78c56e3dc40" />
-        <option name="url" value="https://github.com/SzymonRogozinski/Game-Fight.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/SzymonRogozinski/Game-Fight.git&quot;,
+    &quot;accountId&quot;: &quot;4088e298-259b-4ac2-b7e8-199ffff30068&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -85,37 +88,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.EquipmentTest.executor": "Run",
-    "Application.FightingTest.executor": "Run",
-    "Application.GeneratorTest.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.StartTest.executor": "Run",
-    "Application.Test.executor": "Run",
-    "Application.Tests.FightingTest.executor": "Run",
-    "Application.WalkingMain.executor": "Run",
-    "Application.WalkingTest.executor": "Run",
-    "Application.main.Main.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "true",
-    "JUnit.ArmorGeneratorTest.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "jdk.selected.JAVA_MODULE": "openjdk-22",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Szymon/Desktop/Game_fight/Code/Texture/Enemy",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.EquipmentTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FightingTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GeneratorTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.StartTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Test.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Tests.FightingTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.WalkingMain.executor&quot;: &quot;Run&quot;,
+    &quot;Application.WalkingTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;JUnit.ArmorGeneratorTest.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;fixes&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-22&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Szymon/Desktop/Game_fight/Code/Texture/Enemy&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Szymon\Desktop\Game_fight\Code\Texture\Enemy" />
@@ -152,8 +156,11 @@
       </method>
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-22" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Dice and dungeons" />
+      <option name="PROGRAM_PARAMETERS" value="--enable-preview" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -583,7 +590,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Game/Threads/GameMutex.java</url>
-          <line>64</line>
+          <line>28</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">

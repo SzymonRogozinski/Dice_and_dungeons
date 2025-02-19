@@ -5,11 +5,9 @@ import Game.GameConst;
 import Game.GameManager;
 
 public class WalkingModule {
-    private final WalkingGUIState state;
     private WalkingLevel walking;
 
-    public WalkingModule(WalkingGUIState state) {
-        this.state = state;
+    public WalkingModule() {
         walking = new WalkingLevel(GameManager.getCurrentLevel());
     }
 
@@ -17,30 +15,27 @@ public class WalkingModule {
         return walking;
     }
 
-    public WalkingGUIState getState() {
-        return state;
-    }
-
     public void setNextMap() throws Exception {
         if (GameManager.getLevelPointer() + 1 >= GameConst.LEVELS.size())
             throw new Exception("Cannot load new map!");
         try {
-            walking.killModule();
+            GameManager.getThreadManager().killEnemyThread();
+
             GameManager.setNextLevel();
             walking = new WalkingLevel(GameManager.getCurrentLevel());
-            walking.walkingStart();
+            GameManager.getThreadManager().startEnemyThread();
         } catch (Exception ignore) {
         }
     }
 
     public void startWalking() {
-        if (walking.walkingRunning())
-            walking.walkingContinue();
+        if (GameManager.getThreadManager().getEnemyThread().isAlive())
+            GameManager.getThreadManager().resumeEnemyThread();
         else
-            walking.walkingStart();
+            GameManager.getThreadManager().startEnemyThread();
     }
 
     public void stopWalking() {
-        walking.walkingStop();
+        GameManager.getThreadManager().stopEnemyThread();
     }
 }

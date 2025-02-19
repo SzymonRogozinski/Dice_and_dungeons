@@ -26,8 +26,6 @@ public class WalkingView extends ViewPanel {
     public void refresh() {
         partyStatusPanel.refresh();
         lootLogPanel.refresh();
-        this.repaint();
-        this.revalidate();
     }
 
 }

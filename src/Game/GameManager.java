@@ -72,7 +72,6 @@ public class GameManager {
         //New state
         if (newState == GameStates.WALKING && !bossFight) {
             walkingModule.startWalking();
-            walkingModule.getState().refresh();
         }
         //Set state
         state = newState;

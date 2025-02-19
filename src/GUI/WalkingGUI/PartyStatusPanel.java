@@ -77,8 +77,5 @@ public class PartyStatusPanel extends JPanel {
         manaBar.setString(PlayerInfo.getParty().getCurrentMana() + "/" + PlayerInfo.getParty().getMaxMana());
 
         keysLabel.setText("Keys: " + PlayerInfo.getKeyCollected());
-
-        this.revalidate();
-        this.repaint();
     }
 }

@@ -30,9 +30,12 @@ public class Game {
 
         MainFrame mainFrame = new MainFrame(menuView, walkingView, fightView, equipmentView);
 
+        //Threads
+        GameManager.setThreadManager(new ThreadManager());
+
         //Set modules and states
         GameManager.setMenuModule(new MenuModule(new MenuState(menuView)));
-        GameManager.setWalkingManager(new WalkingModule(new WalkingGUIState(walkingView)));
+        GameManager.setWalkingManager(new WalkingModule());
         GameManager.setFight(new FightModule(new FightGUIState(fightView)));
         GameManager.setEquipment(new EquipmentModule(new EquipmentGUIState(equipmentView)));
         GameManager.setLoot(new LootModule());
@@ -42,7 +45,6 @@ public class Game {
         mainFrame.setVisible(true);
         mainFrame.setFocusable(true);
 
-        //Threads
-        GameManager.setThreadManager(new ThreadManager());
+        GameManager.getThreadManager().start();
     }
 }

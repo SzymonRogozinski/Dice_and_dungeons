@@ -1,5 +1,6 @@
 package GUI.WalkingGUI;
 
+import Game.GameActionQueue;
 import Game.GameManager;
 
 import java.awt.event.KeyEvent;
@@ -25,13 +26,13 @@ public class WalkingKeyListener implements KeyListener {
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             //Up
-            case 38, 87 -> GameManager.getWalkingManager().getWalking().playerMove(0, -1);
+            case 38, 87 -> GameActionQueue.action(()->GameManager.getWalkingManager().getWalking().playerMove(0, -1));
             //Down
-            case 40, 83 -> GameManager.getWalkingManager().getWalking().playerMove(0, 1);
+            case 40, 83 -> GameActionQueue.action(()->GameManager.getWalkingManager().getWalking().playerMove(0, 1));
             //Right
-            case 39, 68 -> GameManager.getWalkingManager().getWalking().playerMove(1, 0);
+            case 39, 68 -> GameActionQueue.action(()->GameManager.getWalkingManager().getWalking().playerMove(1, 0));
             //Left
-            case 37, 65 -> GameManager.getWalkingManager().getWalking().playerMove(-1, 0);
+            case 37, 65 -> GameActionQueue.action(()->GameManager.getWalkingManager().getWalking().playerMove(-1, 0));
         }
     }
 }

@@ -1,5 +1,6 @@
 package Game.Threads;
 
+import Game.GameActionQueue;
 import Game.GameManager;
 
 public class EnemyThread extends Thread {
@@ -23,9 +24,7 @@ public class EnemyThread extends Thread {
                     }
                 }
             }
-            mutex.gameChanging();
-            GameManager.getWalkingManager().getWalking().enemiesMove();
-            mutex.gameChanged();
+            GameActionQueue.action(()->GameManager.getWalkingManager().getWalking().enemiesMove());
             try {
                 Thread.sleep(oneRoundTime / GameManager.getWalkingManager().getWalking().getEnemies().countEnemy());
             } catch (InterruptedException e) {

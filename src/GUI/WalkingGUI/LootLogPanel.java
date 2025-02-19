@@ -28,8 +28,5 @@ public class LootLogPanel extends JPanel {
 
     public void refresh() {
         lootLog.setText(GameManager.getLootModule().getLootLogText());
-
-        this.repaint();
-        this.revalidate();
     }
 }

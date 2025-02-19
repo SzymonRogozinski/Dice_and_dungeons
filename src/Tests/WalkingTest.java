@@ -20,7 +20,7 @@ public class WalkingTest {
         WalkingGUIState state = new WalkingGUIState(walkingView);
 
         try {
-            GameManager.setWalkingManager(new WalkingModule(state));
+            GameManager.setWalkingManager(new WalkingModule());
             //Mocks
             PlayerInfo.setParty(new PlayerParty(new ArrayList<>(), new ArrayList<>()));
             GameManager.setLoot(new LootModule());
@@ -33,6 +33,6 @@ public class WalkingTest {
         mainFrame.setVisible(true);
 
         //Start
-        GameManager.getWalkingManager().getWalking().walkingStart();
+        GameManager.getThreadManager().startEnemyThread();
     }
 }

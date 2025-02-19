@@ -23,7 +23,6 @@ public class WalkingLevel {
     private final Enemies enemies;
     private final PlayerDrone player;
     private final EnemyCharacter boss;
-    private boolean isStopped;
 
     public WalkingLevel(GameLevel levelSetting) {
         MapCreator creator;
@@ -55,27 +54,8 @@ public class WalkingLevel {
         return gameMap;
     }
 
-    public void walkingStart() {
-        GameManager.getThreadManager().startEnemyThread();
-        isStopped = false;
-    }
-
     public Enemies getEnemies() {
         return enemies;
-    }
-
-    public boolean walkingRunning() {
-        return GameManager.getThreadManager().getEnemyThread().isAlive();
-    }
-
-    public void walkingStop() {
-        isStopped = true;
-        GameManager.getThreadManager().stopEnemyThread();
-    }
-
-    public void walkingContinue() {
-        isStopped = false;
-        GameManager.getThreadManager().resumeEnemyThread();
     }
 
     private void setEnemy() {
@@ -87,8 +67,8 @@ public class WalkingLevel {
         return enemies.countEnemy();
     }
 
-    public synchronized void playerMove(int dx, int dy) {
-        if (isStopped)
+    public void playerMove(int dx, int dy) {
+        if (GameManager.getThreadManager().isEnemyThreadStopped())
             return;
         try {
             gameMap.changeCharacterPlace(player, dx, dy);
@@ -109,15 +89,6 @@ public class WalkingLevel {
             }
         } finally {
             fogOfWar.refreshFog();
-            GameManager.getWalkingManager().getState().refresh();
-        }
-    }
-
-    public synchronized void killModule() {
-        try {
-            GameManager.getThreadManager().killEnemyThread();
-            GameManager.getThreadManager().joinEnemyThread();
-        } catch (InterruptedException ignored) {
         }
     }
 
@@ -135,7 +106,6 @@ public class WalkingLevel {
                 GameManager.changeState(GameStates.FIGHTING);
             }
         }
-        GameManager.getWalkingManager().getState().refresh();
     }
 
 }

@@ -8,9 +8,11 @@ public class ThreadManager {
 
     public ThreadManager() {
         mutex = new GameMutex();
-        gft = new GUIRefreshThread(mutex);
+        gft = new GUIRefreshThread();
         et = new EnemyThread(mutex);
+    }
 
+    public void start(){
         gft.start();
     }
 
@@ -20,6 +22,10 @@ public class ThreadManager {
             et.join();
         } catch (InterruptedException ignored) {
         }
+    }
+
+    public boolean isEnemyThreadStopped(){
+        return mutex.isStopEnemyThread();
     }
 
     public void makeNewEnemyThread(){
@@ -40,9 +46,5 @@ public class ThreadManager {
 
     public void stopEnemyThread(){
         mutex.pauseEnemyThread();
-    }
-
-    public void joinEnemyThread() throws InterruptedException {
-        et.join();
     }
 }
