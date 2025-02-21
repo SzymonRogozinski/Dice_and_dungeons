@@ -103,8 +103,5 @@ public class StatusPanel extends JPanel {
         //Refresh combat logs
         combatLog.setText(GameManager.getFight().getCombatLog());
         combatInfo.setText(GameManager.getFight().getCombatInfo());
-
-        this.revalidate();
-        this.repaint();
     }
 }

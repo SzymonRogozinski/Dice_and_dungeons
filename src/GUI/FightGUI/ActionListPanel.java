@@ -7,6 +7,7 @@ import Equipment.Items.UsableItem;
 import GUI.Compents.DimensionlessGameLabel;
 import GUI.Compents.GameButton;
 import GUI.GUISettings;
+import Game.GameActionQueue;
 import Game.GameManager;
 import Game.PlayerInfo;
 
@@ -43,9 +44,9 @@ public class ActionListPanel extends JPanel {
         for (int i = 0; i < 3; i++)
             actionButtons1.add(new GameButton(names[i], buttonWidth, buttonHeight));
 
-        actionButtons1.get(0).addActionListener(_ -> changePage("Fight"));
-        actionButtons1.get(1).addActionListener(_ -> changePage("Items"));
-        actionButtons1.get(2).addActionListener(_ -> changePage("Magic"));
+        actionButtons1.get(0).addActionListener(_ -> GameActionQueue.action(()->changePage("Fight")));
+        actionButtons1.get(1).addActionListener(_ -> GameActionQueue.action(()->changePage("Items")));
+        actionButtons1.get(2).addActionListener(_ -> GameActionQueue.action(()->changePage("Magic")));
 
         CardPanel startPanel = new CardPanel(border, actionButtons1);
         fightPanel = new CardPanel(border, new ArrayList<>(), "Start");
@@ -68,10 +69,10 @@ public class ActionListPanel extends JPanel {
             GameButton button = new GameButton(
                     item.shortName,
                     buttonWidth, buttonHeight,
-                    _ -> {
+                    _ -> GameActionQueue.action(()->{
                         GameManager.getFight().chosenAction(item.getAction());
                         changePage("Start");
-                    }
+                    })
             );
             button.setMargin(new Insets(0, 0, 0, 0));
             button.addMouseListener(new ButtonItemMouseListener(item.name));
@@ -106,12 +107,12 @@ public class ActionListPanel extends JPanel {
             //Button setup
             GameButton button = new GameButton(
                     "", buttonWidth, buttonHeight,
-                    _ -> {
+                    _ -> GameActionQueue.action(()->{
                         if (!(PlayerInfo.getParty().getCurrentMana() < spell.getAction().getManaCost())) {
                             GameManager.getFight().chosenAction(spell.getAction());
                             changePage("Start");
                         }
-                    }
+                    })
             );
 
             JPanel buttonTextPanel = new JPanel();
@@ -169,7 +170,7 @@ public class ActionListPanel extends JPanel {
 
             goBackButton = new GameButton(
                     "go back", buttonWidth, buttonHeight,
-                    _ -> changePage(goBackName)
+                    _ -> GameActionQueue.action(()->changePage(goBackName))
             );
 
             this.add(goBackButton);
@@ -214,14 +215,14 @@ public class ActionListPanel extends JPanel {
             next = new GameButton(
                     "Next",
                     buttonWidth, itemButtonHeight,
-                    _ -> next()
+                    _ -> GameActionQueue.action(this::next)
             );
             next.setMargin(new Insets(0, 0, 0, 0));
 
             prev = new GameButton(
                     "Prev",
                     buttonWidth, itemButtonHeight,
-                    _ -> prev()
+                    _ -> GameActionQueue.action(this::prev)
             );
             prev.setMargin(new Insets(0, 0, 0, 0));
         }
@@ -238,11 +239,11 @@ public class ActionListPanel extends JPanel {
                 GameButton button = new GameButton(
                         item.shortName,
                         buttonWidth, itemButtonHeight,
-                        _ -> {
+                        _ -> GameActionQueue.action(()->{
                             GameManager.getFight().chosenAction(item.getAction());
                             PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
                             changePage("Start");
-                        }
+                        })
                 );
                 button.setMargin(new Insets(0, 0, 0, 0));
                 button.addMouseListener(new ButtonItemMouseListener(item.name));
@@ -272,11 +273,11 @@ public class ActionListPanel extends JPanel {
                 GameButton button = new GameButton(
                         item.shortName,
                         buttonWidth, itemButtonHeight,
-                        _ -> {
+                        _ -> GameActionQueue.action(()->{
                             GameManager.getFight().chosenAction(item.getAction());
                             PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
                             changePage("Start");
-                        }
+                        })
                 );
                 button.setMargin(new Insets(0, 0, 0, 0));
                 button.addMouseListener(new ButtonItemMouseListener(item.name));
@@ -307,11 +308,11 @@ public class ActionListPanel extends JPanel {
                 GameButton button = new GameButton(
                         item.shortName,
                         buttonWidth, itemButtonHeight,
-                        _ -> {
+                        _ -> GameActionQueue.action(()->{
                             GameManager.getFight().chosenAction(item.getAction());
                             PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
                             changePage("Start");
-                        }
+                        })
                 );
                 button.setMargin(new Insets(0, 0, 0, 0));
                 button.addMouseListener(new ButtonItemMouseListener(item.name));
@@ -347,12 +348,12 @@ public class ActionListPanel extends JPanel {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            GameManager.getFight().setCombatInfo("Pointed item: " + itemName);
+            GameActionQueue.action(()->GameManager.getFight().setCombatInfo("Pointed item: " + itemName));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            GameManager.getFight().setCombatInfo("");
+            GameActionQueue.action(()->GameManager.getFight().setCombatInfo(""));
         }
     }
 }

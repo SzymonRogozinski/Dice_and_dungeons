@@ -36,7 +36,6 @@ public class MenuView extends JPanel {
             case MenuState.GAME_OVER -> layout.show(this, "GameOver");
             case MenuState.PLAYER_WIN -> layout.show(this, "Win");
         }
-        refresh();
     }
 
     public void refresh() {

@@ -155,7 +155,6 @@ public class EquipmentTest {
 
         GameManager.setEquipment(module);
         GameManager.setFight(fModule);
-        state.refresh();
 
         mainFrame.add(view);
         mainFrame.pack();

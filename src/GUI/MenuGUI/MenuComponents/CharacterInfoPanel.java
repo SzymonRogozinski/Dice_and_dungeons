@@ -56,8 +56,6 @@ public class CharacterInfoPanel extends JPanel {
         this.add(spells);
         this.add(classes);
 
-        this.repaint();
-        this.revalidate();
     }
 
     public void refresh() {
@@ -114,7 +112,5 @@ public class CharacterInfoPanel extends JPanel {
             spells.setText("");
             classes.setText("");
         }
-        this.repaint();
-        this.revalidate();
     }
 }

@@ -57,7 +57,7 @@ public class MainPanel extends JPanel {
         switch (state){
             case MENU ->  menuView.refresh();
             case WALKING -> walkingView.refresh();
-            //case FIGHTING -> fightView.refr TODO
+            case FIGHTING -> fightView.refresh();
             case EQUIPMENT -> equipmentView.refresh();
         }
 

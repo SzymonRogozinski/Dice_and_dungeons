@@ -72,7 +72,6 @@ public class FightingTest {
         FightModule fight = new FightModule(state);
         GameManager.setFight(fight);
         fight.startFight(getEnemies());
-        state.refresh();
 
         mainFrame.add(fightView);
 

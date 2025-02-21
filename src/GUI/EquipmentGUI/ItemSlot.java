@@ -4,6 +4,7 @@ import Equipment.Items.Item;
 import Equipment.Items.ItemQuality;
 import GUI.Compents.GameLabel;
 import GUI.GUISettings;
+import Game.GameActionQueue;
 import Game.GameManager;
 
 import javax.swing.*;
@@ -85,23 +86,23 @@ public class ItemSlot extends JPanel {
         @Override
         public void mousePressed(MouseEvent e) {
             //Select item
-            GameManager.getEquipment().setClickedItem(reference);
+            GameActionQueue.action(()->GameManager.getEquipment().setClickedItem(reference));
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
             //Send info
-            GameManager.getEquipment().equipItem();
+            GameActionQueue.action(()->GameManager.getEquipment().equipItem());
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            GameManager.getEquipment().setPointedItem(reference);
+            GameActionQueue.action(()->GameManager.getEquipment().setPointedItem(reference));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            GameManager.getEquipment().setPointedItem(null);
+            GameActionQueue.action(()->GameManager.getEquipment().setPointedItem(null));
         }
     }
 

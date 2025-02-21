@@ -34,9 +34,5 @@ public class ChoosePartyPanel extends ViewPanel {
         partyPanel.refresh();
         startPanel.refresh();
         characterInfoPanel.refresh();
-        //Refresh
-        this.revalidate();
-        this.repaint();
     }
-
 }

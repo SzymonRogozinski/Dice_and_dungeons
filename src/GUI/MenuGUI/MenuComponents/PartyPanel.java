@@ -59,7 +59,5 @@ public class PartyPanel extends JPanel {
                 characterLabels[i].setText("-");
             }
         }
-        this.repaint();
-        this.revalidate();
     }
 }

@@ -1,6 +1,7 @@
 package GUI.FightGUI;
 
 import GUI.GUISettings;
+import Game.GameActionQueue;
 import Game.GameManager;
 
 import javax.swing.*;
@@ -25,9 +26,9 @@ public class ActionPanel extends JPanel {
         dice = new DicePanel(border);
 
         //Pause Screen
-        JPanel pauseScreen = new StopPanel(_ -> roll(), "roll", border, false);
-        JPanel enemyScreen = new StopPanel(_ -> enemy(), "enemy attack", border, false);
-        JPanel goBackScreen = new StopPanel(_ -> goBack(), "go back", border, true);
+        JPanel pauseScreen = new StopPanel(_ -> GameActionQueue.action(this::roll), "roll", border, false);
+        JPanel enemyScreen = new StopPanel(_ -> GameActionQueue.action(this::enemy), "enemy attack", border, false);
+        JPanel goBackScreen = new StopPanel(_ -> GameActionQueue.action(this::goBack), "go back", border, true);
 
         this.add("Actions", actions);
         this.add("Pause", pauseScreen);
@@ -84,10 +85,8 @@ public class ActionPanel extends JPanel {
                 reducer.setBackground(Color.BLACK);
                 reducer.add(pauseButton);
                 this.add(reducer);
-            } else {
+            } else
                 this.add(pauseButton);
-            }
-
         }
     }
 }

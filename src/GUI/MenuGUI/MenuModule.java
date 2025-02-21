@@ -21,12 +21,10 @@ public class MenuModule {
 
     public void addToParty(PlayerCharacter character) {
         party.add(character);
-        state.refresh();
     }
 
     public void removeFromParty(PlayerCharacter character) {
         party.remove(character);
-        state.refresh();
     }
 
     public PlayerCharacter getSelectedCharacter() {
@@ -35,7 +33,6 @@ public class MenuModule {
 
     public void setSelectedCharacter(PlayerCharacter selectedCharacter) {
         this.selectedCharacter = selectedCharacter;
-        state.refresh();
     }
 
     public void changeToStart() {

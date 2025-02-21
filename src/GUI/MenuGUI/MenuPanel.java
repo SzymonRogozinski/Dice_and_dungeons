@@ -43,9 +43,5 @@ public class MenuPanel extends JPanel {
 
         this.add(title);
         this.add(menu);
-
-        this.repaint();
-        this.revalidate();
-
     }
 }

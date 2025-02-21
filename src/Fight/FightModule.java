@@ -78,7 +78,6 @@ public class FightModule {
     public void startFight(ArrayList<EnemyCharacter> enemies) {
         this.enemies = enemies;
         state.initState();
-        state.refresh();
     }
 
     public int getRerolls() {
@@ -138,7 +137,6 @@ public class FightModule {
 
     public void setStatusLog(String statusLog) {
         this.statusLog = statusLog;
-        state.refresh();
     }
 
     public String getCombatInfo() {
@@ -147,7 +145,6 @@ public class FightModule {
 
     public void setCombatInfo(String info) {
         combatInfo = info;
-        state.refresh();
     }
 
     public void clear() {

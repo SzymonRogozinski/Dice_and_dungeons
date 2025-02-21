@@ -17,8 +17,4 @@ public class MenuState {
     public void changeState(int newState) {
         view.changeState(newState);
     }
-
-    public void refresh() {
-        view.refresh();
-    }
 }

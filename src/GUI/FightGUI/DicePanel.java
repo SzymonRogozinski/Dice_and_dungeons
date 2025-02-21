@@ -2,6 +2,7 @@ package GUI.FightGUI;
 
 import Dice.DiceSide;
 import GUI.GUISettings;
+import Game.GameActionQueue;
 import Game.GameManager;
 
 import javax.swing.*;
@@ -33,14 +34,13 @@ public class DicePanel extends JPanel {
             this.add(new JLabel());
             i++;
         }
-        this.revalidate();
     }
 
     private class DiceButton extends JButton {
 
         public DiceButton(int index, ImageIcon icon) {
             super(icon);
-            this.addActionListener(_ -> GameManager.getFight().rerollDice(index));
+            this.addActionListener(_ -> GameActionQueue.action(()->GameManager.getFight().rerollDice(index)));
         }
     }
 }

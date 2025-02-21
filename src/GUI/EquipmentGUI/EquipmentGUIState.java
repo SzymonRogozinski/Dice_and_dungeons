@@ -12,8 +12,4 @@ public class EquipmentGUIState {
     public void setState(int newState) {
         panel.setState(newState);
     }
-
-    public void refresh() {
-        panel.refresh();
-    }
 }

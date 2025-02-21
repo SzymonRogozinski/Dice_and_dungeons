@@ -21,10 +21,6 @@ public class FightView extends ViewPanel {
         rollPanel = (RollPanel) panels.get(1);
         actionPanel = (ActionPanel) panels.get(2);
         statusPanel = (StatusPanel) panels.get(3);
-
-        //Refresh
-        this.revalidate();
-        this.repaint();
     }
 
     public ActionPanel getActionPanel() {
@@ -37,9 +33,11 @@ public class FightView extends ViewPanel {
 
     public void init() {
         actionPanel.getActions().loadAction();
-        //Refresh
-        this.revalidate();
-        this.repaint();
+    }
+
+    public void refresh(){
+        statusPanel.refresh();
+        fightPanel.refresh();
     }
 
     public void setState(int newState, int currentState) {
@@ -73,10 +71,5 @@ public class FightView extends ViewPanel {
                 }
             }
         }
-        //Refresh
-        statusPanel.refresh();
-        fightPanel.refresh();
-        this.revalidate();
-        this.repaint();
     }
 }

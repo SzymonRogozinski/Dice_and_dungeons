@@ -2,6 +2,7 @@ package GUI.EquipmentGUI;
 
 import GUI.Compents.GameButton;
 import GUI.GUISettings;
+import Game.GameActionQueue;
 import Game.GameManager;
 import Game.GameStates;
 
@@ -10,8 +11,6 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class SwitchPanel extends JPanel {
-
-    //private EquipmentModule equipment;
 
     public SwitchPanel(Border border) {
         //Set display
@@ -25,24 +24,23 @@ public class SwitchPanel extends JPanel {
         GameButton eqButton = new GameButton("Equipment",
                 (int) (GUISettings.SMALL_PANEL_SIZE * 0.8),
                 (int) (GUISettings.SMALL_PANEL_SIZE * 0.20),
-                _ -> GameManager.getEquipment().changeViewToEquipment()
+                _ -> GameActionQueue.action(()->GameManager.getEquipment().changeViewToEquipment())
         );
 
         GameButton backButton = new GameButton("Backpack",
                 (int) (GUISettings.SMALL_PANEL_SIZE * 0.8),
                 (int) (GUISettings.SMALL_PANEL_SIZE * 0.20),
-                _ -> GameManager.getEquipment().changeViewToBackpack()
+                _ -> GameActionQueue.action(()->GameManager.getEquipment().changeViewToBackpack())
         );
 
         GameButton returnButton = new GameButton("Close",
                 (int) (GUISettings.SMALL_PANEL_SIZE * 0.8),
                 (int) (GUISettings.SMALL_PANEL_SIZE * 0.20),
-                _ -> GameManager.changeState(GameStates.WALKING)
+                _ -> GameActionQueue.action(()->GameManager.changeState(GameStates.WALKING))
         );
 
         this.add(eqButton);
         this.add(backButton);
         this.add(returnButton);
-
     }
 }

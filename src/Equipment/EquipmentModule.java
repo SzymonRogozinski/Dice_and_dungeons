@@ -32,7 +32,6 @@ public class EquipmentModule {
 
     public void setPointedItem(ItemSlot slot) {
         pointedItem = slot;
-        state.refresh();
     }
 
     public ItemSlot getClickedSlot() {
@@ -46,7 +45,6 @@ public class EquipmentModule {
             currentCharacter = 0;
         else if (currentCharacter < 0)
             currentCharacter = PlayerInfo.getParty().getCharacters().size() - 1;
-        state.refresh();
     }
 
     public void changeViewToBackpack() {
@@ -61,7 +59,6 @@ public class EquipmentModule {
 
     public void setClickedItem(ItemSlot slot) {
         clickedSlot = slot;
-        state.refresh();
     }
 
     public void equipItem() {
@@ -81,7 +78,6 @@ public class EquipmentModule {
         }
         //After all
         clickedSlot = null;
-        state.refresh();
     }
 
     public void useChosenItem() {
@@ -98,7 +94,6 @@ public class EquipmentModule {
             useItem = null;
             PlayerInfo.getParty().getBackpack().removeFromBackpack(item);
         }
-        state.refresh();
     }
 
     public Item getUseItem() {
@@ -108,7 +103,6 @@ public class EquipmentModule {
     private void setUseItem(Item item) {
         if (item == null || item.haveTag(Tags.USABLE_OUT_OF_FIGHT))
             useItem = item;
-        state.refresh();
     }
 
     public void changeBackpackPage(boolean forward) {
@@ -116,7 +110,7 @@ public class EquipmentModule {
             PlayerInfo.getParty().getBackpack().setNextPage();
         else
             PlayerInfo.getParty().getBackpack().setPrevPage();
-        state.refresh();
+
     }
 
     private void swapItems() {

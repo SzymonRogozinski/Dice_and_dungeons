@@ -34,9 +34,4 @@ public class FightGUIState {
     public void showDiceResult(ArrayList<DiceSide> result) {
         panel.getActionPanel().getDicePanel().showDiceResults(result);
     }
-
-    public void refresh() {
-        //panel.refresh();
-        panel.setState(currentState, currentState);
-    }
 }

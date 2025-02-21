@@ -48,7 +48,6 @@ public class EquipmentView extends ViewPanel {
                 itemManagementPanel.changeCard("Backpack");
             }
         }
-        refresh();
     }
 
     public void refresh() {
@@ -57,9 +56,6 @@ public class EquipmentView extends ViewPanel {
         charactersInfoPanel.refresh();
         itemManagementPanel.refresh();
         itemInfoPanel.refresh();
-        //Refresh
-        this.revalidate();
-        this.repaint();
     }
 
     @Override

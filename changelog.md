@@ -1,5 +1,7 @@
 # Changelog
 ## Beta
+### v0.4
+- Add 60 fps
 ### v0.3
 - Change remaining placeholders
 - Fix hen rolling, after you point on enemy, you resets results

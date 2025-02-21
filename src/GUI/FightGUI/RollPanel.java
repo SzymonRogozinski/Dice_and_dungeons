@@ -2,6 +2,7 @@ package GUI.FightGUI;
 
 import GUI.Compents.GameLabel;
 import GUI.GUISettings;
+import Game.GameActionQueue;
 import Game.GameManager;
 
 import javax.swing.*;
@@ -26,7 +27,7 @@ public class RollPanel extends JPanel {
         JButton skipButton = new JButton("Skip and sum up");
         skipButton.addActionListener(_ -> {
             if (!GameManager.getFight().isDiceResultNull())
-                sumUpDicePool();
+                GameActionQueue.action(this::sumUpDicePool);
         });
 
         this.add(reroll);

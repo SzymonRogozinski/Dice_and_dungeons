@@ -43,8 +43,5 @@ public class PlayerWinPanel extends JPanel {
         );
         congratulation.setFont(GUISettings.SMALL_FONT);
         textPanel.add(congratulation);
-
-        this.repaint();
-        this.revalidate();
     }
 }

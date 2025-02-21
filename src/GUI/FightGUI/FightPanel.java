@@ -8,6 +8,7 @@ import Fight.Statuses.GameStatus;
 import GUI.Compents.GameLabel;
 import GUI.Compents.GameProgressBar;
 import GUI.GUISettings;
+import Game.GameActionQueue;
 import Game.GameManager;
 import Game.GameUtils;
 import Game.PlayerInfo;
@@ -32,8 +33,9 @@ public class FightPanel extends JPanel {
     private final Border labelBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
     private final ArrayList<EnemyPanel> enemyPanelList;
     private final ArrayList<PlayerPanel> playerPanelList;
-    private final BorderFlashingThread borderFlash;
     private Color selectedColor = new Color(255, 0, 0);
+    private boolean isRaising;
+    private int colorValue;
     private final Border selectedLabelBorder = new LineBorder(selectedColor, 1) {
         @Override
         public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
@@ -56,9 +58,8 @@ public class FightPanel extends JPanel {
         enemyPanelList = new ArrayList<>();
         playerPanelList = new ArrayList<>();
         //Border changer
-        borderFlash = new BorderFlashingThread(this);
-        borderFlash.start();
-        borderFlash.makeStop();
+        isRaising = false;
+        colorValue = 255;
     }
 
     public void refresh() {
@@ -97,7 +98,6 @@ public class FightPanel extends JPanel {
             }
             for (PlayerPanel player : playerPanelList)
                 this.add(player);
-
             setLabels();
         } else {
             for (EnemyPanel enemy : enemyPanelList)
@@ -105,9 +105,12 @@ public class FightPanel extends JPanel {
             for (PlayerPanel player : playerPanelList)
                 player.refresh();
         }
-        //Refresh
+        //Border flash
+        colorValue += isRaising ? 3 : -3;
+        if (colorValue >= 255 || colorValue <= 0)
+            isRaising = !isRaising;
+        selectedColor = new Color(colorValue, 0, 0);
         this.repaint();
-        this.revalidate();
     }
 
     public void enemySelectable(boolean selectableFlag) {
@@ -133,12 +136,6 @@ public class FightPanel extends JPanel {
         int xSpace = (GUISettings.PANEL_SIZE - GUISettings.CHARACTER_WIDTH * playerPanelList.size()) / (playerPanelList.size() + 1);
         for (int i = 0; i < playerPanelList.size(); i++) {
             playerPanelList.get(i).setLocation((xSpace + GUISettings.CHARACTER_WIDTH) * i + xSpace, playerYOffSet);
-        }
-    }
-
-    private void notifyBorder() {
-        synchronized (borderFlash) {
-            borderFlash.notify();
         }
     }
 
@@ -276,8 +273,7 @@ public class FightPanel extends JPanel {
         public void mouseClicked(MouseEvent e) {
             if (!selectableFlag || !setBorderFlashing(false))
                 return;
-            borderFlash.makeStop();
-            GameManager.getFight().targetSelected(selectedEnemy);
+            GameActionQueue.action(()->GameManager.getFight().targetSelected(selectedEnemy));
             selectedEnemy = -1;
         }
 
@@ -292,22 +288,20 @@ public class FightPanel extends JPanel {
         @Override
         public void mouseEntered(MouseEvent e) {
             if (isEnemy)
-                GameManager.getFight().setCombatInfo(enemyPanelList.get(characterId).enemy.getNextAction());
+                GameActionQueue.action(()->GameManager.getFight().setCombatInfo(enemyPanelList.get(characterId).enemy.getNextAction()));
             if (!selectableFlag)
                 return;
             setBorderFlashing(true);
-            notifyBorder();
             selectedEnemy = characterId;
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
             if (isEnemy)
-                GameManager.getFight().setCombatInfo("");
+                GameActionQueue.action(()->GameManager.getFight().setCombatInfo(""));
             if (!selectableFlag)
                 return;
             setBorderFlashing(false);
-            borderFlash.makeStop();
             selectedEnemy = -1;
         }
 
@@ -353,59 +347,12 @@ public class FightPanel extends JPanel {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            GameManager.getFight().setStatusLog(status.info());
+            GameActionQueue.action(()->GameManager.getFight().setStatusLog(status.info()));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            GameManager.getFight().setStatusLog("");
-        }
-
-    }
-
-    private class BorderFlashingThread extends Thread {
-        private final JPanel reference;
-        private boolean isRaising;
-        private int colorValue;
-        private boolean isStop;
-
-        BorderFlashingThread(JPanel reference) {
-            isRaising = false;
-            isStop = false;
-            colorValue = 255;
-            this.reference = reference;
-        }
-
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    synchronized (this) {
-                        if (isStop) {
-                            wait();
-                            isStop = false;
-                        }
-                    }
-                    makeRound();
-                    sleep(2);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-
-        private synchronized void makeRound() {
-            colorValue += isRaising ? 1 : -1;
-            if (colorValue >= 255 || colorValue <= 0)
-                isRaising = !isRaising;
-            selectedColor = new Color(colorValue, 0, 0);
-            reference.repaint();
-        }
-
-        private synchronized void makeStop() {
-            isStop = true;
-            colorValue = 255;
-            isRaising = false;
+            GameActionQueue.action(()->GameManager.getFight().setStatusLog(""));
         }
     }
 
