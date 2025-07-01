@@ -2,6 +2,7 @@ package GUI.MenuGUI.MenuComponents;
 
 import GUI.Compents.GameButton;
 import GUI.Compents.GameLabel;
+import GUI.Compents.GameTextArea;
 import GUI.GUISettings;
 import Game.GameManager;
 import Game.GameStates;
@@ -13,7 +14,7 @@ import java.awt.*;
 public class StartPanel extends JPanel {
 
     private final GameButton start;
-    private final GameLabel status;
+    private final GameTextArea status;
 
     public StartPanel(Border border) {
         FlowLayout layout = new FlowLayout();
@@ -30,11 +31,8 @@ public class StartPanel extends JPanel {
         );
         start.setEnabled(false);
 
-        status = new GameLabel(
-                "Your Party is too small!", SwingConstants.CENTER,
-                GUISettings.SMALL_PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE / 4,
-                Color.WHITE
-        );
+        status = new GameTextArea(GUISettings.SMALL_PANEL_SIZE-4, GUISettings.SMALL_PANEL_SIZE / 4);
+        status.setText("Your Party is too small!");
 
         this.add(start);
         this.add(status);

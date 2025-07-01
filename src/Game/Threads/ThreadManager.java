@@ -4,16 +4,19 @@ public class ThreadManager {
 
     private final GameMutex mutex;
     private final GUIRefreshThread gft;
+    private final MovementThread mt;
     private EnemyThread et;
 
     public ThreadManager() {
         mutex = new GameMutex();
         gft = new GUIRefreshThread();
         et = new EnemyThread(mutex);
+        mt = new MovementThread();
     }
 
     public void start(){
         gft.start();
+        mt.start();
     }
 
     public void killEnemyThread(){

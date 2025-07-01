@@ -5,6 +5,7 @@ import java.awt.*;
 public class GUISettings {
 
     public static final Font SMALL_FONT = new Font("Audiowide", Font.ITALIC, 12);
+    public static final Font DEFAULT_FONT = new Font("Audiowide", Font.PLAIN,12);
     public static final Font BIG_FONT = new Font("Audiowide", Font.BOLD, 16);
     public static final Font TITLE_FONT = new Font("Audiowide", Font.BOLD, 40);
     public static final Font BUTTON_FONT = new Font("Audiowide", Font.BOLD, 12);

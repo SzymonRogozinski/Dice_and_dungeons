@@ -24,6 +24,12 @@ public class WalkingLevel {
     private final PlayerDrone player;
     private final EnemyCharacter boss;
 
+    //Player state
+    private int playerDx=0;
+    private int playerDy=0;
+    private int playerCountdown=0;
+    private final static int MOVE_COUNTDOWN=10;
+
     public WalkingLevel(GameLevel levelSetting) {
         MapCreator creator;
         WalkingSettings settings = levelSetting.walkingSettings();
@@ -68,10 +74,20 @@ public class WalkingLevel {
     }
 
     public void playerMove(int dx, int dy) {
+        playerDx=dx;
+        playerDy=dy;
+    }
+
+    public void makePlayerMove() {
         if (GameManager.getThreadManager().isEnemyThreadStopped())
             return;
         try {
-            gameMap.changeCharacterPlace(player, dx, dy);
+            //Move
+            if(playerCountdown==0 && !(playerDx==0 && playerDy==0)) {
+                gameMap.changeCharacterPlace(player, playerDx, playerDy);
+                playerCountdown=MOVE_COUNTDOWN;
+            }else if(playerCountdown>0)
+                playerCountdown--;
         } catch (EnemyFightException e) {
             enemies.removeEnemy(e.getReference());
             EnemyDrone enemy = (EnemyDrone) e.getReference();

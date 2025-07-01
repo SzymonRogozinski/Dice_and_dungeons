@@ -1,5 +1,7 @@
 package GUI.Compents;
 
+import GUI.GUISettings;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,5 +18,6 @@ public class DimensionlessGameLabel extends JLabel {
         this.setText(text);
         this.setHorizontalAlignment(orientation);
         this.setForeground(foreground);
+        this.setFont(GUISettings.DEFAULT_FONT);
     }
 }
