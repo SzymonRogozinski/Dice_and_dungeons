@@ -3,20 +3,17 @@ package Game.Threads;
 public class ThreadManager {
 
     private final GameMutex mutex;
-    private final GUIRefreshThread gft;
-    private final MovementThread mt;
+    private final FramerateThread ft;
     private EnemyThread et;
 
     public ThreadManager() {
         mutex = new GameMutex();
-        gft = new GUIRefreshThread();
+        ft = new FramerateThread();
         et = new EnemyThread(mutex);
-        mt = new MovementThread();
     }
 
     public void start(){
-        gft.start();
-        mt.start();
+        ft.start();
     }
 
     public void killEnemyThread(){

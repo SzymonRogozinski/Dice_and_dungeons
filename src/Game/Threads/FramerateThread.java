@@ -3,7 +3,7 @@ package Game.Threads;
 import Game.GameActionQueue;
 import Game.GameManager;
 
-public class GUIRefreshThread extends Thread{
+public class FramerateThread extends Thread{
 
     private static final int FRAMERATE = 1000/60;
 

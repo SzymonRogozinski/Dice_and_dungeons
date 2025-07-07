@@ -2,12 +2,15 @@ package GUI.MainGUI;
 
 import GUI.EquipmentGUI.EquipmentView;
 import GUI.FightGUI.FightView;
+import GUI.GUISettings;
 import GUI.MenuGUI.MenuView;
 import GUI.WalkingGUI.WalkingKeyListener;
 import GUI.WalkingGUI.WalkingView;
 import Game.GameStates;
 
 import javax.swing.*;
+import java.awt.*;
+
 
 public class MainFrame extends JFrame {
 
@@ -15,7 +18,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame(MenuView menuView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView) {
         this.setTitle("Dice and Dungeons");
-        this.setResizable(false);
+        this.setResizable(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.addKeyListener(new WalkingKeyListener());
 
@@ -29,5 +32,9 @@ public class MainFrame extends JFrame {
 
     public void refresh() {
         mainPanel.refresh();
+    }
+
+    public void setMinimumSize(){
+        this.setMinimumSize(new Dimension(getWidth(), getHeight()));
     }
 }

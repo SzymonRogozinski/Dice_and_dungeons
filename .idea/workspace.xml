@@ -9,18 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="q">
-      <change afterPath="$PROJECT_DIR$/src/Game/Threads/MovementThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="movement rework">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Compents/DimensionlessGameLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Compents/DimensionlessGameLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Compents/GameButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Compents/GameButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Compents/GameLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Compents/GameLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Compents/GameProgressBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Compents/GameProgressBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Compents/GameTextArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Compents/GameTextArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/GUISettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUISettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/StartPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/StartPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingKeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingKeyListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/Threads/GUIRefreshThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Threads/FramerateThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/Threads/MovementThread.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/Threads/ThreadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Threads/ThreadManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Walking/WalkingLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/WalkingLevel.java" afterDir="false" />
     </list>
@@ -498,7 +494,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739994981886</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="movement rework">
+      <option name="closed" value="true" />
+      <created>1751398838671</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1751398838671</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -516,7 +520,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="Fix skipping turn" />
     <MESSAGE value="Generalized MainPanel" />
     <MESSAGE value="item stat fix" />
     <MESSAGE value="Fix paging" />
@@ -541,7 +544,8 @@
     <MESSAGE value="Add ThreadManager" />
     <MESSAGE value="ThreadManager and GameMutex fixes" />
     <MESSAGE value="Add Queue" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Queue" />
+    <MESSAGE value="movement rework" />
+    <option name="LAST_COMMIT_MESSAGE" value="movement rework" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">

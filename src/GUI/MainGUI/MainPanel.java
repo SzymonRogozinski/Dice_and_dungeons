@@ -9,6 +9,8 @@ import Game.GameStates;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class MainPanel extends JPanel {
     private final CardLayout layout;
@@ -25,6 +27,8 @@ public class MainPanel extends JPanel {
         state=GameStates.MENU;
         this.setLayout(layout);
         this.setPreferredSize(new Dimension(GUISettings.heightAndWidth, GUISettings.heightAndWidth));
+        this.setMinimumSize(new Dimension(GUISettings.heightAndWidth, GUISettings.heightAndWidth));
+        this.addComponentListener(new ResizeListener());
         this.setBackground(Color.BLACK);
 
         //Set panels
@@ -64,5 +68,13 @@ public class MainPanel extends JPanel {
         //Refresh
         this.revalidate();
         this.repaint();
+    }
+
+
+    private class ResizeListener extends ComponentAdapter {
+        @Override
+        public void componentResized(ComponentEvent e) {
+            System.out.println(STR."\{e.getComponent().getWidth()}:\{e.getComponent().getHeight()}");
+        }
     }
 }

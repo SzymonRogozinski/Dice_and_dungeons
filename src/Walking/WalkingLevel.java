@@ -78,7 +78,7 @@ public class WalkingLevel {
         playerDy=dy;
     }
 
-    public void makePlayerMove() {
+    public synchronized void makePlayerMove() {
         if (GameManager.getThreadManager().isEnemyThreadStopped())
             return;
         try {

@@ -29,6 +29,8 @@ public class GameManager {
     private static int levelPointer = 0;
 
     public static void refresh(){
+        if(PlayerInfo.getParty()!=null)
+            GameManager.getWalkingManager().getWalking().makePlayerMove();
         GUIState.refresh();
     }
 
