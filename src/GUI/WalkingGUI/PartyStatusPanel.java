@@ -1,8 +1,8 @@
 package GUI.WalkingGUI;
 
-import GUI.Compents.DimensionlessGameLabel;
-import GUI.Compents.GameButton;
-import GUI.Compents.GameProgressBar;
+import GUI.Components.DimensionlessGameLabel;
+import GUI.Components.GameButton;
+import GUI.Components.GameProgressBar;
 import GUI.GUISettings;
 import Game.GameManager;
 import Game.GameStates;
@@ -15,8 +15,8 @@ import java.awt.*;
 public class PartyStatusPanel extends JPanel {
 
     private final GameProgressBar healthBar, manaBar;
-    private final DimensionlessGameLabel keysLabel;
-
+    private final DimensionlessGameLabel health,mana,keysLabel;
+    private final GameButton eqButton,backpackButton;
 
     public PartyStatusPanel(Border border) {
         //Set display
@@ -26,14 +26,14 @@ public class PartyStatusPanel extends JPanel {
         this.setBorder(border);
 
         //Set health
-        DimensionlessGameLabel health = new DimensionlessGameLabel("Party health", SwingConstants.CENTER, Color.WHITE);
+        health = new DimensionlessGameLabel("Party health", SwingConstants.CENTER, Color.WHITE);
         this.add(health);
 
         healthBar = new GameProgressBar(Color.RED, GUISettings.SMALL_PANEL_SIZE - 6, GUISettings.SMALL_PANEL_SIZE / 8);
         this.add(healthBar);
 
         //Set mana
-        DimensionlessGameLabel mana = new DimensionlessGameLabel("Party mana", SwingConstants.CENTER, Color.WHITE);
+        mana = new DimensionlessGameLabel("Party mana", SwingConstants.CENTER, Color.WHITE);
         this.add(mana);
 
         manaBar = new GameProgressBar(Color.BLUE, GUISettings.SMALL_PANEL_SIZE - 6, GUISettings.SMALL_PANEL_SIZE / 8);
@@ -44,7 +44,7 @@ public class PartyStatusPanel extends JPanel {
         this.add(keysLabel);
 
         //Set equipment buttons
-        GameButton eqButton = new GameButton("Equipment",
+        eqButton = new GameButton("Equipment",
                 GUISettings.SMALL_PANEL_SIZE * 8 / 10,
                 GUISettings.SMALL_PANEL_SIZE / 5,
                 _ -> {
@@ -54,7 +54,7 @@ public class PartyStatusPanel extends JPanel {
         );
         this.add(eqButton);
 
-        GameButton backpackButton = new GameButton(
+        backpackButton = new GameButton(
                 "Backpack",
                 GUISettings.SMALL_PANEL_SIZE * 8 / 10,
                 GUISettings.SMALL_PANEL_SIZE / 5,
@@ -70,12 +70,24 @@ public class PartyStatusPanel extends JPanel {
     public void refresh() {
         healthBar.setMaximum(PlayerInfo.getParty().getMaxHealth());
         healthBar.setValue(PlayerInfo.getParty().getCurrentHealth());
-        healthBar.setString(PlayerInfo.getParty().getCurrentHealth() + "/" + PlayerInfo.getParty().getMaxHealth());
+        healthBar.setString(STR."\{PlayerInfo.getParty().getCurrentHealth()}/\{PlayerInfo.getParty().getMaxHealth()}");
 
         manaBar.setMaximum(PlayerInfo.getParty().getMaxMana());
         manaBar.setValue(PlayerInfo.getParty().getCurrentMana());
-        manaBar.setString(PlayerInfo.getParty().getCurrentMana() + "/" + PlayerInfo.getParty().getMaxMana());
+        manaBar.setString(STR."\{PlayerInfo.getParty().getCurrentMana()}/\{PlayerInfo.getParty().getMaxMana()}");
 
-        keysLabel.setText("Keys: " + PlayerInfo.getKeyCollected());
+        keysLabel.setText(STR."Keys: \{PlayerInfo.getKeyCollected()}");
+    }
+
+    public void resize(){
+        this.setSize(GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE), GUISettings.getResizedValue(GUISettings.PANEL_SIZE));
+
+        health.resize();
+        mana.resize();
+        keysLabel.resize();
+        healthBar.resize();
+        manaBar.resize();
+        eqButton.resize();
+        backpackButton.resize();
     }
 }

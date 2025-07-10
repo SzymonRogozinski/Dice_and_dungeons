@@ -10,3 +10,4 @@
 
 ## Bugs and Fixes
 - No action glitch
+- Dice Side do not resize sometime

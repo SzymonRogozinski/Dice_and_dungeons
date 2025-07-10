@@ -1,5 +1,6 @@
 package GUI.MenuGUI;
 
+import GUI.GUISettings;
 import GUI.MenuGUI.MenuComponents.CharacterInfoPanel;
 import GUI.MenuGUI.MenuComponents.ChoosePanel;
 import GUI.MenuGUI.MenuComponents.PartyPanel;
@@ -7,6 +8,7 @@ import GUI.MenuGUI.MenuComponents.StartPanel;
 import GUI.ViewPanel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class ChoosePartyPanel extends ViewPanel {
@@ -34,5 +36,14 @@ public class ChoosePartyPanel extends ViewPanel {
         partyPanel.refresh();
         startPanel.refresh();
         characterInfoPanel.refresh();
+    }
+
+    public void resize(){
+        super.resize();
+
+        choosePanel.resize();
+        partyPanel.resize();
+        startPanel.resize();
+        characterInfoPanel.resize();
     }
 }

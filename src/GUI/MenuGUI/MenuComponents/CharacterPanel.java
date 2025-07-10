@@ -1,6 +1,7 @@
 package GUI.MenuGUI.MenuComponents;
 
 import Character.PlayerCharacter;
+import GUI.Components.GameLabel;
 import GUI.GUISettings;
 import Game.GameUtils;
 
@@ -11,17 +12,21 @@ public class CharacterPanel extends JPanel {
     private final PlayerCharacter playerCharacter;
     private boolean isSelected;
 
+    private final FlowLayout layout;
+    private final JLabel playerLabel;
+    private final GameLabel nameLabel;
+    private final ImageIcon frontIcon;
+
     public CharacterPanel(PlayerCharacter playerCharacter, ImageIcon frontIcon) {
-        FlowLayout layout = new FlowLayout();
+        layout = new FlowLayout();
         layout.setVgap(1);
         this.setLayout(layout);
         this.playerCharacter = playerCharacter;
+        this.frontIcon=frontIcon;
 
-        JLabel playerLabel = new JLabel(GameUtils.resizeIcon(frontIcon, GUISettings.CHARACTER_WIDTH - 2, (int) (GUISettings.CHARACTER_HEIGHT * 0.85) - 2));
+        playerLabel = new JLabel(GameUtils.resizeIcon(frontIcon, GUISettings.CHARACTER_WIDTH - 2, GUISettings.CHARACTER_HEIGHT * 85/100 - 2));
 
-        JLabel nameLabel = new JLabel(playerCharacter.getName(), SwingConstants.CENTER);
-        nameLabel.setForeground(Color.WHITE);
-        nameLabel.setPreferredSize(new Dimension(GUISettings.CHARACTER_WIDTH - 2, (int) (GUISettings.CHARACTER_HEIGHT * 0.15) - 1));
+        nameLabel = new GameLabel(playerCharacter.getName(), SwingConstants.CENTER,GUISettings.CHARACTER_WIDTH - 2, GUISettings.CHARACTER_HEIGHT * 15/100 - 1,Color.WHITE);
 
         this.add(playerLabel);
         this.add(nameLabel);
@@ -40,6 +45,16 @@ public class CharacterPanel extends JPanel {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public void resize(){
+        this.setSize(GUISettings.getResizedValue(GUISettings.CHARACTER_WIDTH), GUISettings.getResizedValue(GUISettings.CHARACTER_HEIGHT));
+
+        layout.setVgap(GUISettings.getResizedValue(1));
+
+        playerLabel.setIcon(GameUtils.resizeIcon(frontIcon, GUISettings.getResizedValue(GUISettings.CHARACTER_WIDTH - 2), GUISettings.getResizedValue(GUISettings.CHARACTER_HEIGHT * 85/100 - 2)));
+
+        nameLabel.resize();
     }
 
 }

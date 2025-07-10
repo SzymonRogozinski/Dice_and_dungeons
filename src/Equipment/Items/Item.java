@@ -4,6 +4,7 @@ import Game.Taggable;
 import Game.Tags;
 
 import javax.swing.*;
+import java.awt.*;
 
 public abstract class Item extends Taggable {
 
@@ -22,6 +23,10 @@ public abstract class Item extends Taggable {
 
     public ImageIcon getIcon() {
         return icon;
+    }
+
+    public Image getImage() {
+        return icon.getImage();
     }
 
     public ItemQuality getQuality() {

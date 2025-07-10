@@ -5,8 +5,8 @@ import Character.Enemy.EnemyCharacter;
 import Character.PlayerCharacter;
 import Fight.ActionTarget;
 import Fight.Statuses.GameStatus;
-import GUI.Compents.GameLabel;
-import GUI.Compents.GameProgressBar;
+import GUI.Components.GameLabel;
+import GUI.Components.GameProgressBar;
 import GUI.GUISettings;
 import Game.GameActionQueue;
 import Game.GameManager;
@@ -195,7 +195,7 @@ public class FightPanel extends JPanel {
                     return;
                 statusLabel.removeAll();
                 for (GameStatus status : enemy.getStatuses()) {
-                    JLabel statLabel = new JLabel(GameUtils.resizeIcon(status.getIcon(), statusIconSize, statusIconSize));
+                    JLabel statLabel = new JLabel(GameUtils.resizeIcon(status.getIcon(), statusIconSize));
                     statLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
                     statLabel.addMouseListener(new StatusMouseListener(status));
                     statusLabel.add(statLabel);
@@ -250,7 +250,7 @@ public class FightPanel extends JPanel {
                 return;
             statusLabel.removeAll();
             for (GameStatus status : playerCharacter.getStatuses()) {
-                JLabel statLabel = new JLabel(GameUtils.resizeIcon(status.getIcon(), statusIconSize, statusIconSize));
+                JLabel statLabel = new JLabel(GameUtils.resizeIcon(status.getIcon(), statusIconSize));
                 statLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
                 statLabel.addMouseListener(new StatusMouseListener(status));
                 statusLabel.add(statLabel);

@@ -1,9 +1,9 @@
 package GUI.FightGUI;
 
-import GUI.Compents.DimensionlessGameLabel;
-import GUI.Compents.GameLabel;
-import GUI.Compents.GameProgressBar;
-import GUI.Compents.GameTextArea;
+import GUI.Components.DimensionlessGameLabel;
+import GUI.Components.GameLabel;
+import GUI.Components.GameProgressBar;
+import GUI.Components.GameTextArea;
 import GUI.GUISettings;
 import Game.GameManager;
 import Game.PlayerInfo;

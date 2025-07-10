@@ -1,6 +1,6 @@
 package GUI.WalkingGUI;
 
-import GUI.Compents.GameTextArea;
+import GUI.Components.GameTextArea;
 import GUI.GUISettings;
 import Game.GameManager;
 
@@ -28,5 +28,11 @@ public class LootLogPanel extends JPanel {
 
     public void refresh() {
         lootLog.setText(GameManager.getLootModule().getLootLogText());
+    }
+
+    public void resize(){
+        this.setSize(GUISettings.getResizedValue(GUISettings.PANEL_SIZE), GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE));
+
+        lootLog.resize();
     }
 }

@@ -1,7 +1,7 @@
 package GUI.MenuGUI.MenuComponents;
 
-import GUI.Compents.GameButton;
-import GUI.Compents.GameLabel;
+import GUI.Components.GameButton;
+import GUI.Components.GameLabel;
 import GUI.GUISettings;
 import Game.GameManager;
 
@@ -12,18 +12,21 @@ import java.awt.*;
 public class PartyPanel extends JPanel {
 
     private final GameLabel[] characterLabels;
+    private final FlowLayout layout;
+    private final GameLabel header;
+    private final GameButton goBack;
 
     public PartyPanel(Border border) {
         //Set display
         this.setSize(GUISettings.SMALL_PANEL_SIZE, GUISettings.PANEL_SIZE);
-        FlowLayout layout = new FlowLayout();
+        layout = new FlowLayout();
         layout.setVgap(GUISettings.SMALL_PANEL_SIZE / 10);
         this.setLayout(layout);
         this.setBackground(Color.BLACK);
         this.setBorder(border);
 
         //Set Party elements
-        GameLabel header = new GameLabel(
+        header = new GameLabel(
                 "Party", SwingConstants.CENTER,
                 GUISettings.SMALL_PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE / 5,
                 Color.WHITE
@@ -43,7 +46,7 @@ public class PartyPanel extends JPanel {
         }
 
         // Set go back button
-        GameButton goBack = new GameButton(
+        goBack = new GameButton(
                 "Go back",
                 GUISettings.SMALL_PANEL_SIZE * 2 / 3, GUISettings.SMALL_PANEL_SIZE / 5,
                 _ -> GameManager.getMenuModule().changeToStart()
@@ -59,5 +62,18 @@ public class PartyPanel extends JPanel {
                 characterLabels[i].setText("-");
             }
         }
+    }
+
+    public void resize(){
+        this.setSize(GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE), GUISettings.getResizedValue(GUISettings.PANEL_SIZE));
+
+        layout.setVgap(GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE / 10));
+
+        header.resize();
+
+        for (int i = 0; i < 3; i++)
+            characterLabels[i].resize();
+
+        goBack.resize();
     }
 }

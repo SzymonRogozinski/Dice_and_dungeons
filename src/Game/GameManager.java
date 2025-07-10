@@ -3,6 +3,7 @@ package Game;
 import Character.PlayerParty;
 import Equipment.EquipmentModule;
 import Fight.FightModule;
+import GUI.MainGUI.MainFrame;
 import GUI.MainGUI.MainGUIState;
 import GUI.MenuGUI.MenuModule;
 import Game.Threads.ThreadManager;
@@ -21,6 +22,7 @@ public class GameManager {
     private static WalkingModule walkingModule;
     private static MenuModule menuModule;
     private static ThreadManager threadManager;
+    private static MainFrame mainFrame;
     private static boolean bossFight;
 
     //Game state
@@ -144,5 +146,13 @@ public class GameManager {
 
     public static Random getRandom() {
         return random;
+    }
+
+    public static void setMainFrame(MainFrame mainFrame) {
+        GameManager.mainFrame = mainFrame;
+    }
+
+    public static MainFrame getMainFrame() {
+        return mainFrame;
     }
 }

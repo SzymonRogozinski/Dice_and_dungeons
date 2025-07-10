@@ -3,6 +3,7 @@ package GUI.EquipmentGUI;
 import GUI.GUISettings;
 import GUI.ViewPanel;
 import Game.GameManager;
+import Game.GameUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,7 @@ public class EquipmentView extends ViewPanel {
     private final ItemInfoPanel itemInfoPanel;
     private final CharactersInfoPanel charactersInfoPanel;
     private final ItemManagementPanel itemManagementPanel;
+    private final SwitchPanel switchPanel;
     private Point position;
 
     public EquipmentView() {
@@ -24,6 +26,7 @@ public class EquipmentView extends ViewPanel {
         //Get child component
         ArrayList<JPanel> panels = getChildPanels();
         itemManagementPanel = (ItemManagementPanel) panels.get(0);
+        switchPanel = (SwitchPanel) panels.get(1);
         itemInfoPanel = (ItemInfoPanel) panels.get(2);
         charactersInfoPanel = (CharactersInfoPanel) panels.get(3);
 
@@ -58,14 +61,31 @@ public class EquipmentView extends ViewPanel {
         itemInfoPanel.refresh();
     }
 
+    public void resize(){
+        super.resize();
+
+        itemManagementPanel.resize();
+        switchPanel.resize();
+        charactersInfoPanel.resize();
+        itemInfoPanel.resize();
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        Graphics2D g2D = (Graphics2D) g;
 
         ItemSlot it = GameManager.getEquipment().getClickedSlot();
         if (it != null && it.getItem() != null) {
             position = MouseInfo.getPointerInfo().getLocation();
-            it.getItem().getIcon().paintIcon(this, g, (int) position.getX() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().x, (int) position.getY() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().y);
+            g2D.drawImage(
+                    it.getItem().getImage(),
+                    (int) position.getX() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().x,
+                    (int) position.getY() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().y,
+                    GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE),
+                    GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE),
+                    null
+                    );
         }
     }
 

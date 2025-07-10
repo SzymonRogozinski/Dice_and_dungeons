@@ -10,6 +10,11 @@ public abstract class ViewPanel extends JLayeredPane {
 
     private final ArrayList<JPanel> childPanels;
 
+    private final JPanel bigPanel;
+    private final JPanel smallPanel;
+    private final JPanel bottomPanel;
+    private final JPanel sidePanel;
+
     public ViewPanel(JPanel bigPanelContent, JPanel smallPanelContent, JPanel bottomPanelContent, JPanel sidePanelContent) {
         //Setting panel
         this.setLayout(null);
@@ -18,10 +23,10 @@ public abstract class ViewPanel extends JLayeredPane {
 
         //Panel components
         //Big four
-        JPanel bigPanel = new JPanel();
-        JPanel smallPanel = new JPanel();
-        JPanel bottomPanel = new JPanel();
-        JPanel sidePanel = new JPanel();
+        bigPanel = new JPanel();
+        smallPanel = new JPanel();
+        bottomPanel = new JPanel();
+        sidePanel = new JPanel();
         Border border = BorderFactory.createLineBorder(Color.WHITE, 2);
 
         //Settings components
@@ -70,5 +75,15 @@ public abstract class ViewPanel extends JLayeredPane {
 
     public ArrayList<JPanel> getChildPanels() {
         return childPanels;
+    }
+
+    public void resize(){
+        bigPanel.setBounds(0, 0, GUISettings.getResizedValue(GUISettings.PANEL_SIZE), GUISettings.getResizedValue(GUISettings.PANEL_SIZE));
+
+        smallPanel.setBounds(GUISettings.getResizedValue(GUISettings.PANEL_SIZE), GUISettings.getResizedValue(GUISettings.PANEL_SIZE), GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE), GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE));
+
+        sidePanel.setBounds(GUISettings.getResizedValue(GUISettings.PANEL_SIZE), 0, GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE), GUISettings.getResizedValue(GUISettings.PANEL_SIZE));
+
+        bottomPanel.setBounds(0, GUISettings.getResizedValue(GUISettings.PANEL_SIZE), GUISettings.getResizedValue(GUISettings.PANEL_SIZE), GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE));
     }
 }

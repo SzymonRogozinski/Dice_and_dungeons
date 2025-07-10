@@ -1,5 +1,6 @@
 package GUI.MenuGUI.MenuComponents;
 
+import GUI.Components.GameLabel;
 import GUI.GUISettings;
 import Game.GameManager;
 
@@ -12,7 +13,7 @@ public class CharacterInfoPanel extends JPanel {
     private static final int LABEL_WIDTH = GUISettings.PANEL_SIZE * 9 / 10;
     private static final int LABEL_HEIGHT = GUISettings.SMALL_PANEL_SIZE / 8;
 
-    private final JLabel name, stats1, stats2, items, spells, classes;
+    private final GameLabel name, stats1, stats2, items, spells, classes;
 
     public CharacterInfoPanel(Border border) {
         //Set display
@@ -23,31 +24,18 @@ public class CharacterInfoPanel extends JPanel {
         this.setBackground(Color.BLACK);
         this.setBorder(border);
 
-        name = new JLabel("", SwingConstants.CENTER);
-        name.setFont(GUISettings.BIG_FONT);
-        name.setPreferredSize(new Dimension(LABEL_WIDTH, LABEL_HEIGHT));
-        name.setForeground(Color.WHITE);
+        name = new GameLabel("", SwingConstants.CENTER,LABEL_WIDTH, LABEL_HEIGHT, Color.WHITE, GUISettings.BIG_FONT);
         name.setBackground(Color.RED);
 
-        stats1 = new JLabel();
-        stats1.setPreferredSize(new Dimension(LABEL_WIDTH, LABEL_HEIGHT));
-        stats1.setForeground(Color.WHITE);
+        stats1 = new GameLabel("",SwingConstants.LEFT,LABEL_WIDTH, LABEL_HEIGHT,Color.WHITE);
 
-        stats2 = new JLabel();
-        stats2.setPreferredSize(new Dimension(LABEL_WIDTH, LABEL_HEIGHT));
-        stats2.setForeground(Color.WHITE);
+        stats2 = new GameLabel("",SwingConstants.LEFT,LABEL_WIDTH, LABEL_HEIGHT,Color.WHITE);
 
-        items = new JLabel();
-        items.setPreferredSize(new Dimension(LABEL_WIDTH / 2, LABEL_HEIGHT));
-        items.setForeground(Color.WHITE);
+        items = new GameLabel("",SwingConstants.LEFT,LABEL_WIDTH*45/100, LABEL_HEIGHT,Color.WHITE);
 
-        spells = new JLabel();
-        spells.setPreferredSize(new Dimension(LABEL_WIDTH / 2, LABEL_HEIGHT));
-        spells.setForeground(Color.WHITE);
+        spells = new GameLabel("",SwingConstants.LEFT,LABEL_WIDTH*55/100, LABEL_HEIGHT,Color.WHITE);
 
-        classes = new JLabel();
-        classes.setPreferredSize(new Dimension(LABEL_WIDTH, LABEL_HEIGHT));
-        classes.setForeground(Color.WHITE);
+        classes = new GameLabel("",SwingConstants.LEFT,LABEL_WIDTH, LABEL_HEIGHT,Color.WHITE);
 
         this.add(name);
         this.add(stats1);
@@ -112,5 +100,16 @@ public class CharacterInfoPanel extends JPanel {
             spells.setText("");
             classes.setText("");
         }
+    }
+
+    public void resize(){
+        this.setSize(GUISettings.getResizedValue(GUISettings.PANEL_SIZE), GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE));
+
+        name.resize();
+        stats1.resize();
+        stats2.resize();
+        items.resize();
+        spells.resize();
+        classes.resize();
     }
 }

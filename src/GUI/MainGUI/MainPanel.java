@@ -28,7 +28,6 @@ public class MainPanel extends JPanel {
         this.setLayout(layout);
         this.setPreferredSize(new Dimension(GUISettings.heightAndWidth, GUISettings.heightAndWidth));
         this.setMinimumSize(new Dimension(GUISettings.heightAndWidth, GUISettings.heightAndWidth));
-        this.addComponentListener(new ResizeListener());
         this.setBackground(Color.BLACK);
 
         //Set panels
@@ -70,11 +69,18 @@ public class MainPanel extends JPanel {
         this.repaint();
     }
 
+    public void resize(int newSize){
+        GUISettings.setProportion(newSize);
+        this.setPreferredSize(new Dimension(GUISettings.getResizedValue(GUISettings.heightAndWidth), GUISettings.getResizedValue(GUISettings.heightAndWidth)));
 
-    private class ResizeListener extends ComponentAdapter {
-        @Override
-        public void componentResized(ComponentEvent e) {
-            System.out.println(STR."\{e.getComponent().getWidth()}:\{e.getComponent().getHeight()}");
-        }
+        //Resize components
+        menuView.resize();
+        walkingView.resize();
+        equipmentView.resize();
+
+        //Refresh
+        this.revalidate();
+        this.repaint();
     }
+
 }

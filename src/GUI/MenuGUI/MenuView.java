@@ -9,6 +9,9 @@ public class MenuView extends JPanel {
 
     private final CardLayout layout;
     private final ChoosePartyPanel choosePartyPanel;
+    private final MenuPanel menuPanel;
+    private final GameOverPanel gameOverPanel;
+    private final PlayerWinPanel playerWinPanel;
 
     public MenuView() {
         layout = new CardLayout();
@@ -20,11 +23,14 @@ public class MenuView extends JPanel {
 
         //Setting cards
         choosePartyPanel = new ChoosePartyPanel();
+        menuPanel = new MenuPanel();
+        gameOverPanel = new GameOverPanel();
+        playerWinPanel = new PlayerWinPanel();
 
-        this.add("Start", new MenuPanel());
+        this.add("Start", menuPanel);
         this.add("Choose", choosePartyPanel);
-        this.add("GameOver", new GameOverPanel());
-        this.add("Win", new PlayerWinPanel());
+        this.add("GameOver", gameOverPanel);
+        this.add("Win", playerWinPanel);
 
     }
 
@@ -40,5 +46,12 @@ public class MenuView extends JPanel {
 
     public void refresh() {
         choosePartyPanel.refresh();
+    }
+
+    public void resize(){
+        menuPanel.resize();
+        choosePartyPanel.resize();
+        gameOverPanel.resize();
+        playerWinPanel.resize();
     }
 }

@@ -1,4 +1,4 @@
-package GUI.Compents;
+package GUI.Components;
 
 import GUI.GUISettings;
 
@@ -9,12 +9,17 @@ import java.awt.event.ActionListener;
 
 public class GameButton extends JButton {
 
+    private final int fontId,originWidth, originHeight;
 
     public GameButton(String name, int width, int height) {
         this.setMargin(new Insets(0, 0, 0, 0));
         this.setText(name);
         this.setPreferredSize(new Dimension(width, height));
         this.setFont(GUISettings.DEFAULT_FONT);
+
+        fontId = GUISettings.getFontID(this.getFont());
+        originWidth=width;
+        originHeight =height;
     }
 
     public GameButton(String name, int width, int height, ActionListener l) {
@@ -23,6 +28,10 @@ public class GameButton extends JButton {
         this.setPreferredSize(new Dimension(width, height));
         this.addActionListener(l);
         this.setFont(GUISettings.DEFAULT_FONT);
+
+        fontId = GUISettings.getFontID(this.getFont());
+        originWidth=width;
+        originHeight =height;
     }
 
     public GameButton(String name, int width, int height, ActionListener l, Color foreground, Color background, Border border) {
@@ -34,5 +43,14 @@ public class GameButton extends JButton {
         this.setBackground(background);
         this.setBorder(border);
         this.setFont(GUISettings.DEFAULT_FONT);
+
+        fontId = GUISettings.getFontID(this.getFont());
+        originWidth=width;
+        originHeight =height;
+    }
+
+    public void resize(){
+        this.setPreferredSize(new Dimension(GUISettings.getResizedValue(originWidth), GUISettings.getResizedValue(originHeight)));
+        this.setFont(GUISettings.getFontFromID(fontId));
     }
 }

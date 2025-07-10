@@ -22,8 +22,11 @@ public class MainFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.addKeyListener(new WalkingKeyListener());
 
+        CenteredPanel centeredPanel = new CenteredPanel();
+
         mainPanel = new MainPanel(menuView, walkingView, fightView, equipmentView);
-        this.add(mainPanel);
+        centeredPanel.add(mainPanel);
+        this.add(centeredPanel);
     }
 
     public void changeState(GameStates state) {
@@ -36,5 +39,9 @@ public class MainFrame extends JFrame {
 
     public void setMinimumSize(){
         this.setMinimumSize(new Dimension(getWidth(), getHeight()));
+    }
+
+    public MainPanel getMainPanel() {
+        return mainPanel;
     }
 }

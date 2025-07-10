@@ -29,6 +29,7 @@ public class WalkingLevel {
     private int playerDy=0;
     private int playerCountdown=0;
     private final static int MOVE_COUNTDOWN=10;
+    private boolean oneStep=false;
 
     public WalkingLevel(GameLevel levelSetting) {
         MapCreator creator;
@@ -78,6 +79,12 @@ public class WalkingLevel {
         playerDy=dy;
     }
 
+    public void playerMoveByOne(int dx, int dy) {
+        playerDx=dx;
+        playerDy=dy;
+        oneStep=true;
+    }
+
     public synchronized void makePlayerMove() {
         if (GameManager.getThreadManager().isEnemyThreadStopped())
             return;
@@ -86,6 +93,11 @@ public class WalkingLevel {
             if(playerCountdown==0 && !(playerDx==0 && playerDy==0)) {
                 gameMap.changeCharacterPlace(player, playerDx, playerDy);
                 playerCountdown=MOVE_COUNTDOWN;
+                if(oneStep){
+                    oneStep=false;
+                    playerDx=0;
+                    playerDy=0;
+                }
             }else if(playerCountdown>0)
                 playerCountdown--;
         } catch (EnemyFightException e) {

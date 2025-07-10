@@ -37,6 +37,7 @@ public class Game {
         GameManager.setEquipment(new EquipmentModule(new EquipmentGUIState(equipmentView)));
         GameManager.setLoot(new LootModule());
         GameManager.setGUIState(new MainGUIState(mainFrame));
+        GameManager.setMainFrame(mainFrame);
 
         mainFrame.pack();
         mainFrame.setVisible(true);

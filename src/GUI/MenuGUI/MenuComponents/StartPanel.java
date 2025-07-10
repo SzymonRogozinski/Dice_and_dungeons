@@ -1,8 +1,7 @@
 package GUI.MenuGUI.MenuComponents;
 
-import GUI.Compents.GameButton;
-import GUI.Compents.GameLabel;
-import GUI.Compents.GameTextArea;
+import GUI.Components.GameButton;
+import GUI.Components.GameTextArea;
 import GUI.GUISettings;
 import Game.GameManager;
 import Game.GameStates;
@@ -15,9 +14,10 @@ public class StartPanel extends JPanel {
 
     private final GameButton start;
     private final GameTextArea status;
+    private final FlowLayout layout;
 
     public StartPanel(Border border) {
-        FlowLayout layout = new FlowLayout();
+        layout = new FlowLayout();
         layout.setVgap(GUISettings.SMALL_PANEL_SIZE / 5);
         this.setLayout(layout);
         this.setSize(GUISettings.SMALL_PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE);
@@ -46,5 +46,15 @@ public class StartPanel extends JPanel {
             start.setEnabled(false);
             status.setVisible(true);
         }
+    }
+
+    public void resize(){
+        this.setSize(GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE), GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE));
+
+        layout.setVgap(GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE / 5));
+
+        start.resize();
+
+        status.resize();
     }
 }

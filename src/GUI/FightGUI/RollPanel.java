@@ -1,6 +1,6 @@
 package GUI.FightGUI;
 
-import GUI.Compents.GameLabel;
+import GUI.Components.GameLabel;
 import GUI.GUISettings;
 import Game.GameActionQueue;
 import Game.GameManager;
