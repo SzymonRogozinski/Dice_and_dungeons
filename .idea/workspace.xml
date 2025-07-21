@@ -9,62 +9,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="Set Minimum size">
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/ArmorInfoPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/BackpackItemsPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/BackpackPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/ChangePanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/CharacterInfoPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/DiceItemInfoPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/DiceLessItemInfoPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/DiceSidesPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/EquipmentPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/ItemSlotRow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/PartyInfoPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/SmallBackpackItemsPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/UseItemPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/MainGUI/CenteredPanel.java" afterDir="false" />
+    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="Implemented resize to all module, except from fight">
+      <change afterPath="$PROJECT_DIR$/src/GUI/Components/DimensionlessGameButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/BackpackCardPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/ButtonItemMouseListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/CardPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/DiceButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/EnemyMouseListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/EnemyPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/FightPanelState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/GoBackCallBack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/PlayerPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/SpellButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/StatusMouseListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/StopPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dice/DiceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dice/DiceFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Equipment/Items/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/Items/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Compents/DimensionlessGameLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Components/DimensionlessGameLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Compents/GameButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Components/GameButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Compents/GameLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Components/GameLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Compents/GameProgressBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Components/GameProgressBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Compents/GameTextArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Components/GameTextArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/CharactersInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/CharactersInfoPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/EquipmentView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/EquipmentView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/ItemInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/ItemInfoPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/ItemManagementPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/ItemManagementPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/ItemSlot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/ItemSlot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/SwitchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/SwitchPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Fight/DiceMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fight/DiceMaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Fight/FightModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fight/FightModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Components/GameButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Components/GameButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Components/GameLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Components/GameLabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/DiceSidesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/DiceSidesPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/ActionListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/ActionListPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/ActionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/ActionPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/DicePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/DicePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/FightPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/FightPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/FightView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/FightView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/RollPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/RollPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/StatusPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/StatusPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/GUISettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GUISettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/ChoosePartyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/ChoosePartyPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/GameOverPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/GameOverPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/CharacterInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/CharacterInfoPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/CharacterPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/CharacterPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/ChoosePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/ChoosePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/PartyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/PartyPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/StartPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/StartPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/PlayerWinPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/PlayerWinPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/ViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/ViewPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/Arrows.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/Arrows.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/LootLogPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/LootLogPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/PartyStatusPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/PartyStatusPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/GameUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Walking/WalkingLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/WalkingLevel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,39 +99,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.EquipmentTest.executor": "Run",
-    "Application.FightingTest.executor": "Run",
-    "Application.GeneratorTest.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.StartTest.executor": "Run",
-    "Application.Test.executor": "Run",
-    "Application.Tests.FightingTest.executor": "Debug",
-    "Application.WalkingMain.executor": "Run",
-    "Application.WalkingTest.executor": "Run",
-    "Application.main.Main.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "true",
-    "JUnit.ArmorGeneratorTest.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "fixes",
-    "jdk.selected.JAVA_MODULE": "openjdk-22",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Szymon/Desktop/Game_fight/Code/Texture/Enemy",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.EquipmentTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FightingTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GeneratorTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.StartTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Test.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Tests.FightingTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.WalkingMain.executor&quot;: &quot;Run&quot;,
+    &quot;Application.WalkingTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;JUnit.ArmorGeneratorTest.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;fixes&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-22&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Szymon/Desktop/Game_fight/Code/Texture/Enemy&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Szymon\Desktop\Game_fight\Code\Texture\Enemy" />
@@ -557,7 +530,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751885282023</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Implemented resize to all module, except from fight">
+      <option name="closed" value="true" />
+      <created>1752150362102</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1752150362102</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -575,7 +556,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="item stat fix" />
     <MESSAGE value="Fix paging" />
     <MESSAGE value="Add half implemented DiceItemGenerator" />
     <MESSAGE value="Fix bugs in DiceItemGenerator" />
@@ -600,7 +580,8 @@
     <MESSAGE value="Add Queue" />
     <MESSAGE value="movement rework" />
     <MESSAGE value="Set Minimum size" />
-    <option name="LAST_COMMIT_MESSAGE" value="Set Minimum size" />
+    <MESSAGE value="Implemented resize to all module, except from fight" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented resize to all module, except from fight" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -610,16 +591,6 @@
           <url>file://$PROJECT_DIR$/src/Dice/DicePool.java</url>
           <line>37</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/FightGUI/FightPanel.java</url>
-          <line>332</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/FightGUI/FightPanel.java</url>
-          <line>338</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Dice/DiceFactory.java</url>
@@ -642,14 +613,9 @@
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/FightGUI/FightPanel.java</url>
-          <line>65</line>
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/EquipmentGUI/EquipmentView.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="66" />
+          <url>file://$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/DiceItemInfoPanel.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="75" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.IllegalMonitorStateException" package="java.lang" />

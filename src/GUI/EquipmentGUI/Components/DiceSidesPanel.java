@@ -45,7 +45,8 @@ public class DiceSidesPanel extends JPanel {
 
         for (int i = 0; i < 6; i++){
             diceSides[i].resize();
-            diceSides[i].setIcon(GameUtils.resizeIcon((ImageIcon) diceSides[i].getIcon(),GUISettings.getResizedValue(DICE_ICON_SIZE)));
+            if(diceSides[i].getIcon()!=null)
+                diceSides[i].setIcon(GameUtils.resizeIcon((ImageIcon) diceSides[i].getIcon(),GUISettings.getResizedValue(DICE_ICON_SIZE)));
         }
     }
 

@@ -15,7 +15,7 @@ public class GameButton extends JButton {
         this.setMargin(new Insets(0, 0, 0, 0));
         this.setText(name);
         this.setPreferredSize(new Dimension(width, height));
-        this.setFont(GUISettings.DEFAULT_FONT);
+        this.setFont(GUISettings.BUTTON_FONT);
 
         fontId = GUISettings.getFontID(this.getFont());
         originWidth=width;
@@ -27,7 +27,7 @@ public class GameButton extends JButton {
         this.setText(name);
         this.setPreferredSize(new Dimension(width, height));
         this.addActionListener(l);
-        this.setFont(GUISettings.DEFAULT_FONT);
+        this.setFont(GUISettings.BUTTON_FONT);
 
         fontId = GUISettings.getFontID(this.getFont());
         originWidth=width;
@@ -42,7 +42,7 @@ public class GameButton extends JButton {
         this.setForeground(foreground);
         this.setBackground(background);
         this.setBorder(border);
-        this.setFont(GUISettings.DEFAULT_FONT);
+        this.setFont(GUISettings.BUTTON_FONT);
 
         fontId = GUISettings.getFontID(this.getFont());
         originWidth=width;

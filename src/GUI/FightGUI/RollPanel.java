@@ -1,5 +1,7 @@
 package GUI.FightGUI;
 
+import GUI.Components.DimensionlessGameButton;
+import GUI.Components.GameButton;
 import GUI.Components.GameLabel;
 import GUI.GUISettings;
 import Game.GameActionQueue;
@@ -11,6 +13,7 @@ import java.awt.*;
 
 public class RollPanel extends JPanel {
     private final GameLabel reroll;
+    private final DimensionlessGameButton skipButton;
 
     public RollPanel(Border border) {
         this.setLayout(new GridLayout(3, 1));
@@ -24,8 +27,7 @@ public class RollPanel extends JPanel {
                 Color.WHITE
         );
 
-        JButton skipButton = new JButton("Skip and sum up");
-        skipButton.addActionListener(_ -> {
+        skipButton = new DimensionlessGameButton("Skip and sum up", _ -> {
             if (!GameManager.getFight().isDiceResultNull())
                 GameActionQueue.action(this::sumUpDicePool);
         });
@@ -36,11 +38,18 @@ public class RollPanel extends JPanel {
 
 
     public void rerollsChange() {
-        reroll.setText("You have " + GameManager.getFight().getRerolls() + " rerolls.");
+        reroll.setText(STR."You have \{GameManager.getFight().getRerolls()} rerolls.");
     }
 
     private void sumUpDicePool() {
         GameManager.getFight().endAction();
+    }
+
+    public void resize(){
+        this.setSize(GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE), GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE));
+
+        reroll.resize();
+        skipButton.resize();
     }
 
 }

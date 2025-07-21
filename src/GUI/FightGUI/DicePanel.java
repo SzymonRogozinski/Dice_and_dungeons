@@ -1,9 +1,11 @@
 package GUI.FightGUI;
 
 import Dice.DiceSide;
+import GUI.FightGUI.Components.DiceButton;
 import GUI.GUISettings;
 import Game.GameActionQueue;
 import Game.GameManager;
+import Game.GameUtils;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -11,36 +13,40 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class DicePanel extends JPanel {
+
     private static final int diceNumber = 12;
     private static final int diceRow = 2;
     private static final int diceColumns = 6;
+    private final ArrayList<DiceButton> diceButtons;
 
     public DicePanel(Border border) {
         this.setSize(GUISettings.PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE);
         this.setLayout(new GridLayout(diceRow, diceColumns));
         this.setBorder(border);
         this.setBackground(Color.BLACK);
+
+        diceButtons = new ArrayList<>();
+        for(int i=0;i<diceNumber;i++) {
+            diceButtons.add(new DiceButton(i));
+            this.add(diceButtons.get(i));
+        }
     }
 
     public void showDiceResults(ArrayList<DiceSide> diceResults) {
-        this.removeAll();
         int i = 0;
         for (DiceSide res : diceResults) {
-            DiceButton button = new DiceButton(i++, res.getIcon());
-            this.add(button);
+            diceButtons.get(i++).setIcon(res.getIcon());
         }
         //Fulfill
         while (i < diceNumber) {
-            this.add(new JLabel());
-            i++;
+            diceButtons.get(i++).setIcon(null);
         }
     }
 
-    private class DiceButton extends JButton {
+    public void resize(){
+        this.setSize(GUISettings.getResizedValue(GUISettings.PANEL_SIZE), GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE));
 
-        public DiceButton(int index, ImageIcon icon) {
-            super(icon);
-            this.addActionListener(_ -> GameActionQueue.action(()->GameManager.getFight().rerollDice(index)));
-        }
+        for(DiceButton button:diceButtons)
+            button.resize();
     }
 }

@@ -79,4 +79,8 @@ public class DiceMaster {
     public ArrayList<DiceAction> getSumUpResults() {
         return sumUpActions;
     }
+
+    public int getDiceNumber(){
+        return (pool==null ? 0 : pool.getDiceNumber()) + (bonusPool==null ? 0 : bonusPool.getDiceNumber());
+    }
 }

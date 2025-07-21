@@ -40,6 +40,15 @@ public class FightView extends ViewPanel {
         fightPanel.refresh();
     }
 
+    public void resize(){
+        super.resize();
+
+        fightPanel.resize();
+        rollPanel.resize();
+        actionPanel.resize();
+        statusPanel.resize();
+    }
+
     public void setState(int newState, int currentState) {
         if(newState!=currentState){
             switch (newState) {

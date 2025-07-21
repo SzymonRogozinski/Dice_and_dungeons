@@ -15,8 +15,9 @@ import java.awt.*;
 public class StatusPanel extends JPanel {
 
     private final GameProgressBar healthBar, manaBar;
-    private final GameLabel characterName, statusInfo;
+    private final GameLabel characterName, statusInfo, character;
     private final GameTextArea combatLog, combatInfo;
+    private final DimensionlessGameLabel health, mana;
 
     public StatusPanel(Border border) {
         //Set display
@@ -26,7 +27,7 @@ public class StatusPanel extends JPanel {
         this.setBorder(border);
 
         //Set health
-        DimensionlessGameLabel health = new DimensionlessGameLabel("Party health", SwingConstants.CENTER, Color.WHITE);
+        health = new DimensionlessGameLabel("Party health", SwingConstants.CENTER, Color.WHITE);
         this.add(health);
 
         healthBar = new GameProgressBar(
@@ -37,7 +38,7 @@ public class StatusPanel extends JPanel {
         this.add(healthBar);
 
         //Set mana
-        DimensionlessGameLabel mana = new DimensionlessGameLabel("Party mana", SwingConstants.CENTER, Color.WHITE);
+        mana = new DimensionlessGameLabel("Party mana", SwingConstants.CENTER, Color.WHITE);
         this.add(mana);
 
         manaBar = new GameProgressBar(
@@ -48,7 +49,7 @@ public class StatusPanel extends JPanel {
         this.add(manaBar);
 
         //Set character
-        GameLabel character = new GameLabel(
+        character = new GameLabel(
                 "Character turn:",
                 SwingConstants.CENTER,
                 GUISettings.SMALL_PANEL_SIZE - 6,
@@ -90,12 +91,12 @@ public class StatusPanel extends JPanel {
         healthBar.setMaximum(PlayerInfo.getParty().getMaxHealth());
         manaBar.setMaximum(PlayerInfo.getParty().getMaxMana());
         healthBar.setValue(PlayerInfo.getParty().getCurrentHealth());
-        String healthString = PlayerInfo.getParty().getCurrentHealth() + "/" + PlayerInfo.getParty().getMaxHealth();
+        String healthString = STR."\{PlayerInfo.getParty().getCurrentHealth()}/\{PlayerInfo.getParty().getMaxHealth()}";
         if (PlayerInfo.getParty().getShield() > 0)
-            healthString += " +" + PlayerInfo.getParty().getShield();
+            healthString += STR." +\{PlayerInfo.getParty().getShield()}";
         healthBar.setString(healthString);
         manaBar.setValue(PlayerInfo.getParty().getCurrentMana());
-        manaBar.setString(PlayerInfo.getParty().getCurrentMana() + "/" + PlayerInfo.getParty().getMaxMana());
+        manaBar.setString(STR."\{PlayerInfo.getParty().getCurrentMana()}/\{PlayerInfo.getParty().getMaxMana()}");
         characterName.setText(GameManager.getFight().getCharacter().getName());
 
         statusInfo.setText(GameManager.getFight().getStatusLog());
@@ -103,5 +104,19 @@ public class StatusPanel extends JPanel {
         //Refresh combat logs
         combatLog.setText(GameManager.getFight().getCombatLog());
         combatInfo.setText(GameManager.getFight().getCombatInfo());
+    }
+
+    public void resize(){
+        this.setSize(GUISettings.getResizedValue(GUISettings.SMALL_PANEL_SIZE), GUISettings.getResizedValue(GUISettings.PANEL_SIZE));
+
+        healthBar.resize();
+        manaBar.resize();
+        characterName.resize();
+        statusInfo.resize();
+        character.resize();
+        combatLog.resize();
+        combatInfo.resize();
+        health.resize();
+        mana.resize();;
     }
 }

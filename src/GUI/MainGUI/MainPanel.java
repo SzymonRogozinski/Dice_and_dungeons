@@ -76,7 +76,9 @@ public class MainPanel extends JPanel {
         //Resize components
         menuView.resize();
         walkingView.resize();
+        fightView.resize();
         equipmentView.resize();
+
 
         //Refresh
         this.revalidate();

@@ -89,6 +89,8 @@ public class FightModule {
     }
 
     public void rerollDice(int diceId) {
+        if(master.getDiceNumber()<=diceId) return;
+
         master.reroll(diceId);
         state.showDiceResult(master.getResults());
         state.refreshRollPanel();
