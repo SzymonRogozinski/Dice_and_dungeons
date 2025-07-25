@@ -65,16 +65,10 @@ public class CardPanel extends JPanel {
             this.add(button);
 
         this.add(goBackButton);
-        this.repaint();
-        this.revalidate();
     }
 
     public FlowLayout getFlowLayout() {
         return layout;
-    }
-
-    public GameButton getGoBackButton() {
-        return goBackButton;
     }
 
     public void resize(){
@@ -89,4 +83,7 @@ public class CardPanel extends JPanel {
         if(goBackButton!=null) goBackButton.resize();
     }
 
+    public void setGoBackButton(GameButton goBackButton){
+        this.goBackButton=goBackButton;
+    }
 }

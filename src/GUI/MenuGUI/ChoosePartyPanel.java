@@ -26,9 +26,6 @@ public class ChoosePartyPanel extends ViewPanel {
         partyPanel = (PartyPanel) childPanels.get(3);
         startPanel = (StartPanel) childPanels.get(1);
         characterInfoPanel = (CharacterInfoPanel) childPanels.get(2);
-        //Refresh
-        this.revalidate();
-        this.repaint();
     }
 
     public void refresh() {

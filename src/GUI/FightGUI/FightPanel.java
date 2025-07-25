@@ -79,7 +79,6 @@ public class FightPanel extends JPanel {
         if (state.colorValue >= 255 || state.colorValue <= 0)
             state.isRaising = !state.isRaising;
         state.selectedColor = new Color(state.colorValue, 0, 0);
-        this.repaint();
     }
 
     public void enemySelectable(boolean selectableFlag) {
@@ -92,7 +91,7 @@ public class FightPanel extends JPanel {
         //Set boss
         if (state.enemyPanelList.size() == 1 && state.enemyPanelList.getFirst().enemy.getCategory() == EnemyCategory.Boss) {
             EnemyPanel bossPanel = state.enemyPanelList.getFirst();
-            int bossX = GUISettings.getResizedValue((playerYOffSet = GUISettings.PANEL_SIZE - GUISettings.CHARACTER_WIDTH * 2) / 2);
+            int bossX = GUISettings.getResizedValue((GUISettings.PANEL_SIZE - GUISettings.CHARACTER_WIDTH * 2) / 2);
             bossPanel.setLocation(bossX, yOffSet / 2);
         } else { //Set enemies labels. Max 3!
             int xSpace = GUISettings.getResizedValue((GUISettings.PANEL_SIZE - GUISettings.CHARACTER_WIDTH * state.enemyPanelList.size()) / (state.enemyPanelList.size() + 1));

@@ -31,7 +31,7 @@ public class FightGUIState {
         panel.getRollPanel().rerollsChange();
     }
 
-    public void showDiceResult(ArrayList<DiceSide> result) {
-        panel.getActionPanel().getDicePanel().showDiceResults(result);
+    public void showDiceResult(ArrayList<DiceSide> result,int normalDice) {
+        panel.getActionPanel().getDicePanel().showDiceResults(result,normalDice);
     }
 }

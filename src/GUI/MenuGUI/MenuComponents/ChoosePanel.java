@@ -64,7 +64,6 @@ public class ChoosePanel extends JPanel {
         if (colorValue >= 255 || colorValue <= 0)
             isRaising = !isRaising;
         selectedColor = new Color(0, 0, colorValue);
-        this.repaint();
     }
 
     public void resize(){

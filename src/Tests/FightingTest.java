@@ -18,6 +18,7 @@ import Fight.GameActions.SpellAction;
 import Fight.GameActions.UsableItemAction;
 import GUI.FightGUI.FightGUIState;
 import GUI.FightGUI.FightView;
+import Game.*;
 import Game.GameManager;
 import Game.PlayerInfo;
 import Game.Tags;
@@ -27,13 +28,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FightingTest {
-    private static final JFrame mainFrame = new TestFrame();
+
 
     public static void main(String[] args) {
 
-        FightView fightView = new FightView();
-        FightGUIState state = new FightGUIState(fightView);
+        //Set General game
+        new Game();
 
+        //Set tests
         ActionItem item1 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0}, {0}, {0}, {1, 4}, {1, 4}, {1, 6}}), ActionTarget.ENEMY_CHARACTER, (PlayerCharacter p) -> p.getDiceNumber(p.getStrength()), new Tags[]{Tags.ATTACK}), new Tags[]{}, null, "Sword", "Sword", ItemQuality.COMMON, "");
         ActionItem item2 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0}, {2, 3, 0}, {2, 3, 0}, {2, 3, 0}, {2, 3, 0}, {2, 3, 0}}), ActionTarget.PLAYER_CHARACTER, (PlayerCharacter p) -> p.getDiceNumber(p.getCharisma()), new Tags[]{Tags.DEFENCE}), new Tags[]{}, null, "Shield", "Shield", ItemQuality.COMMON, "");
         ActionItem item3 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0}, {0}, {0}, {6, 1}, {6, 1}, {6, 1}}), ActionTarget.ENEMY_CHARACTER, (PlayerCharacter p) -> p.getDiceNumber(p.getCunning()), new Tags[]{}), new Tags[]{}, null, "Trap", "Trap", ItemQuality.COMMON, "");
@@ -48,10 +50,10 @@ public class FightingTest {
         UsableItem usItem1 = new UsableItem(new UsableItemAction(ActionTarget.ENEMY_CHARACTER, new ArrayList<>(List.of(new DiceAction[]{new StunAction()})), new Tags[]{Tags.NO_ROLL, Tags.FREE_ACTION}), 1, new Tags[]{}, null, "Rock", "Rock", ItemQuality.COMMON);
         UsableItem usItem2 = new UsableItem(new UsableItemAction(ActionTarget.PLAYER_CHARACTER, new ArrayList<>(List.of(new DiceAction[]{new AttackBonusAction(3, true)})), new Tags[]{Tags.NO_ROLL, Tags.FREE_ACTION}), 3, new Tags[]{}, null, "Power up", "Power up", ItemQuality.COMMON);
         UsableItem usItem3 = new UsableItem(new UsableItemAction(ActionTarget.PLAYER_CHARACTER, new ArrayList<>(List.of(new DiceAction[]{new DefenseBonusAction(2, true)})), new Tags[]{Tags.NO_ROLL, Tags.FREE_ACTION}), 3, new Tags[]{}, null, "Magic powder", "Magic powder", ItemQuality.COMMON);
-        UsableItem usItem4 = new UsableItem(new UsableItemAction(ActionTarget.PLAYER_CHARACTER, new ArrayList<>(List.of(new DiceAction[]{new MagicBonusAction(2, true)})), new Tags[]{Tags.NO_ROLL, Tags.FREE_ACTION}), 3, new Tags[]{}, null, "Defense potion", "Defense potion", ItemQuality.COMMON);
+        UsableItem usItem4 = new UsableItem(new UsableItemAction(ActionTarget.PLAYER_CHARACTER, new ArrayList<>(List.of(new DiceAction[]{new MagicBonusAction(2, true)})), new Tags[]{Tags.NO_ROLL, Tags.FREE_ACTION}), 3, new Tags[]{}, null, "Defense potion", "Def. potion", ItemQuality.COMMON);
 
-        PlayerCharacter player = new PlayerCharacter(24, 12, 12, 12, 12, 12, "Warrior", new ImageIcon("Texture/CharacterTexture/player.png"), new Tags[]{Tags.WARRIOR});
-        PlayerCharacter player2 = new PlayerCharacter(12, 18, 12, 12, 12, 12, "Bandit", new ImageIcon("Texture/CharacterTexture/player.png"), new Tags[]{Tags.THIEF});
+        PlayerCharacter player = new PlayerCharacter(24, 12, 12, 12, 12, 12, "Warrior", new ImageIcon("Texture/CharacterTexture/warrior.png"), new Tags[]{Tags.WARRIOR});
+        PlayerCharacter player2 = new PlayerCharacter(12, 18, 12, 12, 12, 12, "Bandit", new ImageIcon("Texture/CharacterTexture/bandit.png"), new Tags[]{Tags.THIEF});
 
         //Set eq
         player.getEquipment().equip(item1, 0, CharacterEquipment.ACTION_SLOT);
@@ -69,14 +71,9 @@ public class FightingTest {
         PlayerParty party = new PlayerParty(new ArrayList<>(List.of(new PlayerCharacter[]{player, player2})), usableItems);
         PlayerInfo.setParty(party);
 
-        FightModule fight = new FightModule(state);
-        GameManager.setFight(fight);
-        fight.startFight(getEnemies());
-
-        mainFrame.add(fightView);
-
-        mainFrame.pack();
-        mainFrame.setVisible(true);
+        //Start
+        GameManager.getFight().startFight(getEnemies());
+        GameManager.changeState(GameStates.FIGHTING);
 
     }
 
@@ -84,7 +81,7 @@ public class FightingTest {
         EnemyActionFactory factory1 = new EnemyActionFactory(e -> e.getStrength(), 0.25, false, 1);
         EnemyAI ai1 = getEnemyAI(factory1);
 
-        EnemyCharacter enemy = new EnemyCharacter(12, 12, 12, 12, 12, EnemyCategory.Minion, "Skeleton1", new ImageIcon("Texture/CharacterTexture/skeleton.png"), ai1);
+        EnemyCharacter enemy = new EnemyCharacter(12, 12, 12, 12, 12, EnemyCategory.Boss, "Skeleton1", new ImageIcon("Texture/Enemy/skeleton.png"), ai1);
         return new ArrayList<>(List.of(enemy));
     }
 

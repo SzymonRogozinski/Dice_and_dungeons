@@ -1,29 +1,40 @@
 package GUI.FightGUI;
 
 import Character.PlayerCharacter;
+import Dice.DiceAction.DiceAction;
+import Dice.DiceAction.NullAction;
 import Equipment.Items.ActionItem;
 import Equipment.Items.SpellItem;
 import Equipment.Items.UsableItem;
-import GUI.Components.DimensionlessGameLabel;
+import Fight.ActionTarget;
+import Fight.GameActions.ItemAction;
 import GUI.Components.GameButton;
 import GUI.FightGUI.Components.*;
 import GUI.GUISettings;
+import Fight.GameActions.GameAction;
 import Game.GameActionQueue;
 import Game.GameManager;
 import Game.PlayerInfo;
+import Game.Tags;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class ActionListPanel extends JPanel {
 
     //Sizes and placement of button
     private final static int buttonWidth = GUISettings.SMALL_PANEL_SIZE * 7 / 10;
     private final static int buttonHeight = GUISettings.SMALL_PANEL_SIZE / 3;
+    private final static ItemAction passAction = new ItemAction(null, ActionTarget.PLAYER_PARTY,null,new Tags[]{Tags.NO_ROLL}){
+        @Override
+        public ArrayList<DiceAction> getActionFactories() {
+            return new ArrayList<>(List.of(new DiceAction[]{new NullAction()}));
+        }
+    };
     private final CardLayout layout;
     private final CardPanel fightPanel, magicPanel, startPanel;
     private final BackpackCardPanel itemPanel;
@@ -74,6 +85,19 @@ public class ActionListPanel extends JPanel {
                     })
             );
             button.addMouseListener(new ButtonItemMouseListener(item.name));
+            button.resize();
+            buttons.add(button);
+        }
+        //Add pass action
+        if(items.isEmpty()){
+            GameButton button = new GameButton(
+                    "Pass",
+                    buttonWidth, buttonHeight,
+                    _ -> GameActionQueue.action(()->{
+                        GameManager.getFight().chosenAction(passAction);
+                        changePage("Start");
+                    })
+            );
             button.resize();
             buttons.add(button);
         }

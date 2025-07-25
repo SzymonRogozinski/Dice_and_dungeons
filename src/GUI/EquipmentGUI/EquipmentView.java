@@ -1,5 +1,6 @@
 package GUI.EquipmentGUI;
 
+import GUI.Components.GameLabel;
 import GUI.GUISettings;
 import GUI.ViewPanel;
 import Game.GameManager;
@@ -18,7 +19,8 @@ public class EquipmentView extends ViewPanel {
     private final CharactersInfoPanel charactersInfoPanel;
     private final ItemManagementPanel itemManagementPanel;
     private final SwitchPanel switchPanel;
-    private Point position;
+    private final GameLabel dragableIcon;
+    private ImageIcon dragIcon;
 
     public EquipmentView() {
         super(new ItemManagementPanel(getSharedBorder()), new SwitchPanel(getSharedBorder()), new ItemInfoPanel(getSharedBorder()), new CharactersInfoPanel(getSharedBorder()));
@@ -33,7 +35,9 @@ public class EquipmentView extends ViewPanel {
         mouseMotionAdp = new DragListener();
         this.addMouseMotionListener(mouseMotionAdp);
 
-        position = new Point(0, 0);
+        dragableIcon = new GameLabel(null,GUISettings.ITEM_ICON_SIZE,GUISettings.ITEM_ICON_SIZE);
+        dragableIcon.setSize(dragableIcon.getPreferredSize());
+        this.add(dragableIcon,JLayeredPane.DRAG_LAYER);
     }
 
     public static MouseMotionAdapter getMouseMotionAdp() {
@@ -59,6 +63,23 @@ public class EquipmentView extends ViewPanel {
         charactersInfoPanel.refresh();
         itemManagementPanel.refresh();
         itemInfoPanel.refresh();
+
+        //Set pointed item
+        ItemSlot it = GameManager.getEquipment().getClickedSlot();
+        if(it == null || it.getItem() == null){
+            dragableIcon.setIcon(null);
+            dragIcon=null;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        } else if (it.getItem().getIcon()!=dragIcon) {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+            dragIcon=it.getItem().getIcon();
+            dragableIcon.setIcon(GameUtils.resizeIcon(dragIcon,GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE)));
+        }
+        //Set position
+        Point position = MouseInfo.getPointerInfo().getLocation();
+        int resizedItemSize = GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE);
+        dragableIcon.setLocation((int) position.getX() - resizedItemSize / 2 - this.getLocationOnScreen().x,
+                    (int) position.getY() - resizedItemSize / 2 - this.getLocationOnScreen().y);
     }
 
     public void resize(){
@@ -68,26 +89,50 @@ public class EquipmentView extends ViewPanel {
         switchPanel.resize();
         charactersInfoPanel.resize();
         itemInfoPanel.resize();
+
+        dragableIcon.resize();
+        dragableIcon.setSize(dragableIcon.getPreferredSize());
+        dragableIcon.setIcon(GameUtils.resizeIcon(dragIcon,GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE)));
+
     }
 
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D g2D = (Graphics2D) g;
+//    @Override
+//    protected void paintComponent(Graphics g) {
+//        super.paintComponent(g);
+//        Graphics2D g2D = (Graphics2D) g;
+//
+//        ItemSlot it = GameManager.getEquipment().getClickedSlot();
+//        if (it != null && it.getItem() != null) {
+//            position = MouseInfo.getPointerInfo().getLocation();
+//            g2D.drawImage(
+//                    it.getItem().getImage(),
+//                    (int) position.getX() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().x,
+//                    (int) position.getY() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().y,
+//                    GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE),
+//                    GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE),
+//                    null
+//            );
+//        }
+//    }
 
-        ItemSlot it = GameManager.getEquipment().getClickedSlot();
-        if (it != null && it.getItem() != null) {
-            position = MouseInfo.getPointerInfo().getLocation();
-            g2D.drawImage(
-                    it.getItem().getImage(),
-                    (int) position.getX() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().x,
-                    (int) position.getY() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().y,
-                    GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE),
-                    GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE),
-                    null
-                    );
-        }
-    }
+//    @Override
+//    public void paint(Graphics g) {
+//        super.paint(g);
+//        Graphics2D g2D = (Graphics2D) g;
+//
+//        ItemSlot it = GameManager.getEquipment().getClickedSlot();
+//        if (it != null && it.getItem() != null) {
+//            position = MouseInfo.getPointerInfo().getLocation();
+//            g2D.drawImage(
+//                    it.getItem().getImage(),
+//                    (int) position.getX() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().x,
+//                    (int) position.getY() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().y,
+//                    GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE),
+//                    GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE),
+//                    null
+//                    );
+//        }
+//    }
 
     private class DragListener extends MouseMotionAdapter {
         @Override
@@ -95,5 +140,4 @@ public class EquipmentView extends ViewPanel {
             repaint();
         }
     }
-
 }

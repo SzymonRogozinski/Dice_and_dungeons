@@ -92,7 +92,7 @@ public class FightModule {
         if(master.getDiceNumber()<=diceId) return;
 
         master.reroll(diceId);
-        state.showDiceResult(master.getResults());
+        state.showDiceResult(master.getResults(),master.getNormalDiceNumber());
         state.refreshRollPanel();
     }
 
@@ -130,7 +130,7 @@ public class FightModule {
 
     public void rollDices() {
         master.roll();
-        state.showDiceResult(master.getResults());
+        state.showDiceResult(master.getResults(),master.getNormalDiceNumber());
     }
 
     public String getStatusLog() {

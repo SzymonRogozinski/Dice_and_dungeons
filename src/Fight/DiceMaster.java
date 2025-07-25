@@ -83,4 +83,8 @@ public class DiceMaster {
     public int getDiceNumber(){
         return (pool==null ? 0 : pool.getDiceNumber()) + (bonusPool==null ? 0 : bonusPool.getDiceNumber());
     }
+
+    public int getNormalDiceNumber(){
+        return pool==null ? 0 : pool.getDiceNumber();
+    }
 }

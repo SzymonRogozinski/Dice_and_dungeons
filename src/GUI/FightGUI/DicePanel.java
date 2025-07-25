@@ -17,6 +17,7 @@ public class DicePanel extends JPanel {
     private static final int diceNumber = 12;
     private static final int diceRow = 2;
     private static final int diceColumns = 6;
+    private static final Border defaultBorder = new JButton().getBorder();
     private final ArrayList<DiceButton> diceButtons;
 
     public DicePanel(Border border) {
@@ -32,13 +33,15 @@ public class DicePanel extends JPanel {
         }
     }
 
-    public void showDiceResults(ArrayList<DiceSide> diceResults) {
+    public void showDiceResults(ArrayList<DiceSide> diceResults, int normalDice) {
         int i = 0;
         for (DiceSide res : diceResults) {
+            diceButtons.get(i).setBorder(i<normalDice ? defaultBorder : BorderFactory.createLineBorder(Color.CYAN,1));
             diceButtons.get(i++).setIcon(res.getIcon());
         }
         //Fulfill
         while (i < diceNumber) {
+            diceButtons.get(i).setBorder(defaultBorder);
             diceButtons.get(i++).setIcon(null);
         }
     }

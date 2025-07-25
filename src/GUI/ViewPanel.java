@@ -63,10 +63,6 @@ public abstract class ViewPanel extends JLayeredPane {
         sidePanel.add(sidePanelContent);
 
         childPanels = new ArrayList<>(List.of(bigPanelContent, smallPanelContent, bottomPanelContent, sidePanelContent));
-
-        //Refresh
-        this.revalidate();
-        this.repaint();
     }
 
     public static Border getSharedBorder() {

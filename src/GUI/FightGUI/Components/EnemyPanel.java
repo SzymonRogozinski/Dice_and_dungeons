@@ -95,7 +95,10 @@ public class EnemyPanel  extends JPanel {
     }
 
     public void resize(){
-        this.setSize(GUISettings.getResizedValue(GUISettings.CHARACTER_WIDTH), GUISettings.getResizedValue(FightPanelState.SUM_UP_HEIGHT_PANEL));
+        if(enemy.getCategory()== EnemyCategory.Boss)
+            this.setSize(GUISettings.getResizedValue(GUISettings.CHARACTER_WIDTH*2), GUISettings.getResizedValue(FightPanelState.SUM_UP_HEIGHT_PANEL*2));
+        else
+            this.setSize(GUISettings.getResizedValue(GUISettings.CHARACTER_WIDTH), GUISettings.getResizedValue(FightPanelState.SUM_UP_HEIGHT_PANEL));
 
         layout1.setVgap(GUISettings.getResizedValue(1));
         layout2.setHgap(GUISettings.getResizedValue(1));

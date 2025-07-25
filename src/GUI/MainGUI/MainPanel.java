@@ -41,9 +41,6 @@ public class MainPanel extends JPanel {
         this.add("Fight", fightView);
         this.add("Equipment", equipmentView);
 
-        //Refresh
-        this.revalidate();
-        this.repaint();
     }
 
     public void changeView(GameStates state) {
@@ -78,11 +75,6 @@ public class MainPanel extends JPanel {
         walkingView.resize();
         fightView.resize();
         equipmentView.resize();
-
-
-        //Refresh
-        this.revalidate();
-        this.repaint();
     }
 
 }

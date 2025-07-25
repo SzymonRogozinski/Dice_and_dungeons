@@ -2,6 +2,7 @@ package GUI.FightGUI.Components;
 
 import Equipment.Items.UsableItem;
 import GUI.Components.GameButton;
+import GUI.GUISettings;
 import Game.GameActionQueue;
 import Game.GameManager;
 import Game.PlayerInfo;
@@ -23,8 +24,11 @@ public class BackpackCardPanel extends CardPanel{
 
     public BackpackCardPanel(Border border, ArrayList<GameButton> buttons, String goBackName, GoBackCallBack goBack) {
         super(border, buttons, goBackName, goBack);
-        getGoBackButton().setPreferredSize(new Dimension(buttonWidth, itemButtonHeight));
-        getGoBackButton().setMargin(new Insets(0, 0, 0, 0));
+
+        setGoBackButton(new GameButton(
+                "go back", buttonWidth, itemButtonHeight,
+                _ -> GameActionQueue.action(()->goBack.goBack(goBackName))
+        ));
 
         getFlowLayout().setHgap(backpackButtonHGap);
         getFlowLayout().setVgap(backpackButtonVGap / 3);
@@ -76,6 +80,8 @@ public class BackpackCardPanel extends CardPanel{
 
         next.resize();
         prev.resize();
+        getFlowLayout().setHgap(GUISettings.getResizedValue(backpackButtonHGap));
+        getFlowLayout().setVgap(GUISettings.getResizedValue(backpackButtonVGap / 3));
     }
 
     private void next() {

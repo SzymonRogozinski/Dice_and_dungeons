@@ -21,10 +21,6 @@ public class WalkingView extends ViewPanel {
         arrows = (Arrows) panels.get(1);
         lootLogPanel = (LootLogPanel) panels.get(2);
         partyStatusPanel = (PartyStatusPanel) panels.get(3);
-
-        //Refresh
-        this.revalidate();
-        this.repaint();
     }
 
     public void refresh() {
