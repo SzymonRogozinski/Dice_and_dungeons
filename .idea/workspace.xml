@@ -9,26 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="Implemented fight resize and fullscreen">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Fight/DiceMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fight/DiceMaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Fight/FightModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fight/FightModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/EquipmentView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/EquipmentView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/ActionListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/ActionListPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/Components/BackpackCardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/BackpackCardPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/Components/CardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/CardPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/Components/EnemyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/Components/EnemyPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/DicePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/DicePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/FightGUIState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/FightGUIState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/FightGUI/FightPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FightGUI/FightPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/ChoosePartyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/ChoosePartyPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/ChoosePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MenuGUI/MenuComponents/ChoosePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/ViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/ViewPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Generators/ItemGenerators/UsableItemGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generators/ItemGenerators/UsableItemGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/FightingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/FightingTest.java" afterDir="false" />
+    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="Bug fixes">
+      <change beforePath="$PROJECT_DIR$/src/Tests/EquipmentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/EquipmentTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,9 +126,9 @@
       <recent name="Tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="GeneratorTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Tests.GeneratorTest" />
+  <component name="RunManager" selected="Application.WalkingTest">
+    <configuration name="EquipmentTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Tests.EquipmentTest" />
       <module name="Dice and dungeons" />
       <extension name="coverage">
         <pattern>
@@ -208,7 +190,7 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.GeneratorTest" />
+      <item itemvalue="Application.EquipmentTest" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.StartTest" />
       <item itemvalue="Application.Tests.FightingTest" />
@@ -216,11 +198,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.WalkingTest" />
+        <item itemvalue="Application.EquipmentTest" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Tests.FightingTest" />
-        <item itemvalue="Application.WalkingTest" />
         <item itemvalue="Application.StartTest" />
-        <item itemvalue="Application.GeneratorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -537,7 +519,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753118305321</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Bug fixes">
+      <option name="closed" value="true" />
+      <created>1753434334149</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1753434334149</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -555,7 +545,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="Add half implemented DiceItemGenerator" />
     <MESSAGE value="Fix bugs in DiceItemGenerator" />
     <MESSAGE value="Add usable items generator" />
     <MESSAGE value="update gitignore" />
@@ -580,7 +569,8 @@
     <MESSAGE value="Set Minimum size" />
     <MESSAGE value="Implemented resize to all module, except from fight" />
     <MESSAGE value="Implemented fight resize and fullscreen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented fight resize and fullscreen" />
+    <MESSAGE value="Bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">

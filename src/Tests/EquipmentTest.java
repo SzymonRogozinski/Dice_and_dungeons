@@ -5,18 +5,14 @@ import Character.PlayerParty;
 import Dice.DiceAction.*;
 import Dice.DiceFactory;
 import Equipment.CharacterEquipment;
-import Equipment.EquipmentModule;
 import Equipment.Items.*;
 import Fight.ActionTarget;
-import Fight.FightModule;
 import Fight.GameActions.ItemAction;
 import Fight.GameActions.SpellAction;
 import Fight.GameActions.UsableItemAction;
-import GUI.EquipmentGUI.EquipmentGUIState;
-import GUI.EquipmentGUI.EquipmentView;
+import Game.*;
 import Game.GameManager;
 import Game.PlayerInfo;
-import Game.Tags;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -24,9 +20,10 @@ import java.util.List;
 
 public class EquipmentTest {
 
-    private static final JFrame mainFrame = new TestFrame();
-
     public static void main(String[] args) {
+        //Set General game
+        new Game();
+
         //Test Data
         ActionItem item1 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0}, {0}, {0}, {1, 4}, {1, 4}, {1, 6}}), ActionTarget.ENEMY_CHARACTER, (PlayerCharacter p) -> p.getDiceNumber(p.getStrength()), new Tags[]{Tags.ATTACK}), new Tags[]{Tags.WARRIOR}, new ImageIcon("Texture/Items/dice-pl.png"), "Sword", "Sword", ItemQuality.COMMON, "");
         ActionItem item2 = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0}, {2, 3, 0}, {2, 3, 0}, {2, 3, 0}, {2, 3, 0}, {2, 3, 0}}), ActionTarget.PLAYER_CHARACTER, (PlayerCharacter p) -> p.getDiceNumber(p.getCharisma()), new Tags[]{Tags.DEFENCE}), new Tags[]{}, new ImageIcon("Texture/Items/dice-pl.png"), "Shield", "Shield", ItemQuality.RARE, "");
@@ -146,18 +143,8 @@ public class EquipmentTest {
         party.getBackpack().putToBackpack(item3);
         party.getBackpack().putToBackpack(item5);
         party.getBackpack().putToBackpack(item6);
-        //Code
 
-        EquipmentView view = new EquipmentView();
-        EquipmentGUIState state = new EquipmentGUIState(view);
-        EquipmentModule module = new EquipmentModule(state);
-        FightModule fModule = new FightModule(null, null);
 
-        GameManager.setEquipment(module);
-        GameManager.setFight(fModule);
-
-        mainFrame.add(view);
-        mainFrame.pack();
-        mainFrame.setVisible(true);
+        GameManager.changeState(GameStates.EQUIPMENT);
     }
 }

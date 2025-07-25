@@ -1,26 +1,22 @@
 package Tests;
 
 import Character.PlayerParty;
-import GUI.WalkingGUI.WalkingGUIState;
-import GUI.WalkingGUI.WalkingView;
+import Game.*;
 import Game.GameManager;
 import Game.PlayerInfo;
 import Loot.LootModule;
-import Walking.WalkingModule;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class WalkingTest {
 
-    private static final JFrame mainFrame = new TestFrame();
+
 
     public static void main(String[] args) {
-        WalkingView walkingView = new WalkingView();
-        WalkingGUIState state = new WalkingGUIState(walkingView);
+        //Set General game
+        new Game();
 
         try {
-            GameManager.setWalkingManager(new WalkingModule());
             //Mocks
             PlayerInfo.setParty(new PlayerParty(new ArrayList<>(), new ArrayList<>()));
             GameManager.setLoot(new LootModule());
@@ -28,11 +24,6 @@ public class WalkingTest {
             System.err.println(e.getMessage());
             return;
         }
-        mainFrame.add(walkingView);
-        mainFrame.pack();
-        mainFrame.setVisible(true);
-
-        //Start
-        GameManager.getThreadManager().startEnemyThread();
+        GameManager.changeState(GameStates.WALKING);
     }
 }
