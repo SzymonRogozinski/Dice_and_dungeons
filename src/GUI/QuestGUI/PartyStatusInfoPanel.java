@@ -1,25 +1,20 @@
-package GUI.WalkingGUI;
+package GUI.QuestGUI;
 
 import GUI.Components.DimensionlessGameLabel;
-import GUI.Components.GameButton;
 import GUI.Components.GameProgressBar;
 import GUI.GUISettings;
-import Game.GameManager;
-import Game.GameStates;
 import Game.PlayerInfo;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public class PartyStatusPanel extends JPanel {
+public class PartyStatusInfoPanel extends JPanel {
 
     private final GameProgressBar healthBar, manaBar;
     private final DimensionlessGameLabel health,mana,keysLabel;
-    private final GameButton eqButton,backpackButton,questButton;
 
-    public PartyStatusPanel(Border border) {
-        //Set display
+    public PartyStatusInfoPanel(Border border) {
         this.setSize(GUISettings.SMALL_PANEL_SIZE, GUISettings.PANEL_SIZE);
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setBackground(Color.BLACK);
@@ -42,40 +37,9 @@ public class PartyStatusPanel extends JPanel {
         //Set keys
         keysLabel = new DimensionlessGameLabel("Keys: 0", SwingConstants.CENTER, Color.WHITE);
         this.add(keysLabel);
-
-        //Set equipment buttons
-        eqButton = new GameButton("Equipment",
-                GUISettings.SMALL_PANEL_SIZE * 8 / 10,
-                GUISettings.SMALL_PANEL_SIZE / 5,
-                _ -> {
-                    GameManager.getEquipment().changeViewToEquipment();
-                    GameManager.changeState(GameStates.EQUIPMENT);
-                }
-        );
-        this.add(eqButton);
-
-        backpackButton = new GameButton(
-                "Backpack",
-                GUISettings.SMALL_PANEL_SIZE * 8 / 10,
-                GUISettings.SMALL_PANEL_SIZE / 5,
-                _ -> {
-                    GameManager.getEquipment().changeViewToBackpack();
-                    GameManager.changeState(GameStates.EQUIPMENT);
-                }
-        );
-        this.add(backpackButton);
-
-        questButton = new GameButton(
-                "Quests",
-                GUISettings.SMALL_PANEL_SIZE * 8 / 10,
-                GUISettings.SMALL_PANEL_SIZE / 5,
-                _ -> GameManager.changeState(GameStates.QUEST)
-        );
-        this.add(questButton);
-
     }
 
-    public void refresh() {
+    public void refresh(){
         healthBar.setMaximum(PlayerInfo.getParty().getMaxHealth());
         healthBar.setValue(PlayerInfo.getParty().getCurrentHealth());
         healthBar.setString(STR."\{PlayerInfo.getParty().getCurrentHealth()}/\{PlayerInfo.getParty().getMaxHealth()}");
@@ -95,8 +59,5 @@ public class PartyStatusPanel extends JPanel {
         keysLabel.resize();
         healthBar.resize();
         manaBar.resize();
-        eqButton.resize();
-        backpackButton.resize();
-        questButton.resize();
     }
 }

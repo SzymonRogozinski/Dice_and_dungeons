@@ -4,6 +4,7 @@ import GUI.EquipmentGUI.EquipmentView;
 import GUI.FightGUI.FightView;
 import GUI.GUISettings;
 import GUI.MenuGUI.MenuView;
+import GUI.QuestGUI.QuestView;
 import GUI.WalkingGUI.WalkingView;
 import Game.GameStates;
 
@@ -18,10 +19,11 @@ public class MainPanel extends JPanel {
     private final WalkingView walkingView;
     private final FightView fightView;
     private final EquipmentView equipmentView;
+    private final QuestView questView;
 
     private GameStates state;
 
-    public MainPanel(MenuView menuView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView) {
+    public MainPanel(MenuView menuView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView,QuestView questView) {
         //Setting panel
         layout = new CardLayout();
         state=GameStates.MENU;
@@ -35,11 +37,13 @@ public class MainPanel extends JPanel {
         this.walkingView=walkingView;
         this.fightView=fightView;
         this.equipmentView=equipmentView;
+        this.questView=questView;
 
         this.add("Start", menuView);
         this.add("Walking", walkingView);
         this.add("Fight", fightView);
         this.add("Equipment", equipmentView);
+        this.add("Quest",questView);
 
     }
 
@@ -50,6 +54,7 @@ public class MainPanel extends JPanel {
             case WALKING -> layout.show(this, "Walking");
             case FIGHTING -> layout.show(this, "Fight");
             case EQUIPMENT -> layout.show(this, "Equipment");
+            case QUEST -> layout.show(this, "Quest");
         }
     }
 
@@ -59,6 +64,7 @@ public class MainPanel extends JPanel {
             case WALKING -> walkingView.refresh();
             case FIGHTING -> fightView.refresh();
             case EQUIPMENT -> equipmentView.refresh();
+            case QUEST -> questView.refresh();
         }
 
         //Refresh
@@ -74,6 +80,7 @@ public class MainPanel extends JPanel {
         menuView.resize();
         walkingView.resize();
         fightView.resize();
+        questView.resize();
         equipmentView.resize();
     }
 

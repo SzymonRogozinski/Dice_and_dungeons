@@ -4,5 +4,7 @@ public enum GameStates {
     MENU,
     WALKING,
     FIGHTING,
-    EQUIPMENT
+    EQUIPMENT,
+    QUEST,
+    DIALOG
 }

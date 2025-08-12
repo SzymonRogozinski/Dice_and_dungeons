@@ -11,9 +11,11 @@ import GUI.MainGUI.MainGUIState;
 import GUI.MenuGUI.MenuModule;
 import GUI.MenuGUI.MenuState;
 import GUI.MenuGUI.MenuView;
+import GUI.QuestGUI.QuestView;
 import GUI.WalkingGUI.WalkingView;
 import Game.Threads.ThreadManager;
 import Loot.LootModule;
+import Quest.QuestModule;
 import Walking.WalkingModule;
 
 public class Game {
@@ -24,13 +26,15 @@ public class Game {
         WalkingView walkingView = new WalkingView();
         FightView fightView = new FightView();
         EquipmentView equipmentView = new EquipmentView();
+        QuestView questView = new QuestView();
 
-        MainFrame mainFrame = new MainFrame(menuView, walkingView, fightView, equipmentView);
+        MainFrame mainFrame = new MainFrame(menuView, walkingView, fightView, equipmentView,questView);
 
         //Threads
         GameManager.setThreadManager(new ThreadManager());
 
         //Set modules and states
+        GameManager.setQuestModule(new QuestModule());
         GameManager.setMenuModule(new MenuModule(new MenuState(menuView)));
         GameManager.setWalkingManager(new WalkingModule());
         GameManager.setFight(new FightModule(new FightGUIState(fightView)));

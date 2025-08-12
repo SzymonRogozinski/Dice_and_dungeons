@@ -9,8 +9,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="Bug fixes">
-      <change beforePath="$PROJECT_DIR$/src/Tests/EquipmentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/EquipmentTest.java" afterDir="false" />
+    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="Fix tests">
+      <change afterPath="$PROJECT_DIR$/src/GUI/QuestGUI/NavigationPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/QuestGUI/PartyStatusInfoPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/QuestGUI/QuestDescriptionPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/QuestGUI/QuestListPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/QuestGUI/QuestView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Quest/Quest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Quest/QuestModule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tests/StoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Walking/Places/NPCPlace.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Walking/Places/SafeRoomDoor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/DungeonGenerator.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/DungeonGenerator.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/EquipmentView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/EquipmentView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/SwitchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/SwitchPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/PartyStatusPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/PartyStatusPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/GameStates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameStates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/TestFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/WalkingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/WalkingTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Walking/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/GameMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Walking/MapCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/MapCreator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +103,7 @@
     &quot;Application.GeneratorTest.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Application.StartTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.StoryTest.executor&quot;: &quot;Run&quot;,
     &quot;Application.Test.executor&quot;: &quot;Run&quot;,
     &quot;Application.Tests.FightingTest.executor&quot;: &quot;Run&quot;,
     &quot;Application.WalkingMain.executor&quot;: &quot;Run&quot;,
@@ -126,7 +151,7 @@
       <recent name="Tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.WalkingTest">
+  <component name="RunManager" selected="Application.StoryTest">
     <configuration name="EquipmentTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Tests.EquipmentTest" />
       <module name="Dice and dungeons" />
@@ -150,8 +175,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StartTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Tests.StartTest" />
+    <configuration name="StoryTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Tests.StoryTest" />
       <module name="Dice and dungeons" />
       <extension name="coverage">
         <pattern>
@@ -190,19 +215,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.StoryTest" />
       <item itemvalue="Application.EquipmentTest" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="Application.StartTest" />
       <item itemvalue="Application.Tests.FightingTest" />
       <item itemvalue="Application.WalkingTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.StoryTest" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.WalkingTest" />
         <item itemvalue="Application.EquipmentTest" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Tests.FightingTest" />
-        <item itemvalue="Application.StartTest" />
       </list>
     </recent_temporary>
   </component>
@@ -527,7 +552,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753434334149</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Fix tests">
+      <option name="closed" value="true" />
+      <created>1753434612581</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1753434612581</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -545,7 +578,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="Fix bugs in DiceItemGenerator" />
     <MESSAGE value="Add usable items generator" />
     <MESSAGE value="update gitignore" />
     <MESSAGE value="resolving TODOs" />
@@ -570,7 +602,8 @@
     <MESSAGE value="Implemented resize to all module, except from fight" />
     <MESSAGE value="Implemented fight resize and fullscreen" />
     <MESSAGE value="Bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes" />
+    <MESSAGE value="Fix tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix tests" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">

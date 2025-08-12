@@ -48,10 +48,12 @@ public class EquipmentView extends ViewPanel {
         switch (newState) {
             case EquipmentGUIState.EQUIPMENT -> {
                 charactersInfoPanel.setEquipmentVisibility(true);
+                switchPanel.removeEquipmentButton();
                 itemManagementPanel.changeCard("Equipment");
             }
             case EquipmentGUIState.BACKPACK -> {
                 charactersInfoPanel.setEquipmentVisibility(false);
+                switchPanel.removeBackpackButton();
                 itemManagementPanel.changeCard("Backpack");
             }
         }
@@ -95,44 +97,6 @@ public class EquipmentView extends ViewPanel {
         dragableIcon.setIcon(GameUtils.resizeIcon(dragIcon,GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE)));
 
     }
-
-//    @Override
-//    protected void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//        Graphics2D g2D = (Graphics2D) g;
-//
-//        ItemSlot it = GameManager.getEquipment().getClickedSlot();
-//        if (it != null && it.getItem() != null) {
-//            position = MouseInfo.getPointerInfo().getLocation();
-//            g2D.drawImage(
-//                    it.getItem().getImage(),
-//                    (int) position.getX() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().x,
-//                    (int) position.getY() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().y,
-//                    GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE),
-//                    GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE),
-//                    null
-//            );
-//        }
-//    }
-
-//    @Override
-//    public void paint(Graphics g) {
-//        super.paint(g);
-//        Graphics2D g2D = (Graphics2D) g;
-//
-//        ItemSlot it = GameManager.getEquipment().getClickedSlot();
-//        if (it != null && it.getItem() != null) {
-//            position = MouseInfo.getPointerInfo().getLocation();
-//            g2D.drawImage(
-//                    it.getItem().getImage(),
-//                    (int) position.getX() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().x,
-//                    (int) position.getY() - GUISettings.ITEM_ICON_SIZE / 2 - this.getLocationOnScreen().y,
-//                    GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE),
-//                    GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE),
-//                    null
-//                    );
-//        }
-//    }
 
     private class DragListener extends MouseMotionAdapter {
         @Override

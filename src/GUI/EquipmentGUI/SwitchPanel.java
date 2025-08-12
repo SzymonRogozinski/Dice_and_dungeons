@@ -13,7 +13,7 @@ import java.awt.*;
 public class SwitchPanel extends JPanel {
 
     private final FlowLayout layout;
-    private final GameButton eqButton,backButton,returnButton;
+    private final GameButton eqButton,backButton,questButton,returnButton;
 
     public SwitchPanel(Border border) {
         //Set display
@@ -36,6 +36,12 @@ public class SwitchPanel extends JPanel {
                 _ -> GameActionQueue.action(()->GameManager.getEquipment().changeViewToBackpack())
         );
 
+        questButton = new GameButton("Quests",
+                (int) (GUISettings.SMALL_PANEL_SIZE * 0.8),
+                (int) (GUISettings.SMALL_PANEL_SIZE * 0.20),
+                _ -> GameActionQueue.action(()->GameManager.changeState(GameStates.QUEST))
+        );
+
         returnButton = new GameButton("Close",
                 (int) (GUISettings.SMALL_PANEL_SIZE * 0.8),
                 (int) (GUISettings.SMALL_PANEL_SIZE * 0.20),
@@ -54,5 +60,21 @@ public class SwitchPanel extends JPanel {
         eqButton.resize();
         backButton.resize();
         returnButton.resize();
+    }
+
+    public void removeEquipmentButton(){
+        this.removeAll();
+
+        this.add(backButton);
+        this.add(questButton);
+        this.add(returnButton);
+    }
+
+    public void removeBackpackButton(){
+        this.removeAll();
+
+        this.add(eqButton);
+        this.add(questButton);
+        this.add(returnButton);
     }
 }

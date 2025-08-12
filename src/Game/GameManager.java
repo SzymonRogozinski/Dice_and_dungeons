@@ -8,6 +8,7 @@ import GUI.MainGUI.MainGUIState;
 import GUI.MenuGUI.MenuModule;
 import Game.Threads.ThreadManager;
 import Loot.LootModule;
+import Quest.QuestModule;
 import Walking.WalkingModule;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class GameManager {
     private static LootModule lootModule;
     private static WalkingModule walkingModule;
     private static MenuModule menuModule;
+    private static QuestModule questModule;
     private static ThreadManager threadManager;
     private static MainFrame mainFrame;
     private static boolean bossFight;
@@ -130,6 +132,15 @@ public class GameManager {
     public static void setMenuModule(MenuModule menuModule) {
         if (GameManager.menuModule == null)
             GameManager.menuModule = menuModule;
+    }
+
+    public static QuestModule getQuestModule() {
+        return questModule;
+    }
+
+    public static void setQuestModule(QuestModule questModule) {
+        if (GameManager.questModule == null)
+            GameManager.questModule = questModule;
     }
 
     public static int getLevelPointer() {

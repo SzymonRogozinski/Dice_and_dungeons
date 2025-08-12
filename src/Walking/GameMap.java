@@ -34,6 +34,8 @@ public class GameMap {
                     case TREASURE -> place = new TreasureGamePlace(this.path);
                     case KEY -> place = new KeyGamePlace(this.path);
                     case WALL -> place = new WallGamePlace('W', this.path);
+                    case SAFE_ROOM_DOORS -> place = new SafeRoomDoor(this.path);
+                    case NPC -> place = new NPCPlace(this.path);
                     default -> throw new RuntimeException("Something goes wrong while writing map!");
                 }
                 currentGamePlaces[y][x] = place;

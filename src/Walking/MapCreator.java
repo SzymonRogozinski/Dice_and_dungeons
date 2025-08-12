@@ -25,7 +25,7 @@ public class MapCreator {
     public boolean createMap(int selectedAlg, int width, int height, int size, int enemies, int treasures, int vaults) {
         try {
             Generator.setRandom(random);
-            map = Generator.generateDungeon(selectedAlg, width, height, size, enemies, treasures, vaults);
+            map = Generator.generateDungeon(selectedAlg, width, height, size, enemies, treasures, vaults,1);
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return false;

@@ -10,8 +10,6 @@ import java.util.ArrayList;
 
 public class WalkingTest {
 
-
-
     public static void main(String[] args) {
         //Set General game
         new Game();
