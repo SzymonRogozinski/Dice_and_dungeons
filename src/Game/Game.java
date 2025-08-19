@@ -1,7 +1,9 @@
 package Game;
 
+import Dialog.DialogModule;
 import Equipment.EquipmentModule;
 import Fight.FightModule;
+import GUI.DialogGUI.DialogView;
 import GUI.EquipmentGUI.EquipmentGUIState;
 import GUI.EquipmentGUI.EquipmentView;
 import GUI.FightGUI.FightGUIState;
@@ -27,13 +29,15 @@ public class Game {
         FightView fightView = new FightView();
         EquipmentView equipmentView = new EquipmentView();
         QuestView questView = new QuestView();
+        DialogView dialogView = new DialogView();
 
-        MainFrame mainFrame = new MainFrame(menuView, walkingView, fightView, equipmentView,questView);
+        MainFrame mainFrame = new MainFrame(menuView, walkingView, fightView, equipmentView,questView, dialogView);
 
         //Threads
         GameManager.setThreadManager(new ThreadManager());
 
         //Set modules and states
+        GameManager.setDialogModule(new DialogModule());
         GameManager.setQuestModule(new QuestModule());
         GameManager.setMenuModule(new MenuModule(new MenuState(menuView)));
         GameManager.setWalkingManager(new WalkingModule());

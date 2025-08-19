@@ -1,5 +1,6 @@
 package GUI.QuestGUI;
 
+import GUI.Components.PartyStatusInfoPanel;
 import GUI.ViewPanel;
 
 import javax.swing.*;

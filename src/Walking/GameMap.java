@@ -9,6 +9,9 @@ import Walking.Places.*;
 
 import dg.generator.dungeon.Map;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class GameMap {
     private final int height, width;
     private final GamePlace[][] currentGamePlaces;
@@ -59,6 +62,42 @@ public class GameMap {
         originalGamePlaces[y][x] = place;
     }
 
+    public GameMap(String mapString, String imagePath, boolean bossLevel, int[] start){
+        //Read terrain
+        ArrayList<String> mapStrings=new ArrayList<>();
+
+        Scanner scanner = new Scanner(mapString);
+
+        while(scanner.hasNext())
+            mapStrings.add(scanner.next());
+
+        //Set params
+        this.path = imagePath;
+        this.width = mapStrings.getFirst().length();
+        this.height = mapStrings.size();
+        this.currentGamePlaces = new GamePlace[height][width];
+        this.originalGamePlaces = new GamePlace[height][width];
+
+        GamePlace place;
+        //Load terrain
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                switch (mapStrings.get(y).charAt(x)) {
+                    case '.' -> place = new SpaceGamePlace(this.path);
+                    case '#' -> place = new WallGamePlace('W', this.path);
+                    default -> throw new RuntimeException("Something goes wrong while writing map!");
+                }
+                currentGamePlaces[y][x] = place;
+                originalGamePlaces[y][x] = place;
+            }
+        }
+
+        startX = start[0];
+        startY = start[1];
+
+        //TODO entries and boss
+    }
+
     public int getHeight() {
         return height;
     }
@@ -93,7 +132,7 @@ public class GameMap {
     }
 
     //true means, that character was moved
-    public boolean changeCharacterPlace(Drone gc, int dx, int dy) throws EnemyFightException, EnterExitException {
+    public boolean changeCharacterPlace(Drone gc, int dx, int dy) throws EnemyFightException, EnterExitException, NPCDialogException {
         boolean collisionDetected = false;
         //If collision
         try {
@@ -114,6 +153,10 @@ public class GameMap {
         } catch (ChestOpenException e) {
             GameManager.getLootModule().getLoot(GameManager.getCurrentLevel().lootSettings(), false);
             collisionDetected = true;
+        } catch (NPCDialogException e){
+            collisionDetected = true;
+            if (!(gc instanceof EnemyDrone))
+                throw e;
         } catch (CollisionException e) {
             //Should not happen!
             throw new RuntimeException(e);
@@ -125,6 +168,11 @@ public class GameMap {
             }
         }
         return !collisionDetected;
+    }
+
+    public void setTerrain(GamePlace place, int x,int y){
+        currentGamePlaces[y][x] = place;
+        originalGamePlaces[y][x] = place;
     }
 }
 

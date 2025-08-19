@@ -1,8 +1,8 @@
 package GUI.MainGUI;
 
+import GUI.DialogGUI.DialogView;
 import GUI.EquipmentGUI.EquipmentView;
 import GUI.FightGUI.FightView;
-import GUI.GUISettings;
 import GUI.MenuGUI.MenuView;
 import GUI.QuestGUI.QuestView;
 import GUI.WalkingGUI.WalkingKeyListener;
@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
 
     private final MainPanel mainPanel;
 
-    public MainFrame(MenuView menuView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView, QuestView questView) {
+    public MainFrame(MenuView menuView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView, QuestView questView, DialogView dialogView) {
         this.setTitle("Dice and Dungeons");
         this.setResizable(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,7 +25,7 @@ public class MainFrame extends JFrame {
 
         CenteredPanel centeredPanel = new CenteredPanel();
 
-        mainPanel = new MainPanel(menuView, walkingView, fightView, equipmentView,questView);
+        mainPanel = new MainPanel(menuView, walkingView, fightView, equipmentView,questView, dialogView);
         centeredPanel.add(mainPanel);
         this.add(centeredPanel);
     }

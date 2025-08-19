@@ -1,4 +1,4 @@
-package GUI.QuestGUI;
+package GUI.Components;
 
 import GUI.Components.DimensionlessGameLabel;
 import GUI.Components.GameProgressBar;

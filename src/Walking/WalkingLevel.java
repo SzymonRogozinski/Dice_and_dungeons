@@ -6,14 +6,22 @@ import Game.GameLevel;
 import Game.GameManager;
 import Game.GameStates;
 import Generators.EnemyGenerator.EnemyGenerator;
+import Walking.Collision.NPCDialogException;
 import Walking.Drones.Drone;
 import Walking.Drones.EnemyDrone;
 import Walking.Drones.PlayerDrone;
 import Walking.Collision.EnemyFightException;
 import Walking.Collision.EnterExitException;
 import Walking.Places.PlayerGamePlace;
+import dg.generator.dungeon.Coordinate;
 import dg.generator.dungeon.Map;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +63,40 @@ public class WalkingLevel {
         gameMap.addCharacterPlace(player.getIcon(), player.getPosX(), player.getPosY());
         //Add fog
         fogOfWar = new FogOfWar(player, gameMap);
+    }
+
+    public WalkingLevel(String mapPath) throws FileNotFoundException {
+        //Read json
+        JSONObject mapJson;
+        try {
+            mapJson = new JSONObject(Files.readString(Path.of(mapPath)));
+        } catch (IOException e) {
+            throw new FileNotFoundException("File not found!");
+        }
+
+        int[] start = new int[2];
+        start[0] = mapJson.getJSONArray("Player").getInt(0);
+        start[1] = mapJson.getJSONArray("Player").getInt(1);
+
+        gameMap = new GameMap(mapJson.getString("Terrain"),mapJson.getString("imagesPath"),mapJson.getBoolean("isBoss"), start);
+
+        //Add player
+        player = new PlayerDrone(gameMap.getStartX(), gameMap.getStartY(), new PlayerGamePlace(gameMap.getPath()));
+        gameMap.addCharacterPlace(player.getIcon(), player.getPosX(), player.getPosY());
+        //Add fog
+        fogOfWar = new FogOfWar(player, gameMap);
+
+        //Cast array to Coordinate
+        ArrayList<Coordinate> enemiesCoordinates = new ArrayList<>();
+        JSONArray jsonEnemiesCoordinates = mapJson.getJSONArray("Enemies");
+        for(int i=0;i<jsonEnemiesCoordinates.length();i++)
+            enemiesCoordinates.add(new Coordinate(jsonEnemiesCoordinates.getJSONArray(i).getInt(0),jsonEnemiesCoordinates.getJSONArray(i).getInt(1)));
+
+        enemies=new Enemies(enemiesCoordinates,mapJson.getString("imagesPath"),
+                mapJson.getJSONObject("EnemiesStats").getInt("enemyCost"),
+                mapJson.getJSONObject("EnemiesStats").getInt("minHP"));
+        setEnemy();
+        boss=null; // Todo
     }
 
     public GameMap getMap() {
@@ -115,7 +157,10 @@ public class WalkingLevel {
                 GameManager.startBossBattle();
                 GameManager.changeState(GameStates.FIGHTING);
             }
-        } finally {
+        } catch (NPCDialogException e){
+            GameManager.getDialogModule().setPointedNPC(e.getLines());
+            GameManager.changeState(GameStates.DIALOG);
+        }finally {
             fogOfWar.refreshFog();
         }
     }

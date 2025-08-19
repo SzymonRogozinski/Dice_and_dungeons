@@ -1,8 +1,10 @@
 package Game;
 
 import Character.PlayerParty;
+import Dialog.DialogModule;
 import Equipment.EquipmentModule;
 import Fight.FightModule;
+import GUI.DialogGUI.DialogView;
 import GUI.MainGUI.MainFrame;
 import GUI.MainGUI.MainGUIState;
 import GUI.MenuGUI.MenuModule;
@@ -23,6 +25,7 @@ public class GameManager {
     private static WalkingModule walkingModule;
     private static MenuModule menuModule;
     private static QuestModule questModule;
+    private static DialogModule dialogModule;
     private static ThreadManager threadManager;
     private static MainFrame mainFrame;
     private static boolean bossFight;
@@ -141,6 +144,15 @@ public class GameManager {
     public static void setQuestModule(QuestModule questModule) {
         if (GameManager.questModule == null)
             GameManager.questModule = questModule;
+    }
+
+    public static DialogModule getDialogModule() {
+        return dialogModule;
+    }
+
+    public static void setDialogModule(DialogModule dialogModule) {
+        if(GameManager.dialogModule == null)
+            GameManager.dialogModule = dialogModule;
     }
 
     public static int getLevelPointer() {

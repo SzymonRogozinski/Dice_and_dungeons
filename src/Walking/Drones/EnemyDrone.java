@@ -4,6 +4,7 @@ import Character.Enemy.EnemyCharacter;
 import Game.GameManager;
 import Walking.Collision.EnemyFightException;
 import Walking.Collision.EnterExitException;
+import Walking.Collision.NPCDialogException;
 import Walking.GameMap;
 import Walking.Places.GamePlace;
 import Walking.Places.PlayerGamePlace;
@@ -88,7 +89,7 @@ public class EnemyDrone extends Drone {
                 if (gameMap.changeCharacterPlace(this, moves.getFirst().dx, moves.getFirst().dy))
                     moves.removeFirst();
                 return;
-            } catch (EnterExitException ignored) {
+            } catch (EnterExitException | NPCDialogException ignored) {
             }
         }
         //If not
@@ -101,7 +102,7 @@ public class EnemyDrone extends Drone {
                     break;
                 else
                     count--;
-            } catch (EnterExitException ignored) {
+            } catch (EnterExitException | NPCDialogException ignored) {
             }
         }
     }
@@ -109,6 +110,13 @@ public class EnemyDrone extends Drone {
     @Override
     public GamePlace getIcon() {
         return moves.isEmpty() ? super.getIcon() : pursuitIcon;
+    }
+
+    public GamePlace getBaseIcon() {
+        return super.getIcon();
+    }
+    public GamePlace getPursuitIcon() {
+        return pursuitIcon;
     }
 
     private record NextMove(int dx, int dy, int x, int y) {

@@ -7,9 +7,11 @@ public class EnemyThread extends Thread {
 
     private final static int oneRoundTime = 500;
     private final GameMutex mutex;
+    private boolean hasEnded;
 
     public EnemyThread(GameMutex mutex) {
         this.mutex = mutex;
+        hasEnded=false;
     }
 
     @Override
@@ -26,10 +28,15 @@ public class EnemyThread extends Thread {
             }
             GameActionQueue.action(()->GameManager.getWalkingManager().getWalking().enemiesMove());
             try {
-                Thread.sleep(oneRoundTime / GameManager.getWalkingManager().getWalking().getEnemies().countEnemy());
+                Thread.sleep(oneRoundTime / Math.max(GameManager.getWalkingManager().getWalking().getEnemies().countEnemy(),1));    //Avoid dividing by zero
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        hasEnded=true;
+    }
+
+    public boolean isThreadEnded() {
+        return hasEnded;
     }
 }

@@ -28,8 +28,12 @@ public class WalkingModule {
         }
     }
 
+    public void setMap(WalkingLevel walking) {
+        this.walking = walking;
+    }
+
     public void startWalking() {
-        if (GameManager.getThreadManager().getEnemyThread().isAlive())
+        if (GameManager.getThreadManager().getEnemyThread().isAlive() || GameManager.getThreadManager().getEnemyThread().isThreadEnded())
             GameManager.getThreadManager().resumeEnemyThread();
         else
             GameManager.getThreadManager().startEnemyThread();

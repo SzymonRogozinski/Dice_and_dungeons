@@ -1,5 +1,6 @@
 package GUI.MainGUI;
 
+import GUI.DialogGUI.DialogView;
 import GUI.EquipmentGUI.EquipmentView;
 import GUI.FightGUI.FightView;
 import GUI.GUISettings;
@@ -10,8 +11,6 @@ import Game.GameStates;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 public class MainPanel extends JPanel {
     private final CardLayout layout;
@@ -20,10 +19,11 @@ public class MainPanel extends JPanel {
     private final FightView fightView;
     private final EquipmentView equipmentView;
     private final QuestView questView;
+    private final DialogView dialogView;
 
     private GameStates state;
 
-    public MainPanel(MenuView menuView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView,QuestView questView) {
+    public MainPanel(MenuView menuView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView, QuestView questView, DialogView dialogView) {
         //Setting panel
         layout = new CardLayout();
         state=GameStates.MENU;
@@ -38,13 +38,14 @@ public class MainPanel extends JPanel {
         this.fightView=fightView;
         this.equipmentView=equipmentView;
         this.questView=questView;
+        this.dialogView = dialogView;
 
         this.add("Start", menuView);
         this.add("Walking", walkingView);
         this.add("Fight", fightView);
         this.add("Equipment", equipmentView);
         this.add("Quest",questView);
-
+        this.add("Dialog", dialogView);
     }
 
     public void changeView(GameStates state) {
@@ -55,6 +56,7 @@ public class MainPanel extends JPanel {
             case FIGHTING -> layout.show(this, "Fight");
             case EQUIPMENT -> layout.show(this, "Equipment");
             case QUEST -> layout.show(this, "Quest");
+            case DIALOG -> layout.show(this, "Dialog");
         }
     }
 
@@ -65,6 +67,7 @@ public class MainPanel extends JPanel {
             case FIGHTING -> fightView.refresh();
             case EQUIPMENT -> equipmentView.refresh();
             case QUEST -> questView.refresh();
+            case DIALOG -> dialogView.refresh();
         }
 
         //Refresh
@@ -81,6 +84,7 @@ public class MainPanel extends JPanel {
         walkingView.resize();
         fightView.resize();
         questView.resize();
+        dialogView.resize();
         equipmentView.resize();
     }
 

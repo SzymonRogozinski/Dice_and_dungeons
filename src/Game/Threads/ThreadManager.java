@@ -1,5 +1,7 @@
 package Game.Threads;
 
+import Game.GameManager;
+
 public class ThreadManager {
 
     private final GameMutex mutex;
@@ -37,7 +39,8 @@ public class ThreadManager {
     }
 
     public void startEnemyThread(){
-        et.start();
+        if(!et.isThreadEnded())
+            et.start();
     }
 
     public void resumeEnemyThread(){

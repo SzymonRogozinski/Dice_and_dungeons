@@ -2,6 +2,7 @@ package Walking.Places;
 
 import Walking.Collision.EnemyFightException;
 import Walking.Drones.Drone;
+import Walking.Drones.EnemyDrone;
 
 public class PlayerGamePlace extends GamePlace {
     public PlayerGamePlace(String path) {
@@ -10,7 +11,7 @@ public class PlayerGamePlace extends GamePlace {
 
     @Override
     public boolean getCollision(Drone goingToCollideCharacter) throws EnemyFightException {
-        if (goingToCollideCharacter.getIcon() instanceof EnemyGamePlace)
+        if (goingToCollideCharacter instanceof EnemyDrone)
             throw new EnemyFightException(getReference());
         return true;
     }

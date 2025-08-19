@@ -1,5 +1,7 @@
 package Quest;
 
+import Game.GameManager;
+
 import java.util.ArrayList;
 
 public class QuestModule {
@@ -14,6 +16,14 @@ public class QuestModule {
 
     public ArrayList<Quest> getQuests() {
         return quests;
+    }
+
+    public boolean tryEndQuest(Quest quest){
+        if(!quest.isQuestDone())
+            return false;
+        quests.remove(quest);
+        GameManager.getLootModule().getLoot(quest.getReward());
+        return true;
     }
 
     public int getPointedQuest() {
