@@ -97,6 +97,7 @@ public class GameMap {
                 originalGamePlaces[y][x] = place;
             }
         }
+        this.npcPlace=null;
         //Entry
         place = new EntryGamePlace(this.path, true, false);
         int x, y;
