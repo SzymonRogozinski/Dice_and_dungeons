@@ -34,6 +34,7 @@ public class GameManager {
     private static GameStates state = GameStates.MENU;
     private static MainGUIState GUIState;
     private static int levelPointer = 0;
+    private static GameLevel level = null;
 
     public static void refresh(){
         if(PlayerInfo.getParty()!=null)
@@ -160,7 +161,11 @@ public class GameManager {
     }
 
     public static GameLevel getCurrentLevel() {
-        return GameConst.LEVELS.get(levelPointer);
+        return level==null ? GameConst.LEVELS.get(levelPointer): level;
+    }
+
+    public static void setLevel(GameLevel level) {
+        GameManager.level = level;
     }
 
     public static boolean isBossFight() {

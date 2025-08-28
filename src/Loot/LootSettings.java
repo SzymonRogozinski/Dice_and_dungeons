@@ -12,7 +12,7 @@ public class LootSettings {
         double sum = 0;
         for (double d : probabilities)
             sum += d;
-        if (sum != 1)
+        if (Math.round(sum) != 1)
             throw new IllegalArgumentException("Probability does not sum up to 1!");
         this.probabilities = probabilities;
     }

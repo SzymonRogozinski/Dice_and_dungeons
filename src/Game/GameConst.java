@@ -17,12 +17,12 @@ import java.util.List;
 
 public class GameConst {
     //Levels
-    public static final GameLevel DUNGEON = new GameLevel(new LootSettings(3, new double[]{0.7, 0.3}), 4, 10,
-            new WalkingSettings(0, 2, 100, 100, 1000, 25, 20, 2, "Texture/MapTextures/dungeon/", false));
-    public static final GameLevel MINE = new GameLevel(new LootSettings(5, new double[]{0.4, 0.5, 0.1}), 8, 20,
-            new WalkingSettings(0, 1, 100, 100, 1000, 25, 20, 2, "Texture/MapTextures/mine/", false));
-    public static final GameLevel CAVE = new GameLevel(new LootSettings(7, new double[]{0.1, 0.5, 0.4}), 12, 30,
-            new WalkingSettings(0, 0, 100, 100, 1000, 25, 20, 2, "Texture/MapTextures/cave/", true));
+    public static final GameLevel DUNGEON = new GameLevel(new LootSettings(3, new double[]{0.7, 0.3}), new LootSettings(5, new double[]{0.3, 0.6, 0.1}), 4, 10,
+            new WalkingSettings(0, 2, 100, 100, 1000, 25, 20,2, 2, "Texture/MapTextures/dungeon/", false));
+    public static final GameLevel MINE = new GameLevel(new LootSettings(5, new double[]{0.4, 0.5, 0.1}), new LootSettings(7, new double[]{0.1, 0.3, 0.6}), 8, 20,
+            new WalkingSettings(0, 1, 100, 100, 1000, 25, 20,2,  2, "Texture/MapTextures/mine/", false));
+    public static final GameLevel CAVE = new GameLevel(new LootSettings(7, new double[]{0.1, 0.5, 0.4}), new LootSettings(9, new double[]{0.1, 0.1, 0.8}), 12, 30,
+            new WalkingSettings(0, 0, 100, 100, 1000, 25, 20,2, 2, "Texture/MapTextures/cave/", true));
     public static final ArrayList<GameLevel> LEVELS = new ArrayList<>(List.of(DUNGEON, MINE, CAVE));
     private static final ActionItem sword = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0}, {0}, {1, 4}, {1, 4}, {1, 6}, {1, 6}}), ActionTarget.ENEMY_CHARACTER, (PlayerCharacter p) -> p.getDiceNumber(p.getStrength()), new Tags[]{Tags.ATTACK}), new Tags[]{}, new ImageIcon("Texture/Items/attack_item/sword.png"), "sword", "sword", ItemQuality.COMMON, "strength");
     private static final ActionItem bow = new ActionItem(new ItemAction(DiceFactory.buildDice(new int[][]{{0}, {1, 2}, {1, 3}, {1, 3}, {1, 6}, {1, 6}}), ActionTarget.ENEMY_CHARACTER, (PlayerCharacter p) -> p.getDiceNumber(p.getStrength()), new Tags[]{Tags.ATTACK}), new Tags[]{}, new ImageIcon("Texture/Items/attack_item/bow.png"), "bow", "bow", ItemQuality.COMMON, "strength");

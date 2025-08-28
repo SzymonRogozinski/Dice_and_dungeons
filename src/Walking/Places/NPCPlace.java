@@ -5,6 +5,7 @@ import Walking.Collision.DoorOpenException;
 import Walking.Collision.EnemyFightException;
 import Walking.Collision.NPCDialogException;
 import Walking.Drones.Drone;
+import Walking.Drones.PlayerDrone;
 
 public class NPCPlace extends GamePlace{
 
@@ -16,7 +17,7 @@ public class NPCPlace extends GamePlace{
 
     @Override
     public boolean getCollision(Drone goingToCollideCharacter) throws NPCDialogException {
-        if (goingToCollideCharacter.getIcon() instanceof PlayerGamePlace) {
+        if (goingToCollideCharacter instanceof PlayerDrone) {
             throw new NPCDialogException(lines);
         }
         return true;

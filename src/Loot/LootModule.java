@@ -26,6 +26,14 @@ public class LootModule {
     private int logCounter = -1;
 
     public void getLoot(LootSettings settings, boolean wasFight) {
+        ArrayList<Item> loot = generateLoot(settings);
+        setLootLogText(loot, wasFight? LootSource.ENEMY: LootSource.CHEST);
+        //Place in backpack
+        for (Item item : loot)
+            PlayerInfo.getParty().getBackpack().putToBackpack(item);
+    }
+
+    public static ArrayList<Item> generateLoot(LootSettings settings) {
         int points = settings.getPoints();
         ArrayList<Item> loot = new ArrayList<>();
         while (points > 0) {
@@ -36,10 +44,7 @@ public class LootModule {
                 points -= q;
             }
         }
-        setLootLogText(loot, wasFight? LootSource.ENEMY: LootSource.CHEST);
-        //Place in backpack
-        for (Item item : loot)
-            PlayerInfo.getParty().getBackpack().putToBackpack(item);
+        return loot;
     }
 
     public void getLoot(ArrayList<Item> items) {
@@ -73,7 +78,7 @@ public class LootModule {
         lootLogText = builder.toString();
     }
 
-    private ItemQuality getQuality(int quality) {
+    private static ItemQuality getQuality(int quality) {
         switch (quality) {
             case COMMON_COST -> {
                 return ItemQuality.COMMON;
@@ -88,7 +93,7 @@ public class LootModule {
         }
     }
 
-    private Item generateLoot(ItemQuality quality) {
+    private static Item generateLoot(ItemQuality quality) {
         double roll = GameManager.getRandom().nextDouble();
         if (roll <= USABLE_PROB)
             return UsableItemGenerator.generate(quality);

@@ -2,6 +2,7 @@ package Walking.Places;
 
 import Walking.Collision.ChestOpenException;
 import Walking.Drones.Drone;
+import Walking.Drones.PlayerDrone;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,7 @@ public class TreasureGamePlace extends GamePlace {
 
     @Override
     public boolean getCollision(Drone goingToCollideCharacter) throws ChestOpenException {
-        if (!isOpen && goingToCollideCharacter.getIcon() instanceof PlayerGamePlace) {
+        if (!isOpen && goingToCollideCharacter instanceof PlayerDrone) {
             isOpen = true;
             throw new ChestOpenException();
         }

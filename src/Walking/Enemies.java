@@ -40,6 +40,8 @@ public class Enemies implements Iterable<EnemyDrone> {
     }
 
     public void addQuestToEnemy(int enemyId, Quest quest){
+        if(enemies.get(enemyId).getIcon() instanceof QuestPlace)
+            throw new IllegalArgumentException("Enemy already have quest");
         EnemyDrone enemy = enemies.get(enemyId);
         EnemyDrone questEnemy = new EnemyDrone(enemy.getPosX(), enemy.getPosY(),
                 new QuestPlace(enemy.getBaseIcon(),quest),

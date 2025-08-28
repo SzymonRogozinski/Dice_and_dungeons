@@ -17,6 +17,7 @@ public class GameMap {
     private final GamePlace[][] currentGamePlaces;
     private final GamePlace[][] originalGamePlaces;
     private final int startX, startY;
+    private final NPCPlace npcPlace;
     private final String path;
 
     public GameMap(Map map, String path, boolean bossLevel) {
@@ -26,6 +27,7 @@ public class GameMap {
         this.currentGamePlaces = new GamePlace[height][width];
         this.originalGamePlaces = new GamePlace[height][width];
 
+        NPCPlace tmpNPC = null;
         GamePlace place;
         //Load terrain
         for (int y = 0; y < map.getHeight(); y++) {
@@ -38,13 +40,17 @@ public class GameMap {
                     case KEY -> place = new KeyGamePlace(this.path);
                     case WALL -> place = new WallGamePlace('W', this.path);
                     case SAFE_ROOM_DOORS -> place = new SafeRoomDoor(this.path);
-                    case NPC -> place = new NPCPlace(this.path);
+                    case NPC -> {
+                        place = new NPCPlace(this.path);
+                        tmpNPC = (NPCPlace) place;
+                    }
                     default -> throw new RuntimeException("Something goes wrong while writing map!");
                 }
                 currentGamePlaces[y][x] = place;
                 originalGamePlaces[y][x] = place;
             }
         }
+        this.npcPlace=tmpNPC;
         //Entry
         place = new EntryGamePlace(this.path, true, false);
         int x, y;
@@ -62,7 +68,7 @@ public class GameMap {
         originalGamePlaces[y][x] = place;
     }
 
-    public GameMap(String mapString, String imagePath, boolean bossLevel, int[] start){
+    public GameMap(String mapString, String imagePath, boolean bossLevel, int[] start, int[] end){
         //Read terrain
         ArrayList<String> mapStrings=new ArrayList<>();
 
@@ -91,11 +97,21 @@ public class GameMap {
                 originalGamePlaces[y][x] = place;
             }
         }
-
-        startX = start[0];
-        startY = start[1];
-
-        //TODO entries and boss
+        //Entry
+        place = new EntryGamePlace(this.path, true, false);
+        int x, y;
+        x = start[0];
+        y = start[1];
+        currentGamePlaces[y][x] = place;
+        originalGamePlaces[y][x] = place;
+        startX = x;
+        startY = y;
+        //Exit
+        place = new EntryGamePlace(this.path, false, bossLevel);
+        x = end[0];
+        y = end[1];
+        currentGamePlaces[y][x] = place;
+        originalGamePlaces[y][x] = place;
     }
 
     public int getHeight() {
@@ -120,6 +136,10 @@ public class GameMap {
 
     public int getStartY() {
         return startY;
+    }
+
+    public NPCPlace getNpcPlace() {
+        return npcPlace;
     }
 
     public void addCharacterPlace(GamePlace place, int x, int y) {

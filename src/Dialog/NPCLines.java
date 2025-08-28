@@ -1,6 +1,9 @@
 package Dialog;
 
 import Game.GameManager;
+import Quest.Quest;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -17,6 +20,18 @@ public class NPCLines {
         this.dialogLines = dialogLines;
         chooseAbleDialogLines =new ArrayList<>();
         chooseAbleDialogLines.add(dialogLines[0]);   //Start dialog
+    }
+
+    public NPCLines(JSONObject npcJson, ArrayList<Quest> quests) {
+        this.name = npcJson.getString("Name");
+        currentResponse="";
+        this.dialogLines = loadDialogLines(npcJson.getJSONArray("Dialogs"),npcJson.getJSONArray("QuestDialogs"),quests);
+        chooseAbleDialogLines =new ArrayList<>();
+        chooseAbleDialogLines.add(dialogLines[0]);   //Start dialog
+    }
+
+    public void setDefaultResponse(){
+        currentResponse="";
     }
 
     public String getName() {
@@ -52,5 +67,33 @@ public class NPCLines {
 
         if(line.isRemoveAfterUsed())
             chooseAbleDialogLines.remove(id);
+    }
+
+    private DialogLine[] loadDialogLines(JSONArray dialogs, JSONArray questDialog, ArrayList<Quest> quests){
+        DialogLine[] dialogLines = new DialogLine[dialogs.length()+questDialog.length()];
+        for (int i = 0; i < dialogs.length(); i++) {
+            JSONObject json = dialogs.getJSONObject(i);
+            dialogLines[json.getInt("id")] = new DialogLine(json.getString("line"),
+                    json.getString("response"),
+                    castJSONArrayToIntArray(json.getJSONArray("nextDialogs")),
+                    json.getBoolean("removeAfterUsed"));
+        }
+        for (int i = 0; i < questDialog.length(); i++) {
+            JSONObject json = questDialog.getJSONObject(i);
+            dialogLines[json.getInt("id")] = new DialogQuestLine(json.getString("line"),
+                    json.getString("startResponse"),
+                    json.getString("endResponse"),
+                    castJSONArrayToIntArray(json.getJSONArray("nextDialogs")),
+                    json.getBoolean("startQuestLine"),
+                    quests.get(json.getInt("questId")));
+        }
+        return dialogLines;
+    }
+
+    private int[] castJSONArrayToIntArray(JSONArray jsonArray){
+        int[] arr = new int[jsonArray.length()];
+        for (int i = 0; i < jsonArray.length(); i++)
+            arr[i] = jsonArray.getInt(i);
+        return arr;
     }
 }

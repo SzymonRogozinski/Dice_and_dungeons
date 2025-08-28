@@ -26,7 +26,10 @@ public class NavigationPanel extends JPanel {
 
         trade = new GameButton("Trade",GUISettings.SMALL_PANEL_SIZE*8/10,GUISettings.SMALL_PANEL_SIZE/5);   //TODO
         goBack = new GameButton("End",GUISettings.SMALL_PANEL_SIZE*8/10,GUISettings.SMALL_PANEL_SIZE/5,
-                _ -> GameActionQueue.action(()->GameManager.changeState(GameStates.WALKING)));
+                _ -> GameActionQueue.action(()->{
+                    GameManager.getDialogModule().getPointedNPC().setDefaultResponse();
+                    GameManager.changeState(GameStates.WALKING);
+                }));
 
         this.add(trade);
         this.add(goBack);

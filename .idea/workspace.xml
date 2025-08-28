@@ -9,41 +9,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="Add quest GUI">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/json.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dialog/DialogLine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dialog/DialogModule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dialog/DialogQuestLine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dialog/NPCLines.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/DialogGUI/DialogOptionPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/DialogGUI/DialogView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/DialogGUI/NPCDialogPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/DialogGUI/NavigationPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Loot/LootSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/story_map.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Walking/Collision/NPCDialogException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Walking/Places/QuestPlace.java" afterDir="false" />
+    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="Add basic quests">
+      <change afterPath="$PROJECT_DIR$/src/Generators/StoryGenerator/NPCGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Generators/StoryGenerator/QuestGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Quest/QuestType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Save/LevelLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tests/StoryGeneratorTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dice and dungeons.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Dice and dungeons.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/MainGUI/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/QuestGUI/PartyStatusInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Components/PartyStatusInfoPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/QuestGUI/QuestView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/QuestGUI/QuestView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dialog/NPCLines.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dialog/NPCLines.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/DialogGUI/NavigationPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/DialogGUI/NavigationPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/GameConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameConst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/GameLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameLevel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/Threads/EnemyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Threads/EnemyThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/Threads/ThreadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Threads/ThreadManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Loot/LootModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Loot/LootModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Loot/LootSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Loot/LootSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Quest/Quest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Quest/Quest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Quest/QuestModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Quest/QuestModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tests/StoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/StoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Walking/Drones/EnemyDrone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/Drones/EnemyDrone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/story_map.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/story_map.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Walking/Enemies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/Enemies.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Walking/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/GameMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Walking/Places/NPCPlace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/Places/NPCPlace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Walking/Places/PlayerGamePlace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/Places/PlayerGamePlace.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Walking/WalkingLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/WalkingLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Walking/WalkingModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/WalkingModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Walking/WalkingSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/WalkingSettings.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,8 +41,8 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -105,40 +91,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.EquipmentTest.executor": "Run",
-    "Application.FightingTest.executor": "Run",
-    "Application.GeneratorTest.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.StartTest.executor": "Run",
-    "Application.StoryTest.executor": "Run",
-    "Application.Test.executor": "Run",
-    "Application.Tests.FightingTest.executor": "Run",
-    "Application.WalkingMain.executor": "Run",
-    "Application.WalkingTest.executor": "Run",
-    "Application.main.Main.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "true",
-    "JUnit.ArmorGeneratorTest.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "fixes",
-    "jdk.selected.JAVA_MODULE": "openjdk-22",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Szymon/Desktop/Moje projekty/Dice_and_dungeons/lib/json.jar",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.EquipmentTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FightingTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GeneratorTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.StartTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.StoryGeneratorTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.StoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Test.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Tests.FightingTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.WalkingMain.executor&quot;: &quot;Run&quot;,
+    &quot;Application.WalkingTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;JUnit.ArmorGeneratorTest.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;fixes&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-22&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Szymon/Desktop/Moje projekty/Dice_and_dungeons/lib/json.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Szymon\Desktop\Game_fight\Code\Texture\Enemy" />
@@ -184,8 +171,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StoryTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Tests.StoryTest" />
+    <configuration name="StoryGeneratorTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Tests.StoryGeneratorTest" />
       <module name="Dice and dungeons" />
       <extension name="coverage">
         <pattern>
@@ -197,8 +184,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests.FightingTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Tests.FightingTest" />
+    <configuration name="StoryTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Tests.StoryTest" />
       <module name="Dice and dungeons" />
       <extension name="coverage">
         <pattern>
@@ -224,19 +211,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.StoryGeneratorTest" />
       <item itemvalue="Application.StoryTest" />
       <item itemvalue="Application.EquipmentTest" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="Application.Tests.FightingTest" />
       <item itemvalue="Application.WalkingTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.StoryTest" />
+        <item itemvalue="Application.StoryGeneratorTest" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.WalkingTest" />
         <item itemvalue="Application.EquipmentTest" />
-        <item itemvalue="Application.Tests.FightingTest" />
       </list>
     </recent_temporary>
   </component>
@@ -577,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754996840329</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Add basic quests">
+      <option name="closed" value="true" />
+      <created>1755603502972</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1755603502972</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -595,7 +590,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="update gitignore" />
     <MESSAGE value="resolving TODOs" />
     <MESSAGE value="Start merging" />
     <MESSAGE value="init" />
@@ -620,7 +614,8 @@
     <MESSAGE value="Bug fixes" />
     <MESSAGE value="Fix tests" />
     <MESSAGE value="Add quest GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add quest GUI" />
+    <MESSAGE value="Add basic quests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add basic quests" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -645,6 +640,11 @@
           <url>file://$PROJECT_DIR$/src/Game/Threads/GameMutex.java</url>
           <line>28</line>
           <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Walking/WalkingLevel.java</url>
+          <line>125</line>
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.IllegalMonitorStateException" package="java.lang" />

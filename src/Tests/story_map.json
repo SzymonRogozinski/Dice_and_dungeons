@@ -1,5 +1,6 @@
 {
   "Player": [6,6],
+  "Exit": [8,6],
   "Enemies": [
     [22,6]
   ],
@@ -7,7 +8,83 @@
     "enemyCost": 4,
     "minHP": 10
   },
+  "SafeRoom": [
+    [12,8]
+  ],
+  "NPC": {
+    "Name": "Bob",
+    "Location": [11,6],
+    "Dialogs": [
+      {
+        "id": 0,
+        "line":"Hi",
+        "response": "Good evening",
+        "nextDialogs": [1,3],
+        "removeAfterUsed" : true
+      }
+    ],
+    "QuestDialogs": [
+      {
+        "id": 1,
+        "line":"Start quest1",
+        "startResponse": "Ok",
+        "endResponse": "",
+        "nextDialogs": [2],
+        "startQuestLine" : true,
+        "questId": 0
+      },
+      {
+        "id": 2,
+        "line":"End quest1",
+        "startResponse": "You do not finish quest",
+        "endResponse": "Well done",
+        "nextDialogs": [],
+        "startQuestLine" : false,
+        "questId": 0
+      },
+      {
+        "id": 3,
+        "line":"Start quest2",
+        "startResponse": "Ok",
+        "endResponse": "",
+        "nextDialogs": [4],
+        "startQuestLine" : true,
+        "questId": 1
+      },
+      {
+        "id": 4,
+        "line":"End quest2",
+        "startResponse": "You do not finish quest",
+        "endResponse": "Well done",
+        "nextDialogs": [],
+        "startQuestLine" : false,
+        "questId": 1
+      }
+    ]
+  },
+  "Quests": [
+    {
+      "questName": "Test quest1",
+      "questDescription": "You must open chest",
+      "questType": "CHEST_OPEN",
+      "chestLocation": [6,8]
+    },
+    {
+      "questName": "Test quest2",
+      "questDescription": "You must defeat enemies",
+      "questType": "ENEMY_DEFEAT",
+      "enemyId": 0
+    }
+  ],
   "Terrain": ".............................\n.............................\n.............................\n.............................\n.............................\n.....########...########.....\n.....#......#...#......#.....\n.....#......#####......#.....\n.....#.................#.....\n.....#......#####......#.....\n.....#......#...#......#.....\n.....########...########.....\n.............................\n.............................\n.............................\n.............................\n.............................",
   "isBoss": false,
-  "imagesPath": "Texture/MapTextures/dungeon/"
+  "imagesPath": "Texture/MapTextures/dungeon/",
+  "LootSettings": {
+    "points": 3,
+    "probabilities": [0.7, 0.3]
+  },
+  "LootQuest": {
+    "points": 5,
+    "probabilities": [0.3, 0.6, 0.1]
+  }
 }
