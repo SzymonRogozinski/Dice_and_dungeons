@@ -107,7 +107,6 @@ public class GameLabel extends JLabel {
         this.setPreferredSize(new Dimension(GUISettings.getResizedValue(originWidth), GUISettings.getResizedValue(originHeight)));
         this.setFont(GUISettings.getFontFromID(fontId));
 
-        this.setBackground(Color.CYAN);
         if(icon!=null)
            this.setIcon(GameUtils.resizeIcon(icon, GUISettings.getResizedValue(originWidth), GUISettings.getResizedValue(originHeight)));
     }

@@ -26,6 +26,7 @@ public class WalkingView extends ViewPanel {
     public void refresh() {
         partyStatusPanel.refresh();
         lootLogPanel.refresh();
+        arrows.refresh();
     }
 
     public void resize(){

@@ -51,11 +51,10 @@ public class NPCLines {
         currentResponse= line.getResponse();
         //Check if quest line
         if(line instanceof DialogQuestLine questLine){
-            //Add quest
-            if(questLine.isStartQuestLine())
+            if(questLine.isStartQuestLine()) { //Add quest
+                questLine.getQuest().startQuest();
                 GameManager.getQuestModule().getQuests().add(questLine.getQuest());
-            //End quest
-            else if(GameManager.getQuestModule().tryEndQuest(questLine.getQuest()))
+            }else if(GameManager.getQuestModule().tryEndQuest(questLine.getQuest())) //End quest
                 chooseAbleDialogLines.remove(id);
         }
         //Line was read, do nothing

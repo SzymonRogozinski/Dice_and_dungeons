@@ -63,13 +63,27 @@ public class QuestListPanel extends JPanel {
     }
 
     private void markLabel(int labelId){
-        questLabels.get(labelId).setBorder(BorderFactory.createLineBorder(Color.WHITE,1));
+        if(labelId!=GameManager.getQuestModule().getSelectedQuest())
+            questLabels.get(labelId).setBorder(BorderFactory.createLineBorder(Color.WHITE,1));
         GameActionQueue.action(()-> GameManager.getQuestModule().setPointedQuest(labelId));
     }
 
     private void unMarkLabel(int labelId){
-        questLabels.get(labelId).setBorder(null);
+        if(labelId!=GameManager.getQuestModule().getSelectedQuest())
+            questLabels.get(labelId).setBorder(null);
         GameActionQueue.action(()-> GameManager.getQuestModule().setPointedQuest(-1));
+    }
+
+    private void selectQuest(int questId){
+        if(GameManager.getQuestModule().getSelectedQuest()!=-1)
+            questLabels.get(GameManager.getQuestModule().getSelectedQuest()).setBorder(null);
+        if(questId==GameManager.getQuestModule().getSelectedQuest()){
+            questLabels.get(questId).setBorder(BorderFactory.createLineBorder(Color.WHITE,1));
+            GameActionQueue.action(()-> GameManager.getQuestModule().setSelectedQuest(-1));
+        }else{
+            questLabels.get(questId).setBorder(BorderFactory.createLineBorder(Color.YELLOW,1));
+            GameActionQueue.action(()-> GameManager.getQuestModule().setSelectedQuest(questId));
+        }
     }
 
     private class QuestMouseListener implements MouseListener {
@@ -90,9 +104,12 @@ public class QuestListPanel extends JPanel {
             unMarkLabel(questId);
         }
 
-        //Ignored
         @Override
-        public void mouseClicked(MouseEvent e) {}
+        public void mouseClicked(MouseEvent e) {
+            selectQuest(questId);
+        }
+
+        //Ignored
         @Override
         public void mousePressed(MouseEvent e) {}
         @Override

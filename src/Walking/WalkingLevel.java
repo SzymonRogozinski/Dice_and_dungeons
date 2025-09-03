@@ -149,6 +149,10 @@ public class WalkingLevel {
         boss = mapJson.getBoolean("isBoss") ? EnemyGenerator.generate(EnemyCategory.Boss, mapJson.getJSONObject("EnemiesStats").getInt("enemyCost"), mapJson.getJSONObject("EnemiesStats").getInt("minHP")) : null;
     }
 
+    public PlayerDrone getPlayer() {
+        return player;
+    }
+
     public GameMap getMap() {
         return gameMap;
     }

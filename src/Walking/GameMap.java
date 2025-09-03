@@ -7,6 +7,7 @@ import Walking.Collision.*;
 import Walking.Drones.EnemyDrone;
 import Walking.Places.*;
 
+import dg.generator.dungeon.Coordinate;
 import dg.generator.dungeon.Map;
 
 import java.util.ArrayList;
@@ -194,6 +195,16 @@ public class GameMap {
     public void setTerrain(GamePlace place, int x,int y){
         currentGamePlaces[y][x] = place;
         originalGamePlaces[y][x] = place;
+    }
+
+    public Coordinate getCoordinate(GamePlace place){
+        for(int y=0; y<height; y++){
+            for(int x=0; x<width; x++){
+                if(currentGamePlaces[y][x]==place)
+                    return new Coordinate(x,y);
+            }
+        }
+        return null;
     }
 }
 

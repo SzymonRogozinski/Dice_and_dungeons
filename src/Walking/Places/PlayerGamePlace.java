@@ -11,6 +11,8 @@ public class PlayerGamePlace extends GamePlace {
 
     @Override
     public boolean getCollision(Drone goingToCollideCharacter) throws EnemyFightException {
+        if(goingToCollideCharacter.getIcon() instanceof QuestPlace questPlace)
+            questPlace.getQuest().questWasDone();
         if (goingToCollideCharacter instanceof EnemyDrone)
             throw new EnemyFightException(getReference());
         return true;

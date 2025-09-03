@@ -88,6 +88,8 @@ public class EnemyDrone extends Drone {
             try {
                 if (gameMap.changeCharacterPlace(this, moves.getFirst().dx, moves.getFirst().dy))
                     moves.removeFirst();
+                else
+                    moves.clear();
                 return;
             } catch (EnterExitException | NPCDialogException ignored) {
             }

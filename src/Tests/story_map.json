@@ -67,7 +67,7 @@
       "questName": "Test quest1",
       "questDescription": "You must open chest",
       "questType": "CHEST_OPEN",
-      "chestLocation": [6,8]
+      "chestLocation": [8,8]
     },
     {
       "questName": "Test quest2",

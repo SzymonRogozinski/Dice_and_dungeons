@@ -3,6 +3,8 @@ package GUI.WalkingGUI;
 import GUI.GUISettings;
 import Game.GameManager;
 import Walking.FogOfWar;
+import Walking.Places.GamePlace;
+import Walking.Places.QuestPlace;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +35,19 @@ public class WalkingPanel extends JPanel {
 
         for (int i = 0; i < originViewSize; i++) {
             for (int j = 0; j < originViewSize; j++) {
-                g2D.drawImage(GameManager.getWalkingManager().getWalking().getMap().getPlace(j + GameManager.getWalkingManager().getWalking().fogOfWar.getMinX(), i + GameManager.getWalkingManager().getWalking().fogOfWar.getMinY()).getImage(), j * scale + margin, i * scale + margin, scale, scale, null);
+                GamePlace p = GameManager.getWalkingManager().getWalking().getMap().getPlace(
+                        j + GameManager.getWalkingManager().getWalking().fogOfWar.getMinX(),
+                        i + GameManager.getWalkingManager().getWalking().fogOfWar.getMinY());
+
+                g2D.drawImage(p.getImage(), j * scale + margin, i * scale + margin, scale, scale, null);
+                //Mark quest
+                if(p instanceof QuestPlace questPlace && GameManager.getQuestModule().getSelectedQuest()!=-1){
+                    if(questPlace.getQuest()==GameManager.getQuestModule().getQuests().get(GameManager.getQuestModule().getSelectedQuest())
+                            && !questPlace.getQuest().isQuestDone()) {
+                        g2D.setColor(Color.YELLOW);
+                        g2D.drawRect(j * scale + margin, i * scale + margin, scale-1, scale-1);
+                    }
+                }
             }
         }
     }

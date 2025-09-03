@@ -17,6 +17,15 @@ public class QuestPlace extends GamePlace{
         super(' ', ""); //Null
         this.superPlace = superPlace;
         this.quest=quest;
+        quest.setQuestPlace(this);
+    }
+
+    public Quest getQuest() {
+        return quest;
+    }
+
+    public GamePlace getSuperPlace() {
+        return superPlace;
     }
 
     @Override
