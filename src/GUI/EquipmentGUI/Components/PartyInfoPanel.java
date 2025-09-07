@@ -12,7 +12,7 @@ public class PartyInfoPanel extends JPanel {
 
     private final GameProgressBar healthBar, manaBar;
     private final FlowLayout layout;
-    private final DimensionlessGameLabel health,mana;
+    private final DimensionlessGameLabel health,mana,gold;
 
     public PartyInfoPanel() {
         this.setPreferredSize(new Dimension(GUISettings.SMALL_PANEL_SIZE - 20, GUISettings.PANEL_SIZE / 4));
@@ -33,6 +33,8 @@ public class PartyInfoPanel extends JPanel {
         manaBar = new GameProgressBar(Color.BLUE, GUISettings.SMALL_PANEL_SIZE - 6, GUISettings.SMALL_PANEL_SIZE / 8);
         this.add(manaBar);
 
+        gold = new DimensionlessGameLabel("Gold: 0", SwingConstants.CENTER, Color.YELLOW);
+        this.add(gold);
     }
 
     public void refresh() {
@@ -45,6 +47,7 @@ public class PartyInfoPanel extends JPanel {
         healthBar.setString(healthString);
         manaBar.setValue(PlayerInfo.getParty().getCurrentMana());
         manaBar.setString(STR."\{PlayerInfo.getParty().getCurrentMana()}/\{PlayerInfo.getParty().getMaxMana()}");
+        gold.setText(STR."Gold: \{PlayerInfo.getGold()}");
     }
 
     public void resize(){
@@ -56,5 +59,6 @@ public class PartyInfoPanel extends JPanel {
         healthBar.resize();
         mana.resize();
         manaBar.resize();
+        gold.resize();
     }
 }

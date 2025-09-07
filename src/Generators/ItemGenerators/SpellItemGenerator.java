@@ -3,6 +3,7 @@ package Generators.ItemGenerators;
 import Dice.ActionEnum;
 import Dice.Dice;
 import Dice.DiceFactory;
+import Equipment.Items.ItemCostMod;
 import Equipment.Items.ItemQuality;
 import Equipment.Items.SpellItem;
 import Fight.ActionTarget;
@@ -101,7 +102,16 @@ public class SpellItemGenerator extends Generator {
 
         SpellAction action = new SpellAction(dice, base.target, base.diceLambda, mana, actionTags);
         ImageIcon icon = base.icon;
-        return new SpellItem(action, tags, icon, name, shortName, quality);
+
+        //calc cost
+        int cost;
+        switch (quality){
+            case COMMON -> cost=startPoints * ItemCostMod.COMMON_COST_MOD;
+            case RARE ->  cost=startPoints * ItemCostMod.RARE_COST_MOD;
+            case LEGENDARY ->  cost=startPoints * ItemCostMod.Legendary_COST_MOD;
+            case null, default -> throw new RuntimeException("Quality not implemented");
+        }
+        return new SpellItem(action, tags, icon, name, shortName, quality, cost);
     }
 
     private static void addActionRandomly(DiceItemBase base, int points) {

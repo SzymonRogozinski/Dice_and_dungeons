@@ -11,8 +11,8 @@ public class ActionItem extends Item implements EquippableItem {
     private final ItemAction action;
     private final String scaleAttribute;
 
-    public ActionItem(ItemAction action, Tags[] tags, ImageIcon icon, String name, String shortName, ItemQuality quality, String scaleAttribute) {
-        super(tags, icon, name, shortName, quality);
+    public ActionItem(ItemAction action, Tags[] tags, ImageIcon icon, String name, String shortName, ItemQuality quality, int cost, String scaleAttribute) {
+        super(tags, icon, name, shortName, quality, cost);
         this.action = action;
         this.scaleAttribute = scaleAttribute;
     }

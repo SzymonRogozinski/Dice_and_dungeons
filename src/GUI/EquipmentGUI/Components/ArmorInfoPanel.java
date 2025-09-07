@@ -13,7 +13,7 @@ import java.awt.*;
 public class ArmorInfoPanel extends JPanel {
 
     private final static String[] statsName = new String[]{"Strength", "Endurance", "Intelligence", "Charisma", "Cunning", "Luck"};
-    private final GameLabel nameLabel, requirementsLabel;
+    private final GameLabel nameLabel, requirementsLabel, costLabel;
     private final GameTextArea bonusLabel;
 
     public ArmorInfoPanel() {
@@ -32,6 +32,12 @@ public class ArmorInfoPanel extends JPanel {
                 Color.WHITE
         );
 
+        costLabel = new GameLabel(
+                "", SwingConstants.LEFT,
+                GUISettings.PANEL_SIZE - 10, GUISettings.SMALL_PANEL_SIZE / 7,
+                Color.WHITE
+        );
+
         bonusLabel = new GameTextArea(
                 GUISettings.PANEL_SIZE - 10, GUISettings.SMALL_PANEL_SIZE *2 / 7
         );
@@ -39,6 +45,7 @@ public class ArmorInfoPanel extends JPanel {
         this.add(nameLabel);
         this.add(bonusLabel);
         this.add(requirementsLabel);
+        this.add(costLabel);
     }
 
     public void refresh() {
@@ -75,6 +82,7 @@ public class ArmorInfoPanel extends JPanel {
         nameLabel.setText(item.name);
         bonusLabel.setText(statsBuilder.toString());
         requirementsLabel.setText(requirementsBuilder.toString());
+        costLabel.setText(STR."Cost: \{item.getCost()}");
     }
 
     public void resize(){
@@ -83,5 +91,6 @@ public class ArmorInfoPanel extends JPanel {
         nameLabel.resize();
         requirementsLabel.resize();
         bonusLabel.resize();
+        costLabel.resize();
     }
 }

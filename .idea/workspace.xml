@@ -9,23 +9,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="fix">
+    <list default="true" id="91125b98-029c-4851-8e20-f9e334cf7ac0" name="Changes" comment="Add quest navigation">
+      <change afterPath="$PROJECT_DIR$/src/Equipment/Items/GoldPile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Equipment/Items/ItemCostMod.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Components/GamePanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Generators/ItemGenerators/GoldPileGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dialog/NPCLines.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dialog/NPCLines.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Components/DimensionlessGameLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Components/DimensionlessGameLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Components/GameLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Components/GameLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/QuestGUI/QuestListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/QuestGUI/QuestListPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/Arrows.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/Arrows.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/WalkingGUI/WalkingView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Quest/Quest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Quest/Quest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Quest/QuestModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Quest/QuestModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/story_map.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/story_map.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Walking/Drones/EnemyDrone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/Drones/EnemyDrone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Walking/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/GameMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Walking/Places/PlayerGamePlace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/Places/PlayerGamePlace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Walking/Places/QuestPlace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/Places/QuestPlace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Walking/WalkingLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Walking/WalkingLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Equipment/Items/ActionItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/Items/ActionItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Equipment/Items/ArmorItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/Items/ArmorItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Equipment/Items/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/Items/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Equipment/Items/SpellItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/Items/SpellItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Equipment/Items/UsableItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/Items/UsableItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Equipment/PartyBackpack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Equipment/PartyBackpack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/ArmorInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/ArmorInfoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/DiceItemInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/DiceItemInfoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/DiceLessItemInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/DiceLessItemInfoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/PartyInfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/Components/PartyInfoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/EquipmentGUI/SwitchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EquipmentGUI/SwitchPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/GameConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GameConst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/PlayerInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/PlayerInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generators/ItemGenerators/ArmorGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generators/ItemGenerators/ArmorGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generators/ItemGenerators/DiceItemGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generators/ItemGenerators/DiceItemGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generators/ItemGenerators/SpellItemGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generators/ItemGenerators/SpellItemGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generators/ItemGenerators/UsableItemGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generators/ItemGenerators/UsableItemGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Loot/LootModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Loot/LootModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/EquipmentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/EquipmentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/FightingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/FightingTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -584,7 +593,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756375031388</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Add quest navigation">
+      <option name="closed" value="true" />
+      <created>1756893586222</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1756893586222</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -602,7 +619,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="init" />
     <MESSAGE value="fix bug with integration" />
     <MESSAGE value="minor fixes" />
     <MESSAGE value="todo" />
@@ -627,7 +643,8 @@
     <MESSAGE value="Add basic quests" />
     <MESSAGE value="Fixed bugs and fully implemented map loader" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="Add quest navigation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add quest navigation" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -647,6 +664,11 @@
           <url>file://$PROJECT_DIR$/src/Dice/DiceFactory.java</url>
           <line>67</line>
           <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Generators/ItemGenerators/UsableItemGenerator.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.IllegalMonitorStateException" package="java.lang" />

@@ -4,6 +4,7 @@ import Equipment.Items.ActionItem;
 import Equipment.Items.Item;
 import Equipment.Items.SpellItem;
 import GUI.Components.GameLabel;
+import GUI.Components.GamePanel;
 import GUI.GUISettings;
 import Game.GameManager;
 import Game.Tags;
@@ -13,8 +14,8 @@ import java.awt.*;
 
 public class DiceItemInfoPanel extends JPanel {
 
-    private final static int MANA_COST_TO_ALL_PROPORTION = 2;
-    private final GameLabel nameLabel, requirements, manaCost, target, attribute;
+    private final GameLabel nameLabel, requirements, manaCost, target, attribute, cost;
+    private final GamePanel innerJPanel;
     private final DiceSidesPanel diceSidesPanel;
 
     public DiceItemInfoPanel() {
@@ -31,28 +32,41 @@ public class DiceItemInfoPanel extends JPanel {
 
         requirements = new GameLabel(
                 "", SwingConstants.LEFT,
-                GUISettings.PANEL_SIZE / MANA_COST_TO_ALL_PROPORTION - 20,
+                GUISettings.PANEL_SIZE / 2 - 20,
                 GUISettings.SMALL_PANEL_SIZE / 10,
                 Color.WHITE
         );
 
         target = new GameLabel(
                 "", SwingConstants.LEFT,
-                GUISettings.PANEL_SIZE / MANA_COST_TO_ALL_PROPORTION - 20,
+                GUISettings.PANEL_SIZE / 2 - 20,
                 GUISettings.SMALL_PANEL_SIZE / 10,
                 Color.WHITE
         );
 
         attribute = new GameLabel(
                 "", SwingConstants.LEFT,
-                GUISettings.PANEL_SIZE / MANA_COST_TO_ALL_PROPORTION - 20,
+                GUISettings.PANEL_SIZE / 2 - 20,
                 GUISettings.SMALL_PANEL_SIZE / 10,
                 Color.WHITE
         );
 
+        //Inner panel
+        innerJPanel = new GamePanel(GUISettings.PANEL_SIZE / 2 - 20,
+                GUISettings.SMALL_PANEL_SIZE / 10,
+                Color.BLACK
+        );
+
         manaCost = new GameLabel(
                 "", SwingConstants.LEFT,
-                GUISettings.PANEL_SIZE / MANA_COST_TO_ALL_PROPORTION - 20,
+                GUISettings.PANEL_SIZE / 4 - 15,
+                GUISettings.SMALL_PANEL_SIZE / 10,
+                Color.WHITE
+        );
+
+        cost = new GameLabel(
+                "", SwingConstants.LEFT,
+                GUISettings.PANEL_SIZE / 4 - 15,
                 GUISettings.SMALL_PANEL_SIZE / 10,
                 Color.WHITE
         );
@@ -62,13 +76,17 @@ public class DiceItemInfoPanel extends JPanel {
         this.add(requirements);
         this.add(target);
         this.add(attribute);
-        this.add(manaCost);
+        this.add(innerJPanel);
+
+        innerJPanel.add(cost);
+        innerJPanel.add(manaCost);
     }
 
     public void refresh() {
         Item item = GameManager.getEquipment().getPointedItem();
 
         nameLabel.setText(item.name);
+        cost.setText(STR."Cost: \{item.getCost()}");
 
         if (item instanceof ActionItem aItem) {
             diceSidesPanel.setDiceSides(aItem.getAction().getDice().sides());
@@ -78,8 +96,8 @@ public class DiceItemInfoPanel extends JPanel {
         } else if (item instanceof SpellItem sItem) {
             diceSidesPanel.setDiceSides(sItem.getAction().getDice().sides());
             manaCost.setText(STR."Mana: \{sItem.getAction().getManaCost()}");
-            target.setText(STR."target: \{sItem.getAction().getTarget().toString()}");
-            attribute.setText(STR."amplify by: \{sItem.getScaleAttribute()}");
+            target.setText(STR."Target: \{sItem.getAction().getTarget().toString()}");
+            attribute.setText(STR."Amplify by: \{sItem.getScaleAttribute()}");
         }
 
         StringBuilder requirementsBuilder = new StringBuilder("Requirements:");
@@ -91,7 +109,7 @@ public class DiceItemInfoPanel extends JPanel {
             requirementsBuilder.append(" ").append(s).append(",");
         }
         if (requirementsBuilder.toString().equals("Requirements:")) {
-            requirementsBuilder.append(" None");
+            requirementsBuilder.append(" none");
         } else {
             requirementsBuilder.deleteCharAt(requirementsBuilder.toString().length() - 1);
         }
@@ -107,6 +125,8 @@ public class DiceItemInfoPanel extends JPanel {
         requirements.resize();
         target.resize();
         attribute.resize();
+        innerJPanel.resize();
         manaCost.resize();
+        cost.resize();
     }
 }

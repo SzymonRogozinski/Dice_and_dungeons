@@ -4,6 +4,7 @@ import Dice.ActionEnum;
 import Dice.Dice;
 import Dice.DiceFactory;
 import Equipment.Items.ActionItem;
+import Equipment.Items.ItemCostMod;
 import Equipment.Items.ItemQuality;
 import Fight.GameActions.ItemAction;
 import Game.GameManager;
@@ -84,8 +85,15 @@ public class DiceItemGenerator extends Generator {
         ItemAction action = new ItemAction(dice, base.target, base.diceLambda, actionTags);
         ImageIcon icon = base.icon;
         String attr = base.attribute;
-
-        return new ActionItem(action, tags, icon, name, shortName, quality, attr);
+        //calc cost
+        int cost;
+        switch (quality){
+            case COMMON -> cost=startPoints * ItemCostMod.COMMON_COST_MOD;
+            case RARE ->  cost=startPoints * ItemCostMod.RARE_COST_MOD;
+            case LEGENDARY ->  cost=startPoints * ItemCostMod.Legendary_COST_MOD;
+            case null, default -> throw new RuntimeException("Quality not implemented");
+        }
+        return new ActionItem(action, tags, icon, name, shortName, quality, cost, attr);
     }
 
     private static void addActionRandomly(DiceItemBase base, int points) {

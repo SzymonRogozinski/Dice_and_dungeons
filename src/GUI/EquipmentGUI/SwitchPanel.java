@@ -60,6 +60,7 @@ public class SwitchPanel extends JPanel {
         eqButton.resize();
         backButton.resize();
         returnButton.resize();
+        questButton.resize();
     }
 
     public void removeEquipmentButton(){

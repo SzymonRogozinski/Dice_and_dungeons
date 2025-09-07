@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class DiceLessItemInfoPanel extends JPanel{
 
-    private final GameLabel nameLabel, effectLabel, quantityLabel, targetLabel;
+    private final GameLabel nameLabel, effectLabel, quantityLabel, targetLabel, costLabel;
 
     public DiceLessItemInfoPanel() {
         this.setSize(GUISettings.PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE);
@@ -43,10 +43,17 @@ public class DiceLessItemInfoPanel extends JPanel{
                 Color.WHITE
         );
 
+        costLabel = new GameLabel(
+                "", SwingConstants.LEFT,
+                GUISettings.PANEL_SIZE - 10, GUISettings.SMALL_PANEL_SIZE / 7,
+                Color.WHITE
+        );
+
         this.add(nameLabel);
         this.add(effectLabel);
         this.add(targetLabel);
         this.add(quantityLabel);
+        this.add(costLabel);
     }
 
     public void refresh() {
@@ -68,6 +75,7 @@ public class DiceLessItemInfoPanel extends JPanel{
         nameLabel.setText(item.name);
         effectLabel.setText(builder.toString());
         quantityLabel.setText(STR."Uses: \{item.getNumberOfItems()}");
+        costLabel.setText(STR."Cost: \{item.getCost()}");
     }
 
     public void resize(){
@@ -77,5 +85,6 @@ public class DiceLessItemInfoPanel extends JPanel{
         effectLabel.resize();
         quantityLabel.resize();
         targetLabel.resize();
+        costLabel.resize();
     }
 }

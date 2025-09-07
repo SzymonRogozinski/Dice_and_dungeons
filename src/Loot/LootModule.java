@@ -1,19 +1,18 @@
 package Loot;
 
+import Equipment.Items.GoldPile;
 import Equipment.Items.Item;
 import Equipment.Items.ItemQuality;
 import Game.GameManager;
 import Game.PlayerInfo;
-import Generators.ItemGenerators.ArmorGenerator;
-import Generators.ItemGenerators.DiceItemGenerator;
-import Generators.ItemGenerators.SpellItemGenerator;
-import Generators.ItemGenerators.UsableItemGenerator;
+import Generators.ItemGenerators.*;
 
 import java.util.ArrayList;
 
 public class LootModule {
 
-    private final static double USABLE_PROB = 0.4;
+    private final static double USABLE_PROB = 0.2;
+    private final static double GOLD_PROB = 0.5;
     private final static double ARMOR_PROB = 0.4;
     private final static double DICE_PROB = 0.8;
     private final static int COMMON_COST = 1;
@@ -44,6 +43,17 @@ public class LootModule {
                 points -= q;
             }
         }
+        //Sum up gold
+        int gold=0;
+        for (int i = loot.size()-1; i >= 0 ; i--) {
+            if(loot.get(i) instanceof GoldPile goldPile){
+                gold+=goldPile.getCost();
+                loot.remove(i);
+            }
+        }
+        if(gold!=0)
+            loot.add(new GoldPile(gold));
+
         return loot;
     }
 
@@ -97,6 +107,8 @@ public class LootModule {
         double roll = GameManager.getRandom().nextDouble();
         if (roll <= USABLE_PROB)
             return UsableItemGenerator.generate(quality);
+        else if (roll <= GOLD_PROB)
+            return GoldPileGenerator.generateGoldPile(quality);
         else {
             roll = GameManager.getRandom().nextDouble();
             if (ARMOR_PROB >= roll)

@@ -9,8 +9,8 @@ public class ArmorItem extends Item implements EquippableItem {
 
     private final int strength, endurance, intelligence, charisma, cunning, luck, bodyPart;
 
-    public ArmorItem(int strength, int endurance, int intelligence, int charisma, int cunning, int luck, int bodyPart, Tags[] tags, ImageIcon icon, String name, String shortName, ItemQuality quality) {
-        super(tags, icon, name, shortName, quality);
+    public ArmorItem(int strength, int endurance, int intelligence, int charisma, int cunning, int luck, int bodyPart, Tags[] tags, ImageIcon icon, String name, String shortName, ItemQuality quality, int cost) {
+        super(tags, icon, name, shortName, quality, cost);
         this.strength = strength;
         this.endurance = endurance;
         this.intelligence = intelligence;

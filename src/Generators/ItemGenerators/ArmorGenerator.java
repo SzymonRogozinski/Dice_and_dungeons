@@ -1,6 +1,7 @@
 package Generators.ItemGenerators;
 
 import Equipment.Items.ArmorItem;
+import Equipment.Items.ItemCostMod;
 import Equipment.Items.ItemQuality;
 import Game.GameManager;
 import Game.Tags;
@@ -48,6 +49,7 @@ public class ArmorGenerator extends Generator {
 
         }
         points = (int) (POINTS_MOD * points);
+        int startPoints = points;
         maxStatValue = (int) (points * MAX_STAT_VALUE_PROP);
         int[] highStatIndex = new int[]{-1, -1, -1};
         int highStatCount = 0;
@@ -68,7 +70,16 @@ public class ArmorGenerator extends Generator {
 
         ImageIcon icon = ArmorDictionary.getArmorPartIcon(armor_part);
         Tags[] tags = tag == null ? new Tags[]{} : new Tags[]{tag};
-        return new ArmorItem(stats[0], stats[1], stats[2], stats[3], stats[4], stats[5], armor_part, tags, icon, name, name, quality);
+        //calc cost
+        int cost;
+        switch (quality){
+            case COMMON -> cost=startPoints * ItemCostMod.COMMON_COST_MOD;
+            case RARE ->  cost=startPoints * ItemCostMod.RARE_COST_MOD;
+            case LEGENDARY ->  cost=startPoints * ItemCostMod.Legendary_COST_MOD;
+            case null, default -> throw new RuntimeException("Quality not implemented");
+        }
+
+        return new ArmorItem(stats[0], stats[1], stats[2], stats[3], stats[4], stats[5], armor_part, tags, icon, name, name, quality, cost);
     }
 
     private static String getArmorAdjective(String name, int[] stats, int len) {

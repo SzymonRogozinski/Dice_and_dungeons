@@ -1,10 +1,8 @@
 package Equipment;
 
 import Character.PlayerCharacter;
-import Equipment.Items.EquippableItem;
-import Equipment.Items.Item;
-import Equipment.Items.UsableItem;
-import Equipment.Items.UsedAllOfItemsException;
+import Equipment.Items.*;
+import Game.PlayerInfo;
 
 import java.util.ArrayList;
 
@@ -73,11 +71,12 @@ public class PartyBackpack {
         if (item == null)
             return;
         int id;
-        if (item instanceof UsableItem usableItem && (id = items.indexOf(item)) != -1) {
+        if (item instanceof UsableItem usableItem && (id = items.indexOf(item)) != -1)
             ((UsableItem) items.get(id)).addNewItems(usableItem.getNumberOfItems());
-        } else {
+        else if (item instanceof GoldPile goldPile)
+            PlayerInfo.addGold(goldPile.getCost());
+        else
             items.add(item);
-        }
     }
 
     public void removeFromBackpack(Item item) {

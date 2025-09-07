@@ -7,11 +7,12 @@ import javax.swing.*;
 
 public class UsableItem extends Item {
 
+    public final static double COST_MOD = 0.3;
     private final UsableItemAction action;
     private int numberOfItems;
 
-    public UsableItem(UsableItemAction action, int numberOfItems, Tags[] tags, ImageIcon icon, String name, String shortName, ItemQuality quality) {
-        super(tags, icon, name, shortName, quality);
+    public UsableItem(UsableItemAction action, int numberOfItems, Tags[] tags, ImageIcon icon, String name, String shortName, ItemQuality quality, int cost) {
+        super(tags, icon, name, shortName, quality, cost);
         this.action = action;
         this.numberOfItems = numberOfItems;
         if (numberOfItems < 1) {

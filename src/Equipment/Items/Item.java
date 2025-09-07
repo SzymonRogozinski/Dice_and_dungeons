@@ -12,13 +12,15 @@ public abstract class Item extends Taggable {
     public final String shortName;
     private final ImageIcon icon;
     private final ItemQuality quality;
+    private final int cost;
 
-    public Item(Tags[] tags, ImageIcon icon, String name, String shortName, ItemQuality quality) {
+    public Item(Tags[] tags, ImageIcon icon, String name, String shortName, ItemQuality quality, int cost) {
         super(tags);
         this.icon = icon;
         this.name = name;
         this.shortName = shortName;
         this.quality = quality;
+        this.cost=cost;
     }
 
     public ImageIcon getIcon() {
@@ -31,6 +33,10 @@ public abstract class Item extends Taggable {
 
     public ItemQuality getQuality() {
         return quality;
+    }
+
+    public int getCost() {
+        return cost;
     }
 
     @Override
