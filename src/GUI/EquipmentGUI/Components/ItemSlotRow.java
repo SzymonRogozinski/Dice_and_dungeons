@@ -3,8 +3,8 @@ package GUI.EquipmentGUI.Components;
 import Equipment.CharacterEquipment;
 import Equipment.Items.Item;
 import GUI.Components.DimensionlessGameLabel;
-import GUI.EquipmentGUI.ItemSlot;
 import GUI.GUISettings;
+import GUI.Shared.Components.ItemSlot;
 import Game.GameManager;
 
 import javax.swing.*;
@@ -34,7 +34,7 @@ public class ItemSlotRow extends JPanel {
         this.slotType = slotType;
 
         for (int i = 0; i < slotNumber; i++) {
-            itemSlots[i] = new ItemSlot(null, emptySlotIcons[i], i, slotType);
+            itemSlots[i] = new ItemSlot(null, emptySlotIcons[i], i, slotType, true);
             this.add(itemSlots[i]);
         }
     }

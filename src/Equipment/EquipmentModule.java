@@ -6,7 +6,7 @@ import Equipment.Items.Item;
 import Equipment.Items.UsableItem;
 import Equipment.Items.UsedAllOfItemsException;
 import GUI.EquipmentGUI.EquipmentGUIState;
-import GUI.EquipmentGUI.ItemSlot;
+import GUI.Shared.Components.ItemSlot;
 import Game.GameManager;
 import Game.PlayerInfo;
 import Game.Tags;

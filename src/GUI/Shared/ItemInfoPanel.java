@@ -1,10 +1,11 @@
-package GUI.EquipmentGUI;
+package GUI.Shared;
 
 import Equipment.Items.*;
-import GUI.EquipmentGUI.Components.ArmorInfoPanel;
-import GUI.EquipmentGUI.Components.DiceItemInfoPanel;
-import GUI.EquipmentGUI.Components.DiceLessItemInfoPanel;
+import GUI.Shared.Components.ArmorInfoPanel;
+import GUI.Shared.Components.DiceItemInfoPanel;
+import GUI.Shared.Components.DiceLessItemInfoPanel;
 import GUI.GUISettings;
+import GUI.Shared.Components.PointedItemLambda;
 import Game.GameManager;
 
 import javax.swing.*;
@@ -17,20 +18,22 @@ public class ItemInfoPanel extends JPanel {
     private final DiceItemInfoPanel diceItemInfoPanel;
     private final ArmorInfoPanel armorInfoPanel;
     private final DiceLessItemInfoPanel diceLessItemInfoPanel;
+    private final PointedItemLambda lambda;
 
-    public ItemInfoPanel(Border border) {
+    public ItemInfoPanel(Border border, PointedItemLambda lambda) {
         this.setSize(GUISettings.PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE);
         this.layout = new CardLayout();
         this.setLayout(layout);
         this.setBorder(border);
         this.setBackground(Color.BLACK);
+        this.lambda=lambda;
 
         JPanel emptyPanel = new JPanel();
         emptyPanel.setBackground(Color.BLACK);
 
-        diceItemInfoPanel = new DiceItemInfoPanel();
-        armorInfoPanel = new ArmorInfoPanel();
-        diceLessItemInfoPanel = new DiceLessItemInfoPanel();
+        diceItemInfoPanel = new DiceItemInfoPanel(lambda);
+        armorInfoPanel = new ArmorInfoPanel(lambda);
+        diceLessItemInfoPanel = new DiceLessItemInfoPanel(lambda);
 
         this.add(emptyPanel, "Empty");
         this.add(diceItemInfoPanel, "Dice");
@@ -39,7 +42,7 @@ public class ItemInfoPanel extends JPanel {
     }
 
     public void refresh() {
-        Item item = GameManager.getEquipment().getPointedItem();
+        Item item = lambda.getPointedItem();
         if (item == null) {
             layout.show(this, "Empty");
         } else if (item instanceof ArmorItem) {

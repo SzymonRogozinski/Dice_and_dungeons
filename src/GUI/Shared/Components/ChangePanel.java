@@ -1,4 +1,4 @@
-package GUI.EquipmentGUI.Components;
+package GUI.Shared.Components;
 
 import GUI.Components.GameButton;
 import GUI.GUISettings;

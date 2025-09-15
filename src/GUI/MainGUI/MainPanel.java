@@ -6,6 +6,7 @@ import GUI.FightGUI.FightView;
 import GUI.GUISettings;
 import GUI.MenuGUI.MenuView;
 import GUI.QuestGUI.QuestView;
+import GUI.TradeGUI.TradeView;
 import GUI.WalkingGUI.WalkingView;
 import Game.GameStates;
 
@@ -20,10 +21,11 @@ public class MainPanel extends JPanel {
     private final EquipmentView equipmentView;
     private final QuestView questView;
     private final DialogView dialogView;
+    private final TradeView tradeView;
 
     private GameStates state;
 
-    public MainPanel(MenuView menuView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView, QuestView questView, DialogView dialogView) {
+    public MainPanel(MenuView menuView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView, QuestView questView, DialogView dialogView, TradeView tradeView) {
         //Setting panel
         layout = new CardLayout();
         state=GameStates.MENU;
@@ -39,6 +41,7 @@ public class MainPanel extends JPanel {
         this.equipmentView=equipmentView;
         this.questView=questView;
         this.dialogView = dialogView;
+        this.tradeView=tradeView;
 
         this.add("Start", menuView);
         this.add("Walking", walkingView);
@@ -46,6 +49,7 @@ public class MainPanel extends JPanel {
         this.add("Equipment", equipmentView);
         this.add("Quest",questView);
         this.add("Dialog", dialogView);
+        this.add("Trade", tradeView);
     }
 
     public void changeView(GameStates state) {
@@ -57,6 +61,7 @@ public class MainPanel extends JPanel {
             case EQUIPMENT -> layout.show(this, "Equipment");
             case QUEST -> layout.show(this, "Quest");
             case DIALOG -> layout.show(this, "Dialog");
+            case TRADE -> layout.show(this,"Trade");
         }
     }
 
@@ -68,6 +73,7 @@ public class MainPanel extends JPanel {
             case EQUIPMENT -> equipmentView.refresh();
             case QUEST -> questView.refresh();
             case DIALOG -> dialogView.refresh();
+            case TRADE -> tradeView.refresh();
         }
 
         //Refresh
@@ -86,6 +92,7 @@ public class MainPanel extends JPanel {
         questView.resize();
         dialogView.resize();
         equipmentView.resize();
+        tradeView.resize();
     }
 
 }

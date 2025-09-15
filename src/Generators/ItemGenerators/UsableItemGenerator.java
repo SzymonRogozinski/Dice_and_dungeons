@@ -56,6 +56,24 @@ public class UsableItemGenerator {
         return multiple(uItem, count);
     }
 
+    public static ArrayList<UsableItem> generateTrader(ItemQuality quality) {
+        UsableItem[] itemArray;
+        switch (quality) {
+            case COMMON -> itemArray = COMMONS;
+            case RARE -> itemArray = RARES;
+            case LEGENDARY -> itemArray = LEGENDS;
+            default -> throw new RuntimeException("Quality not implemented!");
+        }
+
+        ArrayList<UsableItem> result = new ArrayList<>();
+        for(UsableItem uItem: itemArray){
+            int count = GameManager.getRandom().nextInt(MIN_ITEMS_NUMBER, MAX_ITEMS_NUMBER + 1);
+            result.add(multiple(uItem,count));
+        }
+
+        return result;
+    }
+
     private static UsableItem multiple(UsableItem item, int count) {
         return new UsableItem(item.getAction(), count, item.tags, item.getIcon(), item.name, item.shortName, item.getQuality(), item.getCost());
     }

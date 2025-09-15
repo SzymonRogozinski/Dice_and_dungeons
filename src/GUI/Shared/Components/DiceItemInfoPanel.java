@@ -1,4 +1,4 @@
-package GUI.EquipmentGUI.Components;
+package GUI.Shared.Components;
 
 import Equipment.Items.ActionItem;
 import Equipment.Items.Item;
@@ -17,10 +17,12 @@ public class DiceItemInfoPanel extends JPanel {
     private final GameLabel nameLabel, requirements, manaCost, target, attribute, cost;
     private final GamePanel innerJPanel;
     private final DiceSidesPanel diceSidesPanel;
+    private final PointedItemLambda lambda;
 
-    public DiceItemInfoPanel() {
+    public DiceItemInfoPanel(PointedItemLambda lambda) {
         this.setSize(GUISettings.PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE);
         this.setBackground(Color.BLACK);
+        this.lambda=lambda;
 
         nameLabel = new GameLabel(
                 "", SwingConstants.CENTER,
@@ -83,7 +85,7 @@ public class DiceItemInfoPanel extends JPanel {
     }
 
     public void refresh() {
-        Item item = GameManager.getEquipment().getPointedItem();
+        Item item = lambda.getPointedItem();
 
         nameLabel.setText(item.name);
         cost.setText(STR."Cost: \{item.getCost()}");

@@ -8,3 +8,4 @@
 - Quests
 
 ## Bugs and Fixes
+- Screen arrows bugs

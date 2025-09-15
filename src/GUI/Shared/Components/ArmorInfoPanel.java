@@ -1,4 +1,4 @@
-package GUI.EquipmentGUI.Components;
+package GUI.Shared.Components;
 
 import Equipment.Items.ArmorItem;
 import GUI.Components.GameLabel;
@@ -15,10 +15,12 @@ public class ArmorInfoPanel extends JPanel {
     private final static String[] statsName = new String[]{"Strength", "Endurance", "Intelligence", "Charisma", "Cunning", "Luck"};
     private final GameLabel nameLabel, requirementsLabel, costLabel;
     private final GameTextArea bonusLabel;
+    private final PointedItemLambda lambda;
 
-    public ArmorInfoPanel() {
+    public ArmorInfoPanel(PointedItemLambda lambda) {
         this.setSize(GUISettings.PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE);
         this.setBackground(Color.BLACK);
+        this.lambda=lambda;
 
         nameLabel = new GameLabel(
                 "", SwingConstants.CENTER,
@@ -49,7 +51,7 @@ public class ArmorInfoPanel extends JPanel {
     }
 
     public void refresh() {
-        ArmorItem item = (ArmorItem) GameManager.getEquipment().getPointedItem();
+        ArmorItem item = (ArmorItem) lambda.getPointedItem();
 
         StringBuilder statsBuilder = new StringBuilder("Statistics:");
         StringBuilder requirementsBuilder = new StringBuilder("Requirements:");

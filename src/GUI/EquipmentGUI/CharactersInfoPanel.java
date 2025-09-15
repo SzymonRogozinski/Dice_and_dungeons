@@ -2,6 +2,7 @@ package GUI.EquipmentGUI;
 
 import GUI.Components.DimensionlessGameLabel;
 import GUI.GUISettings;
+import GUI.Shared.Components.ChangePanel;
 import Game.GameManager;
 import GUI.EquipmentGUI.Components.*;
 

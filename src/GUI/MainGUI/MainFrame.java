@@ -5,6 +5,7 @@ import GUI.EquipmentGUI.EquipmentView;
 import GUI.FightGUI.FightView;
 import GUI.MenuGUI.MenuView;
 import GUI.QuestGUI.QuestView;
+import GUI.TradeGUI.TradeView;
 import GUI.WalkingGUI.WalkingKeyListener;
 import GUI.WalkingGUI.WalkingView;
 import Game.GameStates;
@@ -17,7 +18,7 @@ public class MainFrame extends JFrame {
 
     private final MainPanel mainPanel;
 
-    public MainFrame(MenuView menuView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView, QuestView questView, DialogView dialogView) {
+    public MainFrame(MenuView menuView, WalkingView walkingView, FightView fightView, EquipmentView equipmentView, QuestView questView, DialogView dialogView, TradeView tradeView) {
         this.setTitle("Dice and Dungeons");
         this.setResizable(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,7 +26,7 @@ public class MainFrame extends JFrame {
 
         CenteredPanel centeredPanel = new CenteredPanel();
 
-        mainPanel = new MainPanel(menuView, walkingView, fightView, equipmentView,questView, dialogView);
+        mainPanel = new MainPanel(menuView, walkingView, fightView, equipmentView,questView, dialogView, tradeView);
         centeredPanel.add(mainPanel);
         this.add(centeredPanel);
     }

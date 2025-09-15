@@ -1,4 +1,4 @@
-package GUI.EquipmentGUI;
+package GUI.Shared.Components;
 
 import Equipment.Items.Item;
 import Equipment.Items.ItemQuality;
@@ -21,12 +21,12 @@ public class ItemSlot extends JPanel {
     private final int slotNumber, slotType;
     private Item item;
 
-    public ItemSlot(Item item, ImageIcon emptySlotIcon, int slotNumber, int slotType) {
+    public ItemSlot(Item item, ImageIcon emptySlotIcon, int slotNumber, int slotType, boolean equipmentSlot) {
         this.item = item;
         this.emptySlotIcon = emptySlotIcon;
         this.slotNumber = slotNumber;
         this.slotType = slotType;
-        ItemSlotMouseListener mouseListener = new ItemSlotMouseListener(this);
+        MouseListener mouseListener = equipmentSlot ? new EquipmentItemSlotMouseListener(this) : new TradeItemSlotMouseListener(this);
 
         this.setPreferredSize(new Dimension(GUISettings.ITEM_ICON_SIZE, GUISettings.ITEM_ICON_SIZE));
         this.setBackground(Color.BLACK);
@@ -45,7 +45,6 @@ public class ItemSlot extends JPanel {
 
         this.add(label);
         this.addMouseListener(mouseListener);
-        this.addMouseMotionListener(EquipmentView.getMouseMotionAdp());
     }
 
     public int getSlotNumber() {
@@ -79,41 +78,6 @@ public class ItemSlot extends JPanel {
         label.setIcon(GameUtils.resizeIcon(item == null ? emptySlotIcon : item.getIcon(),
                 GUISettings.getResizedValue(ITEM_ICON_REAL_SIZE)));
         label.resize();
-    }
-
-    private class ItemSlotMouseListener implements MouseListener {
-
-        private final ItemSlot reference;
-
-        public ItemSlotMouseListener(ItemSlot reference) {
-            this.reference = reference;
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-            //Select item
-            GameActionQueue.action(()->GameManager.getEquipment().setClickedItem(reference));
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            //Send info
-            GameActionQueue.action(()->GameManager.getEquipment().equipItem());
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            GameActionQueue.action(()->GameManager.getEquipment().setPointedItem(reference));
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            GameActionQueue.action(()->GameManager.getEquipment().setPointedItem(null));
-        }
     }
 
 }

@@ -11,6 +11,7 @@ import GUI.MenuGUI.MenuModule;
 import Game.Threads.ThreadManager;
 import Loot.LootModule;
 import Quest.QuestModule;
+import Trade.TradeModule;
 import Walking.WalkingModule;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class GameManager {
     private static MenuModule menuModule;
     private static QuestModule questModule;
     private static DialogModule dialogModule;
+    private static TradeModule tradeModule;
     private static ThreadManager threadManager;
     private static MainFrame mainFrame;
     private static boolean bossFight;
@@ -154,6 +156,15 @@ public class GameManager {
     public static void setDialogModule(DialogModule dialogModule) {
         if(GameManager.dialogModule == null)
             GameManager.dialogModule = dialogModule;
+    }
+
+    public static TradeModule getTradeModule() {
+        return tradeModule;
+    }
+
+    public static void setTradeModule(TradeModule tradeModule) {
+        if(GameManager.tradeModule == null)
+            GameManager.tradeModule = tradeModule;
     }
 
     public static int getLevelPointer() {

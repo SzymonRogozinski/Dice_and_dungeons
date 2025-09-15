@@ -16,6 +16,7 @@ public class CharacterEquipment {
     public final static int ARMOR_SLOT = 12;
     public final static int BAG_SLOT = 13;
     public final static int USE_SLOT = 14;
+    public final static int TRADE_SLOT = 15;
 
     private final ActionItem[] actionItems;
     private final SpellItem[] spellItems;

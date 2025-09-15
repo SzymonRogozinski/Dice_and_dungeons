@@ -3,8 +3,8 @@ package GUI.EquipmentGUI.Components;
 import Equipment.CharacterEquipment;
 import Equipment.Items.Item;
 import GUI.Components.GameButton;
-import GUI.EquipmentGUI.ItemSlot;
 import GUI.GUISettings;
+import GUI.Shared.Components.ItemSlot;
 import Game.GameManager;
 import Game.PlayerInfo;
 
@@ -31,7 +31,7 @@ public class SmallBackpackItemsPanel extends JPanel {
 
         for (int i = 0; i < 14; i++) {
             if (i % 7 != 6) {
-                ItemSlot slot = new ItemSlot(null, BAG_SLOT_ICON, i, CharacterEquipment.BAG_SLOT);
+                ItemSlot slot = new ItemSlot(null, BAG_SLOT_ICON, i, CharacterEquipment.BAG_SLOT, true);
                 itemSlots.add(slot);
                 this.add(slot);
             } else {

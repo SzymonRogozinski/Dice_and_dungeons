@@ -1,4 +1,4 @@
-package GUI.EquipmentGUI.Components;
+package GUI.Shared.Components;
 
 import Dice.DiceSide;
 import GUI.Components.GameLabel;
@@ -33,7 +33,7 @@ public class DiceSidesPanel extends JPanel {
 
     }
 
-    void setDiceSides(DiceSide[] sides) {
+    public void setDiceSides(DiceSide[] sides) {
         for (int i = 0; i < 6; i++)
             diceSides[i].setIcon(GameUtils.resizeIcon(sides[i].getIcon(),GUISettings.getResizedValue(DICE_ICON_SIZE)));
     }

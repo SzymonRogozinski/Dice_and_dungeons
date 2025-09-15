@@ -2,8 +2,8 @@ package GUI.EquipmentGUI.Components;
 
 import Equipment.CharacterEquipment;
 import GUI.Components.GameButton;
-import GUI.EquipmentGUI.ItemSlot;
 import GUI.GUISettings;
+import GUI.Shared.Components.ItemSlot;
 import Game.GameManager;
 
 import javax.swing.*;
@@ -30,7 +30,7 @@ public class UseItemPanel extends JPanel {
                 _ -> GameManager.getEquipment().useChosenItem()
         );
 
-        itemSlot = new ItemSlot(null, BAG_SLOT_ICON, 0, CharacterEquipment.USE_SLOT);
+        itemSlot = new ItemSlot(null, BAG_SLOT_ICON, 0, CharacterEquipment.USE_SLOT, true);
 
         this.add(itemSlot);
         this.add(useItem);

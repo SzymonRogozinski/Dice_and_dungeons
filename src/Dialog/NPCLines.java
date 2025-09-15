@@ -2,6 +2,7 @@ package Dialog;
 
 import Game.GameManager;
 import Quest.Quest;
+import Trade.Trader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,12 +13,14 @@ public class NPCLines {
     private final String name;
     private final DialogLine[] dialogLines;
     private final ArrayList<DialogLine> chooseAbleDialogLines;
+    private final Trader trader;
     private String currentResponse;
 
-    public NPCLines(String name, DialogLine[] dialogLines) {
+    public NPCLines(String name, DialogLine[] dialogLines, Trader trader) {
         this.name = name;
         currentResponse="";
         this.dialogLines = dialogLines;
+        this.trader=trader;
         chooseAbleDialogLines =new ArrayList<>();
         chooseAbleDialogLines.add(dialogLines[0]);   //Start dialog
     }
@@ -26,6 +29,7 @@ public class NPCLines {
         this.name = npcJson.getString("Name");
         currentResponse="";
         this.dialogLines = loadDialogLines(npcJson.getJSONArray("Dialogs"),npcJson.getJSONArray("QuestDialogs"),quests);
+        this.trader=new Trader(npcJson.getJSONObject("Trader"));
         chooseAbleDialogLines =new ArrayList<>();
         chooseAbleDialogLines.add(dialogLines[0]);   //Start dialog
     }
@@ -40,6 +44,10 @@ public class NPCLines {
 
     public String getCurrentResponse() {
         return currentResponse;
+    }
+
+    public Trader getTrader() {
+        return trader;
     }
 
     public ArrayList<DialogLine> getChooseAbleDialogLines() {

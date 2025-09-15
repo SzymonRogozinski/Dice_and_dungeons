@@ -1,4 +1,4 @@
-package GUI.EquipmentGUI.Components;
+package GUI.Shared.Components;
 
 import Dice.DiceAction.DiceAction;
 import Equipment.Items.UsableItem;
@@ -13,11 +13,13 @@ import java.util.ArrayList;
 public class DiceLessItemInfoPanel extends JPanel{
 
     private final GameLabel nameLabel, effectLabel, quantityLabel, targetLabel, costLabel;
+    private final PointedItemLambda lambda;
 
-    public DiceLessItemInfoPanel() {
+    public DiceLessItemInfoPanel(PointedItemLambda lambda) {
         this.setSize(GUISettings.PANEL_SIZE, GUISettings.SMALL_PANEL_SIZE);
         this.setBackground(Color.BLACK);
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
+        this.lambda=lambda;
 
         nameLabel = new GameLabel(
                 "", SwingConstants.CENTER,
@@ -57,7 +59,7 @@ public class DiceLessItemInfoPanel extends JPanel{
     }
 
     public void refresh() {
-        UsableItem item = (UsableItem) GameManager.getEquipment().getPointedItem();
+        UsableItem item = (UsableItem) lambda.getPointedItem();
         targetLabel.setText(STR."Target: \{item.getAction().getTarget().toString()}");
         StringBuilder builder = new StringBuilder("Effects:");
 

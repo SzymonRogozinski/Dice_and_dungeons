@@ -48,8 +48,8 @@ public class ArmorGenerator extends Generator {
             default -> throw new RuntimeException("Quality not implemented");
 
         }
-        points = (int) (POINTS_MOD * points);
         int startPoints = points;
+        points = (int) (POINTS_MOD * points);
         maxStatValue = (int) (points * MAX_STAT_VALUE_PROP);
         int[] highStatIndex = new int[]{-1, -1, -1};
         int highStatCount = 0;

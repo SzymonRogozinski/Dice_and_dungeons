@@ -1,4 +1,4 @@
-package GUI.EquipmentGUI;
+package GUI.TradeGUI;
 
 import GUI.Components.GameLabel;
 import GUI.Shared.Components.ItemSlot;
@@ -12,23 +12,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class EquipmentView extends ViewPanel {
+public class TradeView extends ViewPanel {
+
+    private final NavigationPanel navigationPanel;
+    private final TradePanel tradePanel;
     private final ItemInfoPanel itemInfoPanel;
-    private final CharactersInfoPanel charactersInfoPanel;
-    private final ItemManagementPanel itemManagementPanel;
-    private final SwitchPanel switchPanel;
+    private final ItemsPanel itemsPanel;
     private final GameLabel dragableIcon;
     private ImageIcon dragIcon;
 
-    public EquipmentView() {
-        super(new ItemManagementPanel(getSharedBorder()), new SwitchPanel(getSharedBorder()), new ItemInfoPanel(getSharedBorder(), ()->GameManager.getEquipment().getPointedItem()), new CharactersInfoPanel(getSharedBorder()));
+    public TradeView() {
+        super(new ItemsPanel(getSharedBorder()),new NavigationPanel(getSharedBorder()),
+                new ItemInfoPanel(getSharedBorder(),()-> GameManager.getTradeModule().getPointedItem()),
+                new TradePanel(getSharedBorder()));
 
         //Get child component
         ArrayList<JPanel> panels = getChildPanels();
-        itemManagementPanel = (ItemManagementPanel) panels.get(0);
-        switchPanel = (SwitchPanel) panels.get(1);
+        itemsPanel = (ItemsPanel) panels.get(0);
+        navigationPanel = (NavigationPanel) panels.get(1);
         itemInfoPanel = (ItemInfoPanel) panels.get(2);
-        charactersInfoPanel = (CharactersInfoPanel) panels.get(3);
+        tradePanel = (TradePanel) panels.get(3);
 
         dragableIcon = new GameLabel(null,GUISettings.ITEM_ICON_SIZE,GUISettings.ITEM_ICON_SIZE);
         dragableIcon.setSize(dragableIcon.getPreferredSize());
@@ -37,28 +40,29 @@ public class EquipmentView extends ViewPanel {
 
     public void setState(int newState) {
         switch (newState) {
-            case EquipmentGUIState.EQUIPMENT -> {
-                charactersInfoPanel.setEquipmentVisibility(true);
-                switchPanel.removeEquipmentButton();
-                itemManagementPanel.changeCard("Equipment");
+            case TradeGUIState.BUY -> {
+                tradePanel.changeToBuy();
+                navigationPanel.removeSellButton();
+                itemsPanel.changeToBuy();
             }
-            case EquipmentGUIState.BACKPACK -> {
-                charactersInfoPanel.setEquipmentVisibility(false);
-                switchPanel.removeBackpackButton();
-                itemManagementPanel.changeCard("Backpack");
+            case TradeGUIState.SELL -> {
+                tradePanel.changeToSell();
+                navigationPanel.removeBuyButton();
+                itemsPanel.changeToSell();
             }
         }
     }
 
-    public void refresh() {
-        if (GameManager.getEquipment() == null)
+    public void refresh(){
+        if(GameManager.getTradeModule()==null)
             return;
-        charactersInfoPanel.refresh();
-        itemManagementPanel.refresh();
+
+        itemsPanel.refresh();
         itemInfoPanel.refresh();
+        tradePanel.refresh();
 
         //Set pointed item
-        ItemSlot it = GameManager.getEquipment().getClickedSlot();
+        ItemSlot it = GameManager.getTradeModule().getClickedSlot();
         if(it == null || it.getItem() == null){
             dragableIcon.setIcon(null);
             dragIcon=null;
@@ -66,26 +70,25 @@ public class EquipmentView extends ViewPanel {
         } else if (it.getItem().getIcon()!=dragIcon) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
             dragIcon=it.getItem().getIcon();
-            dragableIcon.setIcon(GameUtils.resizeIcon(dragIcon,GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE)));
+            dragableIcon.setIcon(GameUtils.resizeIcon(dragIcon, GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE)));
         }
         //Set position
         Point position = MouseInfo.getPointerInfo().getLocation();
         int resizedItemSize = GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE);
         dragableIcon.setLocation((int) position.getX() - resizedItemSize / 2 - this.getLocationOnScreen().x,
-                    (int) position.getY() - resizedItemSize / 2 - this.getLocationOnScreen().y);
+                (int) position.getY() - resizedItemSize / 2 - this.getLocationOnScreen().y);
     }
 
     public void resize(){
         super.resize();
 
-        itemManagementPanel.resize();
-        switchPanel.resize();
-        charactersInfoPanel.resize();
+        itemsPanel.resize();
+        navigationPanel.resize();
         itemInfoPanel.resize();
+        tradePanel.resize();
 
         dragableIcon.resize();
         dragableIcon.setSize(dragableIcon.getPreferredSize());
         dragableIcon.setIcon(GameUtils.resizeIcon(dragIcon,GUISettings.getResizedValue(GUISettings.ITEM_ICON_SIZE)));
-
     }
 }

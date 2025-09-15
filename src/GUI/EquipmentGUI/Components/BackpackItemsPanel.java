@@ -2,8 +2,8 @@ package GUI.EquipmentGUI.Components;
 
 import Equipment.CharacterEquipment;
 import Equipment.Items.Item;
-import GUI.EquipmentGUI.ItemSlot;
 import GUI.GUISettings;
+import GUI.Shared.Components.ItemSlot;
 import Game.PlayerInfo;
 
 import javax.swing.*;
@@ -26,7 +26,7 @@ public class BackpackItemsPanel extends JPanel {
         itemSlots = new ItemSlot[42];
 
         for (int i = 0; i < 42; i++) {
-            itemSlots[i] = new ItemSlot(null, BAG_SLOT_ICON, i, CharacterEquipment.BAG_SLOT);
+            itemSlots[i] = new ItemSlot(null, BAG_SLOT_ICON, i, CharacterEquipment.BAG_SLOT, true);
             this.add(itemSlots[i]);
         }
     }

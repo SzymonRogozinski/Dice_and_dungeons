@@ -6,5 +6,6 @@ public enum GameStates {
     FIGHTING,
     EQUIPMENT,
     QUEST,
-    DIALOG
+    DIALOG,
+    TRADE
 }

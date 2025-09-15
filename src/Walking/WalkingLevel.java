@@ -72,7 +72,7 @@ public class WalkingLevel {
                 quests.add(QuestGenerator.generateQuest(levelSetting.questLoot()));
             setQuestPlaces(quests);
 
-            gameMap.getNpcPlace().setLines(NPCGenerator.generateNPC(quests));
+            gameMap.getNpcPlace().setLines(NPCGenerator.generateNPC(quests, settings.traderQuality(), settings.traderItemCount()));
         }
         //Add player
         player = new PlayerDrone(gameMap.getStartX(), gameMap.getStartY(), new PlayerGamePlace(gameMap.getPath()));

@@ -38,4 +38,16 @@ public class UsableItem extends Item {
             throw new UsedAllOfItemsException();
         }
     }
+
+    public void removeOne(){
+        numberOfItems--;
+    }
+
+    public void removeAll(){
+        numberOfItems=0;
+    }
+
+    public UsableItem getOneItem(){
+        return new UsableItem(action,1,tags,getIcon(),name,shortName,getQuality(),getCost());
+    }
 }

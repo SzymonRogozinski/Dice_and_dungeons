@@ -13,6 +13,10 @@
   ],
   "NPC": {
     "Name": "Bob",
+    "Trader": {
+      "quality": "common",
+      "itemCount": 3
+    },
     "Location": [11,6],
     "Dialogs": [
       {
