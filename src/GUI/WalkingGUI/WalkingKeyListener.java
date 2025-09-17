@@ -5,7 +5,6 @@ import Game.GameManager;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 public class WalkingKeyListener implements KeyListener {
 
     public WalkingKeyListener() {
@@ -40,3 +39,4 @@ public class WalkingKeyListener implements KeyListener {
         }
     }
 }
+

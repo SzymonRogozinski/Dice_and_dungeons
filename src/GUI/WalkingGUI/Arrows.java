@@ -29,20 +29,19 @@ public class Arrows extends JPanel {
 
         up = new JButton(new ImageIcon("Texture/Buttons/up_arrow.png"));
         up.setFocusable(false);
-        up.addActionListener(_-> GameManager.getWalkingManager().getWalking().playerMoveByOne(0, -1)
-        );
+        up.addMouseListener(new ArrowMouseListener(0,-1));
 
         left = new JButton(new ImageIcon("Texture/Buttons/left_arrow.png"));
         left.setFocusable(false);
-        left.addActionListener(_ -> GameManager.getWalkingManager().getWalking().playerMoveByOne(-1, 0));
+        left.addMouseListener(new ArrowMouseListener(-1,0));
 
         right = new JButton(new ImageIcon("Texture/Buttons/right_arrow.png"));
         right.setFocusable(false);
-        right.addActionListener(_ -> GameManager.getWalkingManager().getWalking().playerMoveByOne(1, 0));
+        right.addMouseListener(new ArrowMouseListener(1,0));
 
         down = new JButton(new ImageIcon("Texture/Buttons/down_arrow.png"));
         down.setFocusable(false);
-        down.addActionListener(_ -> GameManager.getWalkingManager().getWalking().playerMoveByOne(0, 1));
+        down.addMouseListener(new ArrowMouseListener(0,1));
 
         navigate=new DimensionlessGameLabel(IMAGE_SIZE,IMAGE_SIZE);
 

@@ -91,8 +91,8 @@ public class MainPanel extends JPanel {
         fightView.resize();
         questView.resize();
         dialogView.resize();
-        equipmentView.resize();
         tradeView.resize();
+        equipmentView.resize();
     }
 
 }
